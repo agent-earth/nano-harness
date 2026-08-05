@@ -1,0 +1,8 @@
+strategy: optimized
+max_steps: 40
+audit_passes: 1
+max_context_chars: 100000
+reserve_chars: 16000
+scratchpad_chars: 12000
+max_tool_errors: 4
+require_verification: true

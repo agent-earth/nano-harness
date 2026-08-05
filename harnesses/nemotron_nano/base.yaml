@@ -1,0 +1,8 @@
+strategy: base
+max_steps: 24
+audit_passes: 0
+max_context_chars: 90000
+reserve_chars: 12000
+scratchpad_chars: 12000
+max_tool_errors: 4
+require_verification: true

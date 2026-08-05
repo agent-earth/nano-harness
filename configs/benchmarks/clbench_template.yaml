@@ -1,0 +1,16 @@
+model:
+  name: nano-9b
+  max_tokens: 8192
+harness:
+  strategy: optimized
+  max_steps: 4
+  max_context_chars: 115000
+  reserve_chars: 18000
+benchmark:
+  name: clbench
+  source: data/CL-bench.jsonl
+  split: train
+  num_shards: 20
+  shard_id: 0
+output_dir: ../../results/full
+run_id: clbench_nano9b_optimized

@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-08-05",
+  "model": "nvidia/nemotron-nano-9b-v2:free",
+  "synthetic": {
+    "v1": {
+      "base_score": 0.0,
+      "optimized_score": 0.0,
+      "note": "Exact-string scorer rejected semantically correct outputs."
+    },
+    "v2": {
+      "base_score": 1.0,
+      "optimized_score": 0.5,
+      "note": "Unconditional audit preserved a wrong output field type."
+    },
+    "v3": {
+      "base_score": 1.0,
+      "optimized_score": 0.0,
+      "note": "Unconditional audit removed a useful observed tool fact."
+    },
+    "v4": {
+      "base_score": 1.0,
+      "optimized_score": 1.0,
+      "absolute_improvement": 0.0,
+      "relative_improvement_percent": 0.0,
+      "note": "Conditional machine-triggered audit removed the regression."
+    }
+  },
+  "swebench_smoke": {
+    "task_id": "psf__requests-2317",
+    "optimized_v1": {
+      "official_score": null,
+      "valid_repository_patch": false,
+      "tool_calls": 2,
+      "note": "Model reported a patch without applying it or running tests."
+    },
+    "optimized_v2": {
+      "official_score": null,
+      "status": "interrupted",
+      "note": "OpenRouter free-route response stream stalled before mutation."
+    }
+  },
+  "full_matrix_status": "pending"
+}

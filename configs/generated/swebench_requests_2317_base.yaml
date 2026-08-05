@@ -1,0 +1,18 @@
+model:
+  name: nano-9b
+  max_tokens: 4096
+  timeout_seconds: 120
+  max_retries: 2
+harness:
+  strategy: base
+  max_steps: 24
+  audit_passes: 0
+benchmark:
+  name: swebench
+  source: data/smoke/swebench_requests_2317.jsonl
+  split: test
+  limit: 1
+  options:
+    repository_cache: data/swebench_repositories
+output_dir: ../../results/baselines
+run_id: swebench_requests_2317_nano9b_base

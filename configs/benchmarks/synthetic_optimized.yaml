@@ -1,0 +1,14 @@
+model:
+  name: nano-9b
+  max_tokens: 1536
+harness:
+  strategy: optimized
+  max_steps: 12
+  max_context_chars: 90000
+  reserve_chars: 12000
+benchmark:
+  name: synthetic
+  source: builtin
+  split: test
+output_dir: ../../results/optimized
+run_id: synthetic_nano9b_optimized

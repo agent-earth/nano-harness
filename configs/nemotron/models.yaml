@@ -1,0 +1,9 @@
+models:
+  nano-9b: nvidia/nemotron-nano-9b-v2:free
+  nano-30b: nvidia/nemotron-3-nano-30b-a3b:free
+  super-120b: nvidia/nemotron-3-super-120b-a12b:free
+  ultra-550b: nvidia/nemotron-3-ultra-550b-a55b:free
+
+provider:
+  base_url: https://openrouter.ai/api/v1
+  api_key_env: OPENROUTER_API_KEY

@@ -1,0 +1,12 @@
+model:
+  name: nano-9b
+  max_tokens: 768
+harness:
+  strategy: base
+  max_steps: 8
+benchmark:
+  name: synthetic
+  source: builtin
+  split: test
+output_dir: ../../results/baselines
+run_id: synthetic_nano9b_base

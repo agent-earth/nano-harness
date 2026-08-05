@@ -1,0 +1,18 @@
+model:
+  name: nano-9b
+  max_tokens: 8192
+harness:
+  strategy: optimized
+  max_steps: 40
+  max_context_chars: 100000
+  reserve_chars: 16000
+benchmark:
+  name: swebench
+  source: princeton-nlp/SWE-bench_Verified
+  split: test
+  num_shards: 20
+  shard_id: 0
+  options:
+    repository_cache: data/swebench_repositories
+output_dir: ../../results/full
+run_id: swebench_verified_nano9b_optimized
