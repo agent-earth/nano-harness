@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import traceback
 from pathlib import Path
 
 from nano_harness.adapters.taubench import (
@@ -21,6 +22,12 @@ def main() -> None:
     parser.add_argument("--strategy", choices=["base", "optimized"], required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--task-split", default="test")
+    parser.add_argument("--user-strategy", default="llm")
+    parser.add_argument(
+        "--user-model",
+        default="openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+    )
+    parser.add_argument("--user-provider", default="openrouter")
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--end", type=int, default=-1)
     parser.add_argument("--num-shards", type=int, default=1)
@@ -30,15 +37,35 @@ def main() -> None:
 
     from tau_bench.envs import get_env
 
-    probe = get_env(
-        args.env,
-        user_strategy="verify",
-        user_model="gpt-4o",
-        user_provider="openai",
-        task_split=args.task_split,
-    )
-    end = len(probe.tasks) if args.end < 0 else min(args.end, len(probe.tasks))
     output = Path(args.output)
+    try:
+        probe = get_env(
+            args.env,
+            user_strategy=args.user_strategy,
+            user_model=args.user_model,
+            user_provider=args.user_provider,
+            task_split=args.task_split,
+        )
+    except Exception as exc:
+        blocker = {
+            "benchmark": "taubench",
+            "environment": args.env,
+            "model": args.model,
+            "harness": args.strategy,
+            "status": "blocked",
+            "failure_type": (
+                "provider_daily_quota"
+                if "free-models-per-day" in str(exc) or "429" in str(exc)
+                else "environment_initialization_error"
+            ),
+            "error": str(exc),
+            "traceback": traceback.format_exc(),
+            "retryable": True,
+        }
+        append_jsonl_atomic(output, blocker)
+        print(json.dumps({"total": 0, "blocked": blocker}, indent=2))
+        return
+    end = len(probe.tasks) if args.end < 0 else min(args.end, len(probe.tasks))
     completed = completed_task_ids(output)
     harness = AgentHarness(
         OpenRouterClient(ModelConfig(name=args.model)),
@@ -52,9 +79,9 @@ def main() -> None:
             continue
         env = get_env(
             args.env,
-            user_strategy="verify",
-            user_model="gpt-4o",
-            user_provider="openai",
+            user_strategy=args.user_strategy,
+            user_model=args.user_model,
+            user_provider=args.user_provider,
             task_split=args.task_split,
             task_index=task_index,
         )

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
+from nano_harness.client import ProviderQuotaError
 from nano_harness.config import HarnessConfig
 from nano_harness.contracts import should_audit
 from nano_harness.prompts import AUDIT_SYSTEM, system_prompt
@@ -44,6 +45,7 @@ class AgentHarness:
             try:
                 reply = self.client.complete(request_messages, task.tools or None)
             except Exception as exc:
+                quota_error = isinstance(exc, ProviderQuotaError)
                 return TaskResult(
                     task_id=task.task_id,
                     benchmark=task.benchmark,
@@ -52,11 +54,20 @@ class AgentHarness:
                     status="error",
                     output="",
                     error=str(exc),
-                    failure_type="model_api_error",
+                    failure_type=(
+                        "provider_daily_quota" if quota_error else "model_api_error"
+                    ),
                     steps=step,
                     tool_calls=tool_count,
                     usage=usage,
-                    metadata=task.metadata,
+                    metadata={
+                        **task.metadata,
+                        **(
+                            {"provider_quota_reset_at": exc.reset_at}
+                            if quota_error
+                            else {}
+                        ),
+                    },
                     trajectory=trajectory,
                 )
             _merge_usage(usage, reply.usage)
@@ -78,6 +89,38 @@ class AgentHarness:
             )
 
             if not reply.tool_calls:
+                if task.benchmark == "taubench" and hasattr(tool_executor, "respond"):
+                    observation = tool_executor.respond(reply.content)
+                    trajectory.append(
+                        {
+                            "step": step,
+                            "kind": "user_environment",
+                            "observation": observation,
+                            "done": bool(getattr(tool_executor, "done", False)),
+                        }
+                    )
+                    if getattr(tool_executor, "done", False):
+                        return TaskResult(
+                            task_id=task.task_id,
+                            benchmark=task.benchmark,
+                            model=self.model_name,
+                            harness=self.config.strategy,
+                            status="completed",
+                            output=reply.content,
+                            steps=step,
+                            tool_calls=tool_count,
+                            usage=usage,
+                            metadata=task.metadata,
+                            trajectory=trajectory,
+                        )
+                    messages.append({"role": "user", "content": observation})
+                    ledger.facts.append(
+                        f"User/environment observation: {observation[:800]}"
+                    )
+                    ledger.pending = [
+                        "Continue the conversation until the environment reports done."
+                    ]
+                    continue
                 gate_errors = _completion_gate_errors(task, trajectory)
                 if gate_errors:
                     correction = (
@@ -192,6 +235,22 @@ class AgentHarness:
                         "observation": observation,
                     }
                 )
+                if task.benchmark == "taubench" and getattr(
+                    tool_executor, "done", False
+                ):
+                    return TaskResult(
+                        task_id=task.task_id,
+                        benchmark=task.benchmark,
+                        model=self.model_name,
+                        harness=self.config.strategy,
+                        status="completed",
+                        output=observation,
+                        steps=step,
+                        tool_calls=tool_count,
+                        usage=usage,
+                        metadata=task.metadata,
+                        trajectory=trajectory,
+                    )
                 if tool_errors > self.config.max_tool_errors:
                     return TaskResult(
                         task_id=task.task_id,

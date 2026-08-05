@@ -22,11 +22,9 @@ class CLBenchAdapter:
         ):
             metadata = dict(record.get("metadata", {}))
             task_id = str(metadata.get("task_id", record.get("idx", index)))
-            messages = [
-                message
-                for message in record.get("messages", [])
-                if message.get("role") != "assistant"
-            ]
+            messages = list(record.get("messages", []))
+            if messages and messages[-1].get("role") == "assistant":
+                messages = messages[:-1]
             yield Task(
                 task_id=task_id,
                 benchmark=self.name,

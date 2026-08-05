@@ -44,12 +44,22 @@ def compact_messages(
 ) -> list[dict]:
     budget = max(2000, max_chars - reserve_chars)
     ledger_message = {"role": "system", "content": ledger.render(scratchpad_chars)}
+    first_assistant = next(
+        (
+            index
+            for index, message in enumerate(messages)
+            if message.get("role") == "assistant"
+        ),
+        len(messages),
+    )
+    pinned = messages[:first_assistant]
+    mutable_history = messages[first_assistant:]
     if sum(len(str(message.get("content", ""))) for message in messages) <= budget:
-        return [messages[0], ledger_message, *messages[1:]]
-    pinned = [messages[0]]
+        return [*pinned, ledger_message, *mutable_history]
     tail: list[dict] = []
-    used = len(str(messages[0].get("content", ""))) + len(ledger_message["content"])
-    for message in reversed(messages[1:]):
+    used = sum(len(str(message.get("content", ""))) for message in pinned)
+    used += len(ledger_message["content"])
+    for message in reversed(mutable_history):
         size = len(str(message.get("content", ""))) + 200
         if used + size > budget:
             continue

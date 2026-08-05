@@ -115,9 +115,12 @@ SHARD_ID=0 NUM_SHARDS=10 \
 ./scripts/run_taubench_nano.sh
 ```
 
-The runner uses the deterministic `verify` user strategy to avoid adding a
-second paid user-simulator model to the comparison. Outputs preserve reward,
-info, trajectory, trial, and NanoHarness metadata.
+Tau-bench user strategies are model-backed, including `verify`. The matrix
+therefore pins both the agent model and a separate user-simulator model. The
+default is `openrouter/nvidia/nemotron-3-super-120b-a12b:free`; override
+`USER_MODEL`, `USER_PROVIDER`, and `USER_STRATEGY` explicitly and keep them
+identical across comparisons. Outputs preserve reward, info, trajectory, trial,
+and NanoHarness metadata.
 
 ## CL-bench
 
@@ -142,6 +145,14 @@ DRY_RUN=1 SHARD_ID=0 NUM_SHARDS=20 ./scripts/run_full_benchmark_matrix.sh
 It includes base harness runs for 9B, 30B, 120B, and 550B, plus the optimized
 9B run. Tau-bench is launched separately because it owns a live stateful
 environment.
+
+```bash
+DRY_RUN=1 SHARD_ID=0 NUM_SHARDS=10 ./scripts/run_full_taubench_matrix.sh
+```
+
+See `results/full/run_status.json` before launching. With the current OpenRouter
+free tier, the minimum SWE + CL request count alone is 11,995, so a 50
+request/day key cannot finish the required matrix in a practical interval.
 
 ## Layout
 

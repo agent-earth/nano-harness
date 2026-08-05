@@ -39,5 +39,19 @@
       "note": "OpenRouter free-route response stream stalled before mutation."
     }
   },
-  "full_matrix_status": "pending"
+  "full_matrix_status": "started_blocked_on_provider_quota_and_scoring_runtimes",
+  "data": {
+    "swebench_verified_tasks": 500,
+    "clbench_tasks": 1899,
+    "clbench_sha256": "d5fc88d4b2eea75c61dd40862021b6ae2fba26bd21b58e8c5e18377a763943be",
+    "taubench_revision": "59a200c6d575d595120f1cb70fea53cef0632f6b",
+    "taubench_retail_tasks": 115,
+    "taubench_airline_tasks": 50
+  },
+  "provider": {
+    "daily_free_request_limit": 50,
+    "remaining_requests": 0,
+    "reset_at_cst": "2026-08-06 08:00:00",
+    "minimum_swe_plus_cl_matrix_requests": 11995
+  }
 }

@@ -13,6 +13,10 @@ class TauEnvExecutor:
         self.env = env
         self.last_response = None
 
+    @property
+    def done(self) -> bool:
+        return bool(self.last_response and self.last_response.done)
+
     def execute(self, name: str, arguments: dict[str, Any]) -> str:
         from tau_bench.types import Action
 
@@ -25,6 +29,15 @@ class TauEnvExecutor:
             "info": response.info.model_dump(),
         }
         return json.dumps(payload, ensure_ascii=False)
+
+    def respond(self, content: str) -> str:
+        from tau_bench.types import Action, RESPOND_ACTION_NAME
+
+        response = self.env.step(
+            Action(name=RESPOND_ACTION_NAME, kwargs={"content": content})
+        )
+        self.last_response = response
+        return response.observation
 
 
 def make_tau_task(env: Any, task_index: int, wiki: str, tools_info: list[dict]) -> tuple:

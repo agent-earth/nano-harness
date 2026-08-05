@@ -4,8 +4,8 @@ model:
 harness:
   strategy: optimized
   max_steps: 4
-  max_context_chars: 115000
-  reserve_chars: 18000
+  max_context_chars: 350000
+  reserve_chars: 32000
 benchmark:
   name: clbench
   source: data/CL-bench.jsonl

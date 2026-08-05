@@ -71,7 +71,11 @@ def run_config(config: RunConfig, client: Any | None = None) -> dict[str, Any]:
         else:
             executor = None
         result = harness.run(task, executor)
-        if task.benchmark == "swebench" and isinstance(executor, CodingToolExecutor):
+        if (
+            task.benchmark == "swebench"
+            and isinstance(executor, CodingToolExecutor)
+            and result.status not in {"error", "blocked"}
+        ):
             actual_diff = executor.diff()
             result.metadata["model_reported_output"] = result.output
             result.output = actual_diff
@@ -82,6 +86,8 @@ def run_config(config: RunConfig, client: Any | None = None) -> dict[str, Any]:
         append_jsonl_atomic(output_path, adapter.serialize(result))
         completed.add(task.task_id)
         written += 1
+        if result.failure_type == "provider_daily_quota":
+            break
     summary = summarize_paths([output_path])
     summary.update(
         {
@@ -109,7 +115,16 @@ def completed_task_ids(path: Path) -> set[str]:
             except json.JSONDecodeError:
                 continue
             task_id = record.get("instance_id", record.get("task_id", record.get("idx")))
-            if task_id is not None:
+            payload = record.get("nano_harness", record)
+            status = payload.get("status")
+            retryable = status in {"error", "blocked"} or payload.get(
+                "failure_type"
+            ) in {
+                "model_api_error",
+                "provider_daily_quota",
+                "missing_repository_checkout",
+            }
+            if task_id is not None and not retryable:
                 completed.add(str(task_id))
     return completed
 

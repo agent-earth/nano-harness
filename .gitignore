@@ -19,3 +19,4 @@ results/full/configs/
 !results/iterations/v3/synthetic_*.jsonl
 !results/iterations/swe_v1/*.public.jsonl
 !results/experiment_manifest.json
+!results/full/run_status.json

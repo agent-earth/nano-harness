@@ -3,10 +3,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from nano_harness.adapters.clbench import CLBenchAdapter
 from nano_harness.adapters.swebench import extract_patch
-from nano_harness.client import ScriptedClient
+from nano_harness.client import ProviderQuotaError, ScriptedClient
 from nano_harness.coding_tools import CodingToolExecutor
-from nano_harness.config import HarnessConfig, load_run_config
+from nano_harness.config import BenchmarkConfig, HarnessConfig, load_run_config
 from nano_harness.harness import AgentHarness
 from nano_harness.runner import completed_task_ids, merge_paths, run_config
 from nano_harness.state import StateLedger, compact_messages
@@ -197,18 +198,28 @@ class CoreTests(unittest.TestCase):
         self.assertIn("No patch was applied", result.trajectory[1]["errors"][0])
 
     def test_context_compaction_preserves_ledger_and_latest_messages(self):
-        messages = [{"role": "system", "content": "system"}] + [
-            {"role": "user", "content": str(index) * 500} for index in range(10)
+        messages = [
+            {"role": "system", "content": "harness"},
+            {"role": "system", "content": "task context" * 300},
+            {"role": "user", "content": "original task"},
+            {"role": "assistant", "content": "old action" * 300},
+            {"role": "tool", "content": "old observation" * 300},
+            {"role": "assistant", "content": "latest action"},
+            {"role": "tool", "content": "latest observation"},
         ]
         compacted = compact_messages(
             messages,
             StateLedger(objective="keep objective", facts=["verified fact"]),
-            max_chars=3000,
+            max_chars=5000,
             reserve_chars=1000,
             scratchpad_chars=1000,
         )
-        self.assertIn("<state_ledger>", compacted[1]["content"])
-        self.assertEqual(compacted[-1]["content"], "9" * 500)
+        self.assertEqual(compacted[1]["content"], "task context" * 300)
+        self.assertEqual(compacted[2]["content"], "original task")
+        self.assertTrue(
+            any("<state_ledger>" in item.get("content", "") for item in compacted)
+        )
+        self.assertEqual(compacted[-1]["content"], "latest observation")
         self.assertLess(len(compacted), len(messages) + 1)
 
     def test_resume_skips_completed_tasks(self):
@@ -240,6 +251,123 @@ run_id: resume
             output = root / "results/resume/shard-000-of-001.jsonl"
             self.assertEqual(completed_task_ids(output), {"constraint-audit"})
 
+    def test_resume_retries_model_api_errors(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "errors.jsonl"
+            path.write_text(
+                json.dumps(
+                    {
+                        "task_id": "retry-me",
+                        "status": "error",
+                        "failure_type": "model_api_error",
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(completed_task_ids(path), set())
+
+    def test_provider_quota_is_structured_and_retryable(self):
+        class QuotaClient:
+            def complete(self, messages, tools=None):
+                raise ProviderQuotaError("daily quota exhausted", "1785974400000")
+
+        task = Task(
+            task_id="quota",
+            benchmark="clbench",
+            messages=[{"role": "user", "content": "answer"}],
+        )
+        result = AgentHarness(
+            QuotaClient(),
+            "test-model",
+            HarnessConfig(strategy="base"),
+        ).run(task)
+        self.assertEqual(result.failure_type, "provider_daily_quota")
+        self.assertEqual(
+            result.metadata["provider_quota_reset_at"], "1785974400000"
+        )
+
+    def test_runner_stops_shard_after_provider_quota(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_path = root / "quota.yaml"
+            config_path.write_text(
+                f"""
+model:
+  name: nano-9b
+harness:
+  strategy: base
+benchmark:
+  name: synthetic
+  source: builtin
+output_dir: {root / "results"}
+run_id: quota
+""".strip(),
+                encoding="utf-8",
+            )
+
+            class QuotaClient:
+                def complete(self, messages, tools=None):
+                    raise ProviderQuotaError(
+                        "daily quota exhausted", "1785974400000"
+                    )
+
+            summary = run_config(load_run_config(config_path), QuotaClient())
+            self.assertEqual(summary["attempted_this_invocation"], 1)
+            self.assertEqual(summary["written_this_invocation"], 1)
+            self.assertEqual(
+                summary["failure_types"], {"provider_daily_quota": 1}
+            )
+
+    def test_swe_runner_does_not_mask_provider_quota_with_empty_diff(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            repository = root / "repo"
+            repository.mkdir()
+            (repository / "file.py").write_text("value = 1\n", encoding="utf-8")
+            import subprocess
+
+            subprocess.run(["git", "init", "-b", "main"], cwd=repository, check=True)
+            subprocess.run(
+                ["git", "config", "user.name", "Test"], cwd=repository, check=True
+            )
+            subprocess.run(
+                ["git", "config", "user.email", "test@example.com"],
+                cwd=repository,
+                check=True,
+            )
+            subprocess.run(["git", "add", "."], cwd=repository, check=True)
+            subprocess.run(
+                ["git", "commit", "-m", "baseline"], cwd=repository, check=True
+            )
+            result = AgentHarness(
+                type(
+                    "QuotaClient",
+                    (),
+                    {
+                        "complete": lambda self, messages, tools=None: (
+                            (_ for _ in ()).throw(
+                                ProviderQuotaError(
+                                    "daily quota exhausted", "1785974400000"
+                                )
+                            )
+                        )
+                    },
+                )(),
+                "test-model",
+                HarnessConfig(strategy="optimized"),
+            ).run(
+                Task(
+                    task_id="swe-quota",
+                    benchmark="swebench",
+                    messages=[{"role": "user", "content": "fix"}],
+                    tools=[{"type": "function", "function": {"name": "read_file"}}],
+                ),
+                CodingToolExecutor(repository),
+            )
+            self.assertEqual(result.failure_type, "provider_daily_quota")
+            self.assertEqual(result.status, "error")
+
     def test_merge_deduplicates_by_task_id(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -265,6 +393,78 @@ run_id: resume
                 executor.execute("read_file", {"path": "../outside.txt"})
             with self.assertRaises(ValueError):
                 executor.execute("run_command", {"argv": ["bash", "-c", "echo bad"]})
+
+    def test_clbench_preserves_historical_assistant_turns(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "cl.jsonl"
+            path.write_text(
+                json.dumps(
+                    {
+                        "messages": [
+                            {"role": "system", "content": "context"},
+                            {"role": "user", "content": "first"},
+                            {"role": "assistant", "content": "prior answer"},
+                            {"role": "user", "content": "follow-up"},
+                        ],
+                        "rubrics": ["use prior answer"],
+                        "metadata": {"task_id": "multi-turn"},
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            task = next(
+                CLBenchAdapter().load(
+                    BenchmarkConfig(name="clbench", source=str(path))
+                )
+            )
+            self.assertEqual(
+                [message["role"] for message in task.messages],
+                ["system", "user", "assistant", "user"],
+            )
+
+    def test_taubench_response_is_sent_back_to_environment(self):
+        client = ScriptedClient(
+            [
+                ModelReply(content="Could you provide the order id?"),
+                ModelReply(content="Your order is already shipped."),
+            ]
+        )
+
+        class TauExecutor:
+            def __init__(self):
+                self.done = False
+                self.responses = []
+
+            def respond(self, content):
+                self.responses.append(content)
+                if len(self.responses) == 1:
+                    return "The order id is O-17."
+                self.done = True
+                return "###STOP###"
+
+        executor = TauExecutor()
+        task = Task(
+            task_id="tau",
+            benchmark="taubench",
+            messages=[{"role": "user", "content": "Where is my order?"}],
+            metadata={"audit_policy": "never"},
+        )
+        result = AgentHarness(
+            client,
+            "test-model",
+            HarnessConfig(strategy="optimized", max_steps=4),
+        ).run(task, executor)
+        self.assertEqual(result.status, "completed")
+        self.assertEqual(result.steps, 2)
+        self.assertEqual(executor.responses[0], "Could you provide the order id?")
+        self.assertTrue(
+            any(
+                item.get("kind") == "user_environment"
+                and item.get("observation") == "The order id is O-17."
+                for item in result.trajectory
+            )
+        )
 
 
 if __name__ == "__main__":

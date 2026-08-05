@@ -32,9 +32,16 @@ No pending cell is interpreted as zero, failure, or success.
   `sb-cli`.
 - Official CL-bench grading requires a judge model credential separate from the
   tested OpenRouter model credential.
+- The OpenRouter key reached its 50 free-model requests/day limit. The reported
+  reset is `2026-08-06 08:00 CST`.
+- SWE-bench Verified has 500 tasks and CL-bench has 1,899 tasks. Five required
+  harness/model combinations require at least 11,995 requests before Tau-bench,
+  retries, or CL judge calls. At 50 requests/day this is at least 240 days.
+- Tau-bench adds 165 multi-turn tasks per combination and a model-backed user
+  simulator. Its cost is materially higher than one request per task.
 - Free OpenRouter routes can stall or throttle long tool-use requests. The
-  runner records task completion atomically and uses bounded retries so full
-  shards can be resumed.
+  runner records task completion atomically, stops a shard after daily quota,
+  and retries quota/API failures on the next invocation.
 
 ## Reproducible Start
 
@@ -44,3 +51,5 @@ DRY_RUN=1 SHARD_ID=0 NUM_SHARDS=20 ./scripts/run_full_benchmark_matrix.sh
 
 Remove `DRY_RUN=1` only after the model key, benchmark data, and scoring runtime
 are available.
+
+Current machine-readable progress is in `results/full/run_status.json`.

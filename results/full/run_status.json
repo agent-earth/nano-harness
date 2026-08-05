@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-08-05T21:35:00+08:00",
+  "status": "started_blocked",
+  "matrix": {
+    "combinations": 15,
+    "models": [
+      "nvidia/nemotron-nano-9b-v2:free",
+      "nvidia/nemotron-3-nano-30b-a3b:free",
+      "nvidia/nemotron-3-super-120b-a12b:free",
+      "nvidia/nemotron-3-ultra-550b-a55b:free"
+    ],
+    "base_models": 4,
+    "optimized_models": [
+      "nvidia/nemotron-nano-9b-v2:free"
+    ],
+    "benchmarks": [
+      "swebench_verified",
+      "taubench",
+      "clbench"
+    ]
+  },
+  "datasets": {
+    "swebench_verified": {
+      "tasks": 500,
+      "cached": true
+    },
+    "clbench": {
+      "tasks": 1899,
+      "bytes": 90085681,
+      "sha256": "d5fc88d4b2eea75c61dd40862021b6ae2fba26bd21b58e8c5e18377a763943be"
+    },
+    "taubench": {
+      "revision": "59a200c6d575d595120f1cb70fea53cef0632f6b",
+      "retail_tasks": 115,
+      "airline_tasks": 50,
+      "runtime_loaded": true,
+      "historical_trajectories_downloaded": false,
+      "few_shot_demonstrations_downloaded": false
+    }
+  },
+  "started": {
+    "swebench_verified": {
+      "probe_task": "psf__requests-2317",
+      "status": "provider_daily_quota",
+      "retryable": true
+    },
+    "clbench": {
+      "shard_id": 0,
+      "num_shards": 20,
+      "selected_tasks": 95,
+      "status": "provider_daily_quota",
+      "retryable": true
+    },
+    "taubench": {
+      "environment": "retail",
+      "shard_id": 0,
+      "num_shards": 10,
+      "status": "provider_daily_quota",
+      "retryable": true
+    }
+  },
+  "provider_blocker": {
+    "kind": "openrouter_free_model_daily_quota",
+    "limit": 50,
+    "remaining": 0,
+    "reset_at_cst": "2026-08-06 08:00:00",
+    "minimum_swe_plus_cl_requests_for_required_matrix": 11995,
+    "minimum_days_at_current_limit": 240
+  },
+  "scoring_blockers": {
+    "swebench": "Docker is unavailable on this host; use Docker, Modal, or sb-cli.",
+    "clbench": "Official GPT-5.1 judge credential is not available."
+  },
+  "resume_commands": [
+    "SHARD_ID=0 NUM_SHARDS=20 ./scripts/run_full_benchmark_matrix.sh",
+    "SHARD_ID=0 NUM_SHARDS=10 ./scripts/run_full_taubench_matrix.sh"
+  ]
+}

@@ -12,6 +12,12 @@ from nano_harness.config import ModelConfig
 from nano_harness.types import ModelReply
 
 
+class ProviderQuotaError(RuntimeError):
+    def __init__(self, message: str, reset_at: str | None = None):
+        super().__init__(message)
+        self.reset_at = reset_at
+
+
 class OpenRouterClient:
     def __init__(self, config: ModelConfig):
         api_key = os.getenv(config.api_key_env)
@@ -24,6 +30,7 @@ class OpenRouterClient:
             api_key=api_key,
             base_url=config.base_url,
             timeout=config.timeout_seconds,
+            max_retries=0,
         )
 
     def complete(
@@ -65,6 +72,10 @@ class OpenRouterClient:
                     raw=response.model_dump(exclude_none=True),
                 )
             except Exception as exc:
+                if _is_quota_error(exc):
+                    raise ProviderQuotaError(
+                        str(exc), reset_at=_quota_reset_at(exc)
+                    ) from exc
                 last_error = exc
                 if attempt + 1 >= self.config.max_retries:
                     break
@@ -97,3 +108,19 @@ class ScriptedClient:
         if not self.replies:
             raise RuntimeError("ScriptedClient exhausted")
         return self.replies.pop(0)
+
+
+def _is_quota_error(exc: Exception) -> bool:
+    text = str(exc).lower()
+    return "429" in text and (
+        "rate limit" in text or "free-models-per-day" in text
+    )
+
+
+def _quota_reset_at(exc: Exception) -> str | None:
+    text = str(exc)
+    marker = "'X-RateLimit-Reset': '"
+    if marker not in text:
+        return None
+    value = text.split(marker, 1)[1].split("'", 1)[0]
+    return value or None

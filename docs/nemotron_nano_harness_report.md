@@ -15,8 +15,10 @@ CL-bench scores.
 - Docker: unavailable
 - SWE data: SWE-bench Lite, 300 rows cached through `hf-mirror.com`
 - CL data: direct Hugging Face unavailable; mirror metadata reachable, full
-  download not completed
-- Tau source: GitHub source access was slow/incomplete in this segment
+  1,899-task JSONL downloaded through `hf-mirror.com`
+- Tau source: fixed revision `59a200c6d575d595120f1cb70fea53cef0632f6b`;
+  107 runtime files downloaded with historical trajectories and few-shot
+  demonstrations explicitly excluded
 
 ## Synthetic Iterations
 
@@ -66,6 +68,24 @@ The harness was changed at the root cause:
 A v2 retry reached an OpenRouter free-route response-body stall before any
 mutation. The run was interrupted after eight minutes. Request timeout/retry
 settings were reduced to 120 seconds and two attempts for the smoke config.
+
+## Full-flow Start Evidence
+
+- SWE-bench Verified: all 500 tasks cached; `psf__requests-2317` optimized probe
+  started and stopped with structured `provider_daily_quota`.
+- CL-bench: all 1,899 tasks downloaded; shard 0 of 20 started. Before the
+  stop-on-quota fix it wrote 95 retryable quota records. Subsequent runs stop
+  after the first quota record and retry it after reset.
+- Tau-bench: retail (115 tasks, 16 tools) and airline (50 tasks, 14 tools)
+  environments loaded offline. Retail optimized shard 0 of 10 started and wrote
+  a structured `provider_daily_quota` blocker from the user simulator.
+- CL single-task base inference completed on a 76k-character multi-turn task:
+  14,534 prompt tokens, 1,633 completion tokens. The optimized counterpart was
+  blocked by the daily quota before inference.
+
+The CL adapter was corrected to preserve historical assistant turns. The
+context compressor now pins all original task messages and only compacts later
+agent/tool trajectory.
 
 ## Current Conclusions
 
