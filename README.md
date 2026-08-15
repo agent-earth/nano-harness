@@ -26,7 +26,7 @@ claim. Current evidence is documented in
 The current local Qwen3.5-4B/9B matched baseline contract is documented in
 [`docs/qwen35_baseline.md`](docs/qwen35_baseline.md).
 
-- Unit tests: 26 passing.
+- Unit tests: 27 passing.
 - OpenRouter synthetic smoke: completed for nano base and optimized.
 - Real SWE-bench Lite task generation: completed once, then correctly rejected
   as an invalid self-reported patch because no repository mutation or test was

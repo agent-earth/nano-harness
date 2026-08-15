@@ -14,6 +14,7 @@ from nano_harness.baseline import (
     compare_baselines,
     extract_prediction,
     load_cases,
+    load_manifest,
     score_output,
     summarize_baseline,
 )
@@ -43,6 +44,36 @@ class FakeToolExecutor:
 
 
 class CoreTests(unittest.TestCase):
+    def test_single_task_suite_requires_explicit_min_task_groups(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "suite.yaml"
+            base = {
+                "schema_version": "nano_harness_baseline_suite_v1",
+                "suite_id": "single-task",
+                "selection_seed": "fixed",
+                "system_prompt": "answer",
+                "max_tokens": 32,
+                "temperature": 0.0,
+                "chat_template_kwargs": {"enable_thinking": False},
+                "datasets": [
+                    {
+                        "name": "gsm8k",
+                        "path": "gsm8k.parquet",
+                        "sha256": "0" * 64,
+                        "scorer": "numeric_exact",
+                        "limit": 1,
+                    }
+                ],
+            }
+            import yaml
+
+            path.write_text(yaml.safe_dump(base), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "at least 3"):
+                load_manifest(path)
+            base["min_task_groups"] = 1
+            path.write_text(yaml.safe_dump(base), encoding="utf-8")
+            self.assertEqual(load_manifest(path).min_task_groups, 1)
+
     def test_baseline_numeric_and_choice_scorers_require_final_line(self):
         self.assertEqual(extract_prediction("work\nFINAL: $1,234.50", "numeric_exact"), "1234.5")
         self.assertEqual(score_output("FINAL: -0", "0", "numeric_exact"), (1.0, "0"))
@@ -138,6 +169,7 @@ class CoreTests(unittest.TestCase):
             draft_max_tokens=384,
             critique_max_tokens=192,
             verifier_max_tokens=32,
+            min_task_groups=1,
             datasets=(),
         )
         reply, stages = _run_draft_verify_case(
@@ -207,6 +239,7 @@ class CoreTests(unittest.TestCase):
             draft_max_tokens=256,
             critique_max_tokens=192,
             verifier_max_tokens=32,
+            min_task_groups=1,
             datasets=(),
         )
         reply, stages = _run_draft_critique_verify_case(
@@ -252,6 +285,7 @@ class CoreTests(unittest.TestCase):
                 draft_max_tokens=384,
                 critique_max_tokens=192,
                 verifier_max_tokens=32,
+                min_task_groups=1,
                 datasets=(
                     DatasetSpec(
                         name="gpqa_diamond",

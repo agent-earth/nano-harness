@@ -63,6 +63,7 @@ class SuiteManifest:
     draft_max_tokens: int
     critique_max_tokens: int
     verifier_max_tokens: int
+    min_task_groups: int
     datasets: tuple[DatasetSpec, ...]
 
 
@@ -80,6 +81,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "draft_max_tokens",
         "critique_max_tokens",
         "verifier_max_tokens",
+        "min_task_groups",
         "datasets",
     }
     unknown = set(raw) - expected_keys
@@ -88,8 +90,13 @@ def load_manifest(path: str | Path) -> SuiteManifest:
     if raw["schema_version"] != "nano_harness_baseline_suite_v1":
         raise ValueError("unsupported baseline suite schema")
     datasets = tuple(DatasetSpec(**item) for item in raw["datasets"])
-    if len(datasets) < 3:
-        raise ValueError("baseline suite requires at least three datasets")
+    min_task_groups = int(raw.get("min_task_groups", 3))
+    if min_task_groups < 1:
+        raise ValueError("min_task_groups must be at least one")
+    if len(datasets) < min_task_groups:
+        raise ValueError(
+            f"suite requires at least {min_task_groups} dataset task groups"
+        )
     if len({item.name for item in datasets}) != len(datasets):
         raise ValueError("dataset names must be unique")
     strategy = str(raw.get("strategy", "direct"))
@@ -107,6 +114,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         draft_max_tokens=int(raw.get("draft_max_tokens", 384)),
         critique_max_tokens=int(raw.get("critique_max_tokens", 192)),
         verifier_max_tokens=int(raw.get("verifier_max_tokens", 32)),
+        min_task_groups=min_task_groups,
         datasets=datasets,
     )
 
