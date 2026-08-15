@@ -113,12 +113,29 @@ def render_markdown(report: dict[str, Any]) -> str:
     ci = holdout["overall_micro"]["paired_bootstrap_95_ci"]
     return f"""# Critique v1 And Holdout Result
 
+## Evidence Integrity Correction
+
+The dev2 comparison is a valid observation of two different composite
+strategies, but it does not isolate the critique stage: the incumbent draft
+received `case.prompt`, while the critique arm received `case.draft_prompt`.
+The original claim that critique alone caused the regression is withdrawn.
+
+The 18-case holdout aggregate confirmation is invalid: code revision
+`cf2a00e` sent `case.draft_prompt` through direct arms while the validator
+checked `case.prompt`. MMLU and GPQA direct controls used a reasoning prompt
+with a 32-token answer-only budget and truncated every output.
+
+Raw artifacts and the originally observed numbers remain below for audit, but
+the holdout cannot establish a significant 4B advantage. Its GSM8K subset is
+still matched because the two GSM8K prompt fields are equivalent.
+
 ## Critique Decision
 
-The critique stage is rejected. On fresh dev2 it scores
+The composite draft-reasoning/critique strategy is rejected. On fresh dev2 it scores
 {critique['candidate_macro_accuracy']:.4f} versus draft-verify at
 {critique['baseline_macro_accuracy']:.4f}, a {critique['macro_delta']:+.4f}
-delta. Both lost cases are GPQA. Critique uses
+delta. Both lost cases are GPQA. This does not isolate critique because the
+draft prompt also changed. The composite strategy uses
 {report['costs']['dev2_critique']['total_tokens']} tokens versus
 {report['costs']['dev2_incumbent']['total_tokens']} and
 {report['costs']['dev2_critique']['wall_seconds']:.1f}s versus
@@ -141,9 +158,9 @@ Against 9B direct, 4B draft-verify has seven treatment-only wins and zero
 95% bootstrap CI [{ci[0]:+.4f}, {ci[1]:+.4f}], exact McNemar
 `p={holdout['overall_micro']['mcnemar_exact_p']:.6f}`.
 
-This is significant confirmation on a small 18-case holdout. The strategy is
-now frozen. The next experiment is a pre-registered 72-case holdout2; no prompt,
-budget, or scorer changes are allowed before reading it.
+This originally appeared significant, but the aggregate confirmation is
+invalid because its direct controls were mismatched. A corrected fresh
+confirmation is required.
 
 ## Reproduction Identity
 
@@ -190,13 +207,24 @@ def main() -> None:
         },
         "decision": {
             "critique_rejected": True,
-            "draft_verify_frozen": True,
-            "small_holdout_significant": True,
-            "holdout2_required": True,
+            "draft_verify_frozen": False,
+            "small_holdout_significant": None,
+            "holdout2_required": False,
             "next_experiment": (
-                "Pre-registered 72-case holdout2 with 4B direct, 4B "
-                "draft-verify, and 9B direct."
+                "Corrected benchmark-aware routing on fresh matched controls."
             ),
+        },
+        "validity": {
+            "dev2_composite_strategy_comparison_valid": True,
+            "dev2_critique_only_attribution_valid": False,
+            "dev2_additional_changed_variable": "draft prompt",
+            "holdout_aggregate_comparison_valid": False,
+            "affected_holdout_benchmarks": ["mmlu", "gpqa_diamond"],
+            "cause": (
+                "Direct runner used reasoning draft_prompt with a 32-token "
+                "answer-only budget while validation checked prompt."
+            ),
+            "holdout_gsm8k_comparison_valid": True,
         },
     }
     json_path = Path("docs/results/critique_v1_holdout.public.json")

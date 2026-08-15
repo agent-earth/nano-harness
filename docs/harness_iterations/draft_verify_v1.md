@@ -1,5 +1,17 @@
 # Draft-Verify v1
 
+## Evidence Integrity Correction
+
+Revision `cf2a00e` actually sent `case.prompt` to the treatment draft. For
+answer-only MMLU and GPQA, this was not the reasoning-oriented
+`case.draft_prompt` modeled by validation. Fixed-v5 scores remain observations
+of that implementation but do not validate the stated reasoning-draft
+mechanism.
+
+The dev direct arm had the inverse mismatch: it received `case.draft_prompt`
+under the 32-token answer-only budget. Its MMLU and GPQA controls are invalid,
+so the dev promotion claim is withdrawn. Raw evidence is retained for audit.
+
 ## Hypothesis
 
 A small model may need room to reason, but the final answer contract should not
@@ -55,15 +67,16 @@ cases.
 
 ## Result
 
-The disjoint dev slice improved from 5/18 to 9/18, with four candidate-only
-wins, zero control-only wins, and no treatment parse failures. This met the
-pre-registered promotion rule.
+The disjoint dev slice observed 5/18 versus 9/18, but the comparison is
+invalid because the direct MMLU and GPQA controls used a mismatched
+prompt/budget contract. It cannot establish promotion.
 
 On fixed v5 evaluation, 4B draft-verify reached 52/72 (macro 0.7222), compared
 with 4B direct at 50/72 and 9B direct at 51/72. The 4B-vs-9B paired 95%
 bootstrap interval still crosses zero, and GPQA regressed from 10/24 to 8/24.
-The strategy is retained as a component but does not satisfy harness-stage
-acceptance.
+The observed answer-only-draft strategy does not satisfy harness-stage
+acceptance. A corrected fresh experiment is required before claiming the
+reasoning-draft mechanism.
 
 See the public-safe report:
 

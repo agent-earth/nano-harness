@@ -1,5 +1,17 @@
 # Critique v1 And Holdout Protocol
 
+## Evidence Integrity Correction
+
+The dev2 comparison changed both the critique stage and the draft prompt: the
+incumbent used `case.prompt`, while the composite critique arm used
+`case.draft_prompt`. It compares two composite strategies and cannot isolate
+critique-stage causality.
+
+The direct holdout arms used `case.draft_prompt` under answer-only MMLU/GPQA
+budgets. Their aggregate comparisons are invalid; only the matched GSM8K
+subset remains usable. The significant holdout claim is withdrawn and raw
+artifacts remain available by digest.
+
 ## Dev2 Critique Test
 
 The fresh dev2 slice uses `start: 30, limit: 6` for each benchmark. It has no
@@ -9,7 +21,7 @@ The incumbent is draft-verify with a 256-token draft and a 32-token verifier.
 The treatment inserts a 192-token independent critique before the same strict
 formatter.
 
-Critique is rejected:
+The composite critique strategy is rejected:
 
 - incumbent: 14/18, macro 0.7778;
 - critique: 12/18, macro 0.6667;
@@ -45,17 +57,15 @@ may follow from inspecting these cases.
 
 ## Result
 
-Critique is rejected on dev2: draft-verify scores 14/18 and critique scores
-12/18. The two lost cases are GPQA. Critique uses 26,365 tokens and 249 seconds,
-versus 8,418 tokens and 41 seconds for draft-verify.
+The composite critique strategy scores 12/18 versus draft-verify at 14/18.
+The two lost cases are GPQA. It uses 26,365 tokens and 249 seconds versus
+8,418 tokens and 41 seconds, but the draft prompt also changed.
 
-On the untouched holdout, 4B draft-verify scores 13/18 while both 4B direct and
-9B direct score 6/18. Relative to 9B, the treatment has seven treatment-only
-wins and zero 9B-only wins, paired delta +0.3889, bootstrap 95% CI
-[+0.1667, +0.6111], and exact McNemar p=0.015625. All three task groups are
-non-regressing on this holdout.
+The untouched holdout observed 4B draft-verify at 13/18 while both direct arms
+scored 6/18. The aggregate result is invalid because the MMLU/GPQA direct arms
+used a mismatched prompt/budget contract.
 
-The draft-verify policy is now frozen for a larger pre-registered holdout2.
+A corrected fresh confirmation is required.
 
 - [`docs/results/critique_v1_holdout.md`](../results/critique_v1_holdout.md)
 - [`docs/results/critique_v1_holdout.public.json`](../results/critique_v1_holdout.public.json)

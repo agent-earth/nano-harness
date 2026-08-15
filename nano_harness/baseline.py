@@ -60,6 +60,7 @@ class SuiteManifest:
     temperature: float
     chat_template_kwargs: dict[str, Any]
     strategy: str
+    benchmark_routing: dict[str, str]
     draft_max_tokens: int
     critique_max_tokens: int
     second_solve_max_tokens: int
@@ -79,6 +80,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "temperature",
         "chat_template_kwargs",
         "strategy",
+        "benchmark_routing",
         "draft_max_tokens",
         "critique_max_tokens",
         "second_solve_max_tokens",
@@ -102,13 +104,37 @@ def load_manifest(path: str | Path) -> SuiteManifest:
     if len({item.name for item in datasets}) != len(datasets):
         raise ValueError("dataset names must be unique")
     strategy = str(raw.get("strategy", "direct"))
-    if strategy not in {
+    supported_strategies = {
         "direct",
         "draft_verify",
         "draft_critique_verify",
         "dual_solve_verify",
-    }:
+    }
+    if strategy not in supported_strategies | {"benchmark_routing"}:
         raise ValueError(f"unsupported baseline strategy: {strategy}")
+    benchmark_routing = {
+        str(name): str(route)
+        for name, route in raw.get("benchmark_routing", {}).items()
+    }
+    if strategy == "benchmark_routing":
+        dataset_names = {item.name for item in datasets}
+        if set(benchmark_routing) != dataset_names:
+            raise ValueError(
+                "benchmark_routing must cover every dataset exactly: "
+                f"expected={sorted(dataset_names)}, "
+                f"actual={sorted(benchmark_routing)}"
+            )
+        invalid_routes = {
+            name: route
+            for name, route in benchmark_routing.items()
+            if route not in supported_strategies
+        }
+        if invalid_routes:
+            raise ValueError(f"unsupported benchmark routes: {invalid_routes}")
+    elif benchmark_routing:
+        raise ValueError(
+            "benchmark_routing is only allowed with strategy=benchmark_routing"
+        )
     return SuiteManifest(
         schema_version=raw["schema_version"],
         suite_id=raw["suite_id"],
@@ -118,6 +144,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         temperature=float(raw["temperature"]),
         chat_template_kwargs=dict(raw.get("chat_template_kwargs", {})),
         strategy=strategy,
+        benchmark_routing=benchmark_routing,
         draft_max_tokens=int(raw.get("draft_max_tokens", 384)),
         critique_max_tokens=int(raw.get("critique_max_tokens", 192)),
         second_solve_max_tokens=int(raw.get("second_solve_max_tokens", 384)),
@@ -349,21 +376,22 @@ def run_suite(
             continue
         attempted += 1
         started = time.perf_counter()
+        selected_strategy = _strategy_for_case(manifest, case)
         try:
-            if manifest.strategy == "direct":
+            if selected_strategy == "direct":
                 reply, stage_metadata = _run_direct_case(
                     case,
                     model,
                     clients,
                 )
-            elif manifest.strategy == "draft_verify":
+            elif selected_strategy == "draft_verify":
                 reply, stage_metadata = _run_draft_verify_case(
                     case,
                     manifest,
                     model,
                     clients,
                 )
-            elif manifest.strategy == "draft_critique_verify":
+            elif selected_strategy == "draft_critique_verify":
                 reply, stage_metadata = _run_draft_critique_verify_case(
                     case,
                     manifest,
@@ -386,6 +414,7 @@ def run_suite(
                 "benchmark": case.benchmark,
                 "model": model.name,
                 "strategy": manifest.strategy,
+                "selected_strategy": selected_strategy,
                 "source_index": case.source_index,
                 "max_tokens": case.max_tokens,
                 "prompt_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
@@ -414,6 +443,7 @@ def run_suite(
             "benchmark": case.benchmark,
             "model": model.name,
             "strategy": manifest.strategy,
+            "selected_strategy": selected_strategy,
             "source_index": case.source_index,
             "max_tokens": case.max_tokens,
             "prompt_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
@@ -438,6 +468,15 @@ def run_suite(
     return summary
 
 
+def _strategy_for_case(
+    manifest: SuiteManifest,
+    case: BaselineCase,
+) -> str:
+    if manifest.strategy == "benchmark_routing":
+        return manifest.benchmark_routing[case.benchmark]
+    return manifest.strategy
+
+
 def _run_direct_case(
     case: BaselineCase,
     model: ModelConfig,
@@ -447,7 +486,7 @@ def _run_direct_case(
     reply = client.complete(
         [
             {"role": "system", "content": case.system_prompt},
-            {"role": "user", "content": case.draft_prompt},
+            {"role": "user", "content": case.prompt},
         ]
     )
     return reply, {
@@ -475,7 +514,7 @@ def _run_draft_verify_case(
                     "and candidate answer for a separate verifier. Do not use tools."
                 ),
             },
-            {"role": "user", "content": case.prompt},
+            {"role": "user", "content": case.draft_prompt},
         ]
     )
     verifier_client = _client_for_budget(

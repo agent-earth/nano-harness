@@ -9,8 +9,10 @@ from nano_harness.baseline import (
     DatasetSpec,
     SuiteManifest,
     _run_draft_critique_verify_case,
+    _run_direct_case,
     _run_draft_verify_case,
     _run_dual_solve_verify_case,
+    _strategy_for_case,
     build_case,
     compare_baselines,
     extract_prediction,
@@ -167,6 +169,7 @@ class CoreTests(unittest.TestCase):
             temperature=0.0,
             chat_template_kwargs={"enable_thinking": False},
             strategy="draft_verify",
+            benchmark_routing={},
             draft_max_tokens=384,
             critique_max_tokens=192,
             second_solve_max_tokens=384,
@@ -191,6 +194,138 @@ class CoreTests(unittest.TestCase):
         self.assertIn("Candidate reasoning: 7 + 5 = 12.", verifier_prompt)
         self.assertIn(case.prompt, verifier_prompt)
         self.assertIn(case.draft_prompt, draft_client.calls[0]["messages"][-1]["content"])
+
+    def test_direct_and_draft_stages_use_their_declared_prompt_contracts(self):
+        case = build_case(
+            "mmlu",
+            "choice_exact",
+            0,
+            {
+                "question": "Which option is correct?",
+                "choices": ["first", "second"],
+                "answer": 1,
+                "subject": "test",
+            },
+            answer_only=True,
+            system_prompt="answer only",
+            max_tokens=32,
+        )
+        direct_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: B",
+                    usage={"prompt_tokens": 10, "completion_tokens": 4},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        _run_direct_case(
+            case,
+            ModelConfig(name="test"),
+            {32: direct_client},
+        )
+        self.assertIn(
+            "Do not show reasoning",
+            direct_client.calls[0]["messages"][-1]["content"],
+        )
+
+        draft_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="The second option is correct.",
+                    usage={"prompt_tokens": 10, "completion_tokens": 6},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        verifier_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: B",
+                    usage={"prompt_tokens": 20, "completion_tokens": 4},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="draft-contract-test",
+            selection_seed="fixed",
+            system_prompt="answer only",
+            max_tokens=32,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="draft_verify",
+            benchmark_routing={},
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            second_solve_max_tokens=384,
+            verifier_max_tokens=32,
+            min_task_groups=1,
+            datasets=(),
+        )
+        _run_draft_verify_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {256: draft_client, 32: verifier_client},
+        )
+        self.assertIn(
+            "Reason concisely",
+            draft_client.calls[0]["messages"][-1]["content"],
+        )
+        self.assertIn(
+            "Do not show reasoning",
+            verifier_client.calls[0]["messages"][-1]["content"],
+        )
+
+    def test_benchmark_routing_requires_complete_supported_routes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "suite.yaml"
+            base = {
+                "schema_version": "nano_harness_baseline_suite_v1",
+                "suite_id": "routing-test",
+                "selection_seed": "fixed",
+                "system_prompt": "answer",
+                "max_tokens": 32,
+                "temperature": 0.0,
+                "chat_template_kwargs": {"enable_thinking": False},
+                "strategy": "benchmark_routing",
+                "min_task_groups": 1,
+                "datasets": [
+                    {
+                        "name": "mmlu",
+                        "path": "mmlu.parquet",
+                        "sha256": "0" * 64,
+                        "scorer": "choice_exact",
+                        "limit": 1,
+                    }
+                ],
+            }
+            import yaml
+
+            path.write_text(yaml.safe_dump(base), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "cover every dataset"):
+                load_manifest(path)
+            base["benchmark_routing"] = {"mmlu": "unsupported"}
+            path.write_text(yaml.safe_dump(base), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "unsupported benchmark routes"):
+                load_manifest(path)
+            base["benchmark_routing"] = {"mmlu": "draft_verify"}
+            path.write_text(yaml.safe_dump(base), encoding="utf-8")
+            manifest = load_manifest(path)
+            case = build_case(
+                "mmlu",
+                "choice_exact",
+                0,
+                {
+                    "question": "Question?",
+                    "choices": ["A", "B"],
+                    "answer": 0,
+                    "subject": "test",
+                },
+            )
+            self.assertEqual(_strategy_for_case(manifest, case), "draft_verify")
 
     def test_draft_critique_verify_records_three_stage_evidence(self):
         case = build_case(
@@ -238,6 +373,7 @@ class CoreTests(unittest.TestCase):
             temperature=0.0,
             chat_template_kwargs={"enable_thinking": False},
             strategy="draft_critique_verify",
+            benchmark_routing={},
             draft_max_tokens=256,
             critique_max_tokens=192,
             second_solve_max_tokens=384,
@@ -310,6 +446,7 @@ class CoreTests(unittest.TestCase):
             temperature=0.0,
             chat_template_kwargs={"enable_thinking": False},
             strategy="dual_solve_verify",
+            benchmark_routing={},
             draft_max_tokens=256,
             critique_max_tokens=192,
             second_solve_max_tokens=384,
@@ -365,6 +502,7 @@ class CoreTests(unittest.TestCase):
                 temperature=0.0,
                 chat_template_kwargs={"enable_thinking": False},
                 strategy="direct",
+                benchmark_routing={},
                 draft_max_tokens=384,
                 critique_max_tokens=192,
                 second_solve_max_tokens=384,

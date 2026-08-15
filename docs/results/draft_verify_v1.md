@@ -1,9 +1,23 @@
 # Draft-Verify v1 Result
 
+## Evidence Integrity Correction
+
+The fixed-v5 treatment scores are valid observations of the implementation
+that ran, but the original mechanism label was wrong. The draft stage received
+`case.prompt`; on answer-only MMLU and GPQA this was the answer-only prompt,
+not the validator-modeled reasoning `case.draft_prompt`.
+
+The dev1 treatment-versus-direct comparison is invalid because the direct arm
+received `case.draft_prompt` with a 32-token answer-only budget on MMLU and
+GPQA. It cannot justify promotion. Fixed-v5 direct artifacts predate that
+runner regression and remain valid controls, so the fixed-v5 comparison below
+is retained as an empirical answer-only-draft strategy result. It does not
+validate the stated reasoning-draft mechanism.
+
 ## Decision
 
-The treatment is retained as a promising harness component, but it does not
-satisfy the harness-stage acceptance criterion. On the fixed 72-case suite,
+The observed implementation does not satisfy the harness-stage acceptance
+criterion. On the fixed 72-case suite,
 4B draft-verify scores 0.7222 versus the
 9B baseline at 0.7083, a
 +0.0139 macro delta. The paired micro 95% bootstrap
@@ -21,7 +35,8 @@ interval is [-0.0833, +0.1111], so the lead is not significant.
 - Tokens: 5563 direct to
   10331 treatment
 
-The 18 development cases are disjoint from the fixed 72 evaluation cases.
+The 18 development cases are disjoint from the fixed 72 evaluation cases, but
+the comparison is invalid due to the direct-control prompt/budget mismatch.
 
 ## Fixed Evaluation
 
@@ -32,15 +47,14 @@ The 18 development cases are disjoint from the fixed 72 evaluation cases.
 | GPQA-Diamond | 0.4167 | 0.3333 | 0.4167 |
 | Macro | 0.6944 | 0.7222 | 0.7083 |
 
-Draft-verify improves GSM8K and MMLU by two cases each versus 4B direct, but
-loses two GPQA cases. It uses about twice the tokens while reducing wall-clock
-time in this single-sequence local setup. The next iteration should preserve
-the verifier for math/knowledge tasks and test a GPQA-specific repair on a new
-development slice, not tune again on the observed fixed evaluation cases.
+The observed answer-only-draft strategy improves GSM8K and MMLU by two cases
+each versus 4B direct, but loses two GPQA cases. It uses about twice the tokens
+while reducing wall-clock time in this single-sequence local setup. A fresh
+corrected experiment is required before making a reasoning-draft claim.
 
 ## Reproduction Identity
 
-- Code revision: `cf2a00e1d703747a754e85596f80808c76b5fb3c`
+- Code revision: `33912848bbdd3ff7339c45018688c95f6af48925`
 - Dev control manifest SHA256: `b47a935907cbd2a87236691742143c9c79741273c972d4091901fb0d6d0cb59f`
 - Dev treatment manifest SHA256: `02333ef588f848189ec77c8260189f6ea08fec648719005cf1a65c392e109445`
 - Eval treatment manifest SHA256: `e19b782fb5316e207380d758694db5e72e9ee08453b3b687ee7b6f99ea9adda8`

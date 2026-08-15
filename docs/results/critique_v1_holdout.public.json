@@ -6,7 +6,7 @@
     "holdout_4b_treatment_raw_sha256": "2c84bb7d9ea066ab6b787c9ab89618a23fbf05fb0f3f771a2d2e5a6c8786b220",
     "holdout_9b_direct_raw_sha256": "d8507f80daca4f46e707d26039d9cf78508017deb162e1075904e61d5b63ad67"
   },
-  "code_revision": "1c592e00d23a7da909e37bba5853a81c941396f9",
+  "code_revision": "33912848bbdd3ff7339c45018688c95f6af48925",
   "costs": {
     "dev2_critique": {
       "api_errors": 0,
@@ -66,10 +66,10 @@
   },
   "decision": {
     "critique_rejected": true,
-    "draft_verify_frozen": true,
-    "holdout2_required": true,
-    "next_experiment": "Pre-registered 72-case holdout2 with 4B direct, 4B draft-verify, and 9B direct.",
-    "small_holdout_significant": true
+    "draft_verify_frozen": false,
+    "holdout2_required": false,
+    "next_experiment": "Corrected benchmark-aware routing on fresh matched controls.",
+    "small_holdout_significant": null
   },
   "dev2_critique_comparison": {
     "baseline_macro_accuracy": 0.7777777777777778,
@@ -170,7 +170,7 @@
       }
     }
   },
-  "generated_at": "2026-08-15T19:50:30.014931+00:00",
+  "generated_at": "2026-08-15T21:30:32.474758+00:00",
   "holdout": {
     "four_b_direct": {
       "benchmarks": {
@@ -586,5 +586,17 @@
     }
   },
   "iteration_id": "critique-v1-holdout",
-  "schema_version": "nano_harness_public_harness_iteration_v1"
+  "schema_version": "nano_harness_public_harness_iteration_v1",
+  "validity": {
+    "affected_holdout_benchmarks": [
+      "mmlu",
+      "gpqa_diamond"
+    ],
+    "cause": "Direct runner used reasoning draft_prompt with a 32-token answer-only budget while validation checked prompt.",
+    "dev2_additional_changed_variable": "draft prompt",
+    "dev2_composite_strategy_comparison_valid": true,
+    "dev2_critique_only_attribution_valid": false,
+    "holdout_aggregate_comparison_valid": false,
+    "holdout_gsm8k_comparison_valid": true
+  }
 }

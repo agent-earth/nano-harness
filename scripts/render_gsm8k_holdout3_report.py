@@ -169,9 +169,9 @@ draft errors, but holdout acceptance fails:
   {report['costs']['nine_b']['total_tokens']} for 9B direct.
 
 The next experiment must use a fresh slice. Benchmark-aware routing is the next
-falsifiable direction: preserve direct/reasoning behavior for math while using
-draft-verify only where it has repeatedly improved MMLU and GPQA. No holdout3
-tuning is allowed.
+falsifiable direction: preserve direct/reasoning behavior for math while
+retesting draft-verify on MMLU and GPQA under a repaired, validator-matched
+prompt contract. No holdout3 tuning is allowed.
 
 ## Reproduction Identity
 

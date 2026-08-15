@@ -106,10 +106,24 @@ def render_markdown(report: dict[str, Any]) -> str:
     ci = versus_9b["overall_micro"]["paired_bootstrap_95_ci"]
     return f"""# Draft-Verify v1 Result
 
+## Evidence Integrity Correction
+
+The fixed-v5 treatment scores are valid observations of the implementation
+that ran, but the original mechanism label was wrong. The draft stage received
+`case.prompt`; on answer-only MMLU and GPQA this was the answer-only prompt,
+not the validator-modeled reasoning `case.draft_prompt`.
+
+The dev1 treatment-versus-direct comparison is invalid because the direct arm
+received `case.draft_prompt` with a 32-token answer-only budget on MMLU and
+GPQA. It cannot justify promotion. Fixed-v5 direct artifacts predate that
+runner regression and remain valid controls, so the fixed-v5 comparison below
+is retained as an empirical answer-only-draft strategy result. It does not
+validate the stated reasoning-draft mechanism.
+
 ## Decision
 
-The treatment is retained as a promising harness component, but it does not
-satisfy the harness-stage acceptance criterion. On the fixed 72-case suite,
+The observed implementation does not satisfy the harness-stage acceptance
+criterion. On the fixed 72-case suite,
 4B draft-verify scores {versus_9b['candidate_macro_accuracy']:.4f} versus the
 9B baseline at {versus_9b['baseline_macro_accuracy']:.4f}, a
 {versus_9b['macro_delta']:+.4f} macro delta. The paired micro 95% bootstrap
@@ -127,7 +141,8 @@ interval is [{ci[0]:+.4f}, {ci[1]:+.4f}], so the lead is not significant.
 - Tokens: {report['costs']['dev_direct']['total_tokens']} direct to
   {report['costs']['dev_treatment']['total_tokens']} treatment
 
-The 18 development cases are disjoint from the fixed 72 evaluation cases.
+The 18 development cases are disjoint from the fixed 72 evaluation cases, but
+the comparison is invalid due to the direct-control prompt/budget mismatch.
 
 ## Fixed Evaluation
 
@@ -138,11 +153,10 @@ The 18 development cases are disjoint from the fixed 72 evaluation cases.
 | GPQA-Diamond | {versus_4b['benchmarks']['gpqa_diamond']['baseline_accuracy']:.4f} | {versus_4b['benchmarks']['gpqa_diamond']['candidate_accuracy']:.4f} | {versus_9b['benchmarks']['gpqa_diamond']['baseline_accuracy']:.4f} |
 | Macro | {versus_4b['baseline_macro_accuracy']:.4f} | {versus_4b['candidate_macro_accuracy']:.4f} | {versus_9b['baseline_macro_accuracy']:.4f} |
 
-Draft-verify improves GSM8K and MMLU by two cases each versus 4B direct, but
-loses two GPQA cases. It uses about twice the tokens while reducing wall-clock
-time in this single-sequence local setup. The next iteration should preserve
-the verifier for math/knowledge tasks and test a GPQA-specific repair on a new
-development slice, not tune again on the observed fixed evaluation cases.
+The observed answer-only-draft strategy improves GSM8K and MMLU by two cases
+each versus 4B direct, but loses two GPQA cases. It uses about twice the tokens
+while reducing wall-clock time in this single-sequence local setup. A fresh
+corrected experiment is required before making a reasoning-draft claim.
 
 ## Reproduction Identity
 
@@ -210,14 +224,27 @@ def main() -> None:
             "eval_treatment_raw_sha256": sha256_file(PATHS["eval_treatment"]),
         },
         "decision": {
-            "promising_component": True,
+            "promising_component": None,
             "harness_acceptance_satisfied": False,
             "reasons": [
-                "Fixed-suite 4B macro exceeds 9B by one case.",
+                "Fixed-suite observed 4B macro exceeds 9B by one case.",
                 "The paired confidence interval includes zero.",
                 "GPQA regresses by two cases versus 4B direct.",
+                "The dev promotion control was invalid.",
+                "The treatment did not run the declared reasoning draft prompt.",
             ],
-            "next_experiment": "GPQA repair on a fresh disjoint dev2 slice",
+            "next_experiment": (
+                "Corrected benchmark-aware routing on fresh matched controls."
+            ),
+        },
+        "validity": {
+            "dev_comparison_valid": False,
+            "fixed_eval_comparison_valid": True,
+            "fixed_eval_mechanism_label_valid": False,
+            "direct_runner_affected_dev_benchmarks": ["mmlu", "gpqa_diamond"],
+            "actual_treatment_prompt": "case.prompt",
+            "declared_treatment_prompt": "case.draft_prompt",
+            "raw_artifacts_retained": True,
         },
     }
     output_json = Path("docs/results/draft_verify_v1.public.json")

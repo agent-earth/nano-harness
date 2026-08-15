@@ -7,7 +7,7 @@
     "eval_treatment_manifest_sha256": "e19b782fb5316e207380d758694db5e72e9ee08453b3b687ee7b6f99ea9adda8",
     "eval_treatment_raw_sha256": "a2e0ba00bd6ca3e26288a82e227355a420039c8416c8ad76fbfc5b49a4ee4d9d"
   },
-  "code_revision": "cf2a00e1d703747a754e85596f80808c76b5fb3c",
+  "code_revision": "33912848bbdd3ff7339c45018688c95f6af48925",
   "costs": {
     "dev_direct": {
       "api_errors": 0,
@@ -72,12 +72,14 @@
   },
   "decision": {
     "harness_acceptance_satisfied": false,
-    "next_experiment": "GPQA repair on a fresh disjoint dev2 slice",
-    "promising_component": true,
+    "next_experiment": "Corrected benchmark-aware routing on fresh matched controls.",
+    "promising_component": null,
     "reasons": [
-      "Fixed-suite 4B macro exceeds 9B by one case.",
+      "Fixed-suite observed 4B macro exceeds 9B by one case.",
       "The paired confidence interval includes zero.",
-      "GPQA regresses by two cases versus 4B direct."
+      "GPQA regresses by two cases versus 4B direct.",
+      "The dev promotion control was invalid.",
+      "The treatment did not run the declared reasoning draft prompt."
     ]
   },
   "dev_comparison": {
@@ -522,8 +524,20 @@
       }
     }
   },
-  "generated_at": "2026-08-15T19:29:56.848959+00:00",
+  "generated_at": "2026-08-15T21:30:30.955706+00:00",
   "hypothesis": "Separate bounded candidate reasoning from a strict final verifier to improve correctness and format reliability.",
   "iteration_id": "draft-verify-v1",
-  "schema_version": "nano_harness_public_harness_iteration_v1"
+  "schema_version": "nano_harness_public_harness_iteration_v1",
+  "validity": {
+    "actual_treatment_prompt": "case.prompt",
+    "declared_treatment_prompt": "case.draft_prompt",
+    "dev_comparison_valid": false,
+    "direct_runner_affected_dev_benchmarks": [
+      "mmlu",
+      "gpqa_diamond"
+    ],
+    "fixed_eval_comparison_valid": true,
+    "fixed_eval_mechanism_label_valid": false,
+    "raw_artifacts_retained": true
+  }
 }

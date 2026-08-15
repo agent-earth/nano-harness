@@ -40,7 +40,8 @@ wins.
 
 The holdout acceptance is not satisfied. Dual-solve is useful mechanism
 evidence but is too costly and still below 9B. The next experiment must use a
-fresh slice and test benchmark-aware routing; no tuning is allowed on holdout3.
+fresh slice and test benchmark-aware routing with repaired direct/draft prompt
+contracts; no tuning is allowed on holdout3.
 
 - [`docs/results/gsm8k_holdout3_v1.md`](../results/gsm8k_holdout3_v1.md)
 - [`docs/results/gsm8k_holdout3_v1.public.json`](../results/gsm8k_holdout3_v1.public.json)

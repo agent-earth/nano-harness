@@ -1,11 +1,28 @@
 # Critique v1 And Holdout Result
 
+## Evidence Integrity Correction
+
+The dev2 comparison is a valid observation of two different composite
+strategies, but it does not isolate the critique stage: the incumbent draft
+received `case.prompt`, while the critique arm received `case.draft_prompt`.
+The original claim that critique alone caused the regression is withdrawn.
+
+The 18-case holdout aggregate confirmation is invalid: code revision
+`cf2a00e` sent `case.draft_prompt` through direct arms while the validator
+checked `case.prompt`. MMLU and GPQA direct controls used a reasoning prompt
+with a 32-token answer-only budget and truncated every output.
+
+Raw artifacts and the originally observed numbers remain below for audit, but
+the holdout cannot establish a significant 4B advantage. Its GSM8K subset is
+still matched because the two GSM8K prompt fields are equivalent.
+
 ## Critique Decision
 
-The critique stage is rejected. On fresh dev2 it scores
+The composite draft-reasoning/critique strategy is rejected. On fresh dev2 it scores
 0.6667 versus draft-verify at
 0.7778, a -0.1111
-delta. Both lost cases are GPQA. Critique uses
+delta. Both lost cases are GPQA. This does not isolate critique because the
+draft prompt also changed. The composite strategy uses
 26365 tokens versus
 8418 and
 249.4s versus
@@ -28,13 +45,13 @@ Against 9B direct, 4B draft-verify has seven treatment-only wins and zero
 95% bootstrap CI [+0.1667, +0.6111], exact McNemar
 `p=0.015625`.
 
-This is significant confirmation on a small 18-case holdout. The strategy is
-now frozen. The next experiment is a pre-registered 72-case holdout2; no prompt,
-budget, or scorer changes are allowed before reading it.
+This originally appeared significant, but the aggregate confirmation is
+invalid because its direct controls were mismatched. A corrected fresh
+confirmation is required.
 
 ## Reproduction Identity
 
-- Code revision: `1c592e00d23a7da909e37bba5853a81c941396f9`
+- Code revision: `33912848bbdd3ff7339c45018688c95f6af48925`
 - Dev2 incumbent raw SHA256: `9b81723336f9c8f3aadb71996fb083939e32365f1ebe2d7b75d984d405167905`
 - Dev2 critique raw SHA256: `1149331a7c44fa439d8cde7d9f54578a37a5db5f3a16b440b8b72cf2c21451b6`
 - Holdout 4B direct raw SHA256: `e1ba84e4ed3c3305eabdfc353060b0b859f2829933a79252c79e924a0f9adcc2`

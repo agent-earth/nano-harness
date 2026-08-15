@@ -4,7 +4,7 @@
     "four_b_treatment_raw_sha256": "179c57f50c8b1ff0773b28ea72eb87f87464f0dcb3dfda3f15ccbf45a96654a8",
     "nine_b_direct_raw_sha256": "63f0741d3fbabee2e935adcecb2f63b0b6b87ef86b2b53aef9115512ac70bb11"
   },
-  "code_revision": "49c39d90939304d559b4631532070044b6620c26",
+  "code_revision": "33912848bbdd3ff7339c45018688c95f6af48925",
   "costs": {
     "four_b_direct": {
       "api_errors": 0,
@@ -40,12 +40,12 @@
   "decision": {
     "gsm8k_delta": -0.041666666666666664,
     "harness_acceptance_satisfied": false,
-    "next_experiment": "Larger unseen GSM8K-only confirmation.",
-    "overall_significant_win": true,
-    "policy_frozen": true,
+    "next_experiment": "Corrected benchmark-aware routing on fresh matched controls.",
+    "overall_significant_win": null,
+    "policy_frozen": false,
     "task_group_non_regression": false
   },
-  "generated_at": "2026-08-15T20:06:37.300897+00:00",
+  "generated_at": "2026-08-15T21:30:34.548109+00:00",
   "holdout_id": "qwen35-holdout2-v1",
   "schema_version": "nano_harness_public_harness_holdout_v1",
   "summaries": {
@@ -187,6 +187,16 @@
       "total_attempts": 72,
       "total_cases": 72
     }
+  },
+  "validity": {
+    "affected_benchmarks": [
+      "mmlu",
+      "gpqa_diamond"
+    ],
+    "aggregate_comparison_valid": false,
+    "cause": "Direct runner used reasoning draft_prompt with a 32-token answer-only budget while validation checked prompt.",
+    "gsm8k_comparison_valid": true,
+    "treatment_observations_retained": true
   },
   "versus_4b_direct": {
     "baseline_macro_accuracy": 0.3055555555555555,

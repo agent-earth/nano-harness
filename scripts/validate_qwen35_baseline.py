@@ -9,7 +9,12 @@ from pathlib import Path
 
 from transformers import AutoTokenizer
 
-from nano_harness.baseline import case_manifest, load_cases, load_manifest
+from nano_harness.baseline import (
+    _strategy_for_case,
+    case_manifest,
+    load_cases,
+    load_manifest,
+)
 
 
 def main() -> None:
@@ -45,7 +50,8 @@ def main() -> None:
     totals: list[int] = []
     by_benchmark: dict[str, dict[str, list[int]]] = {}
     for case in cases:
-        if manifest.strategy == "direct":
+        selected_strategy = _strategy_for_case(manifest, case)
+        if selected_strategy == "direct":
             text = tokenizer.apply_chat_template(
                 [
                     {"role": "system", "content": case.system_prompt},
@@ -58,7 +64,7 @@ def main() -> None:
             length = len(tokenizer.encode(text))
             output_tokens = case.max_tokens
             total = length + output_tokens
-        elif manifest.strategy == "draft_verify":
+        elif selected_strategy == "draft_verify":
             draft_text = tokenizer.apply_chat_template(
                 [
                     {
@@ -110,7 +116,7 @@ def main() -> None:
                 draft_input + manifest.draft_max_tokens,
                 verifier_input + manifest.verifier_max_tokens,
             )
-        elif manifest.strategy == "draft_critique_verify":
+        elif selected_strategy == "draft_critique_verify":
             draft_text = tokenizer.apply_chat_template(
                 [
                     {
@@ -287,6 +293,7 @@ def main() -> None:
             "max": max(input_lengths),
         },
         "chat_template_kwargs": manifest.chat_template_kwargs,
+        "benchmark_routing": manifest.benchmark_routing,
         "max_total_tokens": max(totals),
         "context_limit": args.context_limit,
         "by_benchmark": {

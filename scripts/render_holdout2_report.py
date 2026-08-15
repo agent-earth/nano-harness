@@ -101,9 +101,24 @@ def render_markdown(report: dict[str, Any]) -> str:
     ci = versus_9b["overall_micro"]["paired_bootstrap_95_ci"]
     return f"""# Draft-Verify Holdout2 Result
 
+## Evidence Integrity Correction
+
+The aggregate 4B-versus-9B conclusion below is invalid. Code revision
+`cf2a00e` accidentally sent `case.draft_prompt` through the direct runner
+while the validator still checked `case.prompt`. For answer-only MMLU and
+GPQA, both direct arms therefore used a reasoning prompt with a 32-token
+budget and truncated all 48 outputs. The treatment observations and raw hashes
+are retained as negative evidence, but they cannot establish uplift over a
+matched direct control.
+
+The GSM8K comparison remains valid because `prompt` and `draft_prompt` are
+identical reasoning contracts for GSM8K. It shows 4B draft-verify at 22/24 and
+9B direct at 23/24. A corrected direct runner and fresh cases are required.
+
 ## Primary Result
 
-On the pre-registered 72-case holdout2, 4B draft-verify scores
+The originally reported, now invalid aggregate comparison was: 4B draft-verify
+scores
 {versus_9b['candidate_macro_accuracy']:.4f} versus 9B direct at
 {versus_9b['baseline_macro_accuracy']:.4f}. The paired micro delta is
 {versus_9b['overall_micro']['delta']:+.4f}, 95% bootstrap CI
@@ -117,8 +132,8 @@ On the pre-registered 72-case holdout2, 4B draft-verify scores
 | GPQA-Diamond | {versus_4b['benchmarks']['gpqa_diamond']['baseline_accuracy']:.4f} | {versus_4b['benchmarks']['gpqa_diamond']['candidate_accuracy']:.4f} | {versus_9b['benchmarks']['gpqa_diamond']['baseline_accuracy']:.4f} |
 | Macro | {versus_4b['baseline_macro_accuracy']:.4f} | {versus_4b['candidate_macro_accuracy']:.4f} | {versus_9b['baseline_macro_accuracy']:.4f} |
 
-The overall lead is large and significant. MMLU and GPQA improve
-significantly, and treatment final parse failures are zero.
+Do not interpret this aggregate lead as model or harness quality. It is
+explained by the direct-control prompt/budget mismatch.
 
 ## Acceptance Decision
 
@@ -128,8 +143,8 @@ task-group non-regression criterion fails on GSM8K: 4B draft-verify scores
 interval including zero, but the criterion cannot be relaxed after seeing
 holdout2.
 
-The strategy remains frozen. The next experiment is a larger unseen
-GSM8K-only confirmation, not another policy change.
+The corrected next experiment is benchmark-aware routing on fresh cases using
+the repaired runner and a validator-matched prompt contract.
 
 ## Cost
 
@@ -189,18 +204,27 @@ def main() -> None:
             for label, path in PATHS.items()
         },
         "decision": {
-            "overall_significant_win": (
-                versus_9b["overall_micro"]["paired_bootstrap_95_ci"][0] > 0
-                and versus_9b["overall_micro"]["mcnemar_exact_p"] < 0.05
-            ),
+            "overall_significant_win": None,
             "task_group_non_regression": all(
                 metrics["candidate_accuracy"] >= metrics["baseline_accuracy"]
                 for metrics in versus_9b["benchmarks"].values()
             ),
             "harness_acceptance_satisfied": acceptance,
             "gsm8k_delta": gsm8k["delta"],
-            "next_experiment": "Larger unseen GSM8K-only confirmation.",
-            "policy_frozen": True,
+            "next_experiment": (
+                "Corrected benchmark-aware routing on fresh matched controls."
+            ),
+            "policy_frozen": False,
+        },
+        "validity": {
+            "aggregate_comparison_valid": False,
+            "affected_benchmarks": ["mmlu", "gpqa_diamond"],
+            "cause": (
+                "Direct runner used reasoning draft_prompt with a 32-token "
+                "answer-only budget while validation checked prompt."
+            ),
+            "gsm8k_comparison_valid": True,
+            "treatment_observations_retained": True,
         },
     }
     json_path = Path("docs/results/holdout2_v1.public.json")
