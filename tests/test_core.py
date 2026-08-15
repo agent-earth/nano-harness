@@ -1,4 +1,5 @@
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -176,6 +177,7 @@ class CoreTests(unittest.TestCase):
             second_solve_max_tokens=384,
             option_evidence_max_tokens=96,
             verifier_max_tokens=32,
+            normalize_bare_choice=False,
             min_task_groups=1,
             datasets=(),
         )
@@ -285,6 +287,7 @@ class CoreTests(unittest.TestCase):
             second_solve_max_tokens=384,
             option_evidence_max_tokens=96,
             verifier_max_tokens=32,
+            normalize_bare_choice=False,
             min_task_groups=1,
             datasets=(),
         )
@@ -407,6 +410,7 @@ class CoreTests(unittest.TestCase):
             second_solve_max_tokens=384,
             option_evidence_max_tokens=96,
             verifier_max_tokens=32,
+            normalize_bare_choice=False,
             min_task_groups=1,
             datasets=(),
         )
@@ -481,6 +485,7 @@ class CoreTests(unittest.TestCase):
             second_solve_max_tokens=384,
             option_evidence_max_tokens=96,
             verifier_max_tokens=32,
+            normalize_bare_choice=False,
             min_task_groups=1,
             datasets=(),
         )
@@ -562,6 +567,7 @@ class CoreTests(unittest.TestCase):
             second_solve_max_tokens=384,
             option_evidence_max_tokens=96,
             verifier_max_tokens=64,
+            normalize_bare_choice=False,
             min_task_groups=1,
             datasets=(),
         )
@@ -586,7 +592,73 @@ class CoreTests(unittest.TestCase):
         for output in option_outputs:
             self.assertIn(output, selector_prompt)
         self.assertEqual(stages["selector"]["max_tokens"], 64)
+        self.assertFalse(stages["selector"]["normalized_bare_choice"])
         self.assertIn("input_sha256", stages["option_evidence"]["A"])
+
+    def test_option_evidence_normalizes_only_an_exact_bare_choice(self):
+        case = build_case(
+            "gpqa_diamond",
+            "choice_exact",
+            0,
+            {
+                "question": "Question\n\nA. alpha\nB. beta\nC. gamma\nD. delta",
+                "answer": "D",
+            },
+            answer_only=True,
+            system_prompt="answer",
+            max_tokens=32,
+        )
+        option_client = ScriptedClient(
+            [
+                ModelReply(
+                    content=f"Evidence {letter}",
+                    usage={"prompt_tokens": 10, "completion_tokens": 2},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+                for letter in "ABCD"
+            ]
+        )
+        selector_client = ScriptedClient(
+            [
+                ModelReply(
+                    content=" d \n",
+                    usage={"prompt_tokens": 40, "completion_tokens": 1},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="normalizer-test",
+            selection_seed="fixed",
+            system_prompt="answer",
+            max_tokens=32,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="option_evidence_verify",
+            benchmark_routing={},
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            second_solve_max_tokens=384,
+            option_evidence_max_tokens=96,
+            verifier_max_tokens=64,
+            normalize_bare_choice=True,
+            min_task_groups=1,
+            datasets=(),
+        )
+        reply, stages = _run_option_evidence_verify_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {96: option_client, 64: selector_client},
+        )
+        self.assertEqual(reply.content, "FINAL: D")
+        self.assertTrue(stages["selector"]["normalized_bare_choice"])
+        self.assertIn("raw_output_sha256", stages["selector"])
+
+        self.assertIsNone(
+            re.fullmatch(r"[A-Da-d]", "The answer is D.".strip())
+        )
 
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -617,6 +689,7 @@ class CoreTests(unittest.TestCase):
                 second_solve_max_tokens=384,
                 option_evidence_max_tokens=96,
                 verifier_max_tokens=32,
+                normalize_bare_choice=False,
                 min_task_groups=1,
                 datasets=(
                     DatasetSpec(

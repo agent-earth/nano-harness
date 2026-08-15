@@ -66,6 +66,7 @@ class SuiteManifest:
     second_solve_max_tokens: int
     option_evidence_max_tokens: int
     verifier_max_tokens: int
+    normalize_bare_choice: bool
     min_task_groups: int
     datasets: tuple[DatasetSpec, ...]
 
@@ -87,6 +88,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "second_solve_max_tokens",
         "option_evidence_max_tokens",
         "verifier_max_tokens",
+        "normalize_bare_choice",
         "min_task_groups",
         "datasets",
     }
@@ -153,6 +155,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         second_solve_max_tokens=int(raw.get("second_solve_max_tokens", 384)),
         option_evidence_max_tokens=int(raw.get("option_evidence_max_tokens", 96)),
         verifier_max_tokens=int(raw.get("verifier_max_tokens", 32)),
+        normalize_bare_choice=bool(raw.get("normalize_bare_choice", False)),
         min_task_groups=min_task_groups,
         datasets=datasets,
     )
@@ -825,6 +828,15 @@ def _run_option_evidence_verify_case(
         ]
     )
     selector_usage = dict(selector.usage)
+    raw_selector_content = selector.content
+    normalized_bare_choice = False
+    stripped_selector = raw_selector_content.strip()
+    if (
+        manifest.normalize_bare_choice
+        and re.fullmatch(r"[A-Da-d]", stripped_selector)
+    ):
+        selector.content = f"FINAL: {stripped_selector.upper()}"
+        normalized_bare_choice = True
     selector.usage = _sum_usage(
         *(stage["usage"] for stage in option_stages.values()),
         selector_usage,
@@ -838,6 +850,10 @@ def _run_option_evidence_verify_case(
             ).hexdigest(),
             "finish_reason": _finish_reason(selector.raw),
             "usage": selector_usage,
+            "raw_output_sha256": hashlib.sha256(
+                raw_selector_content.encode()
+            ).hexdigest(),
+            "normalized_bare_choice": normalized_bare_choice,
         },
     }
 
