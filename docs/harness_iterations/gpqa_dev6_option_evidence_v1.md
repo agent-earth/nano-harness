@@ -43,3 +43,22 @@ PYTHONPATH=. ../.venv/bin/python scripts/validate_qwen35_baseline.py \
   --manifest configs/harness/qwen35_gpqa_dev6_option_evidence_v1.yaml \
   --case-manifest configs/generated/qwen35_gpqa_dev6_option_evidence_v1_cases.json
 ```
+
+## Result
+
+Option evidence scores 6/12 versus 4B direct at 3/12 and 9B direct at 5/12.
+Relative to 4B direct it has three treatment-only wins, zero direct-only
+losses, delta +0.2500, and bootstrap 95% CI [0.0000, 0.5000].
+
+The pre-registered promotion rule fails because one selector returned bare
+`D` instead of `FINAL: D`. It stopped normally and the bare letter matches the
+reference, but no post-hoc rescoring is allowed. All 48 option evaluators
+reached the 96-token limit, yet the decomposition still produces net
+corrective evidence.
+
+Retain the mechanism but do not promote it. On fresh dev7 keep prompts and
+budgets unchanged and add only strict deterministic normalization when the
+selector output is exactly one choice letter.
+
+- [`docs/results/gpqa_dev6_option_evidence_v1.md`](../results/gpqa_dev6_option_evidence_v1.md)
+- [`docs/results/gpqa_dev6_option_evidence_v1.public.json`](../results/gpqa_dev6_option_evidence_v1.public.json)

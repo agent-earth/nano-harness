@@ -1,0 +1,144 @@
+{
+  "artifacts": {
+    "four_b_direct_raw_sha256": "2455bea3d6dbc5d117d2d65e08449b5395cc25a4267fe9d6c5166cbfb7765afc",
+    "four_b_treatment_raw_sha256": "63c7c1f10fdfbe833cc6d42a221b9081b25ace5b4468b2e238d9e985f05ac15e",
+    "nine_b_direct_raw_sha256": "fba7f94e15ad5c86129511f226114c6291e18a853bd95833ad99872cf4582776"
+  },
+  "code_revision": "3462d03d8013228665871c1c2200ff53bb227210",
+  "contract_audits": {
+    "four_b_direct": {
+      "cases": 12,
+      "passed": true,
+      "selected_strategy": "direct",
+      "stage_input_hashes_match": true
+    },
+    "four_b_treatment": {
+      "cases": 12,
+      "option_evaluators_per_case": 4,
+      "passed": true,
+      "selected_strategy": "option_evidence_verify",
+      "stage_input_hashes_match": true
+    },
+    "nine_b_direct": {
+      "cases": 12,
+      "passed": true,
+      "selected_strategy": "direct",
+      "stage_input_hashes_match": true
+    }
+  },
+  "costs": {
+    "four_b_direct": {
+      "api_errors": 0,
+      "cases": 12,
+      "correct": 3,
+      "option_evaluator_calls": 0,
+      "option_evaluator_truncations": 0,
+      "parse_failures": 0,
+      "total_tokens": 2906,
+      "wall_seconds": 3.536123
+    },
+    "four_b_treatment": {
+      "api_errors": 0,
+      "cases": 12,
+      "correct": 6,
+      "option_evaluator_calls": 48,
+      "option_evaluator_truncations": 48,
+      "parse_failures": 1,
+      "total_tokens": 27820,
+      "wall_seconds": 195.64452
+    },
+    "nine_b_direct": {
+      "api_errors": 0,
+      "cases": 12,
+      "correct": 5,
+      "option_evaluator_calls": 0,
+      "option_evaluator_truncations": 0,
+      "parse_failures": 2,
+      "total_tokens": 2904,
+      "wall_seconds": 3.6609899999999995
+    }
+  },
+  "decision": {
+    "accepted": false,
+    "all_option_evaluators_completed": true,
+    "net_paired_wins_over_4b": true,
+    "no_api_errors": true,
+    "no_parse_failures": false,
+    "point_above_4b_direct": true
+  },
+  "experiment_id": "qwen35-gpqa-dev6-option-evidence-v1",
+  "failure_analysis": {
+    "interpretation": "Option decomposition creates net corrective evidence, but the selector needs a pre-registered deterministic bare-letter normalizer before confirmation.",
+    "next_experiment": "Fresh dev7 with unchanged option prompts and budgets plus strict bare-letter-to-FINAL normalization.",
+    "parse_failures": [
+      {
+        "bare_letter_matches_reference": true,
+        "case_id": "gpqa_diamond-9fb4eb670d18b666",
+        "output_kind": "bare_choice_letter",
+        "selector_finish_reason": "stop"
+      }
+    ]
+  },
+  "generated_at": "2026-08-15T22:03:18.605144+00:00",
+  "schema_version": "nano_harness_public_gpqa_dev_v1",
+  "versus_4b_direct": {
+    "baseline_accuracy": 0.25,
+    "baseline_only_cases": [],
+    "baseline_parse_failures": [],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 35,
+    "candidate_accuracy": 0.5,
+    "candidate_only_cases": [
+      "gpqa_diamond-0f963617f2373c1d",
+      "gpqa_diamond-80604b1a5c95aeda",
+      "gpqa_diamond-be4dbfc748953209"
+    ],
+    "candidate_parse_failures": [
+      "gpqa_diamond-9fb4eb670d18b666"
+    ],
+    "delta": 0.25,
+    "mcnemar_exact_p": 0.25,
+    "paired_bootstrap_95_ci": [
+      0.0,
+      0.5
+    ],
+    "paired_counts": {
+      "baseline_only": 0,
+      "both_correct": 3,
+      "both_wrong": 6,
+      "candidate_only": 3
+    }
+  },
+  "versus_9b_direct": {
+    "baseline_accuracy": 0.4166666666666667,
+    "baseline_only_cases": [
+      "gpqa_diamond-233b065216745e04"
+    ],
+    "baseline_parse_failures": [
+      "gpqa_diamond-80604b1a5c95aeda",
+      "gpqa_diamond-93af70bf599927c0"
+    ],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 35,
+    "candidate_accuracy": 0.5,
+    "candidate_only_cases": [
+      "gpqa_diamond-80604b1a5c95aeda",
+      "gpqa_diamond-be4dbfc748953209"
+    ],
+    "candidate_parse_failures": [
+      "gpqa_diamond-9fb4eb670d18b666"
+    ],
+    "delta": 0.08333333333333333,
+    "mcnemar_exact_p": 1.0,
+    "paired_bootstrap_95_ci": [
+      -0.16666666666666666,
+      0.3333333333333333
+    ],
+    "paired_counts": {
+      "baseline_only": 1,
+      "both_correct": 4,
+      "both_wrong": 5,
+      "candidate_only": 2
+    }
+  }
+}
