@@ -115,6 +115,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "dual_solve_verify",
         "option_evidence_verify",
         "option_evidence_arbiter",
+        "protected_math_arbiter",
     }
     if strategy not in supported_strategies | {"benchmark_routing"}:
         raise ValueError(f"unsupported baseline strategy: {strategy}")
@@ -420,8 +421,15 @@ def run_suite(
                     model,
                     clients,
                 )
-            else:
+            elif selected_strategy == "option_evidence_arbiter":
                 reply, stage_metadata = _run_option_evidence_arbiter_case(
+                    case,
+                    manifest,
+                    model,
+                    clients,
+                )
+            else:
+                reply, stage_metadata = _run_protected_math_arbiter_case(
                     case,
                     manifest,
                     model,
@@ -979,6 +987,107 @@ def _run_option_evidence_arbiter_case(
                 raw_arbiter_content.encode()
             ).hexdigest(),
             "normalized_bare_choice": normalized_bare_choice,
+        },
+    }
+
+
+def _run_protected_math_arbiter_case(
+    case: BaselineCase,
+    manifest: SuiteManifest,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    if case.scorer != "numeric_exact":
+        raise ValueError("protected_math_arbiter requires a numeric_exact case")
+
+    direct_client = _client_for_budget(clients, model, case.max_tokens)
+    direct = direct_client.complete(
+        [
+            {"role": "system", "content": case.system_prompt},
+            {"role": "user", "content": case.prompt},
+        ]
+    )
+    direct_prediction = extract_prediction(direct.content, case.scorer)
+
+    resolve_client = _client_for_budget(
+        clients,
+        model,
+        manifest.second_solve_max_tokens,
+    )
+    resolve_prompt = (
+        f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+        "Independently solve this math problem from scratch. Check units, rates, "
+        "time periods, totals, and exactly what quantity is requested. Produce "
+        "compact calculations and end with FINAL: <number>. Do not use tools."
+    )
+    resolve = resolve_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Act as an independent math solver. Do not rely on another "
+                    "solution and make every arithmetic dependency explicit."
+                ),
+            },
+            {"role": "user", "content": resolve_prompt},
+        ]
+    )
+    resolve_prediction = extract_prediction(resolve.content, case.scorer)
+
+    arbiter_client = _client_for_budget(
+        clients,
+        model,
+        manifest.verifier_max_tokens,
+    )
+    arbiter_prompt = (
+        f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+        f"<protected_direct_answer>{direct_prediction}</protected_direct_answer>\n"
+        f"<independent_resolve>\n{resolve.content}\n</independent_resolve>"
+    )
+    arbiter = arbiter_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Act as a conservative math arbiter. Preserve the protected "
+                    "direct answer by default. Override it only if the independent "
+                    "re-solve identifies a specific arithmetic, unit, rate, or "
+                    "question-interpretation contradiction and provides a clearly "
+                    "verified replacement. Return only one FINAL: <number> line."
+                ),
+            },
+            {"role": "user", "content": arbiter_prompt},
+        ]
+    )
+    arbiter_usage = dict(arbiter.usage)
+    arbiter.usage = _sum_usage(direct.usage, resolve.usage, arbiter_usage)
+    return arbiter, {
+        "protected_direct": {
+            "max_tokens": case.max_tokens,
+            "input_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(direct.raw),
+            "usage": direct.usage,
+            "output": direct.content,
+            "output_sha256": hashlib.sha256(direct.content.encode()).hexdigest(),
+            "prediction": direct_prediction,
+        },
+        "independent_resolve": {
+            "max_tokens": manifest.second_solve_max_tokens,
+            "input_sha256": hashlib.sha256(resolve_prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(resolve.raw),
+            "usage": resolve.usage,
+            "output": resolve.content,
+            "output_sha256": hashlib.sha256(resolve.content.encode()).hexdigest(),
+            "prediction": resolve_prediction,
+        },
+        "arbiter": {
+            "max_tokens": manifest.verifier_max_tokens,
+            "input_sha256": hashlib.sha256(arbiter_prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(arbiter.raw),
+            "usage": arbiter_usage,
+            "raw_output_sha256": hashlib.sha256(
+                arbiter.content.encode()
+            ).hexdigest(),
         },
     }
 

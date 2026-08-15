@@ -15,6 +15,7 @@ from nano_harness.baseline import (
     _run_dual_solve_verify_case,
     _run_option_evidence_arbiter_case,
     _run_option_evidence_verify_case,
+    _run_protected_math_arbiter_case,
     _strategy_for_case,
     build_case,
     compare_baselines,
@@ -745,6 +746,85 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(stages["protected_direct"]["output"], "FINAL: A")
         self.assertEqual(set(stages["option_evidence"]), {"A", "B", "C", "D"})
         self.assertFalse(stages["arbiter"]["normalized_bare_choice"])
+        self.assertIn("input_sha256", stages["arbiter"])
+
+    def test_protected_math_arbiter_keeps_resolve_independent(self):
+        case = build_case(
+            "gsm8k",
+            "numeric_exact",
+            0,
+            {
+                "question": "What is 7 plus 5?",
+                "answer": "Compute 7 + 5 = 12.\n#### 12",
+            },
+            system_prompt="answer",
+            max_tokens=600,
+        )
+        direct_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="Bad direct reasoning.\nFINAL: 11",
+                    usage={"prompt_tokens": 10, "completion_tokens": 8},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        resolve_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="7 + 5 = 12.\nFINAL: 12",
+                    usage={"prompt_tokens": 20, "completion_tokens": 10},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        arbiter_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: 12",
+                    usage={"prompt_tokens": 30, "completion_tokens": 4},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="math-arbiter-test",
+            selection_seed="fixed",
+            system_prompt="answer",
+            max_tokens=600,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="protected_math_arbiter",
+            benchmark_routing={},
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            second_solve_max_tokens=384,
+            option_evidence_max_tokens=96,
+            verifier_max_tokens=64,
+            normalize_bare_choice=False,
+            min_task_groups=1,
+            datasets=(),
+        )
+        reply, stages = _run_protected_math_arbiter_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {600: direct_client, 384: resolve_client, 64: arbiter_client},
+        )
+        self.assertEqual(reply.content, "FINAL: 12")
+        self.assertEqual(
+            reply.usage,
+            {"prompt_tokens": 60, "completion_tokens": 22},
+        )
+        resolve_prompt = resolve_client.calls[0]["messages"][-1]["content"]
+        self.assertNotIn("Bad direct reasoning", resolve_prompt)
+        arbiter_prompt = arbiter_client.calls[0]["messages"][-1]["content"]
+        self.assertIn("<protected_direct_answer>11", arbiter_prompt)
+        self.assertNotIn("Bad direct reasoning", arbiter_prompt)
+        self.assertIn("7 + 5 = 12", arbiter_prompt)
+        self.assertEqual(stages["protected_direct"]["prediction"], "11")
+        self.assertEqual(stages["independent_resolve"]["prediction"], "12")
         self.assertIn("input_sha256", stages["arbiter"])
 
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
