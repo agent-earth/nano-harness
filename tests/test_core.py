@@ -228,6 +228,27 @@ class CoreTests(unittest.TestCase):
             "Do not show reasoning",
             direct_client.calls[0]["messages"][-1]["content"],
         )
+        _, direct_stages = _run_direct_case(
+            case,
+            ModelConfig(name="test"),
+            {
+                32: ScriptedClient(
+                    [
+                        ModelReply(
+                            content="FINAL: B",
+                            usage={"prompt_tokens": 10, "completion_tokens": 4},
+                            raw={"choices": [{"finish_reason": "stop"}]},
+                        )
+                    ]
+                )
+            },
+        )
+        import hashlib
+
+        self.assertEqual(
+            direct_stages["direct"]["input_sha256"],
+            hashlib.sha256(case.prompt.encode()).hexdigest(),
+        )
 
         draft_client = ScriptedClient(
             [
@@ -264,7 +285,7 @@ class CoreTests(unittest.TestCase):
             min_task_groups=1,
             datasets=(),
         )
-        _run_draft_verify_case(
+        _, draft_stages = _run_draft_verify_case(
             case,
             manifest,
             ModelConfig(name="test"),
@@ -277,6 +298,10 @@ class CoreTests(unittest.TestCase):
         self.assertIn(
             "Do not show reasoning",
             verifier_client.calls[0]["messages"][-1]["content"],
+        )
+        self.assertEqual(
+            draft_stages["draft"]["input_sha256"],
+            hashlib.sha256(case.draft_prompt.encode()).hexdigest(),
         )
 
     def test_benchmark_routing_requires_complete_supported_routes(self):

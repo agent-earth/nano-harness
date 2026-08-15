@@ -492,6 +492,7 @@ def _run_direct_case(
     return reply, {
         "direct": {
             "max_tokens": case.max_tokens,
+            "input_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
             "finish_reason": _finish_reason(reply.raw),
             "usage": reply.usage,
         }
@@ -547,6 +548,9 @@ def _run_draft_verify_case(
     return verifier, {
         "draft": {
             "max_tokens": manifest.draft_max_tokens,
+            "input_sha256": hashlib.sha256(
+                case.draft_prompt.encode()
+            ).hexdigest(),
             "finish_reason": _finish_reason(draft.raw),
             "usage": draft.usage,
             "output": draft.content,

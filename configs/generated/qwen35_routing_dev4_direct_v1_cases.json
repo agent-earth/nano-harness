@@ -1,0 +1,230 @@
+[
+  {
+    "case_id": "gsm8k-73c3bc801a754842",
+    "benchmark": "gsm8k",
+    "source_index": 45,
+    "source_chars": 443,
+    "max_tokens": 600,
+    "prompt_sha256": "db893d8b2d135766d0707ec75a63db0b9f4b7a300c1fa5043d2b80f1b9f23759",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "104",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-9ed7ba2774ce25ff",
+    "benchmark": "gsm8k",
+    "source_index": 1239,
+    "source_chars": 226,
+    "max_tokens": 600,
+    "prompt_sha256": "cc3c7b0cff7e9ff83e6fd1b3c3b8e1219944ab16df254d501fc8847dc0402520",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "50",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-928bc5e6a4eb79c9",
+    "benchmark": "gsm8k",
+    "source_index": 23,
+    "source_chars": 142,
+    "max_tokens": 600,
+    "prompt_sha256": "a28deddb18f6d5a7da43d579def550646f9b42220e4047a7975f2cc0c925b1b4",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "8",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-ce1a3e94600b2831",
+    "benchmark": "gsm8k",
+    "source_index": 419,
+    "source_chars": 436,
+    "max_tokens": 600,
+    "prompt_sha256": "30e532d92b39aaa953dfbbff47b1e3e3d5bdcd409f0f56e4da22247d9bd239c8",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "3000",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-2bcb032c286d6afb",
+    "benchmark": "gsm8k",
+    "source_index": 302,
+    "source_chars": 141,
+    "max_tokens": 600,
+    "prompt_sha256": "e94e57a13d66e19eff50e3e4c0b63fde455dbd49b2c901a6d4c5741909019d61",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "15",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-633e72e839418487",
+    "benchmark": "gsm8k",
+    "source_index": 1219,
+    "source_chars": 153,
+    "max_tokens": 600,
+    "prompt_sha256": "d279e96e77142786168e69b37b155db437e15fcc3cc5e2a1c065345864373492",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "100",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "mmlu-340bcb9fbc2f96db",
+    "benchmark": "mmlu",
+    "source_index": 8560,
+    "source_chars": 111,
+    "max_tokens": 32,
+    "prompt_sha256": "dbc7e99d628ed6b1bbcb30f58dc543bbad412370b8bf9a03cbf5543f935fb0b6",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_law"
+    }
+  },
+  {
+    "case_id": "mmlu-24acb09b068602e3",
+    "benchmark": "mmlu",
+    "source_index": 770,
+    "source_chars": 1997,
+    "max_tokens": 32,
+    "prompt_sha256": "dc2777368f2acd5d4f4ca17478d79645c00fed9c4e6f2cc22a07ac246fd539ce",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_european_history"
+    }
+  },
+  {
+    "case_id": "mmlu-b4d5458c6b9575b6",
+    "benchmark": "mmlu",
+    "source_index": 9542,
+    "source_chars": 860,
+    "max_tokens": 32,
+    "prompt_sha256": "14b8e6cdc343c61a1669d643ae1bd7535d0cc61609c17891de55c045d57c6702",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_world_history"
+    }
+  },
+  {
+    "case_id": "mmlu-50e0878272e37c81",
+    "benchmark": "mmlu",
+    "source_index": 10282,
+    "source_chars": 94,
+    "max_tokens": 32,
+    "prompt_sha256": "282b0e67f9f5cd12ea5a5e39d48e2819ea609b358a207c0d0efd731ac3d1ce8b",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "miscellaneous"
+    }
+  },
+  {
+    "case_id": "mmlu-8b08831bc4c553d1",
+    "benchmark": "mmlu",
+    "source_index": 8993,
+    "source_chars": 113,
+    "max_tokens": 32,
+    "prompt_sha256": "b4c070ebe2ecc929df05f244ae1e525986b3131177234b6a4cb10e56f50e8466",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "moral_disputes"
+    }
+  },
+  {
+    "case_id": "mmlu-942b31ac1b47e363",
+    "benchmark": "mmlu",
+    "source_index": 3517,
+    "source_chars": 63,
+    "max_tokens": 32,
+    "prompt_sha256": "9e01b18c8ad578246744b86f14c9b0dcbe0f09b04b2fa5b15e2eb6b9aca12505",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_psychology"
+    }
+  },
+  {
+    "case_id": "gpqa_diamond-2c0c54d6a0fa96f7",
+    "benchmark": "gpqa_diamond",
+    "source_index": 183,
+    "source_chars": 1094,
+    "max_tokens": 32,
+    "prompt_sha256": "6e28afe7926b9316b1363e87effc8f092ae11194811bc5022dfaac36d9ae31e9",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-2457af27cc8dd818",
+    "benchmark": "gpqa_diamond",
+    "source_index": 99,
+    "source_chars": 484,
+    "max_tokens": 32,
+    "prompt_sha256": "fb959b470b709cc45fb980430a30f23dae1f49ef725897bef3ef4d79b864efb7",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-48537a32ba7b87ed",
+    "benchmark": "gpqa_diamond",
+    "source_index": 152,
+    "source_chars": 425,
+    "max_tokens": 32,
+    "prompt_sha256": "1a0089f81a9ab15615ef9405d53927e4524956a5b72b3ed976c3225cdb3ccf35",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-e9238f302c8e4681",
+    "benchmark": "gpqa_diamond",
+    "source_index": 193,
+    "source_chars": 339,
+    "max_tokens": 32,
+    "prompt_sha256": "a9b478a5ef7eab3a4a39c6522e081ebd0b387dae7b1e496dd47a0a950b97bee0",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-5468fc64780765a9",
+    "benchmark": "gpqa_diamond",
+    "source_index": 26,
+    "source_chars": 174,
+    "max_tokens": 32,
+    "prompt_sha256": "1c5f4de07f2112b39bc46771b782bea902c1861d044b7adafa53e3be7bbce863",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-480c5d3d7e886c89",
+    "benchmark": "gpqa_diamond",
+    "source_index": 113,
+    "source_chars": 291,
+    "max_tokens": 32,
+    "prompt_sha256": "cc10df7af0afc79ff23d6a7084933cde4350925ee9a164bd7b14c833d4dc61c1",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  }
+]
