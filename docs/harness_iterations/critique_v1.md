@@ -42,3 +42,20 @@ The primary question is whether 4B draft-verify exceeds 9B direct without a
 task-group regression, API errors, or final parse failures. Holdout results are
 confirmatory evidence only for this frozen policy; no prompt or budget changes
 may follow from inspecting these cases.
+
+## Result
+
+Critique is rejected on dev2: draft-verify scores 14/18 and critique scores
+12/18. The two lost cases are GPQA. Critique uses 26,365 tokens and 249 seconds,
+versus 8,418 tokens and 41 seconds for draft-verify.
+
+On the untouched holdout, 4B draft-verify scores 13/18 while both 4B direct and
+9B direct score 6/18. Relative to 9B, the treatment has seven treatment-only
+wins and zero 9B-only wins, paired delta +0.3889, bootstrap 95% CI
+[+0.1667, +0.6111], and exact McNemar p=0.015625. All three task groups are
+non-regressing on this holdout.
+
+The draft-verify policy is now frozen for a larger pre-registered holdout2.
+
+- [`docs/results/critique_v1_holdout.md`](../results/critique_v1_holdout.md)
+- [`docs/results/critique_v1_holdout.public.json`](../results/critique_v1_holdout.public.json)
