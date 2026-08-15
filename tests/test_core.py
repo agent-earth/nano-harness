@@ -3,6 +3,15 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from nano_harness.baseline import (
+    DatasetSpec,
+    SuiteManifest,
+    build_case,
+    extract_prediction,
+    load_cases,
+    score_output,
+    summarize_baseline,
+)
 from nano_harness.adapters.clbench import CLBenchAdapter
 from nano_harness.adapters.swebench import extract_patch
 from nano_harness.client import ProviderQuotaError, ScriptedClient
@@ -24,6 +33,124 @@ class FakeToolExecutor:
 
 
 class CoreTests(unittest.TestCase):
+    def test_baseline_numeric_and_choice_scorers_require_final_line(self):
+        self.assertEqual(extract_prediction("work\nFINAL: $1,234.50", "numeric_exact"), "1234.5")
+        self.assertEqual(score_output("FINAL: -0", "0", "numeric_exact"), (1.0, "0"))
+        self.assertEqual(score_output("reason\nFINAL: c", "C", "choice_exact"), (1.0, "C"))
+        self.assertEqual(score_output("The answer is C.", "C", "choice_exact"), (0.0, None))
+
+    def test_baseline_case_ids_are_content_stable(self):
+        record = {
+            "question": "What is 7 plus 5?",
+            "answer": "Compute 7 + 5 = 12.\n#### 12",
+        }
+        first = build_case("gsm8k", "numeric_exact", 3, record)
+        second = build_case("gsm8k", "numeric_exact", 99, record)
+        self.assertEqual(first.case_id, second.case_id)
+        self.assertEqual(first.expected, "12")
+        self.assertNotEqual(first.source_index, second.source_index)
+
+    def test_baseline_manifest_filters_long_prompts_before_selection(self):
+        with tempfile.TemporaryDirectory() as directory:
+            from datasets import Dataset
+
+            root = Path(directory)
+            path = root / "gpqa.parquet"
+            Dataset.from_list(
+                [
+                    {"question": "short\n\nA. a\nB. b", "answer": "A"},
+                    {"question": "x" * 1000, "answer": "B"},
+                ]
+            ).to_parquet(str(path))
+            from nano_harness.baseline import sha256_file
+
+            manifest = SuiteManifest(
+                schema_version="nano_harness_baseline_suite_v1",
+                suite_id="filter-test",
+                selection_seed="fixed",
+                system_prompt="answer",
+                max_tokens=8,
+                temperature=0.0,
+                datasets=(
+                    DatasetSpec(
+                        name="gpqa_diamond",
+                        path="gpqa.parquet",
+                        sha256=sha256_file(path),
+                        scorer="choice_exact",
+                        limit=1,
+                        max_prompt_chars=200,
+                    ),
+                ),
+            )
+            cases = load_cases(manifest, root)
+            self.assertEqual(len(cases), 1)
+            self.assertEqual(cases[0].source_index, 0)
+
+    def test_baseline_summary_keeps_per_benchmark_metrics(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "cases.jsonl"
+            records = [
+                {
+                    "case_id": "gsm8k-a",
+                    "benchmark": "gsm8k",
+                    "score": 1.0,
+                    "prediction": "12",
+                    "latency_seconds": 1.0,
+                    "usage": {"prompt_tokens": 10, "completion_tokens": 4},
+                },
+                {
+                    "case_id": "mmlu-a",
+                    "benchmark": "mmlu",
+                    "score": 0.0,
+                    "prediction": None,
+                    "latency_seconds": 3.0,
+                    "usage": {"prompt_tokens": 20, "completion_tokens": 6},
+                },
+            ]
+            path.write_text(
+                "".join(json.dumps(record) + "\n" for record in records),
+                encoding="utf-8",
+            )
+            summary = summarize_baseline(path)
+            self.assertEqual(summary["total_cases"], 2)
+            self.assertEqual(summary["total_attempts"], 2)
+            self.assertEqual(summary["macro_accuracy"], 0.5)
+            self.assertEqual(summary["benchmarks"]["gsm8k"]["accuracy"], 1.0)
+            self.assertEqual(summary["benchmarks"]["mmlu"]["parse_failures"], 1)
+
+    def test_baseline_summary_retains_attempts_but_scores_latest_case_result(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "retry.jsonl"
+            records = [
+                {
+                    "case_id": "gsm8k-a",
+                    "benchmark": "gsm8k",
+                    "status": "error",
+                    "score": 0.0,
+                    "prediction": None,
+                    "latency_seconds": 1.0,
+                    "usage": {},
+                },
+                {
+                    "case_id": "gsm8k-a",
+                    "benchmark": "gsm8k",
+                    "status": "completed",
+                    "score": 1.0,
+                    "prediction": "12",
+                    "latency_seconds": 2.0,
+                    "usage": {"prompt_tokens": 10, "completion_tokens": 4},
+                },
+            ]
+            path.write_text(
+                "".join(json.dumps(record) + "\n" for record in records),
+                encoding="utf-8",
+            )
+            summary = summarize_baseline(path)
+            self.assertEqual(summary["total_attempts"], 2)
+            self.assertEqual(summary["total_cases"], 1)
+            self.assertEqual(summary["completed_cases"], 1)
+            self.assertEqual(summary["macro_accuracy"], 1.0)
+
     def test_model_alias_and_relative_output_resolution(self):
         config = load_run_config("configs/benchmarks/synthetic_base.yaml")
         self.assertEqual(config.model.name, "nvidia/nemotron-nano-9b-v2:free")

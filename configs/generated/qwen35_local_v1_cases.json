@@ -1,0 +1,626 @@
+[
+  {
+    "case_id": "gsm8k-864eee38a718569e",
+    "benchmark": "gsm8k",
+    "source_index": 932,
+    "expected": "24",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-76ce78bde5411eca",
+    "benchmark": "gsm8k",
+    "source_index": 278,
+    "expected": "40",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-52950f216de06a14",
+    "benchmark": "gsm8k",
+    "source_index": 109,
+    "expected": "28",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-301632076f9b2f19",
+    "benchmark": "gsm8k",
+    "source_index": 673,
+    "expected": "9",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-72d40dc4278842a4",
+    "benchmark": "gsm8k",
+    "source_index": 545,
+    "expected": "30",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-b03ce4bfb804d02a",
+    "benchmark": "gsm8k",
+    "source_index": 1269,
+    "expected": "54",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-88438176410df015",
+    "benchmark": "gsm8k",
+    "source_index": 902,
+    "expected": "8",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-13be8c8eacc2e1e5",
+    "benchmark": "gsm8k",
+    "source_index": 129,
+    "expected": "10000",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-dd35d224b8d21095",
+    "benchmark": "gsm8k",
+    "source_index": 336,
+    "expected": "72",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-92f13e9ce8d824bd",
+    "benchmark": "gsm8k",
+    "source_index": 1276,
+    "expected": "70",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-5034049daf9bbd9a",
+    "benchmark": "gsm8k",
+    "source_index": 66,
+    "expected": "48",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-94cb0749537c45eb",
+    "benchmark": "gsm8k",
+    "source_index": 1076,
+    "expected": "162",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-e6f58d148c1c6510",
+    "benchmark": "gsm8k",
+    "source_index": 89,
+    "expected": "24",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-01875260af6c147f",
+    "benchmark": "gsm8k",
+    "source_index": 4,
+    "expected": "20",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-139894987fc42abc",
+    "benchmark": "gsm8k",
+    "source_index": 827,
+    "expected": "11",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-7db56800c7c8740d",
+    "benchmark": "gsm8k",
+    "source_index": 740,
+    "expected": "25",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-d4a4b6f3fc7c2d74",
+    "benchmark": "gsm8k",
+    "source_index": 1116,
+    "expected": "60",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-f312e630be5314e2",
+    "benchmark": "gsm8k",
+    "source_index": 839,
+    "expected": "2",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-a5630ebd69be04dc",
+    "benchmark": "gsm8k",
+    "source_index": 1097,
+    "expected": "480",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-a0d1418a89e3e46d",
+    "benchmark": "gsm8k",
+    "source_index": 829,
+    "expected": "14000",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-547308378111e678",
+    "benchmark": "gsm8k",
+    "source_index": 1114,
+    "expected": "8",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-4fd86c912f7f09ed",
+    "benchmark": "gsm8k",
+    "source_index": 1137,
+    "expected": "68",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-f098bdbb467313a2",
+    "benchmark": "gsm8k",
+    "source_index": 1302,
+    "expected": "72",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-32e0c502203f95d8",
+    "benchmark": "gsm8k",
+    "source_index": 845,
+    "expected": "12",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "mmlu-b25e223fefe57373",
+    "benchmark": "mmlu",
+    "source_index": 10075,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "miscellaneous"
+    }
+  },
+  {
+    "case_id": "mmlu-33ce0e1a00fe9af5",
+    "benchmark": "mmlu",
+    "source_index": 671,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "sociology"
+    }
+  },
+  {
+    "case_id": "mmlu-c2b7749084601038",
+    "benchmark": "mmlu",
+    "source_index": 3605,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_psychology"
+    }
+  },
+  {
+    "case_id": "mmlu-c321fd1f22ccf5d6",
+    "benchmark": "mmlu",
+    "source_index": 5232,
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_chemistry"
+    }
+  },
+  {
+    "case_id": "mmlu-c078c72f300a64b2",
+    "benchmark": "mmlu",
+    "source_index": 13825,
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "prehistory"
+    }
+  },
+  {
+    "case_id": "mmlu-7a6fc59893334eb2",
+    "benchmark": "mmlu",
+    "source_index": 13202,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "moral_scenarios"
+    }
+  },
+  {
+    "case_id": "mmlu-4b14e7b3a0a59072",
+    "benchmark": "mmlu",
+    "source_index": 11362,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "college_physics"
+    }
+  },
+  {
+    "case_id": "mmlu-277dad2a1acb60bc",
+    "benchmark": "mmlu",
+    "source_index": 246,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "security_studies"
+    }
+  },
+  {
+    "case_id": "mmlu-43bf7a5d5d123937",
+    "benchmark": "mmlu",
+    "source_index": 3367,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "jurisprudence"
+    }
+  },
+  {
+    "case_id": "mmlu-d08d9b719d32bd08",
+    "benchmark": "mmlu",
+    "source_index": 9333,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_world_history"
+    }
+  },
+  {
+    "case_id": "mmlu-7b051ce5a3932a93",
+    "benchmark": "mmlu",
+    "source_index": 478,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "global_facts"
+    }
+  },
+  {
+    "case_id": "mmlu-d9b21e30ac1d79eb",
+    "benchmark": "mmlu",
+    "source_index": 4865,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "philosophy"
+    }
+  },
+  {
+    "case_id": "mmlu-e49423ffec227cb1",
+    "benchmark": "mmlu",
+    "source_index": 10621,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_microeconomics"
+    }
+  },
+  {
+    "case_id": "mmlu-3545d76adfccb17c",
+    "benchmark": "mmlu",
+    "source_index": 3428,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "jurisprudence"
+    }
+  },
+  {
+    "case_id": "mmlu-e58d642dc2836de4",
+    "benchmark": "mmlu",
+    "source_index": 11339,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "formal_logic"
+    }
+  },
+  {
+    "case_id": "mmlu-604cbfbe71957543",
+    "benchmark": "mmlu",
+    "source_index": 561,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "sociology"
+    }
+  },
+  {
+    "case_id": "mmlu-bf5ccfd140ae917a",
+    "benchmark": "mmlu",
+    "source_index": 4756,
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "philosophy"
+    }
+  },
+  {
+    "case_id": "mmlu-a33880cdc05902aa",
+    "benchmark": "mmlu",
+    "source_index": 3784,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_psychology"
+    }
+  },
+  {
+    "case_id": "mmlu-97e4f4ae49455440",
+    "benchmark": "mmlu",
+    "source_index": 9005,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "moral_disputes"
+    }
+  },
+  {
+    "case_id": "mmlu-00b2a7d11f30ac78",
+    "benchmark": "mmlu",
+    "source_index": 1036,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "college_biology"
+    }
+  },
+  {
+    "case_id": "mmlu-08cf658866704572",
+    "benchmark": "mmlu",
+    "source_index": 797,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_european_history"
+    }
+  },
+  {
+    "case_id": "mmlu-c108063021591a18",
+    "benchmark": "mmlu",
+    "source_index": 7346,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_law"
+    }
+  },
+  {
+    "case_id": "mmlu-d7ebf5ab48c9437b",
+    "benchmark": "mmlu",
+    "source_index": 1958,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "logical_fallacies"
+    }
+  },
+  {
+    "case_id": "mmlu-96f5cc8444e0c4d7",
+    "benchmark": "mmlu",
+    "source_index": 5530,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "human_aging"
+    }
+  },
+  {
+    "case_id": "gpqa_diamond-2a82cb7e153464c6",
+    "benchmark": "gpqa_diamond",
+    "source_index": 77,
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-739042fe56fdaf40",
+    "benchmark": "gpqa_diamond",
+    "source_index": 29,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-bb5610f4eed3382f",
+    "benchmark": "gpqa_diamond",
+    "source_index": 10,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-ae8aef7b0c4b1827",
+    "benchmark": "gpqa_diamond",
+    "source_index": 52,
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-555820c4c886e074",
+    "benchmark": "gpqa_diamond",
+    "source_index": 22,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-2bbddbd87ace012d",
+    "benchmark": "gpqa_diamond",
+    "source_index": 37,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-bf7e15e22fe7c4c8",
+    "benchmark": "gpqa_diamond",
+    "source_index": 134,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-3905ac72abab6464",
+    "benchmark": "gpqa_diamond",
+    "source_index": 14,
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-acbbcfbd0ea75aa4",
+    "benchmark": "gpqa_diamond",
+    "source_index": 64,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-3293287e0fcaeddd",
+    "benchmark": "gpqa_diamond",
+    "source_index": 151,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-672a9d91fe8fa3dc",
+    "benchmark": "gpqa_diamond",
+    "source_index": 75,
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-c45c40b68a631bc9",
+    "benchmark": "gpqa_diamond",
+    "source_index": 50,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-6f1a477099a292ee",
+    "benchmark": "gpqa_diamond",
+    "source_index": 2,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-df2a6fe182615556",
+    "benchmark": "gpqa_diamond",
+    "source_index": 130,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-a09fcb13a92c0c5d",
+    "benchmark": "gpqa_diamond",
+    "source_index": 173,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-5a4ecb790ab5c440",
+    "benchmark": "gpqa_diamond",
+    "source_index": 43,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-a4b52a6a994beeca",
+    "benchmark": "gpqa_diamond",
+    "source_index": 17,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-fb4b1511736ae94f",
+    "benchmark": "gpqa_diamond",
+    "source_index": 190,
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-2072490bf9a40a66",
+    "benchmark": "gpqa_diamond",
+    "source_index": 161,
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-a572ba2c97c0b51b",
+    "benchmark": "gpqa_diamond",
+    "source_index": 45,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-c446171a7700912a",
+    "benchmark": "gpqa_diamond",
+    "source_index": 33,
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-262486d11fe7067d",
+    "benchmark": "gpqa_diamond",
+    "source_index": 197,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-99af4c9bd607a125",
+    "benchmark": "gpqa_diamond",
+    "source_index": 88,
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-f6389685776a3ca7",
+    "benchmark": "gpqa_diamond",
+    "source_index": 104,
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  }
+]

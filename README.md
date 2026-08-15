@@ -23,7 +23,10 @@ The repository is an active long-running experiment, not a finished performance
 claim. Current evidence is documented in
 [`docs/nemotron_nano_harness_report.md`](docs/nemotron_nano_harness_report.md).
 
-- Unit tests: 10 passing.
+The current local Qwen3.5-4B/9B matched baseline contract is documented in
+[`docs/qwen35_baseline.md`](docs/qwen35_baseline.md).
+
+- Unit tests: 21 passing.
 - OpenRouter synthetic smoke: completed for nano base and optimized.
 - Real SWE-bench Lite task generation: completed once, then correctly rejected
   as an invalid self-reported patch because no repository mutation or test was
