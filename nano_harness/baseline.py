@@ -67,6 +67,7 @@ class SuiteManifest:
     option_evidence_max_tokens: int
     verifier_max_tokens: int
     normalize_bare_choice: bool
+    fallback_to_protected_on_parse_failure: bool
     min_task_groups: int
     datasets: tuple[DatasetSpec, ...]
 
@@ -89,6 +90,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "option_evidence_max_tokens",
         "verifier_max_tokens",
         "normalize_bare_choice",
+        "fallback_to_protected_on_parse_failure",
         "min_task_groups",
         "datasets",
     }
@@ -158,6 +160,9 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         option_evidence_max_tokens=int(raw.get("option_evidence_max_tokens", 96)),
         verifier_max_tokens=int(raw.get("verifier_max_tokens", 32)),
         normalize_bare_choice=bool(raw.get("normalize_bare_choice", False)),
+        fallback_to_protected_on_parse_failure=bool(
+            raw.get("fallback_to_protected_on_parse_failure", False)
+        ),
         min_task_groups=min_task_groups,
         datasets=datasets,
     )
@@ -1060,6 +1065,15 @@ def _run_protected_math_arbiter_case(
         ]
     )
     arbiter_usage = dict(arbiter.usage)
+    raw_arbiter_content = arbiter.content
+    fallback_applied = False
+    if (
+        manifest.fallback_to_protected_on_parse_failure
+        and extract_prediction(arbiter.content, case.scorer) is None
+        and direct_prediction is not None
+    ):
+        arbiter.content = f"FINAL: {direct_prediction}"
+        fallback_applied = True
     arbiter.usage = _sum_usage(direct.usage, resolve.usage, arbiter_usage)
     return arbiter, {
         "protected_direct": {
@@ -1086,8 +1100,10 @@ def _run_protected_math_arbiter_case(
             "finish_reason": _finish_reason(arbiter.raw),
             "usage": arbiter_usage,
             "raw_output_sha256": hashlib.sha256(
-                arbiter.content.encode()
+                raw_arbiter_content.encode()
             ).hexdigest(),
+            "raw_output": raw_arbiter_content,
+            "fallback_to_protected_applied": fallback_applied,
         },
     }
 
