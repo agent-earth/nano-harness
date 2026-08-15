@@ -510,6 +510,7 @@ def _run_draft_verify_case(
             "max_tokens": manifest.draft_max_tokens,
             "finish_reason": _finish_reason(draft.raw),
             "usage": draft.usage,
+            "output": draft.content,
             "output_sha256": hashlib.sha256(draft.content.encode()).hexdigest(),
         },
         "verifier": {
@@ -595,12 +596,14 @@ def _run_draft_critique_verify_case(
             "max_tokens": manifest.draft_max_tokens,
             "finish_reason": _finish_reason(draft.raw),
             "usage": draft.usage,
+            "output": draft.content,
             "output_sha256": hashlib.sha256(draft.content.encode()).hexdigest(),
         },
         "critique": {
             "max_tokens": manifest.critique_max_tokens,
             "finish_reason": _finish_reason(critique.raw),
             "usage": critique.usage,
+            "output": critique.content,
             "output_sha256": hashlib.sha256(
                 critique.content.encode()
             ).hexdigest(),
@@ -682,12 +685,14 @@ def _run_dual_solve_verify_case(
             "max_tokens": manifest.draft_max_tokens,
             "finish_reason": _finish_reason(draft.raw),
             "usage": draft.usage,
+            "output": draft.content,
             "output_sha256": hashlib.sha256(draft.content.encode()).hexdigest(),
         },
         "second_solve": {
             "max_tokens": manifest.second_solve_max_tokens,
             "finish_reason": _finish_reason(second.raw),
             "usage": second.usage,
+            "output": second.content,
             "output_sha256": hashlib.sha256(second.content.encode()).hexdigest(),
         },
         "verifier": {

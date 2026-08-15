@@ -24,3 +24,23 @@ Pre-registered acceptance requires:
 
 Token and wall-clock cost are reported but are not a hard gate. No strategy,
 prompt, budget, or scorer changes are allowed after reading holdout3.
+
+## Result
+
+On holdout3:
+
+- 4B draft-verify: 88/96, accuracy 0.9167;
+- 4B dual-solve: 92/96, accuracy 0.9583;
+- 9B direct: 94/96, accuracy 0.9792.
+
+Dual-solve significantly improves over draft-verify by +0.0417, bootstrap 95%
+CI [+0.0104, +0.0833]. It still fails the 9B confirmation: point delta
+-0.0208 and CI [-0.0521, 0.0000], with two 9B-only wins and zero dual-only
+wins.
+
+The holdout acceptance is not satisfied. Dual-solve is useful mechanism
+evidence but is too costly and still below 9B. The next experiment must use a
+fresh slice and test benchmark-aware routing; no tuning is allowed on holdout3.
+
+- [`docs/results/gsm8k_holdout3_v1.md`](../results/gsm8k_holdout3_v1.md)
+- [`docs/results/gsm8k_holdout3_v1.public.json`](../results/gsm8k_holdout3_v1.public.json)

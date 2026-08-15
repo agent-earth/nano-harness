@@ -336,6 +336,11 @@ class CoreTests(unittest.TestCase):
         self.assertIn("Solution A says 11.", final_prompt)
         self.assertIn("Solution B: 7 + 5 = 12.", final_prompt)
         self.assertEqual(stages["second_solve"]["max_tokens"], 384)
+        self.assertEqual(stages["draft"]["output"], "Solution A says 11.")
+        self.assertEqual(
+            stages["second_solve"]["output"],
+            "Solution B: 7 + 5 = 12.",
+        )
 
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:
