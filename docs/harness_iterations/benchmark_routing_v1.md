@@ -82,3 +82,21 @@ PYTHONPATH=. ../.venv/bin/python scripts/validate_qwen35_baseline.py \
   --manifest configs/harness/qwen35_routing_holdout4_v1.yaml \
   --case-manifest configs/generated/qwen35_routing_holdout4_v1_cases.json
 ```
+
+## Dev4 Result
+
+The execution contract audit passed for all three arms. Routed 4B scored
+10/18 (macro 0.5556), below 4B direct at 11/18 (0.6111) and 9B direct at
+13/18 (0.7222). Relative to 4B direct, routing had one GPQA-only win and two
+MMLU direct-only losses; paired delta -0.0556, 95% bootstrap CI
+[-0.2778, +0.1111].
+
+All six GPQA drafts truncated at 256 tokens. MMLU lost two direct-correct
+cases, including one non-truncated reasoning draft. The policy fails the dev4
+promotion rule, so holdout4 must remain unread.
+
+The next experiment uses a fresh slice, keeps GSM8K and MMLU direct, and tests
+a larger reasoning draft only for GPQA.
+
+- [`docs/results/benchmark_routing_dev4_v1.md`](../results/benchmark_routing_dev4_v1.md)
+- [`docs/results/benchmark_routing_dev4_v1.public.json`](../results/benchmark_routing_dev4_v1.public.json)
