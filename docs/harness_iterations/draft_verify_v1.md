@@ -52,3 +52,20 @@ Promote to the fixed v5 evaluation only if the treatment has:
 If the treatment is neutral or negative, retain the evidence, reject the
 strategy, and test a narrower mechanism rather than tuning on v5 evaluation
 cases.
+
+## Result
+
+The disjoint dev slice improved from 5/18 to 9/18, with four candidate-only
+wins, zero control-only wins, and no treatment parse failures. This met the
+pre-registered promotion rule.
+
+On fixed v5 evaluation, 4B draft-verify reached 52/72 (macro 0.7222), compared
+with 4B direct at 50/72 and 9B direct at 51/72. The 4B-vs-9B paired 95%
+bootstrap interval still crosses zero, and GPQA regressed from 10/24 to 8/24.
+The strategy is retained as a component but does not satisfy harness-stage
+acceptance.
+
+See the public-safe report:
+
+- [`docs/results/draft_verify_v1.md`](../results/draft_verify_v1.md)
+- [`docs/results/draft_verify_v1.public.json`](../results/draft_verify_v1.public.json)
