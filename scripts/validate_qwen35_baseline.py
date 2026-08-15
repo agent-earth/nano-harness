@@ -267,7 +267,7 @@ def main() -> None:
                 second_input + manifest.second_solve_max_tokens,
                 verifier_input + manifest.verifier_max_tokens,
             )
-        else:
+        elif selected_strategy == "option_evidence_verify":
             option_inputs = []
             option_placeholder = "e " * manifest.option_evidence_max_tokens
             evidence_blocks = []
@@ -330,6 +330,87 @@ def main() -> None:
             total = max(
                 max(option_inputs) + manifest.option_evidence_max_tokens,
                 selector_input + manifest.verifier_max_tokens,
+            )
+        else:
+            direct_text = tokenizer.apply_chat_template(
+                [
+                    {"role": "system", "content": case.system_prompt},
+                    {"role": "user", "content": case.prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            direct_input = len(tokenizer.encode(direct_text))
+            option_inputs = []
+            option_placeholder = "e " * manifest.option_evidence_max_tokens
+            evidence_blocks = []
+            for letter in ("A", "B", "C", "D"):
+                option_prompt = (
+                    f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+                    f"Evaluate option {letter} independently. State the strongest "
+                    "evidence for or against it, check the relevant facts or "
+                    f"calculation, and end with VERDICT {letter}: SUPPORT or "
+                    f"VERDICT {letter}: REJECT. Do not compare against another "
+                    "option's analysis and do not use tools."
+                )
+                option_text = tokenizer.apply_chat_template(
+                    [
+                        {
+                            "role": "system",
+                            "content": (
+                                "Act as an independent option evaluator. Focus only "
+                                "on the assigned option and produce compact, "
+                                "falsifiable evidence."
+                            ),
+                        },
+                        {"role": "user", "content": option_prompt},
+                    ],
+                    tokenize=False,
+                    add_generation_prompt=True,
+                    **manifest.chat_template_kwargs,
+                )
+                option_inputs.append(len(tokenizer.encode(option_text)))
+                evidence_blocks.append(
+                    f"<option_{letter}>\n{option_placeholder}\n</option_{letter}>"
+                )
+            direct_placeholder = "FINAL: A"
+            arbiter_prompt = (
+                f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+                f"<protected_direct_candidate>\n{direct_placeholder}"
+                "\n</protected_direct_candidate>\n\n"
+                + "\n\n".join(evidence_blocks)
+            )
+            arbiter_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Act as a conservative final arbiter. Preserve the "
+                            "protected direct candidate by default. Override it only "
+                            "when the option evidence identifies a specific "
+                            "contradiction in that candidate and a different option "
+                            "has clearly stronger task-grounded evidence. Return only "
+                            "one FINAL: <letter> line. Do not explain."
+                        ),
+                    },
+                    {"role": "user", "content": arbiter_prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            arbiter_input = len(tokenizer.encode(arbiter_text))
+            length = max(direct_input, *option_inputs, arbiter_input)
+            output_tokens = max(
+                case.max_tokens,
+                manifest.option_evidence_max_tokens,
+                manifest.verifier_max_tokens,
+            )
+            total = max(
+                direct_input + case.max_tokens,
+                max(option_inputs) + manifest.option_evidence_max_tokens,
+                arbiter_input + manifest.verifier_max_tokens,
             )
         totals.append(total)
         metrics = by_benchmark.setdefault(

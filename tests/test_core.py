@@ -13,6 +13,7 @@ from nano_harness.baseline import (
     _run_direct_case,
     _run_draft_verify_case,
     _run_dual_solve_verify_case,
+    _run_option_evidence_arbiter_case,
     _run_option_evidence_verify_case,
     _strategy_for_case,
     build_case,
@@ -659,6 +660,92 @@ class CoreTests(unittest.TestCase):
         self.assertIsNone(
             re.fullmatch(r"[A-Da-d]", "The answer is D.".strip())
         )
+
+    def test_option_arbiter_protects_direct_candidate_then_compares_evidence(self):
+        case = build_case(
+            "gpqa_diamond",
+            "choice_exact",
+            0,
+            {
+                "question": "Question\n\nA. alpha\nB. beta\nC. gamma\nD. delta",
+                "answer": "B",
+            },
+            answer_only=True,
+            system_prompt="answer",
+            max_tokens=32,
+        )
+        direct_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: A",
+                    usage={"prompt_tokens": 10, "completion_tokens": 4},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        option_outputs = [
+            "A has a contradiction.",
+            "B has strong support.",
+            "C is rejected.",
+            "D is rejected.",
+        ]
+        option_client = ScriptedClient(
+            [
+                ModelReply(
+                    content=content,
+                    usage={"prompt_tokens": 20, "completion_tokens": 8},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+                for content in option_outputs
+            ]
+        )
+        arbiter_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: B",
+                    usage={"prompt_tokens": 90, "completion_tokens": 4},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="arbiter-test",
+            selection_seed="fixed",
+            system_prompt="answer",
+            max_tokens=64,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="option_evidence_arbiter",
+            benchmark_routing={},
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            second_solve_max_tokens=384,
+            option_evidence_max_tokens=96,
+            verifier_max_tokens=64,
+            normalize_bare_choice=True,
+            min_task_groups=1,
+            datasets=(),
+        )
+        reply, stages = _run_option_evidence_arbiter_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {32: direct_client, 96: option_client, 64: arbiter_client},
+        )
+        self.assertEqual(reply.content, "FINAL: B")
+        self.assertEqual(
+            reply.usage,
+            {"prompt_tokens": 180, "completion_tokens": 40},
+        )
+        arbiter_prompt = arbiter_client.calls[0]["messages"][-1]["content"]
+        self.assertIn("<protected_direct_candidate>\nFINAL: A", arbiter_prompt)
+        for output in option_outputs:
+            self.assertIn(output, arbiter_prompt)
+        self.assertEqual(stages["protected_direct"]["output"], "FINAL: A")
+        self.assertEqual(set(stages["option_evidence"]), {"A", "B", "C", "D"})
+        self.assertFalse(stages["arbiter"]["normalized_bare_choice"])
+        self.assertIn("input_sha256", stages["arbiter"])
 
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:

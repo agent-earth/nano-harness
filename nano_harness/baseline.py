@@ -114,6 +114,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "draft_critique_verify",
         "dual_solve_verify",
         "option_evidence_verify",
+        "option_evidence_arbiter",
     }
     if strategy not in supported_strategies | {"benchmark_routing"}:
         raise ValueError(f"unsupported baseline strategy: {strategy}")
@@ -412,8 +413,15 @@ def run_suite(
                     model,
                     clients,
                 )
-            else:
+            elif selected_strategy == "option_evidence_verify":
                 reply, stage_metadata = _run_option_evidence_verify_case(
+                    case,
+                    manifest,
+                    model,
+                    clients,
+                )
+            else:
+                reply, stage_metadata = _run_option_evidence_arbiter_case(
                     case,
                     manifest,
                     model,
@@ -852,6 +860,123 @@ def _run_option_evidence_verify_case(
             "usage": selector_usage,
             "raw_output_sha256": hashlib.sha256(
                 raw_selector_content.encode()
+            ).hexdigest(),
+            "normalized_bare_choice": normalized_bare_choice,
+        },
+    }
+
+
+def _run_option_evidence_arbiter_case(
+    case: BaselineCase,
+    manifest: SuiteManifest,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    if case.scorer != "choice_exact":
+        raise ValueError("option_evidence_arbiter requires a choice_exact case")
+
+    direct_client = _client_for_budget(clients, model, case.max_tokens)
+    direct = direct_client.complete(
+        [
+            {"role": "system", "content": case.system_prompt},
+            {"role": "user", "content": case.prompt},
+        ]
+    )
+    option_client = _client_for_budget(
+        clients,
+        model,
+        manifest.option_evidence_max_tokens,
+    )
+    evidence = []
+    option_stages: dict[str, dict[str, Any]] = {}
+    for letter in ("A", "B", "C", "D"):
+        prompt = (
+            f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+            f"Evaluate option {letter} independently. State the strongest evidence "
+            "for or against it, check the relevant facts or calculation, and end "
+            f"with VERDICT {letter}: SUPPORT or VERDICT {letter}: REJECT. Do not "
+            "compare against another option's analysis and do not use tools."
+        )
+        option = option_client.complete(
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "Act as an independent option evaluator. Focus only on the "
+                        "assigned option and produce compact, falsifiable evidence."
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ]
+        )
+        evidence.append(f"<option_{letter}>\n{option.content}\n</option_{letter}>")
+        option_stages[letter] = {
+            "max_tokens": manifest.option_evidence_max_tokens,
+            "input_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(option.raw),
+            "usage": option.usage,
+            "output": option.content,
+            "output_sha256": hashlib.sha256(option.content.encode()).hexdigest(),
+        }
+
+    arbiter_client = _client_for_budget(
+        clients,
+        model,
+        manifest.verifier_max_tokens,
+    )
+    arbiter_prompt = (
+        f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+        f"<protected_direct_candidate>\n{direct.content}"
+        "\n</protected_direct_candidate>\n\n"
+        + "\n\n".join(evidence)
+    )
+    arbiter = arbiter_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Act as a conservative final arbiter. Preserve the protected "
+                    "direct candidate by default. Override it only when the option "
+                    "evidence identifies a specific contradiction in that candidate "
+                    "and a different option has clearly stronger task-grounded "
+                    "evidence. Return only one FINAL: <letter> line. Do not explain."
+                ),
+            },
+            {"role": "user", "content": arbiter_prompt},
+        ]
+    )
+    arbiter_usage = dict(arbiter.usage)
+    raw_arbiter_content = arbiter.content
+    normalized_bare_choice = False
+    stripped_arbiter = raw_arbiter_content.strip()
+    if (
+        manifest.normalize_bare_choice
+        and re.fullmatch(r"[A-Da-d]", stripped_arbiter)
+    ):
+        arbiter.content = f"FINAL: {stripped_arbiter.upper()}"
+        normalized_bare_choice = True
+    arbiter.usage = _sum_usage(
+        direct.usage,
+        *(stage["usage"] for stage in option_stages.values()),
+        arbiter_usage,
+    )
+    return arbiter, {
+        "protected_direct": {
+            "max_tokens": case.max_tokens,
+            "input_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(direct.raw),
+            "usage": direct.usage,
+            "output": direct.content,
+            "output_sha256": hashlib.sha256(direct.content.encode()).hexdigest(),
+        },
+        "option_evidence": option_stages,
+        "arbiter": {
+            "max_tokens": manifest.verifier_max_tokens,
+            "input_sha256": hashlib.sha256(arbiter_prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(arbiter.raw),
+            "usage": arbiter_usage,
+            "raw_output_sha256": hashlib.sha256(
+                raw_arbiter_content.encode()
             ).hexdigest(),
             "normalized_bare_choice": normalized_bare_choice,
         },
