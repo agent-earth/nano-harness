@@ -49,6 +49,7 @@ class SuiteManifest:
     system_prompt: str
     max_tokens: int
     temperature: float
+    chat_template_kwargs: dict[str, Any]
     datasets: tuple[DatasetSpec, ...]
 
 
@@ -61,6 +62,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "system_prompt",
         "max_tokens",
         "temperature",
+        "chat_template_kwargs",
         "datasets",
     }
     unknown = set(raw) - expected_keys
@@ -80,6 +82,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         system_prompt=raw["system_prompt"],
         max_tokens=int(raw["max_tokens"]),
         temperature=float(raw["temperature"]),
+        chat_template_kwargs=dict(raw.get("chat_template_kwargs", {})),
         datasets=datasets,
     )
 

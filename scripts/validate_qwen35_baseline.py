@@ -52,6 +52,7 @@ def main() -> None:
             ],
             tokenize=False,
             add_generation_prompt=True,
+            **manifest.chat_template_kwargs,
         )
         length = len(tokenizer.encode(text))
         lengths.append(length)
@@ -70,6 +71,7 @@ def main() -> None:
             "max": max(lengths),
         },
         "max_output_tokens": manifest.max_tokens,
+        "chat_template_kwargs": manifest.chat_template_kwargs,
         "max_total_tokens": max(lengths) + manifest.max_tokens,
         "context_limit": args.context_limit,
         "by_benchmark": {

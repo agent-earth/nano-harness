@@ -2,6 +2,8 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import MagicMock, patch
 
 from nano_harness.baseline import (
     DatasetSpec,
@@ -14,9 +16,14 @@ from nano_harness.baseline import (
 )
 from nano_harness.adapters.clbench import CLBenchAdapter
 from nano_harness.adapters.swebench import extract_patch
-from nano_harness.client import ProviderQuotaError, ScriptedClient
+from nano_harness.client import OpenRouterClient, ProviderQuotaError, ScriptedClient
 from nano_harness.coding_tools import CodingToolExecutor
-from nano_harness.config import BenchmarkConfig, HarnessConfig, load_run_config
+from nano_harness.config import (
+    BenchmarkConfig,
+    HarnessConfig,
+    ModelConfig,
+    load_run_config,
+)
 from nano_harness.harness import AgentHarness
 from nano_harness.runner import completed_task_ids, merge_paths, run_config
 from nano_harness.state import StateLedger, compact_messages
@@ -71,6 +78,7 @@ class CoreTests(unittest.TestCase):
                 system_prompt="answer",
                 max_tokens=8,
                 temperature=0.0,
+                chat_template_kwargs={"enable_thinking": False},
                 datasets=(
                     DatasetSpec(
                         name="gpqa_diamond",
@@ -85,6 +93,38 @@ class CoreTests(unittest.TestCase):
             cases = load_cases(manifest, root)
             self.assertEqual(len(cases), 1)
             self.assertEqual(cases[0].source_index, 0)
+
+    def test_openai_client_forwards_chat_template_kwargs(self):
+        response = MagicMock()
+        message = MagicMock()
+        message.content = "FINAL: A"
+        message.tool_calls = []
+        message.model_dump.return_value = {"content": "FINAL: A"}
+        response.choices = [SimpleNamespace(message=message)]
+        response.usage = None
+        response.model_dump.return_value = {}
+
+        with (
+            patch.dict("os.environ", {"TEST_API_KEY": "local"}),
+            patch("nano_harness.client.OpenAI") as openai,
+        ):
+            openai.return_value.chat.completions.create.return_value = response
+            client = OpenRouterClient(
+                ModelConfig(
+                    name="test-model",
+                    api_key_env="TEST_API_KEY",
+                    max_retries=1,
+                    chat_template_kwargs={"enable_thinking": False},
+                )
+            )
+            reply = client.complete([{"role": "user", "content": "answer"}])
+
+        self.assertEqual(reply.content, "FINAL: A")
+        kwargs = openai.return_value.chat.completions.create.call_args.kwargs
+        self.assertEqual(
+            kwargs["extra_body"],
+            {"chat_template_kwargs": {"enable_thinking": False}},
+        )
 
     def test_baseline_summary_keeps_per_benchmark_metrics(self):
         with tempfile.TemporaryDirectory() as directory:

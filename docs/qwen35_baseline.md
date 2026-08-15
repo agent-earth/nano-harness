@@ -17,6 +17,13 @@ verified 1024-token service budget without changing task semantics. The
 committed case manifest contains IDs, source indices, labels, and compact
 metadata, but not task bodies.
 
+The suite passes `chat_template_kwargs={"enable_thinking": false}` to both
+models. A real pre-run smoke showed that default thinking mode consumed the
+full 256-token budget on trivial arithmetic before completing the required
+answer line. With thinking disabled, both models returned the correct `FINAL:`
+line in 6-16 completion tokens. This is a matched inference setting, not a
+harness treatment.
+
 This 72-case suite is a directional baseline. It is not large enough by itself
 to establish the final statistical significance required by the project goal.
 
@@ -45,7 +52,7 @@ CUDA_VISIBLE_DEVICES=0 ../.venv/bin/vllm serve ../../models/Qwen3.5-4B \
   --served-model-name qwen3.5-4b \
   --dtype float16 \
   --max-model-len 1024 \
-  --gpu-memory-utilization 0.60 \
+  --gpu-memory-utilization 0.85 \
   --enforce-eager \
   --max-num-batched-tokens 1024 \
   --max-num-seqs 1
@@ -53,6 +60,11 @@ CUDA_VISIBLE_DEVICES=0 ../.venv/bin/vllm serve ../../models/Qwen3.5-4B \
 
 Use `../../models/Qwen3.5-9B` and `qwen3.5-9b` for the 9B service. Confirm
 `/v1/models` before starting a run.
+
+The 9B service cannot allocate KV cache at `--gpu-memory-utilization 0.60`
+after loading its 17.66 GiB of weights; the measured cache budget is -1.46
+GiB. The matched 0.85 setting provides 4.46 GiB of 9B KV cache and 15.72 GiB
+for 4B on 32 GiB V100 GPUs.
 
 ## Run
 

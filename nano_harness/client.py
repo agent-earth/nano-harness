@@ -47,6 +47,10 @@ class OpenRouterClient:
                     "temperature": self.config.temperature,
                     "max_tokens": self.config.max_tokens,
                 }
+                if self.config.chat_template_kwargs:
+                    kwargs["extra_body"] = {
+                        "chat_template_kwargs": self.config.chat_template_kwargs
+                    }
                 if tools:
                     kwargs["tools"] = tools
                     kwargs["tool_choice"] = "auto"

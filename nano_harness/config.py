@@ -24,6 +24,7 @@ class ModelConfig:
     max_tokens: int = 4096
     timeout_seconds: float = 180.0
     max_retries: int = 5
+    chat_template_kwargs: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)

@@ -70,6 +70,7 @@ def main() -> None:
                 max_tokens=manifest.max_tokens,
                 timeout_seconds=180.0,
                 max_retries=3,
+                chat_template_kwargs=manifest.chat_template_kwargs,
             ),
             Path(args.output),
         )
