@@ -118,6 +118,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "option_evidence_verify",
         "option_evidence_arbiter",
         "protected_math_arbiter",
+        "protected_math_gate",
     }
     if strategy not in supported_strategies | {"benchmark_routing"}:
         raise ValueError(f"unsupported baseline strategy: {strategy}")
@@ -433,8 +434,15 @@ def run_suite(
                     model,
                     clients,
                 )
-            else:
+            elif selected_strategy == "protected_math_arbiter":
                 reply, stage_metadata = _run_protected_math_arbiter_case(
+                    case,
+                    manifest,
+                    model,
+                    clients,
+                )
+            else:
+                reply, stage_metadata = _run_protected_math_gate_case(
                     case,
                     manifest,
                     model,
@@ -1104,6 +1112,115 @@ def _run_protected_math_arbiter_case(
             ).hexdigest(),
             "raw_output": raw_arbiter_content,
             "fallback_to_protected_applied": fallback_applied,
+        },
+    }
+
+
+def _run_protected_math_gate_case(
+    case: BaselineCase,
+    manifest: SuiteManifest,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    if case.scorer != "numeric_exact":
+        raise ValueError("protected_math_gate requires a numeric_exact case")
+
+    direct_client = _client_for_budget(clients, model, case.max_tokens)
+    direct = direct_client.complete(
+        [
+            {"role": "system", "content": case.system_prompt},
+            {"role": "user", "content": case.prompt},
+        ]
+    )
+    direct_prediction = extract_prediction(direct.content, case.scorer)
+
+    resolve_client = _client_for_budget(
+        clients,
+        model,
+        manifest.second_solve_max_tokens,
+    )
+    resolve_prompt = (
+        f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+        "Independently solve this math problem from scratch. Check units, rates, "
+        "time periods, totals, and exactly what quantity is requested. Produce "
+        "compact calculations and end with FINAL: <number>. Do not use tools."
+    )
+    resolve = resolve_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Act as an independent math solver. Do not rely on another "
+                    "solution and make every arithmetic dependency explicit."
+                ),
+            },
+            {"role": "user", "content": resolve_prompt},
+        ]
+    )
+    resolve_prediction = extract_prediction(resolve.content, case.scorer)
+
+    gate_client = _client_for_budget(clients, model, manifest.verifier_max_tokens)
+    gate_prompt = (
+        f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+        f"<protected_direct_answer>{direct_prediction}</protected_direct_answer>\n"
+        f"<independent_resolve>\n{resolve.content}\n</independent_resolve>"
+    )
+    gate = gate_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Decide whether the independent re-solve proves a specific "
+                    "arithmetic, unit, rate, or interpretation error in the protected "
+                    "direct answer. Return exactly KEEP or USE_RESOLVE. Default to "
+                    "KEEP unless the contradiction and replacement are both clear."
+                ),
+            },
+            {"role": "user", "content": gate_prompt},
+        ]
+    )
+    raw_gate = gate.content.strip()
+    decision = (
+        "USE_RESOLVE"
+        if raw_gate == "USE_RESOLVE" and resolve_prediction is not None
+        else "KEEP"
+    )
+    selected_prediction = (
+        resolve_prediction if decision == "USE_RESOLVE" else direct_prediction
+    )
+    gate_usage = dict(gate.usage)
+    gate.content = (
+        f"FINAL: {selected_prediction}" if selected_prediction is not None else ""
+    )
+    gate.usage = _sum_usage(direct.usage, resolve.usage, gate_usage)
+    return gate, {
+        "protected_direct": {
+            "max_tokens": case.max_tokens,
+            "input_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(direct.raw),
+            "usage": direct.usage,
+            "output": direct.content,
+            "output_sha256": hashlib.sha256(direct.content.encode()).hexdigest(),
+            "prediction": direct_prediction,
+        },
+        "independent_resolve": {
+            "max_tokens": manifest.second_solve_max_tokens,
+            "input_sha256": hashlib.sha256(resolve_prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(resolve.raw),
+            "usage": resolve.usage,
+            "output": resolve.content,
+            "output_sha256": hashlib.sha256(resolve.content.encode()).hexdigest(),
+            "prediction": resolve_prediction,
+        },
+        "decision_gate": {
+            "max_tokens": manifest.verifier_max_tokens,
+            "input_sha256": hashlib.sha256(gate_prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(gate.raw),
+            "usage": gate_usage,
+            "raw_output": raw_gate,
+            "raw_output_sha256": hashlib.sha256(raw_gate.encode()).hexdigest(),
+            "decision": decision,
+            "selected_prediction": selected_prediction,
         },
     }
 

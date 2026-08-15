@@ -412,7 +412,7 @@ def main() -> None:
                 max(option_inputs) + manifest.option_evidence_max_tokens,
                 arbiter_input + manifest.verifier_max_tokens,
             )
-        else:
+        elif selected_strategy == "protected_math_arbiter":
             direct_text = tokenizer.apply_chat_template(
                 [
                     {"role": "system", "content": case.system_prompt},
@@ -484,6 +484,78 @@ def main() -> None:
                 direct_input + case.max_tokens,
                 resolve_input + manifest.second_solve_max_tokens,
                 arbiter_input + manifest.verifier_max_tokens,
+            )
+        else:
+            direct_text = tokenizer.apply_chat_template(
+                [
+                    {"role": "system", "content": case.system_prompt},
+                    {"role": "user", "content": case.prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            direct_input = len(tokenizer.encode(direct_text))
+            resolve_prompt = (
+                f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+                "Independently solve this math problem from scratch. Check units, "
+                "rates, time periods, totals, and exactly what quantity is "
+                "requested. Produce compact calculations and end with FINAL: "
+                "<number>. Do not use tools."
+            )
+            resolve_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Act as an independent math solver. Do not rely on "
+                            "another solution and make every arithmetic dependency "
+                            "explicit."
+                        ),
+                    },
+                    {"role": "user", "content": resolve_prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            resolve_input = len(tokenizer.encode(resolve_text))
+            resolve_placeholder = "r " * manifest.second_solve_max_tokens
+            gate_prompt = (
+                f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+                "<protected_direct_answer>0</protected_direct_answer>\n"
+                f"<independent_resolve>\n{resolve_placeholder}"
+                "\n</independent_resolve>"
+            )
+            gate_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Decide whether the independent re-solve proves a "
+                            "specific arithmetic, unit, rate, or interpretation "
+                            "error in the protected direct answer. Return exactly "
+                            "KEEP or USE_RESOLVE. Default to KEEP unless the "
+                            "contradiction and replacement are both clear."
+                        ),
+                    },
+                    {"role": "user", "content": gate_prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            gate_input = len(tokenizer.encode(gate_text))
+            length = max(direct_input, resolve_input, gate_input)
+            output_tokens = max(
+                case.max_tokens,
+                manifest.second_solve_max_tokens,
+                manifest.verifier_max_tokens,
+            )
+            total = max(
+                direct_input + case.max_tokens,
+                resolve_input + manifest.second_solve_max_tokens,
+                gate_input + manifest.verifier_max_tokens,
             )
         totals.append(total)
         metrics = by_benchmark.setdefault(
