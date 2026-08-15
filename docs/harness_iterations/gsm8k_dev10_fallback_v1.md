@@ -34,3 +34,23 @@ Promote only if treatment:
 - passes all case, strategy, stage-input, and raw-output audits.
 
 Report fallback count separately. Do not tune on dev10.
+
+## Result
+
+Treatment and 4B direct both score 20/24; 9B direct scores 21/24. Treatment and
+4B direct have identical correctness and predictions on all 24 cases. The
+strict fallback fires 10 times and eliminates final parse failures, but creates
+no repair.
+
+Among the fallback cases, protected direct is correct in seven and the
+independent re-solve is correct in eight. In two cases protected is wrong while
+re-solve is correct; the raw arbiter text identifies the protected
+contradiction but truncates before a numeric `FINAL:`. Thus unconditional
+protected fallback is safe but discards real repair evidence.
+
+Dev10 fails. Fresh dev11 must separate decision from formatting: an 8-token
+gate outputs only `KEEP` or `USE_RESOLVE`, and deterministic code emits the
+selected numeric final. Do not rescore dev10.
+
+- [`docs/results/gsm8k_dev10_fallback_v1.md`](../results/gsm8k_dev10_fallback_v1.md)
+- [`docs/results/gsm8k_dev10_fallback_v1.public.json`](../results/gsm8k_dev10_fallback_v1.public.json)
