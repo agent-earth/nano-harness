@@ -34,3 +34,22 @@ Promote only if treatment:
 
 Report how often the arbiter overrides its protected direct candidate. Do not
 tune on dev8.
+
+## Result
+
+The conservative arbiter scores 7/12 versus 4B direct at 5/12 and 9B direct
+at 4/12. Relative to 4B direct it has two treatment-only wins, zero
+direct-only losses, delta +0.1667, and bootstrap 95% CI
+[0.0000, 0.4167].
+
+Protected-direct predictions match the independent direct arm on all 12 cases.
+The arbiter overrides exactly two times; both overrides repair wrong direct
+answers and neither breaks a correct answer. There are no API or final parse
+errors. Dev8 satisfies every directional promotion rule.
+
+Freeze this GPQA policy and pre-register a new three-task holdout. Keep GSM8K
+and MMLU direct, route only GPQA through the conservative arbiter, and do not
+reuse the sealed holdout4.
+
+- [`docs/results/gpqa_dev8_conservative_arbiter_v1.md`](../results/gpqa_dev8_conservative_arbiter_v1.md)
+- [`docs/results/gpqa_dev8_conservative_arbiter_v1.public.json`](../results/gpqa_dev8_conservative_arbiter_v1.public.json)
