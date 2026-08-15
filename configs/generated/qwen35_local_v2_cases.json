@@ -3,6 +3,7 @@
     "case_id": "gsm8k-864eee38a718569e",
     "benchmark": "gsm8k",
     "source_index": 932,
+    "source_chars": 298,
     "expected": "24",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -11,6 +12,7 @@
     "case_id": "gsm8k-76ce78bde5411eca",
     "benchmark": "gsm8k",
     "source_index": 278,
+    "source_chars": 144,
     "expected": "40",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -19,6 +21,7 @@
     "case_id": "gsm8k-52950f216de06a14",
     "benchmark": "gsm8k",
     "source_index": 109,
+    "source_chars": 231,
     "expected": "28",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -27,6 +30,7 @@
     "case_id": "gsm8k-301632076f9b2f19",
     "benchmark": "gsm8k",
     "source_index": 673,
+    "source_chars": 112,
     "expected": "9",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -35,6 +39,7 @@
     "case_id": "gsm8k-72d40dc4278842a4",
     "benchmark": "gsm8k",
     "source_index": 545,
+    "source_chars": 135,
     "expected": "30",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -43,6 +48,7 @@
     "case_id": "gsm8k-b03ce4bfb804d02a",
     "benchmark": "gsm8k",
     "source_index": 1269,
+    "source_chars": 228,
     "expected": "54",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -51,6 +57,7 @@
     "case_id": "gsm8k-88438176410df015",
     "benchmark": "gsm8k",
     "source_index": 902,
+    "source_chars": 160,
     "expected": "8",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -59,6 +66,7 @@
     "case_id": "gsm8k-13be8c8eacc2e1e5",
     "benchmark": "gsm8k",
     "source_index": 129,
+    "source_chars": 245,
     "expected": "10000",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -67,6 +75,7 @@
     "case_id": "gsm8k-dd35d224b8d21095",
     "benchmark": "gsm8k",
     "source_index": 336,
+    "source_chars": 190,
     "expected": "72",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -75,6 +84,7 @@
     "case_id": "gsm8k-92f13e9ce8d824bd",
     "benchmark": "gsm8k",
     "source_index": 1276,
+    "source_chars": 246,
     "expected": "70",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -83,6 +93,7 @@
     "case_id": "gsm8k-5034049daf9bbd9a",
     "benchmark": "gsm8k",
     "source_index": 66,
+    "source_chars": 273,
     "expected": "48",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -91,6 +102,7 @@
     "case_id": "gsm8k-94cb0749537c45eb",
     "benchmark": "gsm8k",
     "source_index": 1076,
+    "source_chars": 142,
     "expected": "162",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -99,6 +111,7 @@
     "case_id": "gsm8k-e6f58d148c1c6510",
     "benchmark": "gsm8k",
     "source_index": 89,
+    "source_chars": 193,
     "expected": "24",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -107,6 +120,7 @@
     "case_id": "gsm8k-01875260af6c147f",
     "benchmark": "gsm8k",
     "source_index": 4,
+    "source_chars": 471,
     "expected": "20",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -115,6 +129,7 @@
     "case_id": "gsm8k-139894987fc42abc",
     "benchmark": "gsm8k",
     "source_index": 827,
+    "source_chars": 323,
     "expected": "11",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -123,6 +138,7 @@
     "case_id": "gsm8k-7db56800c7c8740d",
     "benchmark": "gsm8k",
     "source_index": 740,
+    "source_chars": 271,
     "expected": "25",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -131,6 +147,7 @@
     "case_id": "gsm8k-d4a4b6f3fc7c2d74",
     "benchmark": "gsm8k",
     "source_index": 1116,
+    "source_chars": 183,
     "expected": "60",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -139,6 +156,7 @@
     "case_id": "gsm8k-f312e630be5314e2",
     "benchmark": "gsm8k",
     "source_index": 839,
+    "source_chars": 149,
     "expected": "2",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -147,6 +165,7 @@
     "case_id": "gsm8k-a5630ebd69be04dc",
     "benchmark": "gsm8k",
     "source_index": 1097,
+    "source_chars": 226,
     "expected": "480",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -155,6 +174,7 @@
     "case_id": "gsm8k-a0d1418a89e3e46d",
     "benchmark": "gsm8k",
     "source_index": 829,
+    "source_chars": 321,
     "expected": "14000",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -163,6 +183,7 @@
     "case_id": "gsm8k-547308378111e678",
     "benchmark": "gsm8k",
     "source_index": 1114,
+    "source_chars": 142,
     "expected": "8",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -171,6 +192,7 @@
     "case_id": "gsm8k-4fd86c912f7f09ed",
     "benchmark": "gsm8k",
     "source_index": 1137,
+    "source_chars": 337,
     "expected": "68",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -179,6 +201,7 @@
     "case_id": "gsm8k-f098bdbb467313a2",
     "benchmark": "gsm8k",
     "source_index": 1302,
+    "source_chars": 269,
     "expected": "72",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -187,6 +210,7 @@
     "case_id": "gsm8k-32e0c502203f95d8",
     "benchmark": "gsm8k",
     "source_index": 845,
+    "source_chars": 192,
     "expected": "12",
     "scorer": "numeric_exact",
     "metadata": {}
@@ -195,6 +219,7 @@
     "case_id": "mmlu-b25e223fefe57373",
     "benchmark": "mmlu",
     "source_index": 10075,
+    "source_chars": 54,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {
@@ -205,6 +230,7 @@
     "case_id": "mmlu-33ce0e1a00fe9af5",
     "benchmark": "mmlu",
     "source_index": 671,
+    "source_chars": 61,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {
@@ -215,6 +241,7 @@
     "case_id": "mmlu-c2b7749084601038",
     "benchmark": "mmlu",
     "source_index": 3605,
+    "source_chars": 183,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {
@@ -225,6 +252,7 @@
     "case_id": "mmlu-c321fd1f22ccf5d6",
     "benchmark": "mmlu",
     "source_index": 5232,
+    "source_chars": 148,
     "expected": "A",
     "scorer": "choice_exact",
     "metadata": {
@@ -235,6 +263,7 @@
     "case_id": "mmlu-c078c72f300a64b2",
     "benchmark": "mmlu",
     "source_index": 13825,
+    "source_chars": 96,
     "expected": "A",
     "scorer": "choice_exact",
     "metadata": {
@@ -245,6 +274,7 @@
     "case_id": "mmlu-7a6fc59893334eb2",
     "benchmark": "mmlu",
     "source_index": 13202,
+    "source_chars": 343,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {
@@ -255,6 +285,7 @@
     "case_id": "mmlu-4b14e7b3a0a59072",
     "benchmark": "mmlu",
     "source_index": 11362,
+    "source_chars": 71,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {
@@ -265,6 +296,7 @@
     "case_id": "mmlu-277dad2a1acb60bc",
     "benchmark": "mmlu",
     "source_index": 246,
+    "source_chars": 74,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {
@@ -275,6 +307,7 @@
     "case_id": "mmlu-43bf7a5d5d123937",
     "benchmark": "mmlu",
     "source_index": 3367,
+    "source_chars": 92,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {
@@ -285,6 +318,7 @@
     "case_id": "mmlu-d08d9b719d32bd08",
     "benchmark": "mmlu",
     "source_index": 9333,
+    "source_chars": 888,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {
@@ -295,6 +329,7 @@
     "case_id": "mmlu-7b051ce5a3932a93",
     "benchmark": "mmlu",
     "source_index": 478,
+    "source_chars": 84,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {
@@ -305,6 +340,7 @@
     "case_id": "mmlu-d9b21e30ac1d79eb",
     "benchmark": "mmlu",
     "source_index": 4865,
+    "source_chars": 97,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {
@@ -315,6 +351,7 @@
     "case_id": "mmlu-e49423ffec227cb1",
     "benchmark": "mmlu",
     "source_index": 10621,
+    "source_chars": 91,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {
@@ -325,6 +362,7 @@
     "case_id": "mmlu-3545d76adfccb17c",
     "benchmark": "mmlu",
     "source_index": 3428,
+    "source_chars": 103,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {
@@ -335,6 +373,7 @@
     "case_id": "mmlu-e58d642dc2836de4",
     "benchmark": "mmlu",
     "source_index": 11339,
+    "source_chars": 185,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {
@@ -345,6 +384,7 @@
     "case_id": "mmlu-604cbfbe71957543",
     "benchmark": "mmlu",
     "source_index": 561,
+    "source_chars": 48,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {
@@ -355,6 +395,7 @@
     "case_id": "mmlu-bf5ccfd140ae917a",
     "benchmark": "mmlu",
     "source_index": 4756,
+    "source_chars": 42,
     "expected": "A",
     "scorer": "choice_exact",
     "metadata": {
@@ -365,6 +406,7 @@
     "case_id": "mmlu-a33880cdc05902aa",
     "benchmark": "mmlu",
     "source_index": 3784,
+    "source_chars": 193,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {
@@ -375,6 +417,7 @@
     "case_id": "mmlu-97e4f4ae49455440",
     "benchmark": "mmlu",
     "source_index": 9005,
+    "source_chars": 35,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {
@@ -385,6 +428,7 @@
     "case_id": "mmlu-00b2a7d11f30ac78",
     "benchmark": "mmlu",
     "source_index": 1036,
+    "source_chars": 185,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {
@@ -395,6 +439,7 @@
     "case_id": "mmlu-08cf658866704572",
     "benchmark": "mmlu",
     "source_index": 797,
+    "source_chars": 848,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {
@@ -405,6 +450,7 @@
     "case_id": "mmlu-c108063021591a18",
     "benchmark": "mmlu",
     "source_index": 7346,
+    "source_chars": 805,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {
@@ -415,6 +461,7 @@
     "case_id": "mmlu-d7ebf5ab48c9437b",
     "benchmark": "mmlu",
     "source_index": 1958,
+    "source_chars": 153,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {
@@ -425,6 +472,7 @@
     "case_id": "mmlu-96f5cc8444e0c4d7",
     "benchmark": "mmlu",
     "source_index": 5530,
+    "source_chars": 73,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {
@@ -435,7 +483,17 @@
     "case_id": "gpqa_diamond-2a82cb7e153464c6",
     "benchmark": "gpqa_diamond",
     "source_index": 77,
+    "source_chars": 833,
     "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-fad225be5832ce40",
+    "benchmark": "gpqa_diamond",
+    "source_index": 67,
+    "source_chars": 1147,
+    "expected": "B",
     "scorer": "choice_exact",
     "metadata": {}
   },
@@ -443,6 +501,7 @@
     "case_id": "gpqa_diamond-739042fe56fdaf40",
     "benchmark": "gpqa_diamond",
     "source_index": 29,
+    "source_chars": 993,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {}
@@ -451,6 +510,7 @@
     "case_id": "gpqa_diamond-bb5610f4eed3382f",
     "benchmark": "gpqa_diamond",
     "source_index": 10,
+    "source_chars": 956,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {}
@@ -459,6 +519,7 @@
     "case_id": "gpqa_diamond-ae8aef7b0c4b1827",
     "benchmark": "gpqa_diamond",
     "source_index": 52,
+    "source_chars": 508,
     "expected": "A",
     "scorer": "choice_exact",
     "metadata": {}
@@ -467,6 +528,7 @@
     "case_id": "gpqa_diamond-555820c4c886e074",
     "benchmark": "gpqa_diamond",
     "source_index": 22,
+    "source_chars": 801,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {}
@@ -475,6 +537,7 @@
     "case_id": "gpqa_diamond-2bbddbd87ace012d",
     "benchmark": "gpqa_diamond",
     "source_index": 37,
+    "source_chars": 487,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {}
@@ -483,7 +546,17 @@
     "case_id": "gpqa_diamond-bf7e15e22fe7c4c8",
     "benchmark": "gpqa_diamond",
     "source_index": 134,
+    "source_chars": 119,
     "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-50d4ea5db47f15e4",
+    "benchmark": "gpqa_diamond",
+    "source_index": 196,
+    "source_chars": 1094,
+    "expected": "D",
     "scorer": "choice_exact",
     "metadata": {}
   },
@@ -491,6 +564,7 @@
     "case_id": "gpqa_diamond-3905ac72abab6464",
     "benchmark": "gpqa_diamond",
     "source_index": 14,
+    "source_chars": 389,
     "expected": "A",
     "scorer": "choice_exact",
     "metadata": {}
@@ -499,6 +573,7 @@
     "case_id": "gpqa_diamond-acbbcfbd0ea75aa4",
     "benchmark": "gpqa_diamond",
     "source_index": 64,
+    "source_chars": 747,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {}
@@ -507,6 +582,7 @@
     "case_id": "gpqa_diamond-3293287e0fcaeddd",
     "benchmark": "gpqa_diamond",
     "source_index": 151,
+    "source_chars": 412,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {}
@@ -515,6 +591,7 @@
     "case_id": "gpqa_diamond-672a9d91fe8fa3dc",
     "benchmark": "gpqa_diamond",
     "source_index": 75,
+    "source_chars": 332,
     "expected": "A",
     "scorer": "choice_exact",
     "metadata": {}
@@ -523,6 +600,7 @@
     "case_id": "gpqa_diamond-c45c40b68a631bc9",
     "benchmark": "gpqa_diamond",
     "source_index": 50,
+    "source_chars": 361,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {}
@@ -531,6 +609,7 @@
     "case_id": "gpqa_diamond-6f1a477099a292ee",
     "benchmark": "gpqa_diamond",
     "source_index": 2,
+    "source_chars": 652,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {}
@@ -539,6 +618,7 @@
     "case_id": "gpqa_diamond-df2a6fe182615556",
     "benchmark": "gpqa_diamond",
     "source_index": 130,
+    "source_chars": 604,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {}
@@ -547,6 +627,7 @@
     "case_id": "gpqa_diamond-a09fcb13a92c0c5d",
     "benchmark": "gpqa_diamond",
     "source_index": 173,
+    "source_chars": 378,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {}
@@ -555,6 +636,7 @@
     "case_id": "gpqa_diamond-5a4ecb790ab5c440",
     "benchmark": "gpqa_diamond",
     "source_index": 43,
+    "source_chars": 317,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {}
@@ -563,6 +645,7 @@
     "case_id": "gpqa_diamond-a4b52a6a994beeca",
     "benchmark": "gpqa_diamond",
     "source_index": 17,
+    "source_chars": 144,
     "expected": "C",
     "scorer": "choice_exact",
     "metadata": {}
@@ -571,6 +654,7 @@
     "case_id": "gpqa_diamond-fb4b1511736ae94f",
     "benchmark": "gpqa_diamond",
     "source_index": 190,
+    "source_chars": 406,
     "expected": "A",
     "scorer": "choice_exact",
     "metadata": {}
@@ -579,6 +663,7 @@
     "case_id": "gpqa_diamond-2072490bf9a40a66",
     "benchmark": "gpqa_diamond",
     "source_index": 161,
+    "source_chars": 641,
     "expected": "D",
     "scorer": "choice_exact",
     "metadata": {}
@@ -587,6 +672,7 @@
     "case_id": "gpqa_diamond-a572ba2c97c0b51b",
     "benchmark": "gpqa_diamond",
     "source_index": 45,
+    "source_chars": 232,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {}
@@ -595,6 +681,7 @@
     "case_id": "gpqa_diamond-c446171a7700912a",
     "benchmark": "gpqa_diamond",
     "source_index": 33,
+    "source_chars": 950,
     "expected": "B",
     "scorer": "choice_exact",
     "metadata": {}
@@ -603,23 +690,8 @@
     "case_id": "gpqa_diamond-262486d11fe7067d",
     "benchmark": "gpqa_diamond",
     "source_index": 197,
+    "source_chars": 275,
     "expected": "C",
-    "scorer": "choice_exact",
-    "metadata": {}
-  },
-  {
-    "case_id": "gpqa_diamond-99af4c9bd607a125",
-    "benchmark": "gpqa_diamond",
-    "source_index": 88,
-    "expected": "C",
-    "scorer": "choice_exact",
-    "metadata": {}
-  },
-  {
-    "case_id": "gpqa_diamond-f6389685776a3ca7",
-    "benchmark": "gpqa_diamond",
-    "source_index": 104,
-    "expected": "A",
     "scorer": "choice_exact",
     "metadata": {}
   }

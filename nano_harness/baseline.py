@@ -29,6 +29,7 @@ class BaselineCase:
     expected: str
     scorer: str
     source_index: int
+    source_chars: int
     metadata: dict[str, Any]
 
 
@@ -39,7 +40,8 @@ class DatasetSpec:
     sha256: str
     scorer: str
     limit: int
-    max_prompt_chars: int | None = None
+    max_source_chars: int | None = None
+    answer_only: bool = False
 
 
 @dataclass(frozen=True)
@@ -119,12 +121,18 @@ def load_cases(manifest: SuiteManifest, dataset_root: Path) -> list[BaselineCase
             )
         records = Dataset.from_parquet(str(path))
         cases = [
-            build_case(spec.name, spec.scorer, index, record)
+            build_case(
+                spec.name,
+                spec.scorer,
+                index,
+                record,
+                answer_only=spec.answer_only,
+            )
             for index, record in enumerate(records)
         ]
-        if spec.max_prompt_chars is not None:
+        if spec.max_source_chars is not None:
             cases = [
-                case for case in cases if len(case.prompt) <= spec.max_prompt_chars
+                case for case in cases if case.source_chars <= spec.max_source_chars
             ]
         if len(cases) < spec.limit:
             raise ValueError(
@@ -144,30 +152,40 @@ def build_case(
     scorer: str,
     source_index: int,
     record: dict[str, Any],
+    *,
+    answer_only: bool = False,
 ) -> BaselineCase:
     if benchmark == "gsm8k":
         question = str(record["question"]).strip()
         expected = extract_gsm8k_reference(str(record["answer"]))
-        prompt = (
-            "Solve the following math problem. Show concise reasoning, then end with "
+        prefix = (
+            "Return only one line in the form FINAL: <number>. Do not show reasoning.\n\n"
+            if answer_only
+            else "Solve the following math problem. Show concise reasoning, then end with "
             "exactly one line in the form FINAL: <number>.\n\n"
-            f"Problem: {question}"
         )
+        prompt = prefix + f"Problem: {question}"
         metadata: dict[str, Any] = {}
     elif benchmark == "mmlu":
         question = str(record["question"]).strip()
         choices = [str(choice) for choice in record["choices"]]
         expected = chr(ord("A") + int(record["answer"]))
-        prompt = format_multiple_choice_prompt(question, choices)
+        prompt = format_multiple_choice_prompt(
+            question,
+            choices,
+            answer_only=answer_only,
+        )
         metadata = {"subject": str(record["subject"])}
     elif benchmark == "gpqa_diamond":
         question = str(record["question"]).strip()
         expected = str(record["answer"]).strip().upper()
-        prompt = (
-            "Answer the following multiple-choice science question. Reason concisely, "
+        prefix = (
+            "Return only one line in the form FINAL: <letter>. Do not show reasoning.\n\n"
+            if answer_only
+            else "Answer the following multiple-choice science question. Reason concisely, "
             "then end with exactly one line in the form FINAL: <letter>.\n\n"
-            f"{question}"
         )
+        prompt = prefix + question
         metadata = {}
     else:
         raise ValueError(f"unsupported baseline benchmark: {benchmark}")
@@ -182,22 +200,30 @@ def build_case(
         expected=expected,
         scorer=scorer,
         source_index=source_index,
+        source_chars=len(question),
         metadata=metadata,
     )
 
 
-def format_multiple_choice_prompt(question: str, choices: list[str]) -> str:
+def format_multiple_choice_prompt(
+    question: str,
+    choices: list[str],
+    *,
+    answer_only: bool = False,
+) -> str:
     if not 2 <= len(choices) <= 10:
         raise ValueError(f"unsupported number of choices: {len(choices)}")
     rendered = "\n".join(
         f"{chr(ord('A') + index)}. {choice}"
         for index, choice in enumerate(choices)
     )
-    return (
-        "Answer the following multiple-choice question. Reason concisely, then end "
+    prefix = (
+        "Return only one line in the form FINAL: <letter>. Do not show reasoning.\n\n"
+        if answer_only
+        else "Answer the following multiple-choice question. Reason concisely, then end "
         "with exactly one line in the form FINAL: <letter>.\n\n"
-        f"Question: {question}\n\nChoices:\n{rendered}"
     )
+    return prefix + f"Question: {question}\n\nChoices:\n{rendered}"
 
 
 def extract_gsm8k_reference(answer: str) -> str:
@@ -580,6 +606,7 @@ def case_manifest(cases: list[BaselineCase]) -> list[dict[str, Any]]:
             "case_id": case.case_id,
             "benchmark": case.benchmark,
             "source_index": case.source_index,
+            "source_chars": case.source_chars,
             "expected": case.expected,
             "scorer": case.scorer,
             "metadata": case.metadata,

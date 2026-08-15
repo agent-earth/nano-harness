@@ -25,4 +25,4 @@ datasets:
     sha256: fdd6e95117cdf87075f56bf673a5bae4680b143bc2d29b486470810122c33f39
     scorer: choice_exact
     limit: 24
-    max_prompt_chars: 1200
+    max_source_chars: 1200

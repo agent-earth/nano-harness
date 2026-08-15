@@ -16,14 +16,14 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--manifest",
-        default="configs/baselines/qwen35_local_v2.yaml",
+        default="configs/baselines/qwen35_local_v4.yaml",
     )
     parser.add_argument("--dataset-root", default="../../datasets")
     parser.add_argument("--tokenizer", default="../../models/Qwen3.5-4B")
     parser.add_argument("--context-limit", type=int, default=1024)
     parser.add_argument(
         "--case-manifest",
-        default="configs/generated/qwen35_local_v2_cases.json",
+        default="configs/generated/qwen35_local_v4_cases.json",
     )
     args = parser.parse_args()
 

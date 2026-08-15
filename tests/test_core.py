@@ -58,6 +58,24 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(first.expected, "12")
         self.assertNotEqual(first.source_index, second.source_index)
 
+    def test_baseline_answer_only_keeps_case_identity_and_changes_contract(self):
+        record = {
+            "question": "What is 7 plus 5?",
+            "answer": "Compute 7 + 5 = 12.\n#### 12",
+        }
+        reasoning = build_case("gsm8k", "numeric_exact", 3, record)
+        answer_only = build_case(
+            "gsm8k",
+            "numeric_exact",
+            3,
+            record,
+            answer_only=True,
+        )
+        self.assertEqual(reasoning.case_id, answer_only.case_id)
+        self.assertIn("Show concise reasoning", reasoning.prompt)
+        self.assertIn("Do not show reasoning", answer_only.prompt)
+        self.assertNotEqual(reasoning.prompt, answer_only.prompt)
+
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:
             from datasets import Dataset
@@ -87,7 +105,7 @@ class CoreTests(unittest.TestCase):
                         sha256=sha256_file(path),
                         scorer="choice_exact",
                         limit=1,
-                        max_prompt_chars=200,
+                        max_source_chars=200,
                     ),
                 ),
             )
