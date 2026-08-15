@@ -1,0 +1,114 @@
+{
+  "artifacts": {
+    "four_b_raw_sha256": "90c6b84a0ddc1f388e15fbac45cff83476586cebcd925a650ab031b9af88257c",
+    "nine_b_raw_sha256": "4f26a86c724cde2ca60b4036101975f6df93b569634b7891b26fdd2882dee7f4"
+  },
+  "baseline_summary": {
+    "benchmarks": {
+      "gsm8k": {
+        "accuracy": 0.9375,
+        "cases": 96,
+        "completed": 96,
+        "completion_tokens": 18040,
+        "correct": 90,
+        "errors": 0,
+        "length_truncations": 0,
+        "mean_latency_seconds": 7.5356644374999995,
+        "parse_failures": 0,
+        "prompt_tokens": 13094
+      }
+    },
+    "completed_cases": 96,
+    "error_cases": 0,
+    "macro_accuracy": 0.9375,
+    "schema_version": "nano_harness_baseline_summary_v1",
+    "total_attempts": 96,
+    "total_cases": 96
+  },
+  "candidate_summary": {
+    "benchmarks": {
+      "gsm8k": {
+        "accuracy": 0.875,
+        "cases": 96,
+        "completed": 96,
+        "completion_tokens": 15616,
+        "correct": 84,
+        "errors": 0,
+        "length_truncations": 0,
+        "mean_latency_seconds": 6.822563708333331,
+        "parse_failures": 0,
+        "prompt_tokens": 42945
+      }
+    },
+    "completed_cases": 96,
+    "error_cases": 0,
+    "macro_accuracy": 0.875,
+    "schema_version": "nano_harness_baseline_summary_v1",
+    "total_attempts": 96,
+    "total_cases": 96
+  },
+  "code_revision": "d6ee71ccdccd9b3b43d39572eeae1438f90e9284",
+  "comparison": {
+    "baseline_accuracy": 0.9375,
+    "baseline_only_cases": [
+      "gsm8k-0a6067271cdd3793",
+      "gsm8k-838f18cf2c04b98b",
+      "gsm8k-9ae327dffe9f450e",
+      "gsm8k-d0e1cac7cfd97b15",
+      "gsm8k-dae8b1b70cd5802a",
+      "gsm8k-dd273cd31cbe54bd"
+    ],
+    "candidate_accuracy": 0.875,
+    "candidate_only_cases": [],
+    "delta": -0.0625,
+    "mcnemar_exact_p": 0.03125,
+    "paired_bootstrap_95_ci": [
+      -0.11458333333333333,
+      -0.020833333333333332
+    ],
+    "paired_counts": {
+      "baseline_only": 6,
+      "both_correct": 84,
+      "both_wrong": 6,
+      "candidate_only": 0
+    }
+  },
+  "confirmation_id": "qwen35-gsm8k-confirm-v1",
+  "costs": {
+    "four_b_draft_verify": {
+      "api_errors": 0,
+      "cases": 96,
+      "correct": 84,
+      "draft_truncations": 14,
+      "parse_failures": 0,
+      "total_tokens": 58561,
+      "verifier_truncations": 0,
+      "wall_seconds": 654.9661159999998
+    },
+    "nine_b_direct": {
+      "api_errors": 0,
+      "cases": 96,
+      "correct": 90,
+      "draft_truncations": 0,
+      "parse_failures": 0,
+      "total_tokens": 31134,
+      "verifier_truncations": 0,
+      "wall_seconds": 723.423786
+    }
+  },
+  "decision": {
+    "confirmation_satisfied": false,
+    "next_experiment": "Independent math re-solve verifier on a fresh GSM8K dev3 slice.",
+    "non_inferiority_lower_bound_above_minus_005": false,
+    "point_non_regression": false,
+    "policy_frozen_for_confirmation": true
+  },
+  "failure_mechanisms": {
+    "baseline_reference_matches": 6,
+    "completed_wrong_draft": 2,
+    "draft_length_truncation": 4,
+    "verifier_corrected_to_reference": 0
+  },
+  "generated_at": "2026-08-15T20:30:31.152656+00:00",
+  "schema_version": "nano_harness_public_gsm8k_confirmation_v1"
+}
