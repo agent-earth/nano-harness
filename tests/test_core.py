@@ -9,6 +9,7 @@ from nano_harness.baseline import (
     DatasetSpec,
     SuiteManifest,
     build_case,
+    compare_baselines,
     extract_prediction,
     load_cases,
     score_output,
@@ -190,6 +191,111 @@ class CoreTests(unittest.TestCase):
             self.assertEqual(summary["total_cases"], 1)
             self.assertEqual(summary["completed_cases"], 1)
             self.assertEqual(summary["macro_accuracy"], 1.0)
+
+    def test_baseline_comparison_is_paired_and_reproducible(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            candidate_path = root / "candidate.jsonl"
+            baseline_path = root / "baseline.jsonl"
+            candidate_rows = [
+                {
+                    "case_id": "gsm8k-a",
+                    "benchmark": "gsm8k",
+                    "model": "4b",
+                    "score": 1.0,
+                    "prediction": "12",
+                },
+                {
+                    "case_id": "gsm8k-b",
+                    "benchmark": "gsm8k",
+                    "model": "4b",
+                    "score": 0.0,
+                    "prediction": None,
+                },
+                {
+                    "case_id": "mmlu-a",
+                    "benchmark": "mmlu",
+                    "model": "4b",
+                    "score": 1.0,
+                    "prediction": "A",
+                },
+                {
+                    "case_id": "mmlu-b",
+                    "benchmark": "mmlu",
+                    "model": "4b",
+                    "score": 0.0,
+                    "prediction": "B",
+                },
+            ]
+            baseline_rows = [
+                {
+                    "case_id": "gsm8k-a",
+                    "benchmark": "gsm8k",
+                    "model": "9b",
+                    "score": 0.0,
+                    "prediction": "10",
+                },
+                {
+                    "case_id": "gsm8k-b",
+                    "benchmark": "gsm8k",
+                    "model": "9b",
+                    "score": 1.0,
+                    "prediction": "9",
+                },
+                {
+                    "case_id": "mmlu-a",
+                    "benchmark": "mmlu",
+                    "model": "9b",
+                    "score": 1.0,
+                    "prediction": "A",
+                },
+                {
+                    "case_id": "mmlu-b",
+                    "benchmark": "mmlu",
+                    "model": "9b",
+                    "score": 0.0,
+                    "prediction": "C",
+                },
+            ]
+            for path, rows in (
+                (candidate_path, candidate_rows),
+                (baseline_path, baseline_rows),
+            ):
+                path.write_text(
+                    "".join(json.dumps(row) + "\n" for row in rows),
+                    encoding="utf-8",
+                )
+
+            first = compare_baselines(
+                candidate_path,
+                baseline_path,
+                bootstrap_samples=500,
+                bootstrap_seed=7,
+            )
+            second = compare_baselines(
+                candidate_path,
+                baseline_path,
+                bootstrap_samples=500,
+                bootstrap_seed=7,
+            )
+            self.assertEqual(first, second)
+            self.assertEqual(first["candidate_model"], "4b")
+            self.assertEqual(first["baseline_model"], "9b")
+            self.assertEqual(first["macro_delta"], 0.0)
+            self.assertEqual(
+                first["overall_micro"]["paired_counts"],
+                {
+                    "both_correct": 1,
+                    "candidate_only": 1,
+                    "baseline_only": 1,
+                    "both_wrong": 1,
+                },
+            )
+            self.assertEqual(first["overall_micro"]["mcnemar_exact_p"], 1.0)
+            self.assertEqual(
+                first["benchmarks"]["gsm8k"]["candidate_parse_failures"],
+                ["gsm8k-b"],
+            )
 
     def test_model_alias_and_relative_output_resolution(self):
         config = load_run_config("configs/benchmarks/synthetic_base.yaml")

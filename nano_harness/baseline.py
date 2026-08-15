@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import random
 import re
 import time
 from dataclasses import asdict, dataclass
@@ -302,6 +303,7 @@ def run_suite(
             "prediction": prediction,
             "score": score,
             "status": "completed",
+            "finish_reason": _finish_reason(reply.raw),
             "latency_seconds": round(latency_seconds, 6),
             "usage": reply.usage,
             "output": reply.content,
@@ -338,6 +340,171 @@ def summarize_baseline(path: Path) -> dict[str, Any]:
     }
 
 
+def compare_baselines(
+    candidate_path: Path,
+    baseline_path: Path,
+    *,
+    bootstrap_samples: int = 10_000,
+    bootstrap_seed: int = 35,
+) -> dict[str, Any]:
+    candidate = _latest_records_by_case(candidate_path)
+    baseline = _latest_records_by_case(baseline_path)
+    if set(candidate) != set(baseline):
+        missing_candidate = sorted(set(baseline) - set(candidate))
+        missing_baseline = sorted(set(candidate) - set(baseline))
+        raise ValueError(
+            "case id mismatch: "
+            f"missing_candidate={missing_candidate[:5]}, "
+            f"missing_baseline={missing_baseline[:5]}"
+        )
+    if not candidate:
+        raise ValueError("cannot compare empty baseline files")
+
+    benchmarks = sorted({str(record["benchmark"]) for record in candidate.values()})
+    by_benchmark: dict[str, dict[str, Any]] = {}
+    for benchmark in benchmarks:
+        case_ids = sorted(
+            case_id
+            for case_id, record in candidate.items()
+            if record["benchmark"] == benchmark
+        )
+        by_benchmark[benchmark] = _paired_metrics(
+            [candidate[case_id] for case_id in case_ids],
+            [baseline[case_id] for case_id in case_ids],
+            bootstrap_samples=bootstrap_samples,
+            bootstrap_seed=f"{bootstrap_seed}:{benchmark}",
+        )
+
+    all_case_ids = sorted(candidate)
+    overall = _paired_metrics(
+        [candidate[case_id] for case_id in all_case_ids],
+        [baseline[case_id] for case_id in all_case_ids],
+        bootstrap_samples=bootstrap_samples,
+        bootstrap_seed=f"{bootstrap_seed}:overall",
+    )
+    candidate_macro = sum(
+        item["candidate_accuracy"] for item in by_benchmark.values()
+    ) / len(by_benchmark)
+    baseline_macro = sum(
+        item["baseline_accuracy"] for item in by_benchmark.values()
+    ) / len(by_benchmark)
+    return {
+        "schema_version": "nano_harness_baseline_comparison_v1",
+        "candidate_model": _single_model(candidate.values()),
+        "baseline_model": _single_model(baseline.values()),
+        "cases": len(all_case_ids),
+        "candidate_macro_accuracy": candidate_macro,
+        "baseline_macro_accuracy": baseline_macro,
+        "macro_delta": candidate_macro - baseline_macro,
+        "overall_micro": overall,
+        "benchmarks": by_benchmark,
+        "bootstrap_samples": bootstrap_samples,
+        "bootstrap_seed": bootstrap_seed,
+    }
+
+
+def _latest_records_by_case(path: Path) -> dict[str, dict[str, Any]]:
+    records: dict[str, dict[str, Any]] = {}
+    for record in _iter_jsonl(path):
+        records[str(record["case_id"])] = record
+    return records
+
+
+def _single_model(records: Iterable[dict[str, Any]]) -> str:
+    models = {str(record["model"]) for record in records}
+    if len(models) != 1:
+        raise ValueError(f"expected one model per result file, got {sorted(models)}")
+    return models.pop()
+
+
+def _paired_metrics(
+    candidate: list[dict[str, Any]],
+    baseline: list[dict[str, Any]],
+    *,
+    bootstrap_samples: int,
+    bootstrap_seed: str,
+) -> dict[str, Any]:
+    if len(candidate) != len(baseline):
+        raise ValueError("paired metric inputs differ in length")
+    pairs = [
+        (float(candidate_row["score"]), float(baseline_row["score"]))
+        for candidate_row, baseline_row in zip(candidate, baseline)
+    ]
+    count = len(pairs)
+    candidate_correct = sum(pair[0] for pair in pairs)
+    baseline_correct = sum(pair[1] for pair in pairs)
+    candidate_only = sum(left == 1.0 and right == 0.0 for left, right in pairs)
+    baseline_only = sum(left == 0.0 and right == 1.0 for left, right in pairs)
+    both_correct = sum(left == 1.0 and right == 1.0 for left, right in pairs)
+    both_wrong = sum(left == 0.0 and right == 0.0 for left, right in pairs)
+    deltas = [left - right for left, right in pairs]
+    confidence_interval = _bootstrap_mean_interval(
+        deltas,
+        samples=bootstrap_samples,
+        seed=bootstrap_seed,
+    )
+    return {
+        "cases": count,
+        "candidate_correct": int(candidate_correct),
+        "baseline_correct": int(baseline_correct),
+        "candidate_accuracy": candidate_correct / count,
+        "baseline_accuracy": baseline_correct / count,
+        "delta": sum(deltas) / count,
+        "paired_counts": {
+            "both_correct": both_correct,
+            "candidate_only": candidate_only,
+            "baseline_only": baseline_only,
+            "both_wrong": both_wrong,
+        },
+        "mcnemar_exact_p": _mcnemar_exact_p(candidate_only, baseline_only),
+        "paired_bootstrap_95_ci": confidence_interval,
+        "candidate_only_cases": [
+            row["case_id"]
+            for row, pair in zip(candidate, pairs)
+            if pair == (1.0, 0.0)
+        ],
+        "baseline_only_cases": [
+            row["case_id"]
+            for row, pair in zip(candidate, pairs)
+            if pair == (0.0, 1.0)
+        ],
+        "candidate_parse_failures": [
+            row["case_id"] for row in candidate if row.get("prediction") is None
+        ],
+        "baseline_parse_failures": [
+            row["case_id"] for row in baseline if row.get("prediction") is None
+        ],
+    }
+
+
+def _bootstrap_mean_interval(
+    values: list[float],
+    *,
+    samples: int,
+    seed: str,
+) -> list[float]:
+    if not values:
+        raise ValueError("cannot bootstrap an empty list")
+    rng = random.Random(seed)
+    count = len(values)
+    estimates = sorted(
+        sum(values[rng.randrange(count)] for _ in range(count)) / count
+        for _ in range(samples)
+    )
+    lower = estimates[int(samples * 0.025)]
+    upper = estimates[min(samples - 1, int(samples * 0.975))]
+    return [lower, upper]
+
+
+def _mcnemar_exact_p(candidate_only: int, baseline_only: int) -> float:
+    discordant = candidate_only + baseline_only
+    if discordant == 0:
+        return 1.0
+    tail = min(candidate_only, baseline_only)
+    probability = sum(math.comb(discordant, index) for index in range(tail + 1))
+    return min(1.0, 2.0 * probability / (2**discordant))
+
+
 def _aggregate_records(records: list[dict[str, Any]]) -> dict[str, Any]:
     count = len(records)
     completed = sum(record.get("status") == "completed" for record in records)
@@ -363,6 +530,9 @@ def _aggregate_records(records: list[dict[str, Any]]) -> dict[str, Any]:
         "prompt_tokens": sum(prompt_tokens),
         "completion_tokens": sum(completion_tokens),
         "parse_failures": sum(record.get("prediction") is None for record in records),
+        "length_truncations": sum(
+            record.get("finish_reason") == "length" for record in records
+        ),
     }
 
 
@@ -394,6 +564,14 @@ def _iter_jsonl(path: Path) -> Iterable[dict[str, Any]]:
         for line in handle:
             if line.strip():
                 yield json.loads(line)
+
+
+def _finish_reason(raw: dict[str, Any]) -> str | None:
+    choices = raw.get("choices", [])
+    if not choices or not isinstance(choices[0], dict):
+        return None
+    value = choices[0].get("finish_reason")
+    return str(value) if value is not None else None
 
 
 def case_manifest(cases: list[BaselineCase]) -> list[dict[str, Any]]:

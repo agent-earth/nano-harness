@@ -7,6 +7,7 @@ from pathlib import Path
 
 from nano_harness.baseline import (
     case_manifest,
+    compare_baselines,
     load_cases,
     load_manifest,
     run_suite,
@@ -46,6 +47,13 @@ def main() -> None:
 
     baseline_summary_parser = subparsers.add_parser("baseline-summary")
     baseline_summary_parser.add_argument("path")
+
+    compare_parser = subparsers.add_parser("baseline-compare")
+    compare_parser.add_argument("--candidate", required=True)
+    compare_parser.add_argument("--baseline", required=True)
+    compare_parser.add_argument("--output", default=None)
+    compare_parser.add_argument("--bootstrap-samples", type=int, default=10_000)
+    compare_parser.add_argument("--bootstrap-seed", type=int, default=35)
 
     args = parser.parse_args()
     if args.command == "run":
@@ -90,6 +98,20 @@ def main() -> None:
         }
     elif args.command == "baseline-summary":
         summary = summarize_baseline(Path(args.path))
+    elif args.command == "baseline-compare":
+        summary = compare_baselines(
+            Path(args.candidate),
+            Path(args.baseline),
+            bootstrap_samples=args.bootstrap_samples,
+            bootstrap_seed=args.bootstrap_seed,
+        )
+        if args.output:
+            output = Path(args.output)
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(
+                json.dumps(summary, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
     else:
         summary = summarize_paths([Path(path) for path in args.paths])
     print(json.dumps(summary, indent=2, ensure_ascii=False))

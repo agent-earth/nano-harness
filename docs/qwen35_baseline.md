@@ -5,7 +5,7 @@ matched, deterministic contract.
 
 ## Suite
 
-`configs/baselines/qwen35_local_v1.yaml` selects 24 cases from each benchmark:
+`configs/baselines/qwen35_local_v2.yaml` selects 24 cases from each benchmark:
 
 - GSM8K: numeric exact match after a required `FINAL:` line;
 - MMLU: choice-letter exact match;
@@ -24,6 +24,12 @@ answer line. With thinking disabled, both models returned the correct `FINAL:`
 line in 6-16 completion tokens. This is a matched inference setting, not a
 harness treatment.
 
+The v2 suite keeps the exact v1 case IDs and raises the matched output budget
+from 256 to 600 tokens. In the completed v1 run, all 48 GPQA attempts reached
+exactly 256 completion tokens and failed to emit a parseable final answer;
+several GSM8K and MMLU cases showed the same pattern. v1 is retained as negative
+configuration evidence and is not used as the valid three-benchmark baseline.
+
 This 72-case suite is a directional baseline. It is not large enough by itself
 to establish the final statistical significance required by the project goal.
 
@@ -38,7 +44,7 @@ PYTHONPATH=. ../.venv/bin/python -m unittest discover -s tests -v
 
 The suite validator checks dataset SHA256 values, exact case selection,
 per-benchmark counts, unique IDs, and Qwen3.5 tokenizer context usage. The
-current maximum is 416 input tokens and 672 tokens including the 256-token
+current maximum is 418 input tokens and 1018 tokens including the 600-token
 output budget.
 
 ## Model Service
@@ -70,14 +76,14 @@ for 4B on 32 GiB V100 GPUs.
 
 ```bash
 PYTHONPATH=. ../.venv/bin/python -m nano_harness.cli baseline \
-  --manifest configs/baselines/qwen35_local_v1.yaml \
+  --manifest configs/baselines/qwen35_local_v2.yaml \
   --dataset-root ../../datasets \
   --model qwen3.5-4b \
   --base-url http://127.0.0.1:8000/v1 \
-  --output results/baselines/qwen35-local-v1/4b/cases.jsonl
+  --output results/baselines/qwen35-local-v2/4b/cases.jsonl
 
 PYTHONPATH=. ../.venv/bin/python -m nano_harness.cli baseline-summary \
-  results/baselines/qwen35-local-v1/4b/cases.jsonl
+  results/baselines/qwen35-local-v2/4b/cases.jsonl
 ```
 
 Use a separate `9b/cases.jsonl` output for Qwen3.5-9B. The runner resumes by
