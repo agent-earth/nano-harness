@@ -38,3 +38,19 @@ Promote only if treatment:
 
 Report majority count, no-majority count, wins, losses, truncations, tokens,
 and wall time. Do not tune on dev12.
+
+## Result
+
+Deterministic majority, 4B direct, and 9B direct each score 23/24. Majority
+changes zero of 24 direct predictions: 16 cases have a majority that includes
+direct, and 8 have no majority and keep direct.
+
+The treatment uses 33,493 tokens and 865.8s, with 48 re-solve calls and 32
+re-solve truncations, but creates no repair. Dev12 fails.
+
+Stop full-suite re-solving. Fresh dev13 should run a single recovery solve only
+when protected direct is unparseable; parseable direct outputs are returned
+unchanged by construction.
+
+- [`docs/results/gsm8k_dev12_majority_v1.md`](../results/gsm8k_dev12_majority_v1.md)
+- [`docs/results/gsm8k_dev12_majority_v1.public.json`](../results/gsm8k_dev12_majority_v1.public.json)
