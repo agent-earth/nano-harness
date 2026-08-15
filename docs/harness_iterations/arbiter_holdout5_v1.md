@@ -45,3 +45,28 @@ Harness acceptance requires all of:
 
 Cost and latency are reported, not hard gates. A failure triggers replan; do
 not tune on holdout5.
+
+## Result
+
+Routed 4B scores 50/72 (macro 0.6944) versus 9B direct at 44/72
+(0.6111). The +0.0833 paired micro delta has bootstrap 95% CI
+[-0.0139, +0.1806] and exact McNemar p=0.146, so the aggregate lead is not
+statistically established.
+
+Per task:
+
+- GSM8K: routed 23/24 versus 9B 24/24;
+- MMLU: routed 16/24 versus 9B 11/24;
+- GPQA-Diamond: routed 11/24 versus 9B 9/24.
+
+The pre-registered task non-regression and significance rules fail. On GPQA,
+the arbiter overrides twice: one repair and one regression, for zero net gain
+over 4B direct. All contract audits pass and routed 4B has no API or final
+parse errors.
+
+Stop GPQA arbitration. The next fresh experiment targets the remaining GSM8K
+gap with a protected direct answer, independent math re-solve, and conservative
+arbiter. Do not tune on holdout5.
+
+- [`docs/results/arbiter_holdout5_v1.md`](../results/arbiter_holdout5_v1.md)
+- [`docs/results/arbiter_holdout5_v1.public.json`](../results/arbiter_holdout5_v1.public.json)
