@@ -43,3 +43,19 @@ PYTHONPATH=. ../.venv/bin/python scripts/validate_qwen35_baseline.py \
   --manifest configs/harness/qwen35_gpqa_dev5_draft_verify_v1.yaml \
   --case-manifest configs/generated/qwen35_gpqa_dev5_draft_verify_v1_cases.json
 ```
+
+## Result
+
+The 384-token treatment scores 3/12, exactly matching 4B direct, while 9B
+direct scores 4/12. Treatment and 4B direct have the same correctness on all
+12 cases and the same prediction on 11/12; the changed prediction remains
+wrong. Draft truncation falls from dev4's 6/6 to 10/12, but neither completed
+draft changes the direct prediction.
+
+The treatment uses 15,077 tokens and 180.0s versus 2,979 tokens and 3.5s for
+4B direct. It fails the directional promotion rule. Stop increasing the
+monolithic draft budget; next test independent evidence for each answer option
+on fresh cases.
+
+- [`docs/results/gpqa_dev5_v1.md`](../results/gpqa_dev5_v1.md)
+- [`docs/results/gpqa_dev5_v1.public.json`](../results/gpqa_dev5_v1.public.json)
