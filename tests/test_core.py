@@ -10,6 +10,7 @@ from nano_harness.baseline import (
     SuiteManifest,
     _run_draft_critique_verify_case,
     _run_draft_verify_case,
+    _run_dual_solve_verify_case,
     build_case,
     compare_baselines,
     extract_prediction,
@@ -168,6 +169,7 @@ class CoreTests(unittest.TestCase):
             strategy="draft_verify",
             draft_max_tokens=384,
             critique_max_tokens=192,
+            second_solve_max_tokens=384,
             verifier_max_tokens=32,
             min_task_groups=1,
             datasets=(),
@@ -238,6 +240,7 @@ class CoreTests(unittest.TestCase):
             strategy="draft_critique_verify",
             draft_max_tokens=256,
             critique_max_tokens=192,
+            second_solve_max_tokens=384,
             verifier_max_tokens=32,
             min_task_groups=1,
             datasets=(),
@@ -258,6 +261,81 @@ class CoreTests(unittest.TestCase):
         self.assertIn("corrected answer is B", final_prompt)
         self.assertEqual(stages["critique"]["max_tokens"], 192)
         self.assertEqual(stages["verifier"]["finish_reason"], "stop")
+
+    def test_dual_solve_verifier_keeps_solutions_independent(self):
+        case = build_case(
+            "gsm8k",
+            "numeric_exact",
+            0,
+            {
+                "question": "What is 7 plus 5?",
+                "answer": "Compute 7 + 5 = 12.\n#### 12",
+            },
+            system_prompt="answer",
+            max_tokens=600,
+        )
+        draft_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="Solution A says 11.",
+                    usage={"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        second_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="Solution B: 7 + 5 = 12.",
+                    usage={"prompt_tokens": 11, "completion_tokens": 7, "total_tokens": 18},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        verifier_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: 12",
+                    usage={"prompt_tokens": 30, "completion_tokens": 4, "total_tokens": 34},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="dual-test",
+            selection_seed="fixed",
+            system_prompt="answer",
+            max_tokens=600,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="dual_solve_verify",
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            second_solve_max_tokens=384,
+            verifier_max_tokens=32,
+            min_task_groups=1,
+            datasets=(),
+        )
+        reply, stages = _run_dual_solve_verify_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {256: draft_client, 384: second_client, 32: verifier_client},
+        )
+        self.assertEqual(reply.content, "FINAL: 12")
+        self.assertEqual(
+            reply.usage,
+            {"prompt_tokens": 51, "completion_tokens": 16, "total_tokens": 67},
+        )
+        self.assertNotIn(
+            "Solution A says 11.",
+            second_client.calls[0]["messages"][-1]["content"],
+        )
+        final_prompt = verifier_client.calls[0]["messages"][-1]["content"]
+        self.assertIn("Solution A says 11.", final_prompt)
+        self.assertIn("Solution B: 7 + 5 = 12.", final_prompt)
+        self.assertEqual(stages["second_solve"]["max_tokens"], 384)
 
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -284,6 +362,7 @@ class CoreTests(unittest.TestCase):
                 strategy="direct",
                 draft_max_tokens=384,
                 critique_max_tokens=192,
+                second_solve_max_tokens=384,
                 verifier_max_tokens=32,
                 min_task_groups=1,
                 datasets=(

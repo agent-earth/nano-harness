@@ -110,7 +110,7 @@ def main() -> None:
                 draft_input + manifest.draft_max_tokens,
                 verifier_input + manifest.verifier_max_tokens,
             )
-        else:
+        elif manifest.strategy == "draft_critique_verify":
             draft_text = tokenizer.apply_chat_template(
                 [
                     {
@@ -186,6 +186,79 @@ def main() -> None:
             total = max(
                 draft_input + manifest.draft_max_tokens,
                 critique_input + manifest.critique_max_tokens,
+                verifier_input + manifest.verifier_max_tokens,
+            )
+        else:
+            draft_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Solve the math task carefully. Produce concise reasoning "
+                            "and a candidate answer. Do not use tools."
+                        ),
+                    },
+                    {"role": "user", "content": case.draft_prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            second_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Independently solve the math task from scratch. Check "
+                            "units, time periods, totals, and all requested quantities. "
+                            "Produce concise reasoning and a candidate answer. Do not "
+                            "use tools."
+                        ),
+                    },
+                    {"role": "user", "content": case.draft_prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            draft_input = len(tokenizer.encode(draft_text))
+            second_input = len(tokenizer.encode(second_text))
+            draft_placeholder = "x " * manifest.draft_max_tokens
+            second_placeholder = "y " * manifest.second_solve_max_tokens
+            verifier_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are the final selector. Reconcile the two independent "
+                            "solutions against the original task. Return only one FINAL "
+                            "line in the exact format requested by the task. Do not "
+                            "explain."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+                            f"<solution_a>\n{draft_placeholder}</solution_a>\n\n"
+                            f"<solution_b>\n{second_placeholder}</solution_b>"
+                        ),
+                    },
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            verifier_input = len(tokenizer.encode(verifier_text))
+            length = max(draft_input, second_input, verifier_input)
+            output_tokens = max(
+                manifest.draft_max_tokens,
+                manifest.second_solve_max_tokens,
+                manifest.verifier_max_tokens,
+            )
+            total = max(
+                draft_input + manifest.draft_max_tokens,
+                second_input + manifest.second_solve_max_tokens,
                 verifier_input + manifest.verifier_max_tokens,
             )
         totals.append(total)

@@ -62,6 +62,7 @@ class SuiteManifest:
     strategy: str
     draft_max_tokens: int
     critique_max_tokens: int
+    second_solve_max_tokens: int
     verifier_max_tokens: int
     min_task_groups: int
     datasets: tuple[DatasetSpec, ...]
@@ -80,6 +81,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "strategy",
         "draft_max_tokens",
         "critique_max_tokens",
+        "second_solve_max_tokens",
         "verifier_max_tokens",
         "min_task_groups",
         "datasets",
@@ -100,7 +102,12 @@ def load_manifest(path: str | Path) -> SuiteManifest:
     if len({item.name for item in datasets}) != len(datasets):
         raise ValueError("dataset names must be unique")
     strategy = str(raw.get("strategy", "direct"))
-    if strategy not in {"direct", "draft_verify", "draft_critique_verify"}:
+    if strategy not in {
+        "direct",
+        "draft_verify",
+        "draft_critique_verify",
+        "dual_solve_verify",
+    }:
         raise ValueError(f"unsupported baseline strategy: {strategy}")
     return SuiteManifest(
         schema_version=raw["schema_version"],
@@ -113,6 +120,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         strategy=strategy,
         draft_max_tokens=int(raw.get("draft_max_tokens", 384)),
         critique_max_tokens=int(raw.get("critique_max_tokens", 192)),
+        second_solve_max_tokens=int(raw.get("second_solve_max_tokens", 384)),
         verifier_max_tokens=int(raw.get("verifier_max_tokens", 32)),
         min_task_groups=min_task_groups,
         datasets=datasets,
@@ -355,8 +363,15 @@ def run_suite(
                     model,
                     clients,
                 )
-            else:
+            elif manifest.strategy == "draft_critique_verify":
                 reply, stage_metadata = _run_draft_critique_verify_case(
+                    case,
+                    manifest,
+                    model,
+                    clients,
+                )
+            else:
+                reply, stage_metadata = _run_dual_solve_verify_case(
                     case,
                     manifest,
                     model,
@@ -589,6 +604,91 @@ def _run_draft_critique_verify_case(
             "output_sha256": hashlib.sha256(
                 critique.content.encode()
             ).hexdigest(),
+        },
+        "verifier": {
+            "max_tokens": manifest.verifier_max_tokens,
+            "finish_reason": _finish_reason(verifier.raw),
+            "usage": verifier_usage,
+        },
+    }
+
+
+def _run_dual_solve_verify_case(
+    case: BaselineCase,
+    manifest: SuiteManifest,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    draft_client = _client_for_budget(clients, model, manifest.draft_max_tokens)
+    draft = draft_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Solve the math task carefully. Produce concise reasoning and a "
+                    "candidate answer. Do not use tools."
+                ),
+            },
+            {"role": "user", "content": case.draft_prompt},
+        ]
+    )
+    second_client = _client_for_budget(
+        clients,
+        model,
+        manifest.second_solve_max_tokens,
+    )
+    second = second_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Independently solve the math task from scratch. Check units, time "
+                    "periods, totals, and all requested quantities. Produce concise "
+                    "reasoning and a candidate answer. Do not use tools."
+                ),
+            },
+            {"role": "user", "content": case.draft_prompt},
+        ]
+    )
+    verifier_client = _client_for_budget(
+        clients,
+        model,
+        manifest.verifier_max_tokens,
+    )
+    verifier = verifier_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "You are the final selector. Reconcile the two independent "
+                    "solutions against the original task. Return only one FINAL line "
+                    "in the exact format requested by the task. Do not explain."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+                    f"<solution_a>\n{draft.content}\n</solution_a>\n\n"
+                    f"<solution_b>\n{second.content}\n</solution_b>"
+                ),
+            },
+        ]
+    )
+    verifier_usage = dict(verifier.usage)
+    verifier.usage = _sum_usage(draft.usage, second.usage, verifier_usage)
+    return verifier, {
+        "draft": {
+            "max_tokens": manifest.draft_max_tokens,
+            "finish_reason": _finish_reason(draft.raw),
+            "usage": draft.usage,
+            "output_sha256": hashlib.sha256(draft.content.encode()).hexdigest(),
+        },
+        "second_solve": {
+            "max_tokens": manifest.second_solve_max_tokens,
+            "finish_reason": _finish_reason(second.raw),
+            "usage": second.usage,
+            "output_sha256": hashlib.sha256(second.content.encode()).hexdigest(),
         },
         "verifier": {
             "max_tokens": manifest.verifier_max_tokens,
