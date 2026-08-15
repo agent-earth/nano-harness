@@ -1,0 +1,162 @@
+{
+  "artifacts": {
+    "four_b_direct_raw_sha256": "65666db89166d5e0aba074ba3902962c75043cc2ad722b7951fdcafeba6925f0",
+    "four_b_treatment_raw_sha256": "3817f5753f03e06c91c0f576733b88a6adb957eefe2654ae7b9b89ebaea36dd6",
+    "nine_b_direct_raw_sha256": "887c4bc787af5320b81fe428fca7f9324d6adacf3aa17d1af40785999e33a0e8"
+  },
+  "code_revision": "93c768cf098d73555f864de28c1acb4deeefbabe",
+  "contract_audits": {
+    "four_b_direct": {
+      "cases": 24,
+      "passed": true,
+      "stage_input_hashes_match": true
+    },
+    "four_b_treatment": {
+      "cases": 24,
+      "deterministic_selection_matches": true,
+      "invalid_raw_gate_output_cases": [],
+      "passed": true,
+      "stage_input_hashes_match": true
+    },
+    "nine_b_direct": {
+      "cases": 24,
+      "passed": true,
+      "stage_input_hashes_match": true
+    }
+  },
+  "costs": {
+    "four_b_direct": {
+      "api_errors": 0,
+      "cases": 24,
+      "correct": 20,
+      "direct_truncations": 0,
+      "gate_truncations": 0,
+      "invalid_raw_gate_outputs": 24,
+      "keep_count": 0,
+      "parse_failures": 1,
+      "resolve_truncations": 0,
+      "total_tokens": 9152,
+      "use_resolve_count": 0,
+      "wall_seconds": 245.56583999999998
+    },
+    "four_b_treatment": {
+      "api_errors": 0,
+      "cases": 24,
+      "correct": 18,
+      "direct_truncations": 1,
+      "gate_truncations": 0,
+      "invalid_raw_gate_outputs": 0,
+      "keep_count": 21,
+      "parse_failures": 1,
+      "resolve_truncations": 4,
+      "total_tokens": 31089,
+      "use_resolve_count": 3,
+      "wall_seconds": 508.77994199999995
+    },
+    "nine_b_direct": {
+      "api_errors": 0,
+      "cases": 24,
+      "correct": 20,
+      "direct_truncations": 0,
+      "gate_truncations": 0,
+      "invalid_raw_gate_outputs": 24,
+      "keep_count": 0,
+      "parse_failures": 2,
+      "resolve_truncations": 0,
+      "total_tokens": 9775,
+      "use_resolve_count": 0,
+      "wall_seconds": 260.44923299999994
+    }
+  },
+  "decision": {
+    "accepted": false,
+    "at_least_one_treatment_only_win": false,
+    "no_api_errors": true,
+    "no_parse_failures": false,
+    "point_above_4b_direct": false,
+    "zero_direct_only_losses": false
+  },
+  "decision_analysis": {
+    "invalid_raw_gate_outputs": [],
+    "neutral_use_resolve": [
+      "gsm8k-e4f30e8a9ad0d7cb"
+    ],
+    "protected_direct_matches_control": true,
+    "use_resolve_cases": [
+      "gsm8k-ab837bfc4717aac4",
+      "gsm8k-d66898cf6c344c6c",
+      "gsm8k-e4f30e8a9ad0d7cb"
+    ],
+    "use_resolve_count": 3,
+    "use_resolve_losses": [
+      "gsm8k-ab837bfc4717aac4",
+      "gsm8k-d66898cf6c344c6c"
+    ],
+    "use_resolve_wins": []
+  },
+  "experiment_id": "qwen35-gsm8k-dev11-gate-v1",
+  "generated_at": "2026-08-15T23:29:07.290881+00:00",
+  "schema_version": "nano_harness_public_gsm8k_dev_v1",
+  "versus_4b_direct": {
+    "baseline_accuracy": 0.8333333333333334,
+    "baseline_only_cases": [
+      "gsm8k-ab837bfc4717aac4",
+      "gsm8k-d66898cf6c344c6c"
+    ],
+    "baseline_parse_failures": [
+      "gsm8k-1f82fed7dfd30e6c"
+    ],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 35,
+    "candidate_accuracy": 0.75,
+    "candidate_only_cases": [],
+    "candidate_parse_failures": [
+      "gsm8k-1f82fed7dfd30e6c"
+    ],
+    "delta": -0.08333333333333333,
+    "mcnemar_exact_p": 0.5,
+    "paired_bootstrap_95_ci": [
+      -0.20833333333333334,
+      0.0
+    ],
+    "paired_counts": {
+      "baseline_only": 2,
+      "both_correct": 18,
+      "both_wrong": 4,
+      "candidate_only": 0
+    }
+  },
+  "versus_9b_direct": {
+    "baseline_accuracy": 0.8333333333333334,
+    "baseline_only_cases": [
+      "gsm8k-1f82fed7dfd30e6c",
+      "gsm8k-ab837bfc4717aac4",
+      "gsm8k-d66898cf6c344c6c"
+    ],
+    "baseline_parse_failures": [
+      "gsm8k-d4d05bb2a2f1d76c",
+      "gsm8k-d79041d0e00d53af"
+    ],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 35,
+    "candidate_accuracy": 0.75,
+    "candidate_only_cases": [
+      "gsm8k-d4d05bb2a2f1d76c"
+    ],
+    "candidate_parse_failures": [
+      "gsm8k-1f82fed7dfd30e6c"
+    ],
+    "delta": -0.08333333333333333,
+    "mcnemar_exact_p": 0.625,
+    "paired_bootstrap_95_ci": [
+      -0.25,
+      0.08333333333333333
+    ],
+    "paired_counts": {
+      "baseline_only": 3,
+      "both_correct": 17,
+      "both_wrong": 3,
+      "candidate_only": 1
+    }
+  }
+}

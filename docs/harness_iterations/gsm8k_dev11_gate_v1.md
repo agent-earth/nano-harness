@@ -36,3 +36,22 @@ Promote only if treatment:
 
 Report gate decisions, invalid gate outputs, wins, losses, tokens, and time.
 Do not tune on dev11.
+
+## Result
+
+Decision gate scores 18/24 versus both 4B direct and 9B direct at 20/24.
+Relative to 4B direct it has zero treatment-only wins and two direct-only
+losses, delta -0.0833, bootstrap 95% CI [-0.2083, 0.0000].
+
+The gate emits valid `KEEP`/`USE_RESOLVE` output on all cases. It selects
+`USE_RESOLVE` three times: zero repairs, two regressions, and one neutral.
+Thus formatting separation works, but LLM arbitration is not a reliable
+correctness signal.
+
+Stop all learned math arbitration. Fresh dev12 must use deterministic numeric
+majority over protected direct and two independent re-solves; select a
+non-direct answer only when at least two numeric predictions agree, otherwise
+keep direct.
+
+- [`docs/results/gsm8k_dev11_gate_v1.md`](../results/gsm8k_dev11_gate_v1.md)
+- [`docs/results/gsm8k_dev11_gate_v1.public.json`](../results/gsm8k_dev11_gate_v1.public.json)
