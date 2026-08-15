@@ -26,6 +26,7 @@ class BaselineCase:
     case_id: str
     benchmark: str
     prompt: str
+    draft_prompt: str
     expected: str
     scorer: str
     source_index: int
@@ -42,6 +43,7 @@ class DatasetSpec:
     sha256: str
     scorer: str
     limit: int
+    start: int = 0
     max_source_chars: int | None = None
     answer_only: bool = False
     max_tokens: int | None = None
@@ -57,6 +59,9 @@ class SuiteManifest:
     max_tokens: int
     temperature: float
     chat_template_kwargs: dict[str, Any]
+    strategy: str
+    draft_max_tokens: int
+    verifier_max_tokens: int
     datasets: tuple[DatasetSpec, ...]
 
 
@@ -70,6 +75,9 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "max_tokens",
         "temperature",
         "chat_template_kwargs",
+        "strategy",
+        "draft_max_tokens",
+        "verifier_max_tokens",
         "datasets",
     }
     unknown = set(raw) - expected_keys
@@ -82,6 +90,9 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         raise ValueError("baseline suite requires at least three datasets")
     if len({item.name for item in datasets}) != len(datasets):
         raise ValueError("dataset names must be unique")
+    strategy = str(raw.get("strategy", "direct"))
+    if strategy not in {"direct", "draft_verify"}:
+        raise ValueError(f"unsupported baseline strategy: {strategy}")
     return SuiteManifest(
         schema_version=raw["schema_version"],
         suite_id=raw["suite_id"],
@@ -90,6 +101,9 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         max_tokens=int(raw["max_tokens"]),
         temperature=float(raw["temperature"]),
         chat_template_kwargs=dict(raw.get("chat_template_kwargs", {})),
+        strategy=strategy,
+        draft_max_tokens=int(raw.get("draft_max_tokens", 384)),
+        verifier_max_tokens=int(raw.get("verifier_max_tokens", 32)),
         datasets=datasets,
     )
 
@@ -140,16 +154,20 @@ def load_cases(manifest: SuiteManifest, dataset_root: Path) -> list[BaselineCase
             cases = [
                 case for case in cases if case.source_chars <= spec.max_source_chars
             ]
-        if len(cases) < spec.limit:
+        if spec.start < 0:
+            raise ValueError(f"{spec.name} start must be non-negative")
+        required = spec.start + spec.limit
+        if len(cases) < required:
             raise ValueError(
-                f"{spec.name} has only {len(cases)} eligible cases for limit {spec.limit}"
+                f"{spec.name} has only {len(cases)} eligible cases for "
+                f"start {spec.start} and limit {spec.limit}"
             )
         cases.sort(
             key=lambda case: hashlib.sha256(
                 f"{manifest.selection_seed}\0{case.benchmark}\0{case.case_id}".encode()
             ).hexdigest()
         )
-        selected.extend(cases[: spec.limit])
+        selected.extend(cases[spec.start : required])
     return selected
 
 
@@ -166,13 +184,17 @@ def build_case(
     if benchmark == "gsm8k":
         question = str(record["question"]).strip()
         expected = extract_gsm8k_reference(str(record["answer"]))
+        reasoning_prefix = (
+            "Solve the following math problem. Show concise reasoning, then end with "
+            "exactly one line in the form FINAL: <number>.\n\n"
+        )
         prefix = (
             "Return only one line in the form FINAL: <number>. Do not show reasoning.\n\n"
             if answer_only
-            else "Solve the following math problem. Show concise reasoning, then end with "
-            "exactly one line in the form FINAL: <number>.\n\n"
+            else reasoning_prefix
         )
         prompt = prefix + f"Problem: {question}"
+        draft_prompt = reasoning_prefix + f"Problem: {question}"
         metadata: dict[str, Any] = {}
     elif benchmark == "mmlu":
         question = str(record["question"]).strip()
@@ -182,6 +204,11 @@ def build_case(
             question,
             choices,
             answer_only=answer_only,
+        )
+        draft_prompt = format_multiple_choice_prompt(
+            question,
+            choices,
+            answer_only=False,
         )
         metadata = {"subject": str(record["subject"])}
     elif benchmark == "gpqa_diamond":
@@ -193,7 +220,12 @@ def build_case(
             else "Answer the following multiple-choice science question. Reason concisely, "
             "then end with exactly one line in the form FINAL: <letter>.\n\n"
         )
+        reasoning_prefix = (
+            "Answer the following multiple-choice science question. Reason concisely, "
+            "then end with exactly one line in the form FINAL: <letter>.\n\n"
+        )
         prompt = prefix + question
+        draft_prompt = reasoning_prefix + question
         metadata = {}
     else:
         raise ValueError(f"unsupported baseline benchmark: {benchmark}")
@@ -205,6 +237,7 @@ def build_case(
         case_id=f"{benchmark}-{case_digest}",
         benchmark=benchmark,
         prompt=prompt,
+        draft_prompt=draft_prompt,
         expected=expected,
         scorer=scorer,
         source_index=source_index,
@@ -298,17 +331,19 @@ def run_suite(
         attempted += 1
         started = time.perf_counter()
         try:
-            if case.max_tokens not in clients:
-                clients[case.max_tokens] = OpenRouterClient(
-                    replace(model, max_tokens=case.max_tokens)
+            if manifest.strategy == "direct":
+                reply, stage_metadata = _run_direct_case(
+                    case,
+                    model,
+                    clients,
                 )
-            client = clients[case.max_tokens]
-            reply = client.complete(
-                [
-                    {"role": "system", "content": case.system_prompt},
-                    {"role": "user", "content": case.prompt},
-                ]
-            )
+            else:
+                reply, stage_metadata = _run_draft_verify_case(
+                    case,
+                    manifest,
+                    model,
+                    clients,
+                )
         except Exception as exc:
             latency_seconds = time.perf_counter() - started
             record = {
@@ -317,6 +352,7 @@ def run_suite(
                 "case_id": case.case_id,
                 "benchmark": case.benchmark,
                 "model": model.name,
+                "strategy": manifest.strategy,
                 "source_index": case.source_index,
                 "max_tokens": case.max_tokens,
                 "prompt_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
@@ -344,6 +380,7 @@ def run_suite(
             "case_id": case.case_id,
             "benchmark": case.benchmark,
             "model": model.name,
+            "strategy": manifest.strategy,
             "source_index": case.source_index,
             "max_tokens": case.max_tokens,
             "prompt_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
@@ -358,6 +395,7 @@ def run_suite(
             "latency_seconds": round(latency_seconds, 6),
             "usage": reply.usage,
             "output": reply.content,
+            "stages": stage_metadata,
             "metadata": case.metadata,
         }
         _append_jsonl(output_path, record)
@@ -365,6 +403,108 @@ def run_suite(
     summary["attempted_this_invocation"] = attempted
     summary["output"] = str(output_path)
     return summary
+
+
+def _run_direct_case(
+    case: BaselineCase,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    client = _client_for_budget(clients, model, case.max_tokens)
+    reply = client.complete(
+        [
+            {"role": "system", "content": case.system_prompt},
+            {"role": "user", "content": case.draft_prompt},
+        ]
+    )
+    return reply, {
+        "direct": {
+            "max_tokens": case.max_tokens,
+            "finish_reason": _finish_reason(reply.raw),
+            "usage": reply.usage,
+        }
+    }
+
+
+def _run_draft_verify_case(
+    case: BaselineCase,
+    manifest: SuiteManifest,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    draft_client = _client_for_budget(clients, model, manifest.draft_max_tokens)
+    draft = draft_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Solve the task carefully. Produce a compact candidate analysis "
+                    "and candidate answer for a separate verifier. Do not use tools."
+                ),
+            },
+            {"role": "user", "content": case.prompt},
+        ]
+    )
+    verifier_client = _client_for_budget(
+        clients,
+        model,
+        manifest.verifier_max_tokens,
+    )
+    verifier = verifier_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "You are the final verifier. Check the candidate against the "
+                    "original task, correct it if needed, and return only one FINAL "
+                    "line in the exact format requested by the task. Do not explain."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+                    f"<candidate>\n{draft.content}\n</candidate>"
+                ),
+            },
+        ]
+    )
+    verifier_usage = dict(verifier.usage)
+    combined_usage = _sum_usage(draft.usage, verifier_usage)
+    verifier.usage = combined_usage
+    return verifier, {
+        "draft": {
+            "max_tokens": manifest.draft_max_tokens,
+            "finish_reason": _finish_reason(draft.raw),
+            "usage": draft.usage,
+            "output_sha256": hashlib.sha256(draft.content.encode()).hexdigest(),
+        },
+        "verifier": {
+            "max_tokens": manifest.verifier_max_tokens,
+            "finish_reason": _finish_reason(verifier.raw),
+            "usage": verifier_usage,
+        },
+    }
+
+
+def _client_for_budget(
+    clients: dict[int, OpenRouterClient],
+    model: ModelConfig,
+    max_tokens: int,
+) -> OpenRouterClient:
+    if max_tokens not in clients:
+        clients[max_tokens] = OpenRouterClient(replace(model, max_tokens=max_tokens))
+    return clients[max_tokens]
+
+
+def _sum_usage(*usages: dict[str, Any]) -> dict[str, int]:
+    output: dict[str, int] = {}
+    for usage in usages:
+        for key in ("prompt_tokens", "completion_tokens", "total_tokens"):
+            value = usage.get(key)
+            if isinstance(value, int):
+                output[key] = output.get(key, 0) + value
+    return output
 
 
 def summarize_baseline(path: Path) -> dict[str, Any]:

@@ -45,24 +45,79 @@ def main() -> None:
     totals: list[int] = []
     by_benchmark: dict[str, dict[str, list[int]]] = {}
     for case in cases:
-        text = tokenizer.apply_chat_template(
-            [
-                {"role": "system", "content": case.system_prompt},
-                {"role": "user", "content": case.prompt},
-            ],
-            tokenize=False,
-            add_generation_prompt=True,
-            **manifest.chat_template_kwargs,
-        )
-        length = len(tokenizer.encode(text))
-        totals.append(length + case.max_tokens)
+        if manifest.strategy == "direct":
+            text = tokenizer.apply_chat_template(
+                [
+                    {"role": "system", "content": case.system_prompt},
+                    {"role": "user", "content": case.prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            length = len(tokenizer.encode(text))
+            output_tokens = case.max_tokens
+            total = length + output_tokens
+        else:
+            draft_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Solve the task carefully. Produce a compact candidate "
+                            "analysis and candidate answer for a separate verifier. "
+                            "Do not use tools."
+                        ),
+                    },
+                    {"role": "user", "content": case.draft_prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            draft_input = len(tokenizer.encode(draft_text))
+            candidate_placeholder = "x " * manifest.draft_max_tokens
+            verifier_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are the final verifier. Check the candidate against "
+                            "the original task, correct it if needed, and return only "
+                            "one FINAL line in the exact format requested by the task. "
+                            "Do not explain."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+                            f"<candidate>\n{candidate_placeholder}</candidate>"
+                        ),
+                    },
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            verifier_input = len(tokenizer.encode(verifier_text))
+            length = max(draft_input, verifier_input)
+            output_tokens = max(
+                manifest.draft_max_tokens,
+                manifest.verifier_max_tokens,
+            )
+            total = max(
+                draft_input + manifest.draft_max_tokens,
+                verifier_input + manifest.verifier_max_tokens,
+            )
+        totals.append(total)
         metrics = by_benchmark.setdefault(
             case.benchmark,
             {"input_tokens": [], "output_tokens": [], "total_tokens": []},
         )
         metrics["input_tokens"].append(length)
-        metrics["output_tokens"].append(case.max_tokens)
-        metrics["total_tokens"].append(length + case.max_tokens)
+        metrics["output_tokens"].append(output_tokens)
+        metrics["total_tokens"].append(total)
 
     input_lengths = sorted(
         length

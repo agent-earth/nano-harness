@@ -8,6 +8,7 @@ from unittest.mock import MagicMock, patch
 from nano_harness.baseline import (
     DatasetSpec,
     SuiteManifest,
+    _run_draft_verify_case,
     build_case,
     compare_baselines,
     extract_prediction,
@@ -86,6 +87,75 @@ class CoreTests(unittest.TestCase):
             ).system_prompt,
         )
 
+    def test_draft_verify_uses_candidate_then_strict_verifier(self):
+        case = build_case(
+            "gsm8k",
+            "numeric_exact",
+            0,
+            {
+                "question": "What is 7 plus 5?",
+                "answer": "Compute 7 + 5 = 12.\n#### 12",
+            },
+            system_prompt="direct",
+            max_tokens=600,
+        )
+        draft_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="Candidate reasoning: 7 + 5 = 12.",
+                    usage={
+                        "prompt_tokens": 20,
+                        "completion_tokens": 10,
+                        "total_tokens": 30,
+                    },
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        verifier_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: 12",
+                    usage={
+                        "prompt_tokens": 40,
+                        "completion_tokens": 4,
+                        "total_tokens": 44,
+                    },
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="draft-test",
+            selection_seed="fixed",
+            system_prompt="direct",
+            max_tokens=600,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="draft_verify",
+            draft_max_tokens=384,
+            verifier_max_tokens=32,
+            datasets=(),
+        )
+        reply, stages = _run_draft_verify_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {384: draft_client, 32: verifier_client},
+        )
+        self.assertEqual(reply.content, "FINAL: 12")
+        self.assertEqual(
+            reply.usage,
+            {"prompt_tokens": 60, "completion_tokens": 14, "total_tokens": 74},
+        )
+        self.assertEqual(stages["draft"]["max_tokens"], 384)
+        self.assertEqual(stages["verifier"]["max_tokens"], 32)
+        verifier_prompt = verifier_client.calls[0]["messages"][-1]["content"]
+        self.assertIn("Candidate reasoning: 7 + 5 = 12.", verifier_prompt)
+        self.assertIn(case.prompt, verifier_prompt)
+        self.assertIn(case.draft_prompt, draft_client.calls[0]["messages"][-1]["content"])
+
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:
             from datasets import Dataset
@@ -108,6 +178,9 @@ class CoreTests(unittest.TestCase):
                 max_tokens=8,
                 temperature=0.0,
                 chat_template_kwargs={"enable_thinking": False},
+                strategy="direct",
+                draft_max_tokens=384,
+                verifier_max_tokens=32,
                 datasets=(
                     DatasetSpec(
                         name="gpqa_diamond",

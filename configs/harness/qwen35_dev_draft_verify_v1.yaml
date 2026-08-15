@@ -1,0 +1,45 @@
+schema_version: nano_harness_baseline_suite_v1
+suite_id: qwen35-dev-draft-verify-v1
+selection_seed: qwen35-local-v1-fixed-cases
+strategy: draft_verify
+draft_max_tokens: 384
+verifier_max_tokens: 32
+system_prompt: >-
+  You are being evaluated under a deterministic answer contract. Solve the
+  problem yourself, follow the requested FINAL line exactly, and do not use
+  tools or external information.
+max_tokens: 600
+temperature: 0.0
+chat_template_kwargs:
+  enable_thinking: false
+datasets:
+  - name: gsm8k
+    path: gsm8k/gsm8k/main/test-00000-of-00001.parquet
+    sha256: ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59
+    scorer: numeric_exact
+    start: 24
+    limit: 6
+    max_tokens: 600
+  - name: mmlu
+    path: mmlu_no_train/mmlu_no_train/all/test-00000-of-00001.parquet
+    sha256: 02033371a64dbe5a0d8b6fb9d612900afcd0fea5140e53490993a4540b3a58fd
+    scorer: choice_exact
+    start: 24
+    limit: 6
+    answer_only: true
+    max_tokens: 32
+    system_prompt: >-
+      Solve the problem internally. Return only the requested FINAL line and
+      do not use tools or external information.
+  - name: gpqa_diamond
+    path: GPQA-Diamond/GPQA-Diamond/test/gpqa_diamond.parquet
+    sha256: fdd6e95117cdf87075f56bf673a5bae4680b143bc2d29b486470810122c33f39
+    scorer: choice_exact
+    start: 24
+    limit: 6
+    max_source_chars: 1200
+    answer_only: true
+    max_tokens: 32
+    system_prompt: >-
+      Solve the problem internally. Return only the requested FINAL line and
+      do not use tools or external information.
