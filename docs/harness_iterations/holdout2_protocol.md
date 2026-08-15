@@ -29,3 +29,18 @@ Primary acceptance requires 4B draft-verify to exceed 9B direct with:
 The 4B direct arm attributes treatment uplift. Holdout2 is confirmation only;
 its result cannot trigger another policy change. A failed acceptance must
 produce an evidence-backed replan instead of holdout tuning.
+
+## Result
+
+4B draft-verify scores 49/72 (macro 0.6806), compared with 4B direct at
+22/72 and 9B direct at 23/72. Relative to 9B, the paired delta is +0.3611,
+bootstrap 95% CI [+0.2500, +0.4722], exact McNemar p=2.16e-7. MMLU and GPQA
+improve significantly, and treatment final parse failures are zero.
+
+The pre-registered task-group criterion fails on GSM8K: 4B draft-verify scores
+22/24 while 9B direct scores 23/24. Harness-stage acceptance therefore remains
+open despite the large significant overall win. The strategy stays frozen; the
+next experiment is a larger unseen GSM8K-only confirmation.
+
+- [`docs/results/holdout2_v1.md`](../results/holdout2_v1.md)
+- [`docs/results/holdout2_v1.public.json`](../results/holdout2_v1.public.json)
