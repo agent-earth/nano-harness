@@ -35,3 +35,21 @@ Promote only if treatment:
 
 Report override count, wins, losses, truncations, tokens, and wall time. Do not
 tune on dev9.
+
+## Result
+
+Protected re-solve scores 17/24 versus 4B direct at 21/24 and 9B direct at
+23/24. Relative to 4B direct it has one treatment-only win and five
+direct-only losses, delta -0.1667, bootstrap 95% CI [-0.3750, 0.0000].
+
+The arbiter produces seven unparseable length-truncated finals. Protected
+direct is correct in five of those cases, the independent re-solve is correct
+in one protected-wrong case, and both are wrong in one case. Across all cases,
+the arbiter makes eight overrides: one win, five losses, and two neutral.
+
+Dev9 fails. Do not rescore it. On fresh dev10, keep prompts and budgets
+unchanged and add deterministic protected-direct fallback only when the arbiter
+final is unparseable.
+
+- [`docs/results/gsm8k_dev9_protected_resolve_v1.md`](../results/gsm8k_dev9_protected_resolve_v1.md)
+- [`docs/results/gsm8k_dev9_protected_resolve_v1.public.json`](../results/gsm8k_dev9_protected_resolve_v1.public.json)
