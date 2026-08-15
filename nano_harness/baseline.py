@@ -120,6 +120,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "protected_math_arbiter",
         "protected_math_gate",
         "protected_math_majority",
+        "protected_math_recovery",
     }
     if strategy not in supported_strategies | {"benchmark_routing"}:
         raise ValueError(f"unsupported baseline strategy: {strategy}")
@@ -449,8 +450,15 @@ def run_suite(
                     model,
                     clients,
                 )
-            else:
+            elif selected_strategy == "protected_math_majority":
                 reply, stage_metadata = _run_protected_math_majority_case(
+                    case,
+                    manifest,
+                    model,
+                    clients,
+                )
+            else:
+                reply, stage_metadata = _run_protected_math_recovery_case(
                     case,
                     manifest,
                     model,
@@ -1348,6 +1356,91 @@ def _run_protected_math_majority_case(
             "majority_prediction": majority,
             "selected_prediction": selected_prediction,
             "selection_reason": selection_reason,
+        },
+    }
+
+
+def _run_protected_math_recovery_case(
+    case: BaselineCase,
+    manifest: SuiteManifest,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    if case.scorer != "numeric_exact":
+        raise ValueError("protected_math_recovery requires a numeric_exact case")
+
+    direct_client = _client_for_budget(clients, model, case.max_tokens)
+    direct = direct_client.complete(
+        [
+            {"role": "system", "content": case.system_prompt},
+            {"role": "user", "content": case.prompt},
+        ]
+    )
+    direct_usage = dict(direct.usage)
+    direct_content = direct.content
+    direct_prediction = extract_prediction(direct.content, case.scorer)
+    recovery_stage = None
+    selected_prediction = direct_prediction
+    if direct_prediction is None:
+        recovery_client = _client_for_budget(
+            clients,
+            model,
+            manifest.second_solve_max_tokens,
+        )
+        recovery_prompt = (
+            f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+            "The first attempt did not produce a parseable final number. Solve the "
+            "problem independently from scratch. Check units, rates, time periods, "
+            "totals, and exactly what quantity is requested. End with exactly one "
+            "line FINAL: <number>. Do not use tools."
+        )
+        recovery = recovery_client.complete(
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "Act as a recovery math solver. Produce a compact verified "
+                        "derivation and a strict numeric final."
+                    ),
+                },
+                {"role": "user", "content": recovery_prompt},
+            ]
+        )
+        selected_prediction = extract_prediction(recovery.content, case.scorer)
+        direct.usage = _sum_usage(direct_usage, recovery.usage)
+        recovery_stage = {
+            "max_tokens": manifest.second_solve_max_tokens,
+            "input_sha256": hashlib.sha256(recovery_prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(recovery.raw),
+            "usage": recovery.usage,
+            "output": recovery.content,
+            "output_sha256": hashlib.sha256(recovery.content.encode()).hexdigest(),
+            "prediction": selected_prediction,
+        }
+    direct.content = (
+        f"FINAL: {selected_prediction}" if selected_prediction is not None else ""
+    )
+    return direct, {
+        "protected_direct": {
+            "max_tokens": case.max_tokens,
+            "input_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(direct.raw),
+            "usage": direct_usage,
+            "output": direct_content,
+            "output_sha256": hashlib.sha256(direct_content.encode()).hexdigest(),
+            "prediction": direct_prediction,
+        },
+        "conditional_recovery": recovery_stage,
+        "deterministic_selection": {
+            "recovery_triggered": direct_prediction is None,
+            "selected_prediction": selected_prediction,
+            "selection_reason": (
+                "recovery_prediction"
+                if direct_prediction is None and selected_prediction is not None
+                else "direct_prediction"
+                if direct_prediction is not None
+                else "recovery_unparseable"
+            ),
         },
     }
 
