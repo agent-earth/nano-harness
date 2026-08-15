@@ -5,7 +5,7 @@ matched, deterministic contract.
 
 ## Suite
 
-`configs/baselines/qwen35_local_v3.yaml` selects 24 cases from each benchmark:
+`configs/baselines/qwen35_local_v5.yaml` selects 24 cases from each benchmark:
 
 - GSM8K: numeric exact match after a required `FINAL:` line;
 - MMLU: choice-letter exact match;
@@ -24,7 +24,7 @@ answer line. With thinking disabled, both models returned the correct `FINAL:`
 line in 6-16 completion tokens. This is a matched inference setting, not a
 harness treatment.
 
-All three suite versions keep identical case IDs:
+All five suite versions keep identical case IDs:
 
 - v1 used a 256-token reasoning budget. All 48 GPQA attempts hit the limit and
   failed to emit a parseable final answer.
@@ -33,9 +33,13 @@ All three suite versions keep identical case IDs:
 - v3 uses one matched answer-only contract for all three benchmarks and a
   32-token output budget. A real GPQA pre-run smoke completed in four tokens for
   both models with parseable predictions.
+- v4 restored reasoning for GSM8K but used one global 600-token budget, which
+  allowed answer-only contract drift on 9B multiple-choice cases.
+- v5 uses per-benchmark budgets: GSM8K gets 600 tokens for concise reasoning;
+  MMLU and GPQA get 32 tokens under an answer-only contract.
 
-v1 and v2 are retained as negative configuration evidence and are not used as
-the valid three-benchmark baseline.
+v1 through v4 are retained as negative configuration evidence and are not used
+as the valid three-benchmark baseline.
 
 This 72-case suite is a directional baseline. It is not large enough by itself
 to establish the final statistical significance required by the project goal.
@@ -51,8 +55,8 @@ PYTHONPATH=. ../.venv/bin/python -m unittest discover -s tests -v
 
 The suite validator checks dataset SHA256 values, exact case selection,
 per-benchmark counts, unique IDs, and Qwen3.5 tokenizer context usage. The
-current maximum is 420 input tokens and 452 tokens including the 32-token
-output budget.
+current maximum totals are 787 tokens for GSM8K, 411 for MMLU, and 442 for
+GPQA, all within the 1024-token service limit.
 
 ## Model Service
 
@@ -83,14 +87,14 @@ for 4B on 32 GiB V100 GPUs.
 
 ```bash
 PYTHONPATH=. ../.venv/bin/python -m nano_harness.cli baseline \
-  --manifest configs/baselines/qwen35_local_v3.yaml \
+  --manifest configs/baselines/qwen35_local_v5.yaml \
   --dataset-root ../../datasets \
   --model qwen3.5-4b \
   --base-url http://127.0.0.1:8000/v1 \
-  --output results/baselines/qwen35-local-v3/4b/cases.jsonl
+  --output results/baselines/qwen35-local-v5/4b/cases.jsonl
 
 PYTHONPATH=. ../.venv/bin/python -m nano_harness.cli baseline-summary \
-  results/baselines/qwen35-local-v3/4b/cases.jsonl
+  results/baselines/qwen35-local-v5/4b/cases.jsonl
 ```
 
 Use a separate `9b/cases.jsonl` output for Qwen3.5-9B. The runner resumes by
@@ -99,3 +103,15 @@ latency, and API token usage per case.
 
 Do not change prompts, case IDs, context budget, output budget, temperature, or
 scorers between model runs. Any changed treatment requires a new suite ID.
+
+## Result
+
+The committed public report is
+[`docs/results/qwen35_local_v5.md`](results/qwen35_local_v5.md), with a
+machine-readable companion at
+[`docs/results/qwen35_local_v5.public.json`](results/qwen35_local_v5.public.json).
+The report is regenerated from ignored raw case files with:
+
+```bash
+PYTHONPATH=. ../.venv/bin/python scripts/render_qwen35_baseline_report.py
+```

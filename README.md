@@ -73,11 +73,11 @@ to intentionally start a fresh trial.
 
 ## SWE-bench
 
-Download data through `oniond` when available. In this environment the
-configured bucket returned HTTP 400, so the verified fallback is:
+Download data through `oniond` with the verified `ai-infra` bucket:
 
 ```bash
-export HF_ENDPOINT=https://hf-mirror.com
+export BUCKET=ai-infra
+oniond download dataset SWE-bench_Lite --dir ../../datasets/SWE-bench_Lite
 ```
 
 The template defaults to SWE-bench Verified and a 20-way shard:
