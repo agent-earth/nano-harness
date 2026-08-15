@@ -58,7 +58,7 @@ def main() -> None:
             length = len(tokenizer.encode(text))
             output_tokens = case.max_tokens
             total = length + output_tokens
-        else:
+        elif manifest.strategy == "draft_verify":
             draft_text = tokenizer.apply_chat_template(
                 [
                     {
@@ -108,6 +108,84 @@ def main() -> None:
             )
             total = max(
                 draft_input + manifest.draft_max_tokens,
+                verifier_input + manifest.verifier_max_tokens,
+            )
+        else:
+            draft_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Solve the task carefully. Produce a compact candidate "
+                            "analysis and candidate answer for an independent critic. "
+                            "Do not use tools."
+                        ),
+                    },
+                    {"role": "user", "content": case.draft_prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            draft_input = len(tokenizer.encode(draft_text))
+            draft_placeholder = "x " * manifest.draft_max_tokens
+            critique_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Act as an independent critic. Re-solve the original task, "
+                            "identify any error in the candidate, and provide a corrected "
+                            "candidate. Keep the critique compact and do not use tools."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+                            f"<candidate>\n{draft_placeholder}</candidate>"
+                        ),
+                    },
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            critique_input = len(tokenizer.encode(critique_text))
+            critique_placeholder = "y " * manifest.critique_max_tokens
+            verifier_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are the final formatter. Use the original task, "
+                            "candidate, and critique to return only one FINAL line in "
+                            "the exact format requested by the task. Do not explain."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+                            f"<candidate>\n{draft_placeholder}</candidate>\n\n"
+                            f"<critique>\n{critique_placeholder}</critique>"
+                        ),
+                    },
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            verifier_input = len(tokenizer.encode(verifier_text))
+            length = max(draft_input, critique_input, verifier_input)
+            output_tokens = max(
+                manifest.draft_max_tokens,
+                manifest.critique_max_tokens,
+                manifest.verifier_max_tokens,
+            )
+            total = max(
+                draft_input + manifest.draft_max_tokens,
+                critique_input + manifest.critique_max_tokens,
                 verifier_input + manifest.verifier_max_tokens,
             )
         totals.append(total)

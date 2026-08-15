@@ -1,0 +1,230 @@
+[
+  {
+    "case_id": "gsm8k-7fd85edeb9675e33",
+    "benchmark": "gsm8k",
+    "source_index": 184,
+    "source_chars": 172,
+    "max_tokens": 600,
+    "prompt_sha256": "567b11463b4f58439352ce641ead6829fc65cd3085684daf784b6543b842e7ee",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "25",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-d23e19a14537ad61",
+    "benchmark": "gsm8k",
+    "source_index": 1106,
+    "source_chars": 163,
+    "max_tokens": 600,
+    "prompt_sha256": "5f52a140e4fb9e02b59b1dbdb343c03183c95009e147ec6f2cf980013e0cccdf",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "5",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-82c6140b00642133",
+    "benchmark": "gsm8k",
+    "source_index": 1220,
+    "source_chars": 178,
+    "max_tokens": 600,
+    "prompt_sha256": "b0ccb6fb8864861709fd9cf211223a9c68f0310361f9631f968f9cc269d20967",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "32",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-08ed46238082d428",
+    "benchmark": "gsm8k",
+    "source_index": 123,
+    "source_chars": 122,
+    "max_tokens": 600,
+    "prompt_sha256": "44eeb82d0fdf838cedd7545999e871ac26e23e15e3685712b9c33a563842916a",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "50",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-fd3852c2afea706b",
+    "benchmark": "gsm8k",
+    "source_index": 55,
+    "source_chars": 157,
+    "max_tokens": 600,
+    "prompt_sha256": "637164f5e7837de7b510d4be74838274ad007e288443754568e54f035ab3006f",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "14",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-5bd7f56209c65b27",
+    "benchmark": "gsm8k",
+    "source_index": 360,
+    "source_chars": 123,
+    "max_tokens": 600,
+    "prompt_sha256": "381d4d42a37aa3402fd2cc90d80d3414709a80a63f2a2476b26da2f46b476c27",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "25",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "mmlu-b63117fddad95397",
+    "benchmark": "mmlu",
+    "source_index": 9931,
+    "source_chars": 79,
+    "max_tokens": 32,
+    "prompt_sha256": "a6b3c356407e5646cd69617dd812314770714abba2342e7e04093ef150ea12fe",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "miscellaneous"
+    }
+  },
+  {
+    "case_id": "mmlu-903d6d9ed8bfb74b",
+    "benchmark": "mmlu",
+    "source_index": 12290,
+    "source_chars": 101,
+    "max_tokens": 32,
+    "prompt_sha256": "86539dfc12a474375cd94da710fd6d541091681efc54e90b31ffcd21e964ab10",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "elementary_mathematics"
+    }
+  },
+  {
+    "case_id": "mmlu-912b65d6fec38376",
+    "benchmark": "mmlu",
+    "source_index": 10726,
+    "source_chars": 177,
+    "max_tokens": 32,
+    "prompt_sha256": "19f41d456a49f0386dfb3d9841971ffecb4c39e9b235f202a451aaa9031a1998",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_microeconomics"
+    }
+  },
+  {
+    "case_id": "mmlu-bcd2fd3760335714",
+    "benchmark": "mmlu",
+    "source_index": 10966,
+    "source_chars": 138,
+    "max_tokens": 32,
+    "prompt_sha256": "6ade10c5f041a97c85853360475064b169309b60e88d44b4541b125a6cf9b610",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "clinical_knowledge"
+    }
+  },
+  {
+    "case_id": "mmlu-aad773c77eff6cbf",
+    "benchmark": "mmlu",
+    "source_index": 6552,
+    "source_chars": 129,
+    "max_tokens": 32,
+    "prompt_sha256": "8ddbb225f9128ad20e89a645beefefbc42f3d484b895d05b6d8b9abe122dfcc6",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "conceptual_physics"
+    }
+  },
+  {
+    "case_id": "mmlu-e6960357db4426ca",
+    "benchmark": "mmlu",
+    "source_index": 11908,
+    "source_chars": 211,
+    "max_tokens": 32,
+    "prompt_sha256": "8ddc648cf90bd0ac5ffae994b96ac07324d28e212e08d2404b52e69d0806f61e",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_accounting"
+    }
+  },
+  {
+    "case_id": "gpqa_diamond-137309bb47cd530d",
+    "benchmark": "gpqa_diamond",
+    "source_index": 119,
+    "source_chars": 323,
+    "max_tokens": 32,
+    "prompt_sha256": "cf4222a47c835dc4c3642335b584da2e112737f58bbb5a8a1fadbaed32f37cac",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-ee45249a3ede2771",
+    "benchmark": "gpqa_diamond",
+    "source_index": 148,
+    "source_chars": 1146,
+    "max_tokens": 32,
+    "prompt_sha256": "b88913b10e951ec309c4d8b00740f3bfc9df23ba296266a2013b00203386ecd4",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-3f0b703c6849b5bd",
+    "benchmark": "gpqa_diamond",
+    "source_index": 85,
+    "source_chars": 672,
+    "max_tokens": 32,
+    "prompt_sha256": "63e51e061abfd289c68e72630264a802fc3eed402ab1c6da9582647440dabe09",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-fd660ea41a124d97",
+    "benchmark": "gpqa_diamond",
+    "source_index": 18,
+    "source_chars": 416,
+    "max_tokens": 32,
+    "prompt_sha256": "4fbf8096a3677ec1b2bb7ac14016d7f629cc38a630141c8cb1ac4293ccfcca3d",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-5e0a335d3f1ac210",
+    "benchmark": "gpqa_diamond",
+    "source_index": 164,
+    "source_chars": 386,
+    "max_tokens": 32,
+    "prompt_sha256": "8486d6fcbb7587d2a675f56ef5eb7ffabda3b1bb87be658c24d28566e1a7957b",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-afed5d36e3deee55",
+    "benchmark": "gpqa_diamond",
+    "source_index": 74,
+    "source_chars": 556,
+    "max_tokens": 32,
+    "prompt_sha256": "283c7276b84b12d514744dcc4bd6eabbcb7f4e847c5f3bb24811acd93ccf47c2",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  }
+]

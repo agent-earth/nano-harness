@@ -61,6 +61,7 @@ class SuiteManifest:
     chat_template_kwargs: dict[str, Any]
     strategy: str
     draft_max_tokens: int
+    critique_max_tokens: int
     verifier_max_tokens: int
     datasets: tuple[DatasetSpec, ...]
 
@@ -77,6 +78,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "chat_template_kwargs",
         "strategy",
         "draft_max_tokens",
+        "critique_max_tokens",
         "verifier_max_tokens",
         "datasets",
     }
@@ -91,7 +93,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
     if len({item.name for item in datasets}) != len(datasets):
         raise ValueError("dataset names must be unique")
     strategy = str(raw.get("strategy", "direct"))
-    if strategy not in {"direct", "draft_verify"}:
+    if strategy not in {"direct", "draft_verify", "draft_critique_verify"}:
         raise ValueError(f"unsupported baseline strategy: {strategy}")
     return SuiteManifest(
         schema_version=raw["schema_version"],
@@ -103,6 +105,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         chat_template_kwargs=dict(raw.get("chat_template_kwargs", {})),
         strategy=strategy,
         draft_max_tokens=int(raw.get("draft_max_tokens", 384)),
+        critique_max_tokens=int(raw.get("critique_max_tokens", 192)),
         verifier_max_tokens=int(raw.get("verifier_max_tokens", 32)),
         datasets=datasets,
     )
@@ -337,8 +340,15 @@ def run_suite(
                     model,
                     clients,
                 )
-            else:
+            elif manifest.strategy == "draft_verify":
                 reply, stage_metadata = _run_draft_verify_case(
+                    case,
+                    manifest,
+                    model,
+                    clients,
+                )
+            else:
+                reply, stage_metadata = _run_draft_critique_verify_case(
                     case,
                     manifest,
                     model,
@@ -478,6 +488,99 @@ def _run_draft_verify_case(
             "finish_reason": _finish_reason(draft.raw),
             "usage": draft.usage,
             "output_sha256": hashlib.sha256(draft.content.encode()).hexdigest(),
+        },
+        "verifier": {
+            "max_tokens": manifest.verifier_max_tokens,
+            "finish_reason": _finish_reason(verifier.raw),
+            "usage": verifier_usage,
+        },
+    }
+
+
+def _run_draft_critique_verify_case(
+    case: BaselineCase,
+    manifest: SuiteManifest,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    draft_client = _client_for_budget(clients, model, manifest.draft_max_tokens)
+    draft = draft_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Solve the task carefully. Produce a compact candidate analysis "
+                    "and candidate answer for an independent critic. Do not use tools."
+                ),
+            },
+            {"role": "user", "content": case.draft_prompt},
+        ]
+    )
+    critique_client = _client_for_budget(
+        clients,
+        model,
+        manifest.critique_max_tokens,
+    )
+    critique = critique_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Act as an independent critic. Re-solve the original task, identify "
+                    "any error in the candidate, and provide a corrected candidate. "
+                    "Keep the critique compact and do not use tools."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+                    f"<candidate>\n{draft.content}\n</candidate>"
+                ),
+            },
+        ]
+    )
+    verifier_client = _client_for_budget(
+        clients,
+        model,
+        manifest.verifier_max_tokens,
+    )
+    verifier = verifier_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "You are the final formatter. Use the original task, candidate, and "
+                    "critique to return only one FINAL line in the exact format "
+                    "requested by the task. Do not explain."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+                    f"<candidate>\n{draft.content}\n</candidate>\n\n"
+                    f"<critique>\n{critique.content}\n</critique>"
+                ),
+            },
+        ]
+    )
+    verifier_usage = dict(verifier.usage)
+    verifier.usage = _sum_usage(draft.usage, critique.usage, verifier_usage)
+    return verifier, {
+        "draft": {
+            "max_tokens": manifest.draft_max_tokens,
+            "finish_reason": _finish_reason(draft.raw),
+            "usage": draft.usage,
+            "output_sha256": hashlib.sha256(draft.content.encode()).hexdigest(),
+        },
+        "critique": {
+            "max_tokens": manifest.critique_max_tokens,
+            "finish_reason": _finish_reason(critique.raw),
+            "usage": critique.usage,
+            "output_sha256": hashlib.sha256(
+                critique.content.encode()
+            ).hexdigest(),
         },
         "verifier": {
             "max_tokens": manifest.verifier_max_tokens,

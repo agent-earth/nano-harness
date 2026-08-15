@@ -8,6 +8,7 @@ from unittest.mock import MagicMock, patch
 from nano_harness.baseline import (
     DatasetSpec,
     SuiteManifest,
+    _run_draft_critique_verify_case,
     _run_draft_verify_case,
     build_case,
     compare_baselines,
@@ -135,6 +136,7 @@ class CoreTests(unittest.TestCase):
             chat_template_kwargs={"enable_thinking": False},
             strategy="draft_verify",
             draft_max_tokens=384,
+            critique_max_tokens=192,
             verifier_max_tokens=32,
             datasets=(),
         )
@@ -155,6 +157,74 @@ class CoreTests(unittest.TestCase):
         self.assertIn("Candidate reasoning: 7 + 5 = 12.", verifier_prompt)
         self.assertIn(case.prompt, verifier_prompt)
         self.assertIn(case.draft_prompt, draft_client.calls[0]["messages"][-1]["content"])
+
+    def test_draft_critique_verify_records_three_stage_evidence(self):
+        case = build_case(
+            "gpqa_diamond",
+            "choice_exact",
+            0,
+            {"question": "A. alpha\nB. beta", "answer": "B"},
+            answer_only=True,
+            system_prompt="answer",
+            max_tokens=32,
+        )
+        draft_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="Candidate A",
+                    usage={"prompt_tokens": 10, "completion_tokens": 4, "total_tokens": 14},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        critique_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="Candidate A is wrong; corrected answer is B.",
+                    usage={"prompt_tokens": 20, "completion_tokens": 8, "total_tokens": 28},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        verifier_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: B",
+                    usage={"prompt_tokens": 30, "completion_tokens": 4, "total_tokens": 34},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="critique-test",
+            selection_seed="fixed",
+            system_prompt="answer",
+            max_tokens=32,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="draft_critique_verify",
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            verifier_max_tokens=32,
+            datasets=(),
+        )
+        reply, stages = _run_draft_critique_verify_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {256: draft_client, 192: critique_client, 32: verifier_client},
+        )
+        self.assertEqual(reply.content, "FINAL: B")
+        self.assertEqual(
+            reply.usage,
+            {"prompt_tokens": 60, "completion_tokens": 16, "total_tokens": 76},
+        )
+        self.assertIn("Candidate A", critique_client.calls[0]["messages"][-1]["content"])
+        final_prompt = verifier_client.calls[0]["messages"][-1]["content"]
+        self.assertIn("corrected answer is B", final_prompt)
+        self.assertEqual(stages["critique"]["max_tokens"], 192)
+        self.assertEqual(stages["verifier"]["finish_reason"], "stop")
 
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -180,6 +250,7 @@ class CoreTests(unittest.TestCase):
                 chat_template_kwargs={"enable_thinking": False},
                 strategy="direct",
                 draft_max_tokens=384,
+                critique_max_tokens=192,
                 verifier_max_tokens=32,
                 datasets=(
                     DatasetSpec(
