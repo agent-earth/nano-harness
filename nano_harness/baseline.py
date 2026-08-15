@@ -64,6 +64,7 @@ class SuiteManifest:
     draft_max_tokens: int
     critique_max_tokens: int
     second_solve_max_tokens: int
+    option_evidence_max_tokens: int
     verifier_max_tokens: int
     min_task_groups: int
     datasets: tuple[DatasetSpec, ...]
@@ -84,6 +85,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "draft_max_tokens",
         "critique_max_tokens",
         "second_solve_max_tokens",
+        "option_evidence_max_tokens",
         "verifier_max_tokens",
         "min_task_groups",
         "datasets",
@@ -109,6 +111,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "draft_verify",
         "draft_critique_verify",
         "dual_solve_verify",
+        "option_evidence_verify",
     }
     if strategy not in supported_strategies | {"benchmark_routing"}:
         raise ValueError(f"unsupported baseline strategy: {strategy}")
@@ -148,6 +151,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         draft_max_tokens=int(raw.get("draft_max_tokens", 384)),
         critique_max_tokens=int(raw.get("critique_max_tokens", 192)),
         second_solve_max_tokens=int(raw.get("second_solve_max_tokens", 384)),
+        option_evidence_max_tokens=int(raw.get("option_evidence_max_tokens", 96)),
         verifier_max_tokens=int(raw.get("verifier_max_tokens", 32)),
         min_task_groups=min_task_groups,
         datasets=datasets,
@@ -398,8 +402,15 @@ def run_suite(
                     model,
                     clients,
                 )
-            else:
+            elif selected_strategy == "dual_solve_verify":
                 reply, stage_metadata = _run_dual_solve_verify_case(
+                    case,
+                    manifest,
+                    model,
+                    clients,
+                )
+            else:
+                reply, stage_metadata = _run_option_evidence_verify_case(
                     case,
                     manifest,
                     model,
@@ -742,6 +753,91 @@ def _run_dual_solve_verify_case(
             "max_tokens": manifest.verifier_max_tokens,
             "finish_reason": _finish_reason(verifier.raw),
             "usage": verifier_usage,
+        },
+    }
+
+
+def _run_option_evidence_verify_case(
+    case: BaselineCase,
+    manifest: SuiteManifest,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    if case.scorer != "choice_exact":
+        raise ValueError("option_evidence_verify requires a choice_exact case")
+    option_client = _client_for_budget(
+        clients,
+        model,
+        manifest.option_evidence_max_tokens,
+    )
+    evidence = []
+    option_stages: dict[str, dict[str, Any]] = {}
+    for letter in ("A", "B", "C", "D"):
+        prompt = (
+            f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+            f"Evaluate option {letter} independently. State the strongest evidence "
+            "for or against it, check the relevant facts or calculation, and end "
+            f"with VERDICT {letter}: SUPPORT or VERDICT {letter}: REJECT. Do not "
+            "compare against another option's analysis and do not use tools."
+        )
+        reply = option_client.complete(
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "Act as an independent option evaluator. Focus only on the "
+                        "assigned option and produce compact, falsifiable evidence."
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ]
+        )
+        evidence.append(f"<option_{letter}>\n{reply.content}\n</option_{letter}>")
+        option_stages[letter] = {
+            "max_tokens": manifest.option_evidence_max_tokens,
+            "input_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(reply.raw),
+            "usage": reply.usage,
+            "output": reply.content,
+            "output_sha256": hashlib.sha256(reply.content.encode()).hexdigest(),
+        }
+
+    selector_client = _client_for_budget(
+        clients,
+        model,
+        manifest.verifier_max_tokens,
+    )
+    selector_prompt = (
+        f"<original_task>\n{case.prompt}\n</original_task>\n\n"
+        + "\n\n".join(evidence)
+    )
+    selector = selector_client.complete(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Select the best answer from the independent option evidence. "
+                    "Resolve contradictions against the original task and return only "
+                    "one FINAL: <letter> line. Do not explain."
+                ),
+            },
+            {"role": "user", "content": selector_prompt},
+        ]
+    )
+    selector_usage = dict(selector.usage)
+    selector.usage = _sum_usage(
+        *(stage["usage"] for stage in option_stages.values()),
+        selector_usage,
+    )
+    return selector, {
+        "option_evidence": option_stages,
+        "selector": {
+            "max_tokens": manifest.verifier_max_tokens,
+            "input_sha256": hashlib.sha256(
+                selector_prompt.encode()
+            ).hexdigest(),
+            "finish_reason": _finish_reason(selector.raw),
+            "usage": selector_usage,
         },
     }
 
