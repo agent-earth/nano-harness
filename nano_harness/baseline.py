@@ -119,6 +119,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "option_evidence_arbiter",
         "protected_math_arbiter",
         "protected_math_gate",
+        "protected_math_majority",
     }
     if strategy not in supported_strategies | {"benchmark_routing"}:
         raise ValueError(f"unsupported baseline strategy: {strategy}")
@@ -441,8 +442,15 @@ def run_suite(
                     model,
                     clients,
                 )
-            else:
+            elif selected_strategy == "protected_math_gate":
                 reply, stage_metadata = _run_protected_math_gate_case(
+                    case,
+                    manifest,
+                    model,
+                    clients,
+                )
+            else:
+                reply, stage_metadata = _run_protected_math_majority_case(
                     case,
                     manifest,
                     model,
@@ -1221,6 +1229,125 @@ def _run_protected_math_gate_case(
             "raw_output_sha256": hashlib.sha256(raw_gate.encode()).hexdigest(),
             "decision": decision,
             "selected_prediction": selected_prediction,
+        },
+    }
+
+
+def _run_protected_math_majority_case(
+    case: BaselineCase,
+    manifest: SuiteManifest,
+    model: ModelConfig,
+    clients: dict[int, OpenRouterClient],
+) -> tuple[Any, dict[str, Any]]:
+    if case.scorer != "numeric_exact":
+        raise ValueError("protected_math_majority requires a numeric_exact case")
+
+    direct_client = _client_for_budget(clients, model, case.max_tokens)
+    direct = direct_client.complete(
+        [
+            {"role": "system", "content": case.system_prompt},
+            {"role": "user", "content": case.prompt},
+        ]
+    )
+    direct_usage = dict(direct.usage)
+    direct_content = direct.content
+    direct_prediction = extract_prediction(direct.content, case.scorer)
+
+    resolve_client = _client_for_budget(
+        clients,
+        model,
+        manifest.second_solve_max_tokens,
+    )
+    prompts = {
+        "resolve_a": (
+            f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+            "Independently solve this math problem from scratch. Track each "
+            "quantity and arithmetic dependency in forward order. Check units, "
+            "rates, time periods, and the requested quantity. End with FINAL: "
+            "<number>. Do not use tools."
+        ),
+        "resolve_b": (
+            f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+            "Independently solve this math problem using a verification-first "
+            "approach. Derive the result, then check it by inverse calculation, "
+            "estimation, unit analysis, and rereading exactly what is requested. "
+            "End with FINAL: <number>. Do not use tools."
+        ),
+    }
+    systems = {
+        "resolve_a": (
+            "Act as an independent forward math solver. Do not rely on another "
+            "solution and make arithmetic dependencies explicit."
+        ),
+        "resolve_b": (
+            "Act as an independent verification-oriented math solver. Use a "
+            "different derivation and actively test the result for contradictions."
+        ),
+    }
+    resolves = {}
+    stages = {}
+    for name in ("resolve_a", "resolve_b"):
+        reply = resolve_client.complete(
+            [
+                {"role": "system", "content": systems[name]},
+                {"role": "user", "content": prompts[name]},
+            ]
+        )
+        prediction = extract_prediction(reply.content, case.scorer)
+        resolves[name] = (reply, prediction)
+        stages[name] = {
+            "max_tokens": manifest.second_solve_max_tokens,
+            "input_sha256": hashlib.sha256(prompts[name].encode()).hexdigest(),
+            "finish_reason": _finish_reason(reply.raw),
+            "usage": reply.usage,
+            "output": reply.content,
+            "output_sha256": hashlib.sha256(reply.content.encode()).hexdigest(),
+            "prediction": prediction,
+        }
+
+    predictions = [
+        direct_prediction,
+        resolves["resolve_a"][1],
+        resolves["resolve_b"][1],
+    ]
+    counts: dict[str, int] = {}
+    for prediction in predictions:
+        if prediction is not None:
+            counts[prediction] = counts.get(prediction, 0) + 1
+    majority = next(
+        (prediction for prediction, count in counts.items() if count >= 2),
+        None,
+    )
+    selected_prediction = majority if majority is not None else direct_prediction
+    selection_reason = "numeric_majority" if majority is not None else "no_majority_keep_direct"
+
+    direct.content = (
+        f"FINAL: {selected_prediction}" if selected_prediction is not None else ""
+    )
+    direct.usage = _sum_usage(
+        direct_usage,
+        resolves["resolve_a"][0].usage,
+        resolves["resolve_b"][0].usage,
+    )
+    return direct, {
+        "protected_direct": {
+            "max_tokens": case.max_tokens,
+            "input_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
+            "finish_reason": _finish_reason(direct.raw),
+            "usage": direct_usage,
+            "output": direct_content,
+            "output_sha256": hashlib.sha256(
+                direct_content.encode()
+            ).hexdigest(),
+            "prediction": direct_prediction,
+        },
+        "independent_resolves": stages,
+        "deterministic_vote": {
+            "predictions": predictions,
+            "counts": counts,
+            "majority_prediction": majority,
+            "selected_prediction": selected_prediction,
+            "selection_reason": selection_reason,
         },
     }
 

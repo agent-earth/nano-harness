@@ -17,6 +17,7 @@ from nano_harness.baseline import (
     _run_option_evidence_verify_case,
     _run_protected_math_arbiter_case,
     _run_protected_math_gate_case,
+    _run_protected_math_majority_case,
     _strategy_for_case,
     build_case,
     compare_baselines,
@@ -1054,6 +1055,155 @@ class CoreTests(unittest.TestCase):
         )
         self.assertEqual(reply.content, "FINAL: 12")
         self.assertEqual(stages["decision_gate"]["decision"], "KEEP")
+
+    def test_math_majority_selects_two_matching_resolves(self):
+        case = build_case(
+            "gsm8k",
+            "numeric_exact",
+            0,
+            {
+                "question": "What is 7 plus 5?",
+                "answer": "Compute 7 + 5 = 12.\n#### 12",
+            },
+            system_prompt="answer",
+            max_tokens=600,
+        )
+        direct_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: 11",
+                    usage={"prompt_tokens": 10, "completion_tokens": 4},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        resolve_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: 12",
+                    usage={"prompt_tokens": 20, "completion_tokens": 4},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                ),
+                ModelReply(
+                    content="Check: 12.\nFINAL: 12",
+                    usage={"prompt_tokens": 21, "completion_tokens": 6},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                ),
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="majority-test",
+            selection_seed="fixed",
+            system_prompt="answer",
+            max_tokens=600,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="protected_math_majority",
+            benchmark_routing={},
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            second_solve_max_tokens=384,
+            option_evidence_max_tokens=96,
+            verifier_max_tokens=8,
+            normalize_bare_choice=False,
+            fallback_to_protected_on_parse_failure=False,
+            min_task_groups=1,
+            datasets=(),
+        )
+        reply, stages = _run_protected_math_majority_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {600: direct_client, 384: resolve_client},
+        )
+        self.assertEqual(reply.content, "FINAL: 12")
+        self.assertEqual(
+            stages["deterministic_vote"]["selection_reason"],
+            "numeric_majority",
+        )
+        self.assertEqual(
+            stages["deterministic_vote"]["predictions"],
+            ["11", "12", "12"],
+        )
+        self.assertEqual(reply.usage, {"prompt_tokens": 51, "completion_tokens": 14})
+        self.assertNotIn(
+            "FINAL: 11",
+            resolve_client.calls[0]["messages"][-1]["content"],
+        )
+        self.assertNotEqual(
+            resolve_client.calls[0]["messages"][0]["content"],
+            resolve_client.calls[1]["messages"][0]["content"],
+        )
+
+    def test_math_majority_keeps_direct_without_consensus(self):
+        case = build_case(
+            "gsm8k",
+            "numeric_exact",
+            0,
+            {
+                "question": "What is 7 plus 5?",
+                "answer": "Compute 7 + 5 = 12.\n#### 12",
+            },
+            system_prompt="answer",
+            max_tokens=600,
+        )
+        clients = {
+            600: ScriptedClient(
+                [
+                    ModelReply(
+                        content="FINAL: 12",
+                        usage={"prompt_tokens": 10, "completion_tokens": 4},
+                        raw={"choices": [{"finish_reason": "stop"}]},
+                    )
+                ]
+            ),
+            384: ScriptedClient(
+                [
+                    ModelReply(
+                        content="FINAL: 11",
+                        usage={"prompt_tokens": 20, "completion_tokens": 4},
+                        raw={"choices": [{"finish_reason": "stop"}]},
+                    ),
+                    ModelReply(
+                        content="FINAL: 13",
+                        usage={"prompt_tokens": 20, "completion_tokens": 4},
+                        raw={"choices": [{"finish_reason": "stop"}]},
+                    ),
+                ]
+            ),
+        }
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="no-majority-test",
+            selection_seed="fixed",
+            system_prompt="answer",
+            max_tokens=600,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="protected_math_majority",
+            benchmark_routing={},
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            second_solve_max_tokens=384,
+            option_evidence_max_tokens=96,
+            verifier_max_tokens=8,
+            normalize_bare_choice=False,
+            fallback_to_protected_on_parse_failure=False,
+            min_task_groups=1,
+            datasets=(),
+        )
+        reply, stages = _run_protected_math_majority_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            clients,
+        )
+        self.assertEqual(reply.content, "FINAL: 12")
+        self.assertEqual(
+            stages["deterministic_vote"]["selection_reason"],
+            "no_majority_keep_direct",
+        )
 
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:

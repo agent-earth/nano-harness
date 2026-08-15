@@ -485,7 +485,7 @@ def main() -> None:
                 resolve_input + manifest.second_solve_max_tokens,
                 arbiter_input + manifest.verifier_max_tokens,
             )
-        else:
+        elif selected_strategy == "protected_math_gate":
             direct_text = tokenizer.apply_chat_template(
                 [
                     {"role": "system", "content": case.system_prompt},
@@ -556,6 +556,66 @@ def main() -> None:
                 direct_input + case.max_tokens,
                 resolve_input + manifest.second_solve_max_tokens,
                 gate_input + manifest.verifier_max_tokens,
+            )
+        else:
+            direct_text = tokenizer.apply_chat_template(
+                [
+                    {"role": "system", "content": case.system_prompt},
+                    {"role": "user", "content": case.prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            direct_input = len(tokenizer.encode(direct_text))
+            resolve_prompts = (
+                (
+                    f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+                    "Independently solve this math problem from scratch. Track each "
+                    "quantity and arithmetic dependency in forward order. Check "
+                    "units, rates, time periods, and the requested quantity. End "
+                    "with FINAL: <number>. Do not use tools."
+                ),
+                (
+                    f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+                    "Independently solve this math problem using a "
+                    "verification-first approach. Derive the result, then check it "
+                    "by inverse calculation, estimation, unit analysis, and "
+                    "rereading exactly what is requested. End with FINAL: <number>. "
+                    "Do not use tools."
+                ),
+            )
+            resolve_systems = (
+                (
+                    "Act as an independent forward math solver. Do not rely on "
+                    "another solution and make arithmetic dependencies explicit."
+                ),
+                (
+                    "Act as an independent verification-oriented math solver. Use "
+                    "a different derivation and actively test the result for "
+                    "contradictions."
+                ),
+            )
+            resolve_inputs = []
+            for system, prompt in zip(resolve_systems, resolve_prompts):
+                text = tokenizer.apply_chat_template(
+                    [
+                        {"role": "system", "content": system},
+                        {"role": "user", "content": prompt},
+                    ],
+                    tokenize=False,
+                    add_generation_prompt=True,
+                    **manifest.chat_template_kwargs,
+                )
+                resolve_inputs.append(len(tokenizer.encode(text)))
+            length = max(direct_input, *resolve_inputs)
+            output_tokens = max(
+                case.max_tokens,
+                manifest.second_solve_max_tokens,
+            )
+            total = max(
+                direct_input + case.max_tokens,
+                max(resolve_inputs) + manifest.second_solve_max_tokens,
             )
         totals.append(total)
         metrics = by_benchmark.setdefault(
