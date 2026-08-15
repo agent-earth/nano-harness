@@ -6,7 +6,7 @@ import math
 import random
 import re
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -30,6 +30,8 @@ class BaselineCase:
     scorer: str
     source_index: int
     source_chars: int
+    system_prompt: str
+    max_tokens: int
     metadata: dict[str, Any]
 
 
@@ -42,6 +44,8 @@ class DatasetSpec:
     limit: int
     max_source_chars: int | None = None
     answer_only: bool = False
+    max_tokens: int | None = None
+    system_prompt: str | None = None
 
 
 @dataclass(frozen=True)
@@ -127,6 +131,8 @@ def load_cases(manifest: SuiteManifest, dataset_root: Path) -> list[BaselineCase
                 index,
                 record,
                 answer_only=spec.answer_only,
+                system_prompt=spec.system_prompt or manifest.system_prompt,
+                max_tokens=spec.max_tokens or manifest.max_tokens,
             )
             for index, record in enumerate(records)
         ]
@@ -154,6 +160,8 @@ def build_case(
     record: dict[str, Any],
     *,
     answer_only: bool = False,
+    system_prompt: str = "",
+    max_tokens: int = 0,
 ) -> BaselineCase:
     if benchmark == "gsm8k":
         question = str(record["question"]).strip()
@@ -201,6 +209,8 @@ def build_case(
         scorer=scorer,
         source_index=source_index,
         source_chars=len(question),
+        system_prompt=system_prompt,
+        max_tokens=max_tokens,
         metadata=metadata,
     )
 
@@ -277,7 +287,7 @@ def run_suite(
     output_path: Path,
 ) -> dict[str, Any]:
     cases = load_cases(manifest, dataset_root)
-    client = OpenRouterClient(model)
+    clients: dict[int, OpenRouterClient] = {}
     completed = _completed_case_ids(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -288,9 +298,14 @@ def run_suite(
         attempted += 1
         started = time.perf_counter()
         try:
+            if case.max_tokens not in clients:
+                clients[case.max_tokens] = OpenRouterClient(
+                    replace(model, max_tokens=case.max_tokens)
+                )
+            client = clients[case.max_tokens]
             reply = client.complete(
                 [
-                    {"role": "system", "content": manifest.system_prompt},
+                    {"role": "system", "content": case.system_prompt},
                     {"role": "user", "content": case.prompt},
                 ]
             )
@@ -303,6 +318,11 @@ def run_suite(
                 "benchmark": case.benchmark,
                 "model": model.name,
                 "source_index": case.source_index,
+                "max_tokens": case.max_tokens,
+                "prompt_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
+                "system_prompt_sha256": hashlib.sha256(
+                    case.system_prompt.encode()
+                ).hexdigest(),
                 "expected": case.expected,
                 "prediction": None,
                 "score": 0.0,
@@ -325,6 +345,11 @@ def run_suite(
             "benchmark": case.benchmark,
             "model": model.name,
             "source_index": case.source_index,
+            "max_tokens": case.max_tokens,
+            "prompt_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
+            "system_prompt_sha256": hashlib.sha256(
+                case.system_prompt.encode()
+            ).hexdigest(),
             "expected": case.expected,
             "prediction": prediction,
             "score": score,
@@ -607,6 +632,11 @@ def case_manifest(cases: list[BaselineCase]) -> list[dict[str, Any]]:
             "benchmark": case.benchmark,
             "source_index": case.source_index,
             "source_chars": case.source_chars,
+            "max_tokens": case.max_tokens,
+            "prompt_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
+            "system_prompt_sha256": hashlib.sha256(
+                case.system_prompt.encode()
+            ).hexdigest(),
             "expected": case.expected,
             "scorer": case.scorer,
             "metadata": case.metadata,

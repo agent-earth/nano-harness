@@ -75,6 +75,16 @@ class CoreTests(unittest.TestCase):
         self.assertIn("Show concise reasoning", reasoning.prompt)
         self.assertIn("Do not show reasoning", answer_only.prompt)
         self.assertNotEqual(reasoning.prompt, answer_only.prompt)
+        self.assertNotEqual(
+            reasoning.system_prompt,
+            build_case(
+                "gsm8k",
+                "numeric_exact",
+                3,
+                record,
+                system_prompt="answer only",
+            ).system_prompt,
+        )
 
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:

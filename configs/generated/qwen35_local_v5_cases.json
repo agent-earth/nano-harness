@@ -1,0 +1,914 @@
+[
+  {
+    "case_id": "gsm8k-864eee38a718569e",
+    "benchmark": "gsm8k",
+    "source_index": 932,
+    "source_chars": 298,
+    "max_tokens": 600,
+    "prompt_sha256": "811c2a60c11f6c92402e3cae053f89008499b6284ed4cfc1aa65b7fadc784e56",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "24",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-76ce78bde5411eca",
+    "benchmark": "gsm8k",
+    "source_index": 278,
+    "source_chars": 144,
+    "max_tokens": 600,
+    "prompt_sha256": "3da42cc80bc1aa011cd8997852bc3a308364faa3146dae3679ff401515825ea4",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "40",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-52950f216de06a14",
+    "benchmark": "gsm8k",
+    "source_index": 109,
+    "source_chars": 231,
+    "max_tokens": 600,
+    "prompt_sha256": "b14e89ae0091f88cfe7ebe5389898d456b352fb12e9d806bf5b3724b36a3a53b",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "28",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-301632076f9b2f19",
+    "benchmark": "gsm8k",
+    "source_index": 673,
+    "source_chars": 112,
+    "max_tokens": 600,
+    "prompt_sha256": "5fcf02a88628a45092d60b328abd872646a2177058aae53eedc35c63d38639c9",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "9",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-72d40dc4278842a4",
+    "benchmark": "gsm8k",
+    "source_index": 545,
+    "source_chars": 135,
+    "max_tokens": 600,
+    "prompt_sha256": "7196f86a3028b1f5029c41c350d10cea453c1f40fb8b1db1d8c186e5c3e152f7",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "30",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-b03ce4bfb804d02a",
+    "benchmark": "gsm8k",
+    "source_index": 1269,
+    "source_chars": 228,
+    "max_tokens": 600,
+    "prompt_sha256": "86dd3f6e559aedf6d0924387131404ea95e67d165decdf98ac581a6609367f03",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "54",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-88438176410df015",
+    "benchmark": "gsm8k",
+    "source_index": 902,
+    "source_chars": 160,
+    "max_tokens": 600,
+    "prompt_sha256": "e5b9d63956b831bfd73fe1d79ec201b4d72eb30d3bf774db3dc3504463060432",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "8",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-13be8c8eacc2e1e5",
+    "benchmark": "gsm8k",
+    "source_index": 129,
+    "source_chars": 245,
+    "max_tokens": 600,
+    "prompt_sha256": "e88d59eaff1538f589cfdb4c99bbedde6a07bf492431d7cdc248bb79b9420943",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "10000",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-dd35d224b8d21095",
+    "benchmark": "gsm8k",
+    "source_index": 336,
+    "source_chars": 190,
+    "max_tokens": 600,
+    "prompt_sha256": "f016a1311636c69cd462519934a5623d06df89d612ea542cee1892885bbfde3a",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "72",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-92f13e9ce8d824bd",
+    "benchmark": "gsm8k",
+    "source_index": 1276,
+    "source_chars": 246,
+    "max_tokens": 600,
+    "prompt_sha256": "d9bcd11ebf9e9fa3d0040271dbe6eadbb9611ae0efe5caf698a93bb7816ea439",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "70",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-5034049daf9bbd9a",
+    "benchmark": "gsm8k",
+    "source_index": 66,
+    "source_chars": 273,
+    "max_tokens": 600,
+    "prompt_sha256": "936d97299796e9872a773c1c65cc359b17f1a0bbfb4da0d639a23b8f72cac091",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "48",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-94cb0749537c45eb",
+    "benchmark": "gsm8k",
+    "source_index": 1076,
+    "source_chars": 142,
+    "max_tokens": 600,
+    "prompt_sha256": "9a0643fd7e7d1ed156ff4ebaa0709cd5fc12b9442f126773b3031f4d80faa63f",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "162",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-e6f58d148c1c6510",
+    "benchmark": "gsm8k",
+    "source_index": 89,
+    "source_chars": 193,
+    "max_tokens": 600,
+    "prompt_sha256": "c106e0ff057d9c5f9b90c90e6de8278a537d038b613cd0e76dcfc1d0c5c1e7e7",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "24",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-01875260af6c147f",
+    "benchmark": "gsm8k",
+    "source_index": 4,
+    "source_chars": 471,
+    "max_tokens": 600,
+    "prompt_sha256": "e037831d0be2a6b1ec57e005148546cd8e079535dc2dafa2e920dd817c21d27b",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "20",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-139894987fc42abc",
+    "benchmark": "gsm8k",
+    "source_index": 827,
+    "source_chars": 323,
+    "max_tokens": 600,
+    "prompt_sha256": "da667566e2b93fcc5ec921b6d7bb7ff29b24f58ab2c660e2a4e26fdb25772961",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "11",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-7db56800c7c8740d",
+    "benchmark": "gsm8k",
+    "source_index": 740,
+    "source_chars": 271,
+    "max_tokens": 600,
+    "prompt_sha256": "0571e39e843b93c532e302bc916260cb5247ea22b87b87861c7d68f179bec024",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "25",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-d4a4b6f3fc7c2d74",
+    "benchmark": "gsm8k",
+    "source_index": 1116,
+    "source_chars": 183,
+    "max_tokens": 600,
+    "prompt_sha256": "ac5b70994eaabd7fec322590bb3bd8b20f0bc7f26d5a6234d9e317a0e6c3647c",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "60",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-f312e630be5314e2",
+    "benchmark": "gsm8k",
+    "source_index": 839,
+    "source_chars": 149,
+    "max_tokens": 600,
+    "prompt_sha256": "70af99c030719d907df5c4c9cc7c2fc7bbfd433e075ac0707cd525757f98481c",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "2",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-a5630ebd69be04dc",
+    "benchmark": "gsm8k",
+    "source_index": 1097,
+    "source_chars": 226,
+    "max_tokens": 600,
+    "prompt_sha256": "9e4824e5407a12d74a54fff200a8e35ff8571edc9bd1d503b221cc54bd5ddeec",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "480",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-a0d1418a89e3e46d",
+    "benchmark": "gsm8k",
+    "source_index": 829,
+    "source_chars": 321,
+    "max_tokens": 600,
+    "prompt_sha256": "6630855eba5c0af3ac6a3c74a69624000993f11911313faca0a84d416beff6c7",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "14000",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-547308378111e678",
+    "benchmark": "gsm8k",
+    "source_index": 1114,
+    "source_chars": 142,
+    "max_tokens": 600,
+    "prompt_sha256": "01f8ae22f43c25e71d48a7377b798543ebd58974d36877acffad1ee50fb7be76",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "8",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-4fd86c912f7f09ed",
+    "benchmark": "gsm8k",
+    "source_index": 1137,
+    "source_chars": 337,
+    "max_tokens": 600,
+    "prompt_sha256": "2f7cf279fd2949140ca0d3f1457f39a102514fcd8889e4edc15c5cd416d8347d",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "68",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-f098bdbb467313a2",
+    "benchmark": "gsm8k",
+    "source_index": 1302,
+    "source_chars": 269,
+    "max_tokens": 600,
+    "prompt_sha256": "802912654dd796efdbd5e3ce16e81d6da38918b4e713d1d8cbaa0ca43ed1c8e9",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "72",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-32e0c502203f95d8",
+    "benchmark": "gsm8k",
+    "source_index": 845,
+    "source_chars": 192,
+    "max_tokens": 600,
+    "prompt_sha256": "0e6bfdc9e99254db1367a6029676bc0f5afa5790811f07781d90419e9c4bdcdf",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "12",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "mmlu-b25e223fefe57373",
+    "benchmark": "mmlu",
+    "source_index": 10075,
+    "source_chars": 54,
+    "max_tokens": 32,
+    "prompt_sha256": "81d0afee2ae221ba06694c9e3d9d0536896f82290430ae7d553220a68141733f",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "miscellaneous"
+    }
+  },
+  {
+    "case_id": "mmlu-33ce0e1a00fe9af5",
+    "benchmark": "mmlu",
+    "source_index": 671,
+    "source_chars": 61,
+    "max_tokens": 32,
+    "prompt_sha256": "171bdfebd438152d7f31391468880d04ed7b2fb36bbba528d1cd615ce4f516a7",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "sociology"
+    }
+  },
+  {
+    "case_id": "mmlu-c2b7749084601038",
+    "benchmark": "mmlu",
+    "source_index": 3605,
+    "source_chars": 183,
+    "max_tokens": 32,
+    "prompt_sha256": "7c8f1579fd5ba3fdc4c374ba9076970566c14fe277a05e42b815d7681a3d261a",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_psychology"
+    }
+  },
+  {
+    "case_id": "mmlu-c321fd1f22ccf5d6",
+    "benchmark": "mmlu",
+    "source_index": 5232,
+    "source_chars": 148,
+    "max_tokens": 32,
+    "prompt_sha256": "fe6c7dbc039b00d5556b90d24773de900baaf21cadc70e7bdbcfd0c06d5bd790",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_chemistry"
+    }
+  },
+  {
+    "case_id": "mmlu-c078c72f300a64b2",
+    "benchmark": "mmlu",
+    "source_index": 13825,
+    "source_chars": 96,
+    "max_tokens": 32,
+    "prompt_sha256": "ba48ce6ea37f204c2a3b7679f74196db8ce8cf2d194936583e19f41dbe9c5c74",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "prehistory"
+    }
+  },
+  {
+    "case_id": "mmlu-7a6fc59893334eb2",
+    "benchmark": "mmlu",
+    "source_index": 13202,
+    "source_chars": 343,
+    "max_tokens": 32,
+    "prompt_sha256": "92b09f4b783320728dc00934b6aba279e2fac213025dfe61ad64b39a75253103",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "moral_scenarios"
+    }
+  },
+  {
+    "case_id": "mmlu-4b14e7b3a0a59072",
+    "benchmark": "mmlu",
+    "source_index": 11362,
+    "source_chars": 71,
+    "max_tokens": 32,
+    "prompt_sha256": "f31b296d3319cc38f690115d492dce2428a01bd6a36328462eea73bc7474423c",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "college_physics"
+    }
+  },
+  {
+    "case_id": "mmlu-277dad2a1acb60bc",
+    "benchmark": "mmlu",
+    "source_index": 246,
+    "source_chars": 74,
+    "max_tokens": 32,
+    "prompt_sha256": "c8b4333c693b693c63914d476c02822dc702cc57275ca81b49a9e1697d32abdd",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "security_studies"
+    }
+  },
+  {
+    "case_id": "mmlu-43bf7a5d5d123937",
+    "benchmark": "mmlu",
+    "source_index": 3367,
+    "source_chars": 92,
+    "max_tokens": 32,
+    "prompt_sha256": "2e4d818c52444ea7539974635bbcf6097a7306fb6a236a9ffe8404846c4f2a1c",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "jurisprudence"
+    }
+  },
+  {
+    "case_id": "mmlu-d08d9b719d32bd08",
+    "benchmark": "mmlu",
+    "source_index": 9333,
+    "source_chars": 888,
+    "max_tokens": 32,
+    "prompt_sha256": "79de9253a6e6add3259a9110109a77a3d6f88f15bddf5493460480cad01299a7",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_world_history"
+    }
+  },
+  {
+    "case_id": "mmlu-7b051ce5a3932a93",
+    "benchmark": "mmlu",
+    "source_index": 478,
+    "source_chars": 84,
+    "max_tokens": 32,
+    "prompt_sha256": "0b6a11df8ab6118a25a70b46adc79a45014bcaa90e2ed35ff65e5321685dfcf3",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "global_facts"
+    }
+  },
+  {
+    "case_id": "mmlu-d9b21e30ac1d79eb",
+    "benchmark": "mmlu",
+    "source_index": 4865,
+    "source_chars": 97,
+    "max_tokens": 32,
+    "prompt_sha256": "7f252248e427ccc680382502fedc0a543baa33ce23ad8801881c4860b6ea9c5f",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "philosophy"
+    }
+  },
+  {
+    "case_id": "mmlu-e49423ffec227cb1",
+    "benchmark": "mmlu",
+    "source_index": 10621,
+    "source_chars": 91,
+    "max_tokens": 32,
+    "prompt_sha256": "db6645f5b761ce071a185ca3e90284d8426996bcc63e7159a2668681c79d975f",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_microeconomics"
+    }
+  },
+  {
+    "case_id": "mmlu-3545d76adfccb17c",
+    "benchmark": "mmlu",
+    "source_index": 3428,
+    "source_chars": 103,
+    "max_tokens": 32,
+    "prompt_sha256": "e2ccbe09e1db8860e9c039e18d09f77712b7aad5504c7058233b8d1ef3227a61",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "jurisprudence"
+    }
+  },
+  {
+    "case_id": "mmlu-e58d642dc2836de4",
+    "benchmark": "mmlu",
+    "source_index": 11339,
+    "source_chars": 185,
+    "max_tokens": 32,
+    "prompt_sha256": "e36af3cb5ae6a637f956b80fb3d6c3bec16efd3860a6d081ef888d2838b445c0",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "formal_logic"
+    }
+  },
+  {
+    "case_id": "mmlu-604cbfbe71957543",
+    "benchmark": "mmlu",
+    "source_index": 561,
+    "source_chars": 48,
+    "max_tokens": 32,
+    "prompt_sha256": "4cb86b4bd99eac46ec8e37ba3577f89eb2ba801aed02cce5383cb4c662d8b346",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "sociology"
+    }
+  },
+  {
+    "case_id": "mmlu-bf5ccfd140ae917a",
+    "benchmark": "mmlu",
+    "source_index": 4756,
+    "source_chars": 42,
+    "max_tokens": 32,
+    "prompt_sha256": "49b52ab0b29e6de654d167162b388f787cea848c64ee254376d13696192053f9",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "philosophy"
+    }
+  },
+  {
+    "case_id": "mmlu-a33880cdc05902aa",
+    "benchmark": "mmlu",
+    "source_index": 3784,
+    "source_chars": 193,
+    "max_tokens": 32,
+    "prompt_sha256": "cdf2d180c43021842be4cf38026ce6f59a5ab38258813bd70855c4e35130e5b8",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_psychology"
+    }
+  },
+  {
+    "case_id": "mmlu-97e4f4ae49455440",
+    "benchmark": "mmlu",
+    "source_index": 9005,
+    "source_chars": 35,
+    "max_tokens": 32,
+    "prompt_sha256": "e4968deb47b494a201cb874264d4b2a0708897b05b55ff289172fbb4d9db808f",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "moral_disputes"
+    }
+  },
+  {
+    "case_id": "mmlu-00b2a7d11f30ac78",
+    "benchmark": "mmlu",
+    "source_index": 1036,
+    "source_chars": 185,
+    "max_tokens": 32,
+    "prompt_sha256": "41ba866df9b1e0a19130129ea874d1617d4d51d8bd0cbcecebec335ad588ecc1",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "college_biology"
+    }
+  },
+  {
+    "case_id": "mmlu-08cf658866704572",
+    "benchmark": "mmlu",
+    "source_index": 797,
+    "source_chars": 848,
+    "max_tokens": 32,
+    "prompt_sha256": "070c81b95b13de5bba461f8f906ff7ef2afc73f2c14dcb0245b712193faea05a",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_european_history"
+    }
+  },
+  {
+    "case_id": "mmlu-c108063021591a18",
+    "benchmark": "mmlu",
+    "source_index": 7346,
+    "source_chars": 805,
+    "max_tokens": 32,
+    "prompt_sha256": "160833dcc7a319219bffca5b0b7fd47af6c92702c023028cdd46e4aae704513d",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_law"
+    }
+  },
+  {
+    "case_id": "mmlu-d7ebf5ab48c9437b",
+    "benchmark": "mmlu",
+    "source_index": 1958,
+    "source_chars": 153,
+    "max_tokens": 32,
+    "prompt_sha256": "6ffb0d97ea1a2f5ce03c0f65d21886cd16c44913d6fdc12faa8a3245983090bf",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "logical_fallacies"
+    }
+  },
+  {
+    "case_id": "mmlu-96f5cc8444e0c4d7",
+    "benchmark": "mmlu",
+    "source_index": 5530,
+    "source_chars": 73,
+    "max_tokens": 32,
+    "prompt_sha256": "1e0661c403615ade26855776fcf8ef3840a9906b6356145682f61f8855cf4910",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "human_aging"
+    }
+  },
+  {
+    "case_id": "gpqa_diamond-2a82cb7e153464c6",
+    "benchmark": "gpqa_diamond",
+    "source_index": 77,
+    "source_chars": 833,
+    "max_tokens": 32,
+    "prompt_sha256": "637c4365dffba2a4516f026e85b5c7d523375d4c84f5923c176e7dcd37f75db7",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-fad225be5832ce40",
+    "benchmark": "gpqa_diamond",
+    "source_index": 67,
+    "source_chars": 1147,
+    "max_tokens": 32,
+    "prompt_sha256": "66af2452b0bc898c424bf52db7122460a41ebf093175c9ab69b41b9c8d619b3e",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-739042fe56fdaf40",
+    "benchmark": "gpqa_diamond",
+    "source_index": 29,
+    "source_chars": 993,
+    "max_tokens": 32,
+    "prompt_sha256": "ffd08e06e58fdf34ac899416d7cbdc96108d15e73af827ed7f0e8f2c88ac11b9",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-bb5610f4eed3382f",
+    "benchmark": "gpqa_diamond",
+    "source_index": 10,
+    "source_chars": 956,
+    "max_tokens": 32,
+    "prompt_sha256": "8632c16f822de6e02803ba364589959f98aaa27b584162b9935bc434679d415f",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-ae8aef7b0c4b1827",
+    "benchmark": "gpqa_diamond",
+    "source_index": 52,
+    "source_chars": 508,
+    "max_tokens": 32,
+    "prompt_sha256": "c14ceceed7126990ceb8799b295715732685381373792f175900671bd4468f34",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-555820c4c886e074",
+    "benchmark": "gpqa_diamond",
+    "source_index": 22,
+    "source_chars": 801,
+    "max_tokens": 32,
+    "prompt_sha256": "91f6adaacb41471dab62bddd902ee5ff5cea0798d6c29f9c385a9716d049918e",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-2bbddbd87ace012d",
+    "benchmark": "gpqa_diamond",
+    "source_index": 37,
+    "source_chars": 487,
+    "max_tokens": 32,
+    "prompt_sha256": "d9d09c29ad5577078ad5446e4e3ed15605f29e2cd52133acec6babb89614d186",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-bf7e15e22fe7c4c8",
+    "benchmark": "gpqa_diamond",
+    "source_index": 134,
+    "source_chars": 119,
+    "max_tokens": 32,
+    "prompt_sha256": "8e5e0f47d9ad5d5425e5d92763e4e379fbe79a971c0cea43066ba5be5fff54dc",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-50d4ea5db47f15e4",
+    "benchmark": "gpqa_diamond",
+    "source_index": 196,
+    "source_chars": 1094,
+    "max_tokens": 32,
+    "prompt_sha256": "91685bfffbb9eb824403a4d412d39198b888d7730122a62f6170143d03f7aeb6",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-3905ac72abab6464",
+    "benchmark": "gpqa_diamond",
+    "source_index": 14,
+    "source_chars": 389,
+    "max_tokens": 32,
+    "prompt_sha256": "b15db208225555d414324cd374582f5e2dd5e33aa2ff00977040dfb2fc8da755",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-acbbcfbd0ea75aa4",
+    "benchmark": "gpqa_diamond",
+    "source_index": 64,
+    "source_chars": 747,
+    "max_tokens": 32,
+    "prompt_sha256": "47cf18971717c386a035405b8b6a5c41e8172addfb40fcd1f973f8c67728ceba",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-3293287e0fcaeddd",
+    "benchmark": "gpqa_diamond",
+    "source_index": 151,
+    "source_chars": 412,
+    "max_tokens": 32,
+    "prompt_sha256": "c8664d046f198eceb7fad0645568c380b5437a46da627504d5a37156936dcc4b",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-672a9d91fe8fa3dc",
+    "benchmark": "gpqa_diamond",
+    "source_index": 75,
+    "source_chars": 332,
+    "max_tokens": 32,
+    "prompt_sha256": "a23725a7dcd63240769928599538b68fa22a9ce373cf5014d76e731b5bd043d3",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-c45c40b68a631bc9",
+    "benchmark": "gpqa_diamond",
+    "source_index": 50,
+    "source_chars": 361,
+    "max_tokens": 32,
+    "prompt_sha256": "81973f4b191ca9a9c6bb6ec19c5b420927730d8c59f682535b8a0d536efa9193",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-6f1a477099a292ee",
+    "benchmark": "gpqa_diamond",
+    "source_index": 2,
+    "source_chars": 652,
+    "max_tokens": 32,
+    "prompt_sha256": "00a39f745753783e269d486a94d2c744bdd26a3262bd5ec1b837cfacee08308e",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-df2a6fe182615556",
+    "benchmark": "gpqa_diamond",
+    "source_index": 130,
+    "source_chars": 604,
+    "max_tokens": 32,
+    "prompt_sha256": "2a3b2c10cd6e97211919b0e33f98ba122c400613bc253eebe002b1079e01f9a0",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-a09fcb13a92c0c5d",
+    "benchmark": "gpqa_diamond",
+    "source_index": 173,
+    "source_chars": 378,
+    "max_tokens": 32,
+    "prompt_sha256": "8c390e8493fd5dff4073286f2153b0092ba2fab32fa90da34344face0c7f46c5",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-5a4ecb790ab5c440",
+    "benchmark": "gpqa_diamond",
+    "source_index": 43,
+    "source_chars": 317,
+    "max_tokens": 32,
+    "prompt_sha256": "5b0a29f56a47fe197838250a018c87f0f8805e9251545589788f8666e3a8466b",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-a4b52a6a994beeca",
+    "benchmark": "gpqa_diamond",
+    "source_index": 17,
+    "source_chars": 144,
+    "max_tokens": 32,
+    "prompt_sha256": "244a11c997ce17cc0890452d353e8814449da9db9f6dac35406ac0540b6d3873",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-fb4b1511736ae94f",
+    "benchmark": "gpqa_diamond",
+    "source_index": 190,
+    "source_chars": 406,
+    "max_tokens": 32,
+    "prompt_sha256": "82001fe515673c8eab0117cf1b7a8f364703f4750923f56fbf51c90b47573fd6",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-2072490bf9a40a66",
+    "benchmark": "gpqa_diamond",
+    "source_index": 161,
+    "source_chars": 641,
+    "max_tokens": 32,
+    "prompt_sha256": "75b45f775907a0f413b9f08b088c719176c8b383e296adbf2ccdd4d9d19fed28",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-a572ba2c97c0b51b",
+    "benchmark": "gpqa_diamond",
+    "source_index": 45,
+    "source_chars": 232,
+    "max_tokens": 32,
+    "prompt_sha256": "e4dcb884cabb972c8d208c8c3cdfd403662578877f17d8ff88ab509c528622cc",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-c446171a7700912a",
+    "benchmark": "gpqa_diamond",
+    "source_index": 33,
+    "source_chars": 950,
+    "max_tokens": 32,
+    "prompt_sha256": "6cdbe731b29a0655ed8974c1faff2e74fd3580ffd856c37a06a9b7e2f0c23af1",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-262486d11fe7067d",
+    "benchmark": "gpqa_diamond",
+    "source_index": 197,
+    "source_chars": 275,
+    "max_tokens": 32,
+    "prompt_sha256": "dcdf388c75064f61f7cf3f404a4ca48710c40981be3835ccf814eb143e54b61d",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  }
+]

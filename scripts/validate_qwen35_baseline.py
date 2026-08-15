@@ -16,14 +16,14 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--manifest",
-        default="configs/baselines/qwen35_local_v4.yaml",
+        default="configs/baselines/qwen35_local_v5.yaml",
     )
     parser.add_argument("--dataset-root", default="../../datasets")
     parser.add_argument("--tokenizer", default="../../models/Qwen3.5-4B")
     parser.add_argument("--context-limit", type=int, default=1024)
     parser.add_argument(
         "--case-manifest",
-        default="configs/generated/qwen35_local_v4_cases.json",
+        default="configs/generated/qwen35_local_v5_cases.json",
     )
     args = parser.parse_args()
 
@@ -42,12 +42,12 @@ def main() -> None:
         raise SystemExit("case ids are not unique")
 
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, local_files_only=True)
-    lengths: list[int] = []
-    by_benchmark: dict[str, list[int]] = {}
+    totals: list[int] = []
+    by_benchmark: dict[str, dict[str, list[int]]] = {}
     for case in cases:
         text = tokenizer.apply_chat_template(
             [
-                {"role": "system", "content": manifest.system_prompt},
+                {"role": "system", "content": case.system_prompt},
                 {"role": "user", "content": case.prompt},
             ],
             tokenize=False,
@@ -55,28 +55,42 @@ def main() -> None:
             **manifest.chat_template_kwargs,
         )
         length = len(tokenizer.encode(text))
-        lengths.append(length)
-        by_benchmark.setdefault(case.benchmark, []).append(length)
+        totals.append(length + case.max_tokens)
+        metrics = by_benchmark.setdefault(
+            case.benchmark,
+            {"input_tokens": [], "output_tokens": [], "total_tokens": []},
+        )
+        metrics["input_tokens"].append(length)
+        metrics["output_tokens"].append(case.max_tokens)
+        metrics["total_tokens"].append(length + case.max_tokens)
 
-    lengths.sort()
+    input_lengths = sorted(
+        length
+        for metrics in by_benchmark.values()
+        for length in metrics["input_tokens"]
+    )
     report = {
         "schema_version": "nano_harness_baseline_validation_v1",
         "suite_id": manifest.suite_id,
         "cases": len(cases),
         "counts": dict(sorted(counts.items())),
         "input_tokens": {
-            "min": min(lengths),
-            "p50": lengths[len(lengths) // 2],
-            "p95": lengths[int(len(lengths) * 0.95) - 1],
-            "max": max(lengths),
+            "min": min(input_lengths),
+            "p50": input_lengths[len(input_lengths) // 2],
+            "p95": input_lengths[int(len(input_lengths) * 0.95) - 1],
+            "max": max(input_lengths),
         },
-        "max_output_tokens": manifest.max_tokens,
         "chat_template_kwargs": manifest.chat_template_kwargs,
-        "max_total_tokens": max(lengths) + manifest.max_tokens,
+        "max_total_tokens": max(totals),
         "context_limit": args.context_limit,
         "by_benchmark": {
-            name: {"min": min(values), "max": max(values)}
-            for name, values in sorted(by_benchmark.items())
+            name: {
+                "input_min": min(metrics["input_tokens"]),
+                "input_max": max(metrics["input_tokens"]),
+                "output_max": max(metrics["output_tokens"]),
+                "total_max": max(metrics["total_tokens"]),
+            }
+            for name, metrics in sorted(by_benchmark.items())
         },
     }
     print(json.dumps(report, indent=2, sort_keys=True))
