@@ -68,3 +68,37 @@ PYTHONPATH=. ../.venv/bin/python -m nano_harness.cli baseline \
   --output \
     results/harness/qwen35-v11-full-matched-adapter-v1/candidate/cases.jsonl
 ```
+
+## Result
+
+V11 completes 211/211 cases with zero API errors:
+
+- GSM8K: 89/96, versus base 4B 90/96 and 9B 89/96;
+- MMLU: 66/96, versus base 4B 67/96 and 9B 58/96;
+- GPQA-Diamond: 7/19, versus base 4B 6/19 and 9B 4/19;
+- micro: 162/211, versus base 4B 163/211 and 9B 151/211;
+- macro: 0.6610, versus base 4B 0.6504 and 9B 0.5806.
+
+Against base 4B, micro delta is -0.0047 with paired 95% CI
+[-0.0284, +0.0190] and exact McNemar p=1.0. The aggregate difference is not
+significant, but GSM8K and MMLU each miss the frozen task non-regression gate
+by one case.
+
+Against 9B, micro delta is +0.0521, but paired 95% CI
+[-0.0095, +0.1137] crosses zero and exact McNemar p=0.135. The 11-case point
+improvement is not statistically supported and must not be described as
+significant superiority.
+
+Candidate GSM8K has two parse failures, both caused by length truncation under
+the frozen 600-token budget. Official scores remain unchanged. All candidate,
+base 4B, and 9B case, prompt, stage-input, model, strategy, and output-budget
+audits pass.
+
+Reject v11 for promotion, merge, scale-up, and RL. Preserve the GPQA gain,
+local family improvement, and format stability. Any next training data may use
+only abstract failure families, never benchmark or canary row payloads.
+
+Public result:
+
+- `docs/results/v11_full_matched_adapter_v1.md`;
+- `docs/results/v11_full_matched_adapter_v1.public.json`.
