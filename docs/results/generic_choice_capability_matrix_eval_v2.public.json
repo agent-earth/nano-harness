@@ -1,0 +1,277 @@
+{
+  "arms": {
+    "four_b_constrained": {
+      "accuracy": 0.59375,
+      "ambiguity_cases": 16,
+      "by_family": {
+        "duplicate_option_ambiguity": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "explicit_average_exact": {
+          "cases": 8,
+          "correct": 2,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "explicit_average_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "host_count_exact": {
+          "cases": 8,
+          "correct": 4,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "sequential_fraction_exact": {
+          "cases": 8,
+          "correct": 8,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "verbal_average_exact": {
+          "cases": 8,
+          "correct": 5,
+          "parseable": 8,
+          "scored_cases": 8
+        }
+      },
+      "cases": 48,
+      "correct": 19,
+      "parseable": 48,
+      "scored_cases": 32
+    },
+    "four_b_constrained_verified_executor": {
+      "accuracy": 0.78125,
+      "ambiguity_cases": 16,
+      "by_family": {
+        "duplicate_option_ambiguity": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "explicit_average_exact": {
+          "cases": 8,
+          "correct": 8,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "explicit_average_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "host_count_exact": {
+          "cases": 8,
+          "correct": 4,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "sequential_fraction_exact": {
+          "cases": 8,
+          "correct": 8,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "verbal_average_exact": {
+          "cases": 8,
+          "correct": 5,
+          "parseable": 8,
+          "scored_cases": 8
+        }
+      },
+      "cases": 48,
+      "correct": 25,
+      "parseable": 48,
+      "scored_cases": 32
+    },
+    "nine_b_constrained": {
+      "accuracy": 0.53125,
+      "ambiguity_cases": 16,
+      "by_family": {
+        "duplicate_option_ambiguity": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "explicit_average_exact": {
+          "cases": 8,
+          "correct": 1,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "explicit_average_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "host_count_exact": {
+          "cases": 8,
+          "correct": 4,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "sequential_fraction_exact": {
+          "cases": 8,
+          "correct": 8,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "verbal_average_exact": {
+          "cases": 8,
+          "correct": 4,
+          "parseable": 8,
+          "scored_cases": 8
+        }
+      },
+      "cases": 48,
+      "correct": 17,
+      "parseable": 48,
+      "scored_cases": 32
+    }
+  },
+  "comparisons": {
+    "executor_vs_four_b": {
+      "cases": 32,
+      "delta": 0.1875,
+      "left_only": 6,
+      "left_only_by_family": {
+        "explicit_average_exact": 6
+      },
+      "left_only_case_ids": [
+        "matrix-04cba53e856c3bfe63f6",
+        "matrix-52c9d9d61fe8685e44cb",
+        "matrix-6de34b7dd3226c3a7e04",
+        "matrix-81356e16bd9da08729e6",
+        "matrix-896602fdd05bc4571b17",
+        "matrix-a917035c3feeebebd45d"
+      ],
+      "mcnemar_exact_p": 0.03125,
+      "paired_bootstrap_95_ci": [
+        0.0625,
+        0.34375
+      ],
+      "right_only": 0,
+      "right_only_by_family": {},
+      "right_only_case_ids": []
+    },
+    "executor_vs_nine_b": {
+      "cases": 32,
+      "delta": 0.25,
+      "left_only": 8,
+      "left_only_by_family": {
+        "explicit_average_exact": 7,
+        "verbal_average_exact": 1
+      },
+      "left_only_case_ids": [
+        "matrix-04cba53e856c3bfe63f6",
+        "matrix-52c9d9d61fe8685e44cb",
+        "matrix-6de34b7dd3226c3a7e04",
+        "matrix-6fecec1b8447ee7e9637",
+        "matrix-7809dc1638fb0212b5e1",
+        "matrix-896602fdd05bc4571b17",
+        "matrix-925207edf9986d8fe299",
+        "matrix-a917035c3feeebebd45d"
+      ],
+      "mcnemar_exact_p": 0.0078125,
+      "paired_bootstrap_95_ci": [
+        0.09375,
+        0.40625
+      ],
+      "right_only": 0,
+      "right_only_by_family": {},
+      "right_only_case_ids": []
+    },
+    "four_b_vs_nine_b": {
+      "cases": 32,
+      "delta": 0.0625,
+      "left_only": 3,
+      "left_only_by_family": {
+        "explicit_average_exact": 2,
+        "verbal_average_exact": 1
+      },
+      "left_only_case_ids": [
+        "matrix-6fecec1b8447ee7e9637",
+        "matrix-7809dc1638fb0212b5e1",
+        "matrix-925207edf9986d8fe299"
+      ],
+      "mcnemar_exact_p": 0.625,
+      "paired_bootstrap_95_ci": [
+        -0.0625,
+        0.1875
+      ],
+      "right_only": 1,
+      "right_only_by_family": {
+        "explicit_average_exact": 1
+      },
+      "right_only_case_ids": [
+        "matrix-81356e16bd9da08729e6"
+      ]
+    }
+  },
+  "decision": {
+    "benchmark_superiority_claim_allowed": false,
+    "executor_significantly_exceeds_nine_b_on_matrix": true,
+    "executor_significantly_improves_over_four_b_direct": true,
+    "four_b_direct_significantly_exceeds_nine_b": false,
+    "independent_holdout_allowed": false,
+    "merge_allowed": false,
+    "next_action": "Preserve the verified executor and matrix evidence. Expand the fresh matrix with history-disjoint generic host-count and verbal-average verifier families before any new parser or training intervention; do not use matrix cases as training data.",
+    "rl_allowed": false,
+    "scale_allowed": false
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "independent_holdout_rows_loaded": false,
+    "independent_quality_claim_allowed": false,
+    "matrix_training_allowed": false,
+    "target_used_by_executor_parser": false,
+    "training_eligible_cases": 0,
+    "v1_nine_b_outputs_reused": false
+  },
+  "experiment_id": "generic-choice-capability-matrix-eval-v2",
+  "identity": {
+    "config_sha256": "47776628053eb2f3fa34e2a6cfc7b6682734a702a03aab8bff834c48d11d9c6c",
+    "four_b_model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "four_b_serving_receipt_sha256": "2549527942acfe53a1eb352453649a9ea3cc31d68bb9790c865553ee95c2f578",
+    "matrix_sha256": "5db7561b95f6b951ef7fb45293e24a39276b69b5b43e04c63712f8450e37b933",
+    "nine_b_model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+    "raw_result_sha256": "b9cc50b51bc6b9bd5c8b0d64bd72a138a7e3e97482a5a3ba891d589719e7f322",
+    "v1_public_report_sha256": "11787551bc9dfa49d6f0e7cdee9409fe359e555d7b0304909b023ba700f11e62"
+  },
+  "passed": true,
+  "pre_registration_revision": "52945f0",
+  "routing": {
+    "ambiguity_direct_parity": 16,
+    "ambiguity_overrides": 0,
+    "expected_route_matches": 48,
+    "fallbacks": 40,
+    "verified_overrides": 8
+  },
+  "schema_version": "nano_harness_public_choice_matrix_eval_v2",
+  "validation": {
+    "all_arms_parseable_48": true,
+    "ambiguity_parity_16": true,
+    "ambiguity_zero_overrides": true,
+    "executor_correct_25": true,
+    "executor_eight_wins_zero_losses_vs_nine": true,
+    "executor_six_fixes_zero_regressions_vs_four": true,
+    "executor_vs_nine_ci_positive": true,
+    "executor_vs_nine_mcnemar_below_005": true,
+    "expected_route_matches_48": true,
+    "four_b_correct_19": true,
+    "four_vs_nine_not_significant": true,
+    "nine_b_correct_17": true,
+    "training_eligible_zero": true
+  }
+}
