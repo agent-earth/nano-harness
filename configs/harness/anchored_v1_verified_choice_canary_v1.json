@@ -1,0 +1,19 @@
+{
+  "ambiguous_fallback": "reuse_direct_output",
+  "baseline_public_report_path": "docs/results/anchored_v1_regression_canary.public.json",
+  "baseline_public_report_sha256": "d84268672681583b3f4bbc4ed85abf6c7f59abf89cab2b7b56f916eb832a2cdf",
+  "baseline_raw_path": "results/harness/qwen35-anchored-v1-regression-canary/candidate/cases.jsonl",
+  "baseline_raw_sha256": "c42b266b234b3f77f9b22ff8f70e5f2c7de6503a9fa96282b7fcfa4522c74b91",
+  "case_manifest_path": "configs/generated/qwen35_adapter_regression_canary_v1_cases.json",
+  "case_manifest_sha256": "03122cb316732e006dd196ef886ca76796c54a2eefa5f94ef9554dd4b2013b53",
+  "dataset_root": "../../datasets",
+  "exact_option_match_required": true,
+  "experiment_id": "anchored-v1-verified-choice-canary-v1",
+  "local_pass_report_path": "docs/results/anchored_v1_verified_choice_executor_v1.public.json",
+  "local_pass_report_sha256": "f226f12956d3a72fdc3f6923a069c1786dbfa1e08496e4502eb2561a424009c2",
+  "manifest_path": "configs/harness/qwen35_adapter_regression_canary_v1.yaml",
+  "manifest_sha256": "e213985897e1da260c24e8f383e80d02a3f9c880a09f45e6cc2cc27f51dcf0f8",
+  "output_path": "results/harness/anchored-v1-verified-choice-canary-v1/candidate/result.json",
+  "parser_version": "explicit_two_expression_average_v1",
+  "schema_version": "nano_harness_verified_choice_canary_v1"
+}
