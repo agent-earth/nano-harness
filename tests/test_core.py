@@ -48,6 +48,9 @@ from nano_harness.choice_matrix_eval_v2 import (
 from nano_harness.choice_verifier_matrix_eval_v2 import (
     load_config as load_choice_verifier_matrix_eval_config,
 )
+from nano_harness.choice_exact_replication_eval_v3 import (
+    load_config as load_choice_exact_replication_eval_config,
+)
 from nano_harness.config import (
     BenchmarkConfig,
     HarnessConfig,
@@ -98,6 +101,26 @@ class CoreTests(unittest.TestCase):
             path.write_text(json.dumps(raw), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "parser_version"):
                 load_choice_verifier_matrix_eval_config(path)
+
+    def test_choice_exact_replication_config_is_frozen(self):
+        source = Path(
+            "configs/harness/generic_choice_exact_replication_eval_v3.json"
+        )
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "config.json"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            config = load_choice_exact_replication_eval_config(path)
+            self.assertEqual(config.scored_cases, 32)
+            self.assertEqual(config.minimum_executor_wins_over_nine_b, 6)
+            self.assertEqual(config.maximum_executor_losses_over_nine_b, 0)
+            self.assertEqual(config.significance_alpha, 0.05)
+            raw["minimum_executor_wins_over_nine_b"] = 5
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            with self.assertRaisesRegex(
+                ValueError, "minimum_executor_wins_over_nine_b"
+            ):
+                load_choice_exact_replication_eval_config(path)
 
     def test_verified_choice_v2_host_exact_and_ambiguity(self):
         exact = verify_choice_v2(
