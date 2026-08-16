@@ -72,3 +72,20 @@ PYTHONPATH=. ../.venv/bin/python scripts/validate_qwen35_baseline.py \
   --case-manifest configs/generated/qwen35_gsm8k_dev16_constrained_v1_cases.json
 PYTHONPATH=. ../.venv/bin/python -m pytest -q
 ```
+
+## Result
+
+All three arms score 91/96. The 4B direct and treatment predictions match on
+all 96 cases, with zero 4B parse failures, zero recovery calls, 1.000x token
+ratio, and zero API errors. The 9B direct arm has four parse failures. Against
+9B, 4B has two wins and two losses; delta is 0, paired 95% CI
+[-0.0417, +0.0417], and exact McNemar p=1.
+
+Dev16 fails the pre-registered promotion rule because recovery is again
+unobserved. Across dev15 and dev16, 144 fresh 4B direct cases have zero parse
+failures. Stop enlarging GSM8K development windows for this mechanism. Retain
+constrained recovery as an optional parse guard and return to a higher-leverage
+harness hypothesis.
+
+- [`docs/results/gsm8k_dev16_constrained_recovery_v1.md`](../results/gsm8k_dev16_constrained_recovery_v1.md)
+- [`docs/results/gsm8k_dev16_constrained_recovery_v1.public.json`](../results/gsm8k_dev16_constrained_recovery_v1.public.json)

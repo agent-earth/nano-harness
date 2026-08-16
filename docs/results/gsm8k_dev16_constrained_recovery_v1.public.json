@@ -1,0 +1,140 @@
+{
+  "artifacts": {
+    "four_b_direct_raw_sha256": "5300a96906bd43893af1b4aa5144a3c4e1a198ad356085b4589e5e7f894f38e4",
+    "four_b_treatment_raw_sha256": "49eccdab57a2ada4bd26df87833df1f442b6e437b924778eb588b01742cbaa92",
+    "nine_b_direct_raw_sha256": "3907143f3567d68d9b83dfd0f71684e0ac2260d3e9d430ffa3e4ebccfa7aee0f"
+  },
+  "code_revision": "3b7d835bd5acac1019867d7e37ace15cc39a7f32",
+  "contract_audits": {
+    "four_b_direct": {
+      "cases": 96,
+      "passed": true,
+      "stage_input_hashes_match": true
+    },
+    "four_b_treatment": {
+      "cases": 96,
+      "conditional_execution_matches": true,
+      "passed": true,
+      "protected_direct_matches_control": true,
+      "recovery_cases": [],
+      "recovery_regex_fullmatch": true,
+      "structured_outputs_match": true
+    },
+    "nine_b_direct": {
+      "cases": 96,
+      "passed": true,
+      "stage_input_hashes_match": true
+    }
+  },
+  "costs": {
+    "four_b_direct": {
+      "api_errors": 0,
+      "cases": 96,
+      "correct": 91,
+      "parse_failures": 0,
+      "recovery_calls": 0,
+      "recovery_truncations": 0,
+      "regex_matches": 0,
+      "total_tokens": 32430,
+      "wall_seconds": 809.4663030000002
+    },
+    "four_b_treatment": {
+      "api_errors": 0,
+      "cases": 96,
+      "correct": 91,
+      "parse_failures": 0,
+      "recovery_calls": 0,
+      "recovery_truncations": 0,
+      "regex_matches": 0,
+      "total_tokens": 32430,
+      "wall_seconds": 806.1798639999996
+    },
+    "nine_b_direct": {
+      "api_errors": 0,
+      "cases": 96,
+      "correct": 91,
+      "parse_failures": 4,
+      "recovery_calls": 0,
+      "recovery_truncations": 0,
+      "regex_matches": 0,
+      "total_tokens": 31735,
+      "wall_seconds": 763.638282
+    }
+  },
+  "decision": {
+    "accepted": false,
+    "all_recoveries_match_regex": true,
+    "at_least_one_recovery_win": false,
+    "next_experiment": "Stop enlarging GSM8K development windows; retain the validated mechanism as an optional no-op parse guard and return to higher-leverage harness hypotheses.",
+    "no_api_errors": true,
+    "parse_failures_reduced": false,
+    "recovery_triggered": false,
+    "token_ratio_below_1_2": true,
+    "zero_direct_only_losses": true
+  },
+  "experiment_id": "qwen35-gsm8k-dev16-constrained-recovery-v1",
+  "recovery_analysis": {
+    "parseable_direct_unchanged": true,
+    "recovery_cases": [],
+    "recovery_count": 0,
+    "recovery_wins": [],
+    "unresolved_recoveries": []
+  },
+  "schema_version": "nano_harness_public_gsm8k_dev_v1",
+  "token_ratio_vs_4b_direct": 1.0,
+  "versus_4b_direct": {
+    "baseline_accuracy": 0.9479166666666666,
+    "baseline_only_cases": [],
+    "baseline_parse_failures": [],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 35,
+    "candidate_accuracy": 0.9479166666666666,
+    "candidate_only_cases": [],
+    "candidate_parse_failures": [],
+    "delta": 0.0,
+    "mcnemar_exact_p": 1.0,
+    "paired_bootstrap_95_ci": [
+      0.0,
+      0.0
+    ],
+    "paired_counts": {
+      "baseline_only": 0,
+      "both_correct": 91,
+      "both_wrong": 5,
+      "candidate_only": 0
+    }
+  },
+  "versus_9b_direct": {
+    "baseline_accuracy": 0.9479166666666666,
+    "baseline_only_cases": [
+      "gsm8k-193a80f2b4d81400",
+      "gsm8k-5d73d82d5cc1ff93"
+    ],
+    "baseline_parse_failures": [
+      "gsm8k-41241715b3dd1218",
+      "gsm8k-661c711a549d463d",
+      "gsm8k-6661641947ff80d4",
+      "gsm8k-92c99a410d1a454e"
+    ],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 35,
+    "candidate_accuracy": 0.9479166666666666,
+    "candidate_only_cases": [
+      "gsm8k-6661641947ff80d4",
+      "gsm8k-92c99a410d1a454e"
+    ],
+    "candidate_parse_failures": [],
+    "delta": 0.0,
+    "mcnemar_exact_p": 1.0,
+    "paired_bootstrap_95_ci": [
+      -0.041666666666666664,
+      0.041666666666666664
+    ],
+    "paired_counts": {
+      "baseline_only": 2,
+      "both_correct": 89,
+      "both_wrong": 3,
+      "candidate_only": 2
+    }
+  }
+}
