@@ -34,3 +34,19 @@ Promote only if:
 - token ratio versus direct is below 1.2x.
 
 Do not tune on dev14.
+
+## Result
+
+Short recovery, 4B direct, and 9B direct each score 45/48. Recovery triggers
+once and leaves that case unparseable; parseable direct outputs are unchanged.
+Token ratio is 1.014x.
+
+The recovery output calculates the correct four cups per row but spends all 64
+tokens explaining the calculation and truncates before `FINAL:`. Prompt-only
+answer suppression is insufficient.
+
+Dev14 fails. Fresh dev15 should keep conditional triggering and enforce a
+numeric `FINAL:` grammar through the serving API. Do not rescore dev14.
+
+- [`docs/results/gsm8k_dev14_short_recovery_v1.md`](../results/gsm8k_dev14_short_recovery_v1.md)
+- [`docs/results/gsm8k_dev14_short_recovery_v1.public.json`](../results/gsm8k_dev14_short_recovery_v1.public.json)
