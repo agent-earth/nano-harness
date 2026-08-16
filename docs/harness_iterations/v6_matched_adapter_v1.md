@@ -99,3 +99,32 @@ PYTHONPATH=. ../.venv/bin/python -m nano_harness.cli baseline \
   --base-url http://127.0.0.1:8003/v1 \
   --output results/harness/qwen35-v6-matched-adapter-v1/candidate/cases.jsonl
 ```
+
+## Result
+
+The v6 adapter fails benchmark non-regression:
+
+- GSM8K: 73/96 versus base 4B 90/96 and 9B 89/96;
+- MMLU: 68/96 versus base 4B 67/96 and 9B 58/96;
+- GPQA-Diamond: 4/19 versus base 4B 6/19 and 9B 4/19;
+- micro: 145/211 versus base 4B 163/211 and 9B 151/211;
+- macro: 0.5598 versus base 4B 0.6504 and 9B 0.5806.
+
+Against base 4B, paired micro delta is -0.0853, 95% CI
+[-0.1280, -0.0474], exact McNemar p=0.000121. There are 20 base-only
+wins and 2 adapter-only wins. GSM8K regresses significantly by 17 cases;
+GPQA regresses by 2; MMLU improves by 1.
+
+Candidate GSM8K has 9 official parse failures. A non-scoring inline-final
+diagnostic finds 8 contain the correct numeric value but violate the required
+standalone `FINAL:` line; 14 other GSM8K failures are parseable but numerically
+wrong. Official scores are unchanged.
+
+All 211 cases complete with zero API errors. Case, prompt, stage-input, budget,
+scorer, source-result, adapter-namespace, logits, and known-case serving audits
+pass. The adapter is rejected for merge, scale-up, and RL.
+
+Public result:
+
+- `docs/results/v6_matched_adapter_v1.md`;
+- `docs/results/v6_matched_adapter_v1.public.json`.
