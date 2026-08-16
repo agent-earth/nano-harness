@@ -38,15 +38,10 @@ def format_diagnostic() -> dict:
         if match is None:
             other.append(row["case_id"])
             continue
-        record = {
-            "case_id": row["case_id"],
-            "letter": match.group(1).upper(),
-            "expected": row["expected"],
-        }
-        if record["letter"] == record["expected"]:
-            matching.append(record)
+        if match.group(1).upper() == row["expected"]:
+            matching.append(row["case_id"])
         else:
-            mismatching.append(record)
+            mismatching.append(row["case_id"])
     official_correct = sum(
         float(row["score"])
         for row in records.values()
@@ -63,8 +58,8 @@ def format_diagnostic() -> dict:
         "other_shapes": other,
         "letters_matching_reference": len(matching),
         "letters_mismatching_reference": len(mismatching),
-        "matching_cases": matching,
-        "mismatching_cases": mismatching,
+        "matching_case_ids": matching,
+        "mismatching_case_ids": mismatching,
         "official_nine_b_mmlu_correct": int(official_correct),
         "hypothetical_correct_if_colon_normalized": int(
             official_correct + len(matching)

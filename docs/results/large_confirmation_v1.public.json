@@ -3,7 +3,7 @@
     "four_b_raw_sha256": "977a99e978936fbcfc99d45d859a8324746215b3ba518ed3bc5c4a2b5990b33e",
     "nine_b_raw_sha256": "07b442f620245379444f02d633c76502032df84dfe5ad0b74d88996d3c0103bd"
   },
-  "code_revision": "8776f7b610f8cbb9e8c2716f7cd87b4e828978cd",
+  "code_revision": "1afd65fe90227daac57b355048cbf6c34a1dedcc",
   "comparison": {
     "baseline_macro_accuracy": 0.787109375,
     "baseline_model": "qwen3.5-9b",
@@ -445,294 +445,66 @@
     "hypothetical_correct_if_colon_normalized": 191,
     "letters_matching_reference": 29,
     "letters_mismatching_reference": 28,
-    "matching_cases": [
-      {
-        "case_id": "mmlu-bdf7c806efbda60f",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-05145630f58e9856",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-a28fa0456247260c",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-39e89e2b0dc7e8ed",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-2edbe1d19a9a6eac",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-be7687404bc4232c",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-c59d81dbc6d7f652",
-        "expected": "B",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-33963b673c29d48f",
-        "expected": "D",
-        "letter": "D"
-      },
-      {
-        "case_id": "mmlu-0c296c32dc15e69e",
-        "expected": "B",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-f14facfed42ab93e",
-        "expected": "A",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-b5fe4a1db47f8554",
-        "expected": "A",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-68cac94213e9a3ba",
-        "expected": "B",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-ddb2aa2aa0d70fc3",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-df1b68eb2782a022",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-77e86438093abe5c",
-        "expected": "A",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-e79c2e03568f4bf2",
-        "expected": "A",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-5fdc83393f0dd40f",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-248cdfaed7557efc",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-7466a9a75664b2d3",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-2844392f24ffeffd",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-61f77e015d3d90c7",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-e184f41e9a65b102",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-14e35b3e238fe7c4",
-        "expected": "A",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-77949347072019fc",
-        "expected": "C",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-d42e310f14cbb81d",
-        "expected": "A",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-0dfbefd024abf8a9",
-        "expected": "D",
-        "letter": "D"
-      },
-      {
-        "case_id": "mmlu-13b4e75cf3d225b1",
-        "expected": "A",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-1b1cb24095b411c8",
-        "expected": "A",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-323aa754e805735d",
-        "expected": "A",
-        "letter": "A"
-      }
+    "matching_case_ids": [
+      "mmlu-bdf7c806efbda60f",
+      "mmlu-05145630f58e9856",
+      "mmlu-a28fa0456247260c",
+      "mmlu-39e89e2b0dc7e8ed",
+      "mmlu-2edbe1d19a9a6eac",
+      "mmlu-be7687404bc4232c",
+      "mmlu-c59d81dbc6d7f652",
+      "mmlu-33963b673c29d48f",
+      "mmlu-0c296c32dc15e69e",
+      "mmlu-f14facfed42ab93e",
+      "mmlu-b5fe4a1db47f8554",
+      "mmlu-68cac94213e9a3ba",
+      "mmlu-ddb2aa2aa0d70fc3",
+      "mmlu-df1b68eb2782a022",
+      "mmlu-77e86438093abe5c",
+      "mmlu-e79c2e03568f4bf2",
+      "mmlu-5fdc83393f0dd40f",
+      "mmlu-248cdfaed7557efc",
+      "mmlu-7466a9a75664b2d3",
+      "mmlu-2844392f24ffeffd",
+      "mmlu-61f77e015d3d90c7",
+      "mmlu-e184f41e9a65b102",
+      "mmlu-14e35b3e238fe7c4",
+      "mmlu-77949347072019fc",
+      "mmlu-d42e310f14cbb81d",
+      "mmlu-0dfbefd024abf8a9",
+      "mmlu-13b4e75cf3d225b1",
+      "mmlu-1b1cb24095b411c8",
+      "mmlu-323aa754e805735d"
     ],
-    "mismatching_cases": [
-      {
-        "case_id": "mmlu-7ba52a7b616f8388",
-        "expected": "C",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-05e37de43852418b",
-        "expected": "A",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-a5e6f5da799b3846",
-        "expected": "B",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-f06e48828c67004a",
-        "expected": "B",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-2ab1e5ad3d8ce37f",
-        "expected": "A",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-54cc52ea588c6f4e",
-        "expected": "C",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-1912778bd55ff594",
-        "expected": "B",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-6073221b04619415",
-        "expected": "A",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-41e9d75b3951c9e8",
-        "expected": "D",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-5462f6d2588a5339",
-        "expected": "A",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-69c453bb612206bd",
-        "expected": "D",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-bfbed8b472fc3d9d",
-        "expected": "A",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-b2919848f1924c26",
-        "expected": "C",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-94ee1b06d2ab7bfb",
-        "expected": "D",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-d4e292f15bad011d",
-        "expected": "D",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-7c970439b2bdf447",
-        "expected": "A",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-736fbd143add8d64",
-        "expected": "C",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-7cc9df7203b31c37",
-        "expected": "B",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-7099e1ac8065d6aa",
-        "expected": "B",
-        "letter": "A"
-      },
-      {
-        "case_id": "mmlu-9b979e7d461c6c63",
-        "expected": "D",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-cc23d2ccb2aab606",
-        "expected": "A",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-6e7bd92b2335da97",
-        "expected": "A",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-1a1e21de1eb1966f",
-        "expected": "B",
-        "letter": "D"
-      },
-      {
-        "case_id": "mmlu-9d4396221f372619",
-        "expected": "D",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-2565f71ecfc7b911",
-        "expected": "D",
-        "letter": "B"
-      },
-      {
-        "case_id": "mmlu-7ae6cc419dad7628",
-        "expected": "D",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-f82d4f32c7be33d8",
-        "expected": "D",
-        "letter": "C"
-      },
-      {
-        "case_id": "mmlu-b6129cadd0089034",
-        "expected": "A",
-        "letter": "B"
-      }
+    "mismatching_case_ids": [
+      "mmlu-7ba52a7b616f8388",
+      "mmlu-05e37de43852418b",
+      "mmlu-a5e6f5da799b3846",
+      "mmlu-f06e48828c67004a",
+      "mmlu-2ab1e5ad3d8ce37f",
+      "mmlu-54cc52ea588c6f4e",
+      "mmlu-1912778bd55ff594",
+      "mmlu-6073221b04619415",
+      "mmlu-41e9d75b3951c9e8",
+      "mmlu-5462f6d2588a5339",
+      "mmlu-69c453bb612206bd",
+      "mmlu-bfbed8b472fc3d9d",
+      "mmlu-b2919848f1924c26",
+      "mmlu-94ee1b06d2ab7bfb",
+      "mmlu-d4e292f15bad011d",
+      "mmlu-7c970439b2bdf447",
+      "mmlu-736fbd143add8d64",
+      "mmlu-7cc9df7203b31c37",
+      "mmlu-7099e1ac8065d6aa",
+      "mmlu-9b979e7d461c6c63",
+      "mmlu-cc23d2ccb2aab606",
+      "mmlu-6e7bd92b2335da97",
+      "mmlu-1a1e21de1eb1966f",
+      "mmlu-9d4396221f372619",
+      "mmlu-2565f71ecfc7b911",
+      "mmlu-7ae6cc419dad7628",
+      "mmlu-f82d4f32c7be33d8",
+      "mmlu-b6129cadd0089034"
     ],
     "official_nine_b_mmlu_correct": 162,
     "official_parse_failures": 57,
