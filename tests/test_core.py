@@ -19,6 +19,7 @@ from nano_harness.baseline import (
     _run_protected_math_gate_case,
     _run_protected_math_majority_case,
     _run_protected_math_recovery_case,
+    _run_protected_math_short_recovery_case,
     _strategy_for_case,
     build_case,
     compare_baselines,
@@ -1326,6 +1327,71 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(
             reply.usage,
             {"prompt_tokens": 30, "completion_tokens": 13},
+        )
+
+    def test_short_math_recovery_uses_answer_only_budget(self):
+        case = build_case(
+            "gsm8k",
+            "numeric_exact",
+            0,
+            {
+                "question": "What is 7 plus 5?",
+                "answer": "Compute 7 + 5 = 12.\n#### 12",
+            },
+            system_prompt="answer",
+            max_tokens=600,
+        )
+        direct_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="Reasoning without final",
+                    usage={"prompt_tokens": 10, "completion_tokens": 5},
+                    raw={"choices": [{"finish_reason": "length"}]},
+                )
+            ]
+        )
+        recovery_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: 12",
+                    usage={"prompt_tokens": 20, "completion_tokens": 4},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="short-recovery-test",
+            selection_seed="fixed",
+            system_prompt="answer",
+            max_tokens=600,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="protected_math_short_recovery",
+            benchmark_routing={},
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            second_solve_max_tokens=64,
+            option_evidence_max_tokens=96,
+            verifier_max_tokens=8,
+            normalize_bare_choice=False,
+            fallback_to_protected_on_parse_failure=False,
+            min_task_groups=1,
+            datasets=(),
+        )
+        reply, stages = _run_protected_math_short_recovery_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {600: direct_client, 64: recovery_client},
+        )
+        self.assertEqual(reply.content, "FINAL: 12")
+        self.assertEqual(stages["conditional_recovery"]["max_tokens"], 64)
+        prompt = recovery_client.calls[0]["messages"][-1]["content"]
+        self.assertIn("Do not show reasoning", prompt)
+        self.assertEqual(
+            stages["deterministic_selection"]["selection_reason"],
+            "short_recovery_prediction",
         )
 
     def test_baseline_manifest_filters_long_prompts_before_selection(self):

@@ -617,7 +617,7 @@ def main() -> None:
                 direct_input + case.max_tokens,
                 max(resolve_inputs) + manifest.second_solve_max_tokens,
             )
-        else:
+        elif selected_strategy == "protected_math_recovery":
             direct_text = tokenizer.apply_chat_template(
                 [
                     {"role": "system", "content": case.system_prompt},
@@ -642,6 +642,47 @@ def main() -> None:
                         "content": (
                             "Act as a recovery math solver. Produce a compact verified "
                             "derivation and a strict numeric final."
+                        ),
+                    },
+                    {"role": "user", "content": recovery_prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            recovery_input = len(tokenizer.encode(recovery_text))
+            length = max(direct_input, recovery_input)
+            output_tokens = max(
+                case.max_tokens,
+                manifest.second_solve_max_tokens,
+            )
+            total = max(
+                direct_input + case.max_tokens,
+                recovery_input + manifest.second_solve_max_tokens,
+            )
+        else:
+            direct_text = tokenizer.apply_chat_template(
+                [
+                    {"role": "system", "content": case.system_prompt},
+                    {"role": "user", "content": case.prompt},
+                ],
+                tokenize=False,
+                add_generation_prompt=True,
+                **manifest.chat_template_kwargs,
+            )
+            direct_input = len(tokenizer.encode(direct_text))
+            recovery_prompt = (
+                f"<original_task>\n{case.draft_prompt}\n</original_task>\n\n"
+                "Solve the problem internally from scratch. Return only one line "
+                "FINAL: <number>. Do not show reasoning and do not use tools."
+            )
+            recovery_text = tokenizer.apply_chat_template(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Recover the missing numeric final. Solve internally and "
+                            "output only the exact FINAL line."
                         ),
                     },
                     {"role": "user", "content": recovery_prompt},
