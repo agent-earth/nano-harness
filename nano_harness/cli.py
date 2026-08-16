@@ -24,6 +24,10 @@ from nano_harness.verified_choice_canary import (
     load_config as load_verified_choice_canary_config,
 )
 from nano_harness.verified_choice_canary import run as run_verified_choice_canary
+from nano_harness.verified_choice_full import (
+    load_config as load_verified_choice_full_config,
+)
+from nano_harness.verified_choice_full import run as run_verified_choice_full
 
 
 def main() -> None:
@@ -74,6 +78,9 @@ def main() -> None:
     )
     verified_choice_canary_parser.add_argument("--config", required=True)
 
+    verified_choice_full_parser = subparsers.add_parser("verified-choice-full")
+    verified_choice_full_parser.add_argument("--config", required=True)
+
     args = parser.parse_args()
     if args.command == "run":
         summary = run_config(load_run_config(args.config))
@@ -90,6 +97,10 @@ def main() -> None:
     elif args.command == "verified-choice-canary":
         summary = run_verified_choice_canary(
             load_verified_choice_canary_config(args.config)
+        )
+    elif args.command == "verified-choice-full":
+        summary = run_verified_choice_full(
+            load_verified_choice_full_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(

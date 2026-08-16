@@ -1,0 +1,23 @@
+{
+  "ambiguous_fallback": "reuse_direct_output",
+  "baseline_public_report_path": "docs/results/anchored_v1_full_development.public.json",
+  "baseline_public_report_sha256": "413a292246ee368000a484d82b68ccf1b37998f7bf3cd91ed2940b15356174a0",
+  "baseline_raw_path": "results/harness/qwen35-anchored-v1-full-development/candidate/cases.jsonl",
+  "baseline_raw_sha256": "a8f6a731042c7b81c97196abd60d6c632006b7c59da1bbdb2328ab73c539def0",
+  "canary_pass_report_path": "docs/results/anchored_v1_verified_choice_canary_v1.public.json",
+  "canary_pass_report_sha256": "e9edf209ace2d52516b38602d942812525f997543463a6abd2a7463340f68ccc",
+  "case_manifest_path": "configs/generated/qwen35_three_task_replication_v1_cases.json",
+  "case_manifest_sha256": "eafbe4d42487a225322dd3b3bdc1d805c065fb15f0f8b968e65ccf747f96976f",
+  "dataset_root": "../../datasets",
+  "exact_option_match_required": true,
+  "experiment_id": "anchored-v1-verified-choice-full-v1",
+  "four_b_raw_path": "results/harness/qwen35-three-task-replication-v1/4b/cases.jsonl",
+  "four_b_raw_sha256": "c59383d3fd3d6087025d6e1ff649979d9d5a9e8dc73b5429a4f8e9fa41b6b8c7",
+  "manifest_path": "configs/harness/qwen35_v6_matched_adapter_v1.yaml",
+  "manifest_sha256": "08c71cae463bd3b0a0031e95d6339136d0c445beecaac631c4f5843e0b14d4c1",
+  "nine_b_raw_path": "results/harness/qwen35-three-task-replication-v1/9b/cases.jsonl",
+  "nine_b_raw_sha256": "ffae93774d51b87a2e29258d170a84f8b165f996e2e78eedd102271dfc260044",
+  "output_path": "results/harness/anchored-v1-verified-choice-full-v1/candidate/result.json",
+  "parser_version": "explicit_two_expression_average_v1",
+  "schema_version": "nano_harness_verified_choice_full_v1"
+}

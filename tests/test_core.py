@@ -56,6 +56,9 @@ from nano_harness.verified_choice import (
 from nano_harness.verified_choice_canary import (
     load_config as load_verified_choice_canary_config,
 )
+from nano_harness.verified_choice_full import (
+    load_config as load_verified_choice_full_config,
+)
 
 
 class FakeToolExecutor:
@@ -68,6 +71,21 @@ class FakeToolExecutor:
 
 
 class CoreTests(unittest.TestCase):
+    def test_verified_choice_full_config_is_frozen(self):
+        source = Path(
+            "configs/harness/anchored_v1_verified_choice_full_v1.json"
+        )
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "config.json"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            config = load_verified_choice_full_config(path)
+            self.assertTrue(config.exact_option_match_required)
+            raw["ambiguous_fallback"] = "nearest_option"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "ambiguous_fallback"):
+                load_verified_choice_full_config(path)
+
     def test_verified_choice_canary_config_is_frozen(self):
         source = Path(
             "configs/harness/anchored_v1_verified_choice_canary_v1.json"
