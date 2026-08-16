@@ -1,0 +1,28 @@
+{
+  "chat_template_kwargs": {
+    "enable_thinking": false
+  },
+  "experiment_id": "generic-choice-capability-matrix-eval-v2",
+  "four_b_base_url": "http://127.0.0.1:8003/v1",
+  "four_b_model": "qwen3.5-4b-anchor-v1",
+  "four_b_model_config_path": "../../models/Qwen3.5-4B/config.json",
+  "four_b_model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+  "four_b_serving_adapter_weights_sha256": "9ce7be3954f8e0f3d245fe846d6e35275243b7f0caf66cb847fd716173658649",
+  "four_b_serving_receipt_path": "results/serving/qwen35-anchored-v1-vllm-adapter.receipt.json",
+  "four_b_serving_receipt_sha256": "2549527942acfe53a1eb352453649a9ea3cc31d68bb9790c865553ee95c2f578",
+  "matrix_path": "../nano-data-pipeline/datasets/generic_choice_capability_matrix_v1.json",
+  "matrix_sha256": "5db7561b95f6b951ef7fb45293e24a39276b69b5b43e04c63712f8450e37b933",
+  "max_tokens": 32,
+  "nine_b_base_url": "http://127.0.0.1:8001/v1",
+  "nine_b_model": "qwen3.5-9b",
+  "nine_b_model_config_path": "../../models/Qwen3.5-9B/config.json",
+  "nine_b_model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+  "output_path": "results/harness/generic-choice-capability-matrix-eval-v2/result.json",
+  "parser_version": "explicit_two_expression_average_v1",
+  "schema_version": "nano_harness_choice_matrix_eval_v2",
+  "structured_output_regex": "FINAL: [A-D]",
+  "system_prompt": "Solve the choice task from the stated facts and return exactly one standalone FINAL: <letter> line.",
+  "temperature": 0.0,
+  "v1_public_report_path": "docs/results/generic_choice_capability_matrix_eval_v1.public.json",
+  "v1_public_report_sha256": "11787551bc9dfa49d6f0e7cdee9409fe359e555d7b0304909b023ba700f11e62"
+}

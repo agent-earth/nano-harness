@@ -42,6 +42,9 @@ from nano_harness.coding_tools import CodingToolExecutor
 from nano_harness.choice_matrix_eval import (
     load_config as load_choice_matrix_eval_config,
 )
+from nano_harness.choice_matrix_eval_v2 import (
+    load_config as load_choice_matrix_eval_v2_config,
+)
 from nano_harness.config import (
     BenchmarkConfig,
     HarnessConfig,
@@ -74,6 +77,21 @@ class FakeToolExecutor:
 
 
 class CoreTests(unittest.TestCase):
+    def test_choice_matrix_eval_v2_config_is_frozen(self):
+        source = Path(
+            "configs/harness/generic_choice_capability_matrix_eval_v2.json"
+        )
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "config.json"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            config = load_choice_matrix_eval_v2_config(path)
+            self.assertEqual(config.structured_output_regex, r"FINAL: [A-D]")
+            raw["structured_output_regex"] = r"[A-D]"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "structured_output_regex"):
+                load_choice_matrix_eval_v2_config(path)
+
     def test_choice_matrix_eval_config_is_frozen(self):
         source = Path(
             "configs/harness/generic_choice_capability_matrix_eval_v1.json"
