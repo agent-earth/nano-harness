@@ -1,0 +1,514 @@
+[
+  {
+    "case_id": "gsm8k-d99d828fbdbc111f",
+    "benchmark": "gsm8k",
+    "source_index": 610,
+    "source_chars": 157,
+    "max_tokens": 600,
+    "prompt_sha256": "b74aa644e48b7d34f1de3012c3d250a52455a929d2548f70db83c473b4077944",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "65960",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-4b9c776af3933e0a",
+    "benchmark": "gsm8k",
+    "source_index": 1278,
+    "source_chars": 204,
+    "max_tokens": 600,
+    "prompt_sha256": "e3e7707fa6a53e247e79b28318efc65c61ed70850a4eda8832b6553f9943af6a",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "665",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-38cb1d6bf02c449a",
+    "benchmark": "gsm8k",
+    "source_index": 19,
+    "source_chars": 255,
+    "max_tokens": 600,
+    "prompt_sha256": "2bff3373de510e6c1ab5fcb73acf0379430508baf8a03d0abac4dd2fcd707925",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "6",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-d63df8010730c6b8",
+    "benchmark": "gsm8k",
+    "source_index": 286,
+    "source_chars": 107,
+    "max_tokens": 600,
+    "prompt_sha256": "a396e6af24d7e64dd308474828bdcecfc8d7950917e70b2f1453e60271777a13",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "90",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-63e518e76a1bf650",
+    "benchmark": "gsm8k",
+    "source_index": 941,
+    "source_chars": 342,
+    "max_tokens": 600,
+    "prompt_sha256": "04f9a113d6ffe4502ce984dca55827dad64825af2a3e36f1f8c0796a51dfcc3c",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "842",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-fcede10682ec71fa",
+    "benchmark": "gsm8k",
+    "source_index": 8,
+    "source_chars": 406,
+    "max_tokens": 600,
+    "prompt_sha256": "2b614a168aec99ba0106a3bbb3f0ae9857f8050702171380c575d770c0b27df2",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "45",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-fa039e12e77f6570",
+    "benchmark": "gsm8k",
+    "source_index": 378,
+    "source_chars": 192,
+    "max_tokens": 600,
+    "prompt_sha256": "7bdc3b10fc04dae02042ea6d3f734bf2df3eab3941f10cce2167c84de82ee7e1",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "15",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-fd619716158f5e57",
+    "benchmark": "gsm8k",
+    "source_index": 1092,
+    "source_chars": 281,
+    "max_tokens": 600,
+    "prompt_sha256": "06bec4b253608563d434be96e5bc9ab93dd4510e264feac56a1807cf532ea7ed",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "1080",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-8c3d46fa9b2515a9",
+    "benchmark": "gsm8k",
+    "source_index": 406,
+    "source_chars": 277,
+    "max_tokens": 600,
+    "prompt_sha256": "f95e7f4de7b44de2f4eed51f1c9a4883043dbdfbffd380584ce3170fb3c84c94",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "200",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-afe5271f7397692a",
+    "benchmark": "gsm8k",
+    "source_index": 940,
+    "source_chars": 238,
+    "max_tokens": 600,
+    "prompt_sha256": "7b6ec37df7385def9bf186b7993aa57668cb775db66083949a82d040138af5e0",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "280",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-1b0b6f4d2e1b0a77",
+    "benchmark": "gsm8k",
+    "source_index": 410,
+    "source_chars": 332,
+    "max_tokens": 600,
+    "prompt_sha256": "b357b7f6b0ccc6f568f6f8521a686f8f334616b873a36a35c1cf650c0fc0281c",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "3",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-b83fb1e0d547a470",
+    "benchmark": "gsm8k",
+    "source_index": 394,
+    "source_chars": 168,
+    "max_tokens": 600,
+    "prompt_sha256": "007fa3b5d51c3e0450b770e7c326bb15efd924f452a9a3e59ca828f205b6c492",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "92",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-c99cd0e15d1feac9",
+    "benchmark": "gsm8k",
+    "source_index": 587,
+    "source_chars": 390,
+    "max_tokens": 600,
+    "prompt_sha256": "ff7b32e08d0621960c6339b32e11c7fb8766330b89e5a8733bc4abf0deb79588",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "30",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-c8b93e085a40a24a",
+    "benchmark": "gsm8k",
+    "source_index": 59,
+    "source_chars": 137,
+    "max_tokens": 600,
+    "prompt_sha256": "77be33672faa6491b53cdbb93d8a18c7e70c25cdd6adb48ec10155fba76fa7d7",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "187",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-5f695d056d34d941",
+    "benchmark": "gsm8k",
+    "source_index": 920,
+    "source_chars": 299,
+    "max_tokens": 600,
+    "prompt_sha256": "634b752b0744a9b92669a5750b76ff799a2aa53761d065e124cb18eb4efd79d2",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "47",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gsm8k-d4fd143719c9f2be",
+    "benchmark": "gsm8k",
+    "source_index": 299,
+    "source_chars": 309,
+    "max_tokens": 600,
+    "prompt_sha256": "dea6dfca827d196c6b2374305066bb04afc6c24de82c9fada6fa33bd787c9d39",
+    "system_prompt_sha256": "efb151646047d4d333dea419485a717bdc8b884b81a7f8e231d8df085fb47fd2",
+    "expected": "31800",
+    "scorer": "numeric_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "mmlu-6aab7e1407fd5a39",
+    "benchmark": "mmlu",
+    "source_index": 11101,
+    "source_chars": 53,
+    "max_tokens": 32,
+    "prompt_sha256": "3c23164fcd59c0610c0da92cb3141032297eb657b0ad70e05c783c9e2a93d03e",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "clinical_knowledge"
+    }
+  },
+  {
+    "case_id": "mmlu-6c75396055266091",
+    "benchmark": "mmlu",
+    "source_index": 2314,
+    "source_chars": 63,
+    "max_tokens": 32,
+    "prompt_sha256": "5ec5600791370de6f46e4bd4307342c98d34b37c66850b7eef673eea01b256f4",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "nutrition"
+    }
+  },
+  {
+    "case_id": "mmlu-048c0aa27d991e33",
+    "benchmark": "mmlu",
+    "source_index": 9432,
+    "source_chars": 1007,
+    "max_tokens": 32,
+    "prompt_sha256": "1ba8f264204a5cb6b2c2a7d2356bd747804d019688afce6cef7ffca7d768ebb6",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_world_history"
+    }
+  },
+  {
+    "case_id": "mmlu-1bffec754cb4f671",
+    "benchmark": "mmlu",
+    "source_index": 5043,
+    "source_chars": 63,
+    "max_tokens": 32,
+    "prompt_sha256": "5ef06e5bb749a601b434243873e41ad4d1cc5a15d316c79e674de24a05ef25ab",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "college_chemistry"
+    }
+  },
+  {
+    "case_id": "mmlu-d41df614a56fcc56",
+    "benchmark": "mmlu",
+    "source_index": 4857,
+    "source_chars": 30,
+    "max_tokens": 32,
+    "prompt_sha256": "3658d782fbe4be7cf767c09c178b94a68960988b88c687c7d69813eef8c3e36d",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "philosophy"
+    }
+  },
+  {
+    "case_id": "mmlu-d77640bddbfcb4c7",
+    "benchmark": "mmlu",
+    "source_index": 12699,
+    "source_chars": 424,
+    "max_tokens": 32,
+    "prompt_sha256": "a659e0aeff9fda5ad0cdda800af9489da3cf5ff0de6039bab13489775b2c5379",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "moral_scenarios"
+    }
+  },
+  {
+    "case_id": "mmlu-c2c8789f0012b044",
+    "benchmark": "mmlu",
+    "source_index": 12355,
+    "source_chars": 257,
+    "max_tokens": 32,
+    "prompt_sha256": "2fcd99319ae420a4eb521884efedc9a93442171d02a9b9812bef2d4e29dacfe6",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "college_mathematics"
+    }
+  },
+  {
+    "case_id": "mmlu-cbb17358e88c5a58",
+    "benchmark": "mmlu",
+    "source_index": 9188,
+    "source_chars": 127,
+    "max_tokens": 32,
+    "prompt_sha256": "35350488e949d1ea45a3dff19a775818418261b0345c50014581f8f6c6ae2be0",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "moral_disputes"
+    }
+  },
+  {
+    "case_id": "mmlu-91bd52fbebd0ebef",
+    "benchmark": "mmlu",
+    "source_index": 4317,
+    "source_chars": 52,
+    "max_tokens": 32,
+    "prompt_sha256": "48e8afb14739f69f88f4dfbc9014f8fac06c547734c9145c1967eca9b3203f35",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "high_school_mathematics"
+    }
+  },
+  {
+    "case_id": "mmlu-11f2d8c1db0808f0",
+    "benchmark": "mmlu",
+    "source_index": 9003,
+    "source_chars": 73,
+    "max_tokens": 32,
+    "prompt_sha256": "39b92d9abfe85b0dc88bc6a297220f82ad2e581a3903c206140cef96cbbfe759",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "moral_disputes"
+    }
+  },
+  {
+    "case_id": "mmlu-08093a4e8efd9fe1",
+    "benchmark": "mmlu",
+    "source_index": 4784,
+    "source_chars": 42,
+    "max_tokens": 32,
+    "prompt_sha256": "47b8f7bf8787a27924a724eb15fdb97c17417dcbc02ed84999d2209094312f55",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "philosophy"
+    }
+  },
+  {
+    "case_id": "mmlu-794ef5faffb3cc76",
+    "benchmark": "mmlu",
+    "source_index": 7368,
+    "source_chars": 465,
+    "max_tokens": 32,
+    "prompt_sha256": "e687264e6205ae0eeec7863b57494b3d8de8daefe9683f27dc84bf051759670d",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "professional_law"
+    }
+  },
+  {
+    "case_id": "mmlu-6c2ba148adb4ebd8",
+    "benchmark": "mmlu",
+    "source_index": 11958,
+    "source_chars": 41,
+    "max_tokens": 32,
+    "prompt_sha256": "d614f39daa6c29c379040ccd61bf6407109fe2bfe6cba69165a3ed5146b0c585",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "elementary_mathematics"
+    }
+  },
+  {
+    "case_id": "mmlu-b5ecf1b676cba3e1",
+    "benchmark": "mmlu",
+    "source_index": 10430,
+    "source_chars": 662,
+    "max_tokens": 32,
+    "prompt_sha256": "ca01424f4e3c5048f4846f429230888017b423780ea4dce66aa6898cb4a698e2",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "miscellaneous"
+    }
+  },
+  {
+    "case_id": "mmlu-9eeba76c1972da9b",
+    "benchmark": "mmlu",
+    "source_index": 12858,
+    "source_chars": 343,
+    "max_tokens": 32,
+    "prompt_sha256": "6b907c03f4527fb0a65f8c94f2d82b98893a9c4482b91b9534e8d70cd814e017",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "moral_scenarios"
+    }
+  },
+  {
+    "case_id": "mmlu-1aa4d5f821cebc34",
+    "benchmark": "mmlu",
+    "source_index": 2122,
+    "source_chars": 116,
+    "max_tokens": 32,
+    "prompt_sha256": "c5bf67e97103223b275106d827092d386d29933699fe55b280c47f3a81ae367a",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "D",
+    "scorer": "choice_exact",
+    "metadata": {
+      "subject": "nutrition"
+    }
+  },
+  {
+    "case_id": "gpqa_diamond-b33f8c3526b9864e",
+    "benchmark": "gpqa_diamond",
+    "source_index": 174,
+    "source_chars": 566,
+    "max_tokens": 32,
+    "prompt_sha256": "8adb3d8bce8961b6f2d036cb4bbc02854bd2ddce7edfd9e8988b73e1a79aea16",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-3602a0f94d53c497",
+    "benchmark": "gpqa_diamond",
+    "source_index": 15,
+    "source_chars": 584,
+    "max_tokens": 32,
+    "prompt_sha256": "1b8560b5d541101c902b943e2d90ac30c462ae519ccdcb3c7d3f7e0f1000775c",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-87802948df666929",
+    "benchmark": "gpqa_diamond",
+    "source_index": 121,
+    "source_chars": 617,
+    "max_tokens": 32,
+    "prompt_sha256": "bc18b0d3a812f50b67dddbfd8e762010bef6bb8ea7854d0931a2bc0cf3720c6f",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-a7c28b1225cb396e",
+    "benchmark": "gpqa_diamond",
+    "source_index": 53,
+    "source_chars": 253,
+    "max_tokens": 32,
+    "prompt_sha256": "bad02ecd7a8a9e9aa10bce2803b0a68acd2a2530c5b8c0ebb830915b9466d1ac",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "B",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-3c78494ac0cfb0b5",
+    "benchmark": "gpqa_diamond",
+    "source_index": 94,
+    "source_chars": 137,
+    "max_tokens": 32,
+    "prompt_sha256": "dca9b5a4f2afcead9da322f966fd11928f85f8ea394af0f8a867bd6b598296cb",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-61083c894436009c",
+    "benchmark": "gpqa_diamond",
+    "source_index": 100,
+    "source_chars": 410,
+    "max_tokens": 32,
+    "prompt_sha256": "5461acc1eae493e0e2742c32630067e96c88b4d43289f091256effeeb9486f0a",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-51c58df5475de9fb",
+    "benchmark": "gpqa_diamond",
+    "source_index": 114,
+    "source_chars": 757,
+    "max_tokens": 32,
+    "prompt_sha256": "22945a96fc3ec54e66f5faba9e496cf8368d01b4ca379608a14e86f409f06d8c",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "C",
+    "scorer": "choice_exact",
+    "metadata": {}
+  },
+  {
+    "case_id": "gpqa_diamond-32b48e06c89cd857",
+    "benchmark": "gpqa_diamond",
+    "source_index": 145,
+    "source_chars": 691,
+    "max_tokens": 32,
+    "prompt_sha256": "c616747bec6e3ae2123d2c238c804f926de27d48c9e93c175b981353204e3561",
+    "system_prompt_sha256": "4e9ac964239472c9c2b7b40b2ec1b5126b28af0d30395c5ed8f49dab135235e6",
+    "expected": "A",
+    "scorer": "choice_exact",
+    "metadata": {}
+  }
+]
