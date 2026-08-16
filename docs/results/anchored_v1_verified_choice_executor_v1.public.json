@@ -1,0 +1,167 @@
+{
+  "baseline": {
+    "by_family": {
+      "capability_preservation_choice": {
+        "exact": 6,
+        "failure_sample_ids": [
+          "synthetic-1a7b299fb729cd67bd71",
+          "synthetic-cb1b63a543f33dcb72fe"
+        ],
+        "samples": 8,
+        "semantic_exact": 6
+      },
+      "capability_preservation_numeric": {
+        "exact": 8,
+        "failure_sample_ids": [
+          "synthetic-33e0eb52e48e0c3d5634",
+          "synthetic-3c3b215d2977ecf9e2db",
+          "synthetic-6ff963588953d733c5a3",
+          "synthetic-c3daf536f8bd333e8555",
+          "synthetic-ded38e17d41cc5a613da"
+        ],
+        "samples": 16,
+        "semantic_exact": 11
+      },
+      "semantic_arithmetic_process": {
+        "exact": 8,
+        "failure_sample_ids": [],
+        "samples": 8,
+        "semantic_exact": 8
+      }
+    },
+    "exact": 22,
+    "samples": 32,
+    "semantic_exact": 25
+  },
+  "candidate": {
+    "by_family": {
+      "capability_preservation_choice": {
+        "exact": 7,
+        "failure_sample_ids": [
+          "synthetic-1a7b299fb729cd67bd71"
+        ],
+        "samples": 8,
+        "semantic_exact": 7
+      },
+      "capability_preservation_numeric": {
+        "exact": 8,
+        "failure_sample_ids": [
+          "synthetic-33e0eb52e48e0c3d5634",
+          "synthetic-3c3b215d2977ecf9e2db",
+          "synthetic-6ff963588953d733c5a3",
+          "synthetic-c3daf536f8bd333e8555",
+          "synthetic-ded38e17d41cc5a613da"
+        ],
+        "samples": 16,
+        "semantic_exact": 11
+      },
+      "semantic_arithmetic_process": {
+        "exact": 8,
+        "failure_sample_ids": [],
+        "samples": 8,
+        "semantic_exact": 8
+      }
+    },
+    "exact": 23,
+    "samples": 32,
+    "semantic_exact": 26
+  },
+  "case_delta": {
+    "changed_sample_ids": [
+      "synthetic-cb1b63a543f33dcb72fe"
+    ],
+    "fallback_rows": 27,
+    "fixed_sample_ids": [
+      "synthetic-cb1b63a543f33dcb72fe"
+    ],
+    "regressed_sample_ids": []
+  },
+  "decision": {
+    "accepted_local_harness": true,
+    "independent_holdout_allowed": false,
+    "merge_allowed": false,
+    "next_action": "Apply the exact target-blind verified-choice executor to the old sealed 40-case regression canary. A canary pass permits the old 211-case development suite, not the independent holdout.",
+    "prior_full_suite_allowed": false,
+    "rl_allowed": false,
+    "scale_allowed": false,
+    "sealed_canary_allowed": true
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "independent_holdout_prompts_loaded": false,
+    "independent_holdout_references_loaded": false,
+    "independent_holdout_run": false,
+    "independent_quality_claim_allowed": false,
+    "prior_full_suite_run": false,
+    "sealed_canary_run": false,
+    "target_used_by_parser": false
+  },
+  "experiment_id": "anchored-v1-verified-choice-executor-v1",
+  "fixed_case_receipt": {
+    "aggregate_expression": "(108 + 182) / 2",
+    "eligible": true,
+    "exact_matching_options": [
+      "B"
+    ],
+    "expression_values": [
+      "108",
+      "182"
+    ],
+    "expressions": [
+      "27 * 4",
+      "26 * 7"
+    ],
+    "option_values": {
+      "A": "133",
+      "B": "145",
+      "C": "151",
+      "D": "159"
+    },
+    "override": true,
+    "parser_version": "explicit_two_expression_average_v1",
+    "prompt_sha256": "00cf6e579f48d949f87a8dcff1f5a58d8d9f6fe46770b9dd033ce01de9baa6e5",
+    "reason": "unique_exact_option_match",
+    "result": "145",
+    "schema_version": "verified_choice_receipt_v1",
+    "selected_letter": "B"
+  },
+  "identity": {
+    "baseline_result_sha256": "7f9ed333fbf75beea925d3de261587d5225521fa63fecc4bb68c267e9f6cc57e",
+    "config_sha256": "b6aa27605fdbf25db5a470cfe95f0fee704f1c249c9069ef6b12401afa5d5178",
+    "dataset_sha256": "4657e96af9f9d1b81bfdb5fac6a29c31baf24b23d7753508aafdea5603ffd80d",
+    "raw_result_sha256": "528fdbc6eaf03eeef87dc5dfa6dce4880184136a7fd14c86dc07755a15c2c0b0"
+  },
+  "local_gate": {
+    "baseline_choice_6": true,
+    "baseline_numeric_11": true,
+    "baseline_process_8": true,
+    "baseline_semantic_25": true,
+    "baseline_strict_22": true,
+    "candidate_choice_at_least_7": true,
+    "candidate_numeric_at_least_11": true,
+    "candidate_process_equals_8": true,
+    "candidate_semantic_at_least_25": true,
+    "candidate_strict_at_least_22": true,
+    "fallback_outputs_equal_direct": true,
+    "one_fix_zero_regressions": true,
+    "target_blind_parser": true
+  },
+  "method": {
+    "ambiguous_fallback": "reuse_direct_output",
+    "exact_option_match_required": true,
+    "model_calls": 0,
+    "parser_version": "explicit_two_expression_average_v1",
+    "supported_intent": "average_of_two_expression_results",
+    "target_used_by_parser": false
+  },
+  "passed": true,
+  "pre_registration_revision": "41441c3",
+  "routing": {
+    "ambiguous_fallbacks": 3,
+    "choice_rows": 8,
+    "ineligible_fallbacks": 0,
+    "non_choice_reused": 24,
+    "verified_overrides": 5
+  },
+  "schema_version": "nano_harness_public_anchored_verified_choice_v1"
+}
