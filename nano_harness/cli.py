@@ -5,6 +5,8 @@ import json
 import os
 from pathlib import Path
 
+from nano_harness.analog_contract import load_config as load_analog_contract_config
+from nano_harness.analog_contract import run as run_analog_contract
 from nano_harness.baseline import (
     case_manifest,
     compare_baselines,
@@ -55,9 +57,18 @@ def main() -> None:
     compare_parser.add_argument("--bootstrap-samples", type=int, default=10_000)
     compare_parser.add_argument("--bootstrap-seed", type=int, default=35)
 
+    analog_contract_parser = subparsers.add_parser("analog-contract")
+    analog_contract_parser.add_argument("--config", required=True)
+
     args = parser.parse_args()
     if args.command == "run":
         summary = run_config(load_run_config(args.config))
+    elif args.command == "analog-contract":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_analog_contract(
+            load_analog_contract_config(args.config)
+        )
     elif args.command == "merge":
         summary = merge_paths(
             [Path(pattern) for item in args.input for pattern in sorted(Path().glob(item))],

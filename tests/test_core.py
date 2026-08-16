@@ -6,6 +6,11 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
+from nano_harness.analog_contract import (
+    load_config as load_analog_contract_config,
+    run_choice_calculation_selector,
+    summarize_rows as summarize_analog_rows,
+)
 from nano_harness.baseline import (
     DatasetSpec,
     SuiteManifest,
@@ -56,6 +61,102 @@ class FakeToolExecutor:
 
 
 class CoreTests(unittest.TestCase):
+    def test_analog_contract_config_is_frozen(self):
+        source = Path(
+            "configs/harness/anchored_v1_choice_calculation_selector_v1.json"
+        )
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "config.json"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            config = load_analog_contract_config(path)
+            self.assertEqual(config.selector_regex, r"FINAL: [A-D]")
+            raw["selector_max_tokens"] = 16
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "selector_max_tokens"):
+                load_analog_contract_config(path)
+
+    def test_choice_calculation_selector_forwards_frozen_regex(self):
+        config = load_analog_contract_config(
+            "configs/harness/anchored_v1_choice_calculation_selector_v1.json"
+        )
+        sample = {
+            "sample_id": "choice-1",
+            "format_family": "final_choice",
+            "messages": [
+                {"role": "system", "content": "answer only"},
+                {
+                    "role": "user",
+                    "content": "What is 2 + 2?\nA. 3\nB. 4\nFINAL only.",
+                },
+                {"role": "assistant", "content": "FINAL: B"},
+            ],
+        }
+        calculation = ScriptedClient(
+            [
+                ModelReply(
+                    content="2 + 2 = 4. Option B matches. CANDIDATE: B",
+                    usage={"prompt_tokens": 20, "completion_tokens": 12},
+                )
+            ]
+        )
+        selector = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: B",
+                    usage={"prompt_tokens": 40, "completion_tokens": 4},
+                )
+            ]
+        )
+        output, usage, stages = run_choice_calculation_selector(
+            sample,
+            config,
+            calculation,
+            selector,
+        )
+        self.assertEqual(output, "FINAL: B")
+        self.assertEqual(
+            selector.calls[0]["extra_body"],
+            {"structured_outputs": {"regex": r"FINAL: [A-D]"}},
+        )
+        self.assertIn(
+            "2 + 2 = 4",
+            selector.calls[0]["messages"][-1]["content"],
+        )
+        self.assertEqual(usage["prompt_tokens"], 60.0)
+        self.assertEqual(stages["calculation"]["max_tokens"], 128)
+        self.assertEqual(stages["selector"]["max_tokens"], 8)
+
+    def test_analog_contract_summary_keeps_family_metrics(self):
+        rows = [
+            {
+                "sample_id": "choice-1",
+                "task_family": "choice",
+                "exact": True,
+                "semantic_valid": True,
+            },
+            {
+                "sample_id": "choice-2",
+                "task_family": "choice",
+                "exact": False,
+                "semantic_valid": False,
+            },
+            {
+                "sample_id": "numeric-1",
+                "task_family": "numeric",
+                "exact": False,
+                "semantic_valid": True,
+            },
+        ]
+        summary = summarize_analog_rows(rows)
+        self.assertEqual(summary["exact"], 1)
+        self.assertEqual(summary["semantic_exact"], 2)
+        self.assertEqual(summary["by_family"]["choice"]["semantic_exact"], 1)
+        self.assertEqual(
+            summary["by_family"]["choice"]["failure_sample_ids"],
+            ["choice-2"],
+        )
+
     def test_single_task_suite_requires_explicit_min_task_groups(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "suite.yaml"

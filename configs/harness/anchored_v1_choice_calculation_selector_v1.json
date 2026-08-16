@@ -1,0 +1,22 @@
+{
+  "base_url": "http://127.0.0.1:8003/v1",
+  "calculation_max_tokens": 128,
+  "calculation_system_prompt": "Solve the multiple-choice arithmetic task from the stated facts. Compute every intermediate total and the requested final quantity explicitly. Compare the computed value with all listed options. End with CANDIDATE: <letter>. Do not use tools or external information.",
+  "chat_template_kwargs": {
+    "enable_thinking": false
+  },
+  "dataset_path": "../nano-data-pipeline/datasets/generic_choice_replay_v11.json",
+  "dataset_sha256": "4657e96af9f9d1b81bfdb5fac6a29c31baf24b23d7753508aafdea5603ffd80d",
+  "direct_max_tokens": 128,
+  "experiment_id": "anchored-v1-choice-calculation-selector-v1",
+  "model": "qwen3.5-4b-anchor-v1",
+  "output_path": "results/harness/anchored-v1-choice-calculation-selector-v1/local/result.json",
+  "schema_version": "nano_harness_analog_contract_v1",
+  "selector_max_tokens": 8,
+  "selector_regex": "FINAL: [A-D]",
+  "selector_system_prompt": "Act as a strict arithmetic answer selector. Independently verify the supplied calculation against the original task, recompute any disputed value, and map the verified result to the listed option. Return exactly one line FINAL: <letter>. Do not preserve the candidate by default and do not explain.",
+  "serving_adapter_weights_sha256": "9ce7be3954f8e0f3d245fe846d6e35275243b7f0caf66cb847fd716173658649",
+  "serving_receipt_path": "results/serving/qwen35-anchored-v1-vllm-adapter.receipt.json",
+  "serving_receipt_sha256": "2549527942acfe53a1eb352453649a9ea3cc31d68bb9790c865553ee95c2f578",
+  "temperature": 0.0
+}
