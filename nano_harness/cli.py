@@ -25,6 +25,12 @@ from nano_harness.choice_matrix_eval_v2 import (
     load_config as load_choice_matrix_eval_v2_config,
 )
 from nano_harness.choice_matrix_eval_v2 import run as run_choice_matrix_eval_v2
+from nano_harness.choice_verifier_matrix_eval_v2 import (
+    load_config as load_choice_verifier_matrix_eval_config,
+)
+from nano_harness.choice_verifier_matrix_eval_v2 import (
+    run as run_choice_verifier_matrix_eval,
+)
 from nano_harness.runner import merge_paths, run_config, summarize_paths
 from nano_harness.verified_choice import load_config as load_verified_choice_config
 from nano_harness.verified_choice import run as run_verified_choice
@@ -97,6 +103,11 @@ def main() -> None:
     )
     choice_matrix_eval_v2_parser.add_argument("--config", required=True)
 
+    choice_verifier_matrix_parser = subparsers.add_parser(
+        "choice-verifier-matrix-eval"
+    )
+    choice_verifier_matrix_parser.add_argument("--config", required=True)
+
     args = parser.parse_args()
     if args.command == "run":
         summary = run_config(load_run_config(args.config))
@@ -129,6 +140,12 @@ def main() -> None:
             os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
         summary = run_choice_matrix_eval_v2(
             load_choice_matrix_eval_v2_config(args.config)
+        )
+    elif args.command == "choice-verifier-matrix-eval":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_choice_verifier_matrix_eval(
+            load_choice_verifier_matrix_eval_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(

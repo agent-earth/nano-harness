@@ -45,6 +45,9 @@ from nano_harness.choice_matrix_eval import (
 from nano_harness.choice_matrix_eval_v2 import (
     load_config as load_choice_matrix_eval_v2_config,
 )
+from nano_harness.choice_verifier_matrix_eval_v2 import (
+    load_config as load_choice_verifier_matrix_eval_config,
+)
 from nano_harness.config import (
     BenchmarkConfig,
     HarnessConfig,
@@ -65,6 +68,7 @@ from nano_harness.verified_choice_canary import (
 from nano_harness.verified_choice_full import (
     load_config as load_verified_choice_full_config,
 )
+from nano_harness.verified_choice_v2 import verify_choice_v2
 
 
 class FakeToolExecutor:
@@ -77,6 +81,72 @@ class FakeToolExecutor:
 
 
 class CoreTests(unittest.TestCase):
+    def test_choice_verifier_matrix_config_is_frozen(self):
+        source = Path(
+            "configs/harness/generic_choice_verifier_matrix_eval_v2.json"
+        )
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "config.json"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            config = load_choice_verifier_matrix_eval_config(path)
+            self.assertEqual(
+                config.parser_version,
+                "host_count_and_verbal_average_v2",
+            )
+            raw["parser_version"] = "other"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "parser_version"):
+                load_choice_verifier_matrix_eval_config(path)
+
+    def test_verified_choice_v2_host_exact_and_ambiguity(self):
+        exact = verify_choice_v2(
+            "A coordinator attends a summit, registers 23 delegates, "
+            "and every delegate brings 3 guests. Including the coordinator, "
+            "how many people attend?\nA. 91\nB. 93\nC. 95\nD. 97"
+        )
+        self.assertTrue(exact["override"])
+        self.assertEqual(exact["selected_letter"], "B")
+        self.assertEqual(exact["expression"], "1 + 23 + 23 * 3")
+        no_exact = verify_choice_v2(
+            "A coordinator attends a summit, registers 23 delegates, "
+            "and every delegate brings 3 guests. Including the coordinator, "
+            "how many people attend?\nA. 90\nB. 92\nC. 94\nD. 96"
+        )
+        self.assertFalse(no_exact["override"])
+        self.assertEqual(no_exact["reason"], "no_unique_exact_option_match")
+        duplicate = verify_choice_v2(
+            "A coordinator attends a summit, registers 23 delegates, "
+            "and every delegate brings 3 guests. Including the coordinator, "
+            "how many people attend?\nA. 91\nB. 93\nC. 93\nD. 97"
+        )
+        self.assertFalse(duplicate["override"])
+        self.assertEqual(duplicate["reason"], "option_values_not_unique")
+
+    def test_verified_choice_v2_verbal_average_exact_and_ambiguity(self):
+        exact = verify_choice_v2(
+            "A north depot processed 100 parcels and a south depot processed "
+            "140 parcels. What is the average number of parcels processed by "
+            "the two depots?\nA. 110\nB. 115\nC. 120\nD. 125"
+        )
+        self.assertTrue(exact["override"])
+        self.assertEqual(exact["selected_letter"], "C")
+        self.assertEqual(exact["result"], "120")
+        no_exact = verify_choice_v2(
+            "A north depot processed 101 parcels and a south depot processed "
+            "140 parcels. What is the average number of parcels processed by "
+            "the two depots?\nA. 118\nB. 119\nC. 120\nD. 121"
+        )
+        self.assertFalse(no_exact["override"])
+        self.assertEqual(no_exact["result"], "241/2")
+        duplicate = verify_choice_v2(
+            "A north depot processed 100 parcels and a south depot processed "
+            "140 parcels. What is the average number of parcels processed by "
+            "the two depots?\nA. 110\nB. 120\nC. 120\nD. 125"
+        )
+        self.assertFalse(duplicate["override"])
+        self.assertEqual(duplicate["reason"], "option_values_not_unique")
+
     def test_choice_matrix_eval_v2_config_is_frozen(self):
         source = Path(
             "configs/harness/generic_choice_capability_matrix_eval_v2.json"
