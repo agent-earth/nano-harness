@@ -1,0 +1,164 @@
+{
+  "artifacts": {
+    "four_b_direct_raw_sha256": "47a6f1b415c062b00ec4c4b68cebc7fc63c01d78e3969dfae4a574937c43f4f9",
+    "four_b_treatment_raw_sha256": "c16d551e1bf1d6b471e1d91809ec95274cb2f60ee10d6dcf9e022bbfb28b9ab3",
+    "nine_b_direct_raw_sha256": "2019580f5a524f366acb49c59389660dda128621ff65084d55244f16c862ed79"
+  },
+  "code_revision": "9e496927a22004664320efe7741cdfaeaf63d9e8",
+  "contract_audits": {
+    "four_b_direct": {
+      "cases": 48,
+      "passed": true,
+      "stage_input_hashes_match": true
+    },
+    "four_b_treatment": {
+      "cases": 48,
+      "conditional_execution_matches": true,
+      "passed": true,
+      "protected_direct_matches_control": true,
+      "recovery_cases": [
+        "gsm8k-bc1777399850d017",
+        "gsm8k-ae1fc787367fc313",
+        "gsm8k-6d7f9b65a2da8d58",
+        "gsm8k-ae013604d7f064e0"
+      ]
+    },
+    "nine_b_direct": {
+      "cases": 48,
+      "passed": true,
+      "stage_input_hashes_match": true
+    }
+  },
+  "costs": {
+    "four_b_direct": {
+      "api_errors": 0,
+      "cases": 48,
+      "correct": 39,
+      "parse_failures": 4,
+      "recovery_calls": 0,
+      "recovery_truncations": 0,
+      "total_tokens": 17784,
+      "wall_seconds": 465.01740299999994
+    },
+    "four_b_treatment": {
+      "api_errors": 0,
+      "cases": 48,
+      "correct": 39,
+      "parse_failures": 4,
+      "recovery_calls": 4,
+      "recovery_truncations": 4,
+      "total_tokens": 20049,
+      "wall_seconds": 523.3089329999999
+    },
+    "nine_b_direct": {
+      "api_errors": 0,
+      "cases": 48,
+      "correct": 44,
+      "parse_failures": 1,
+      "recovery_calls": 0,
+      "recovery_truncations": 0,
+      "total_tokens": 16918,
+      "wall_seconds": 422.82218699999993
+    }
+  },
+  "decision": {
+    "accepted": false,
+    "at_least_one_recovery_win": false,
+    "next_experiment": "Fresh dev14 keeps conditional triggering but replaces the 384-token derivation recovery with a 64-token answer-only recovery.",
+    "no_api_errors": true,
+    "parse_failures_not_increased": true,
+    "recovery_triggered": true,
+    "token_ratio_below_1_5": true,
+    "zero_direct_only_losses": true
+  },
+  "experiment_id": "qwen35-gsm8k-dev13-recovery-v1",
+  "recovery_analysis": {
+    "parseable_direct_unchanged": true,
+    "recovery_cases": [
+      "gsm8k-bc1777399850d017",
+      "gsm8k-ae1fc787367fc313",
+      "gsm8k-6d7f9b65a2da8d58",
+      "gsm8k-ae013604d7f064e0"
+    ],
+    "recovery_count": 4,
+    "recovery_wins": [],
+    "unresolved_recoveries": [
+      "gsm8k-bc1777399850d017",
+      "gsm8k-ae1fc787367fc313",
+      "gsm8k-6d7f9b65a2da8d58",
+      "gsm8k-ae013604d7f064e0"
+    ]
+  },
+  "schema_version": "nano_harness_public_gsm8k_dev_v1",
+  "token_ratio_vs_4b_direct": 1.127361673414305,
+  "versus_4b_direct": {
+    "baseline_accuracy": 0.8125,
+    "baseline_only_cases": [],
+    "baseline_parse_failures": [
+      "gsm8k-6d7f9b65a2da8d58",
+      "gsm8k-ae013604d7f064e0",
+      "gsm8k-ae1fc787367fc313",
+      "gsm8k-bc1777399850d017"
+    ],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 35,
+    "candidate_accuracy": 0.8125,
+    "candidate_only_cases": [],
+    "candidate_parse_failures": [
+      "gsm8k-6d7f9b65a2da8d58",
+      "gsm8k-ae013604d7f064e0",
+      "gsm8k-ae1fc787367fc313",
+      "gsm8k-bc1777399850d017"
+    ],
+    "delta": 0.0,
+    "mcnemar_exact_p": 1.0,
+    "paired_bootstrap_95_ci": [
+      0.0,
+      0.0
+    ],
+    "paired_counts": {
+      "baseline_only": 0,
+      "both_correct": 39,
+      "both_wrong": 9,
+      "candidate_only": 0
+    }
+  },
+  "versus_9b_direct": {
+    "baseline_accuracy": 0.9166666666666666,
+    "baseline_only_cases": [
+      "gsm8k-4955079fbe0efa9e",
+      "gsm8k-6b32cacf075a2396",
+      "gsm8k-6d7f9b65a2da8d58",
+      "gsm8k-842a89153d663340",
+      "gsm8k-ae013604d7f064e0",
+      "gsm8k-fb6745ca21b1d3fe"
+    ],
+    "baseline_parse_failures": [
+      "gsm8k-ae1fc787367fc313"
+    ],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 35,
+    "candidate_accuracy": 0.8125,
+    "candidate_only_cases": [
+      "gsm8k-14adeeb03b3ad650"
+    ],
+    "candidate_parse_failures": [
+      "gsm8k-6d7f9b65a2da8d58",
+      "gsm8k-ae013604d7f064e0",
+      "gsm8k-ae1fc787367fc313",
+      "gsm8k-bc1777399850d017"
+    ],
+    "delta": -0.10416666666666667,
+    "mcnemar_exact_p": 0.125,
+    "paired_bootstrap_95_ci": [
+      -0.20833333333333334,
+      0.0
+    ],
+    "paired_counts": {
+      "baseline_only": 6,
+      "both_correct": 38,
+      "both_wrong": 3,
+      "candidate_only": 1
+    }
+  }
+}

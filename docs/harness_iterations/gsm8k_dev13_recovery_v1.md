@@ -38,3 +38,17 @@ Promote only if:
 - average treatment token cost is below 1.5x direct.
 
 Do not tune on dev13.
+
+## Result
+
+Conditional recovery and 4B direct both score 39/48; 9B direct scores 44/48.
+Recovery triggers exactly on the four direct parse failures, but all four
+384-token recovery calls also truncate without a numeric final. Parseable
+direct outputs are unchanged and token ratio is 1.127x.
+
+Dev13 fails. Fresh dev14 keeps conditional triggering but replaces long
+derivation recovery with a 64-token answer-only call that solves internally
+and emits only `FINAL: <number>`.
+
+- [`docs/results/gsm8k_dev13_recovery_v1.md`](../results/gsm8k_dev13_recovery_v1.md)
+- [`docs/results/gsm8k_dev13_recovery_v1.public.json`](../results/gsm8k_dev13_recovery_v1.public.json)
