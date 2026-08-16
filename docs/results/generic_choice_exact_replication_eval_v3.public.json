@@ -1,0 +1,230 @@
+{
+  "arms": {
+    "four_b_constrained": {
+      "accuracy": 0.6875,
+      "ambiguity_cases": 0,
+      "by_family": {
+        "host_count_exact_replication": {
+          "cases": 16,
+          "correct": 8,
+          "parseable": 16,
+          "scored_cases": 16
+        },
+        "verbal_average_exact_replication": {
+          "cases": 16,
+          "correct": 14,
+          "parseable": 16,
+          "scored_cases": 16
+        }
+      },
+      "cases": 32,
+      "correct": 22,
+      "parseable": 32,
+      "scored_cases": 32
+    },
+    "four_b_verified_executor_v2": {
+      "accuracy": 1.0,
+      "ambiguity_cases": 0,
+      "by_family": {
+        "host_count_exact_replication": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16,
+          "scored_cases": 16
+        },
+        "verbal_average_exact_replication": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16,
+          "scored_cases": 16
+        }
+      },
+      "cases": 32,
+      "correct": 32,
+      "parseable": 32,
+      "scored_cases": 32
+    },
+    "nine_b_constrained": {
+      "accuracy": 0.34375,
+      "ambiguity_cases": 0,
+      "by_family": {
+        "host_count_exact_replication": {
+          "cases": 16,
+          "correct": 4,
+          "parseable": 16,
+          "scored_cases": 16
+        },
+        "verbal_average_exact_replication": {
+          "cases": 16,
+          "correct": 7,
+          "parseable": 16,
+          "scored_cases": 16
+        }
+      },
+      "cases": 32,
+      "correct": 11,
+      "parseable": 32,
+      "scored_cases": 32
+    }
+  },
+  "comparisons": {
+    "executor_vs_four_b": {
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "choice-exact-replication-v3:executor-four",
+      "cases": 32,
+      "delta": 0.3125,
+      "left_only": 10,
+      "left_only_by_family": {
+        "host_count_exact_replication": 8,
+        "verbal_average_exact_replication": 2
+      },
+      "left_only_case_ids": [
+        "matrix3-0bcf57eac85958c23672",
+        "matrix3-0c4f55be49228e9975c5",
+        "matrix3-170d44fdc280f7ac50fd",
+        "matrix3-1be4690ce812d0770a39",
+        "matrix3-427d7e2379bba493fcd4",
+        "matrix3-4e0cc0b2b7b6f7ade820",
+        "matrix3-565f7ea2314a5a9fd8c5",
+        "matrix3-6e4a65d2063327403e02",
+        "matrix3-70248ff8346118ef601b",
+        "matrix3-ddf4c2513d798f9418a6"
+      ],
+      "mcnemar_exact_p": 0.001953125,
+      "paired_bootstrap_95_ci": [
+        0.15625,
+        0.46875
+      ],
+      "right_only": 0,
+      "right_only_by_family": {},
+      "right_only_case_ids": []
+    },
+    "executor_vs_nine_b": {
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "choice-exact-replication-v3:executor-nine",
+      "cases": 32,
+      "delta": 0.65625,
+      "left_only": 21,
+      "left_only_by_family": {
+        "host_count_exact_replication": 12,
+        "verbal_average_exact_replication": 9
+      },
+      "left_only_case_ids": [
+        "matrix3-0256d4d9e09eaef2821c",
+        "matrix3-05308a87e553381e642e",
+        "matrix3-0bcf57eac85958c23672",
+        "matrix3-0c4f55be49228e9975c5",
+        "matrix3-170d44fdc280f7ac50fd",
+        "matrix3-1b66e4bfc72acaeb3b83",
+        "matrix3-1be4690ce812d0770a39",
+        "matrix3-2b05520cf0ad16cb7559",
+        "matrix3-35b18474f586c20b7093",
+        "matrix3-427d7e2379bba493fcd4",
+        "matrix3-4b815ebd19fab299e1b3",
+        "matrix3-4e0cc0b2b7b6f7ade820",
+        "matrix3-565f7ea2314a5a9fd8c5",
+        "matrix3-5e98f7a5f5fb70e0147c",
+        "matrix3-6d807ffa812015819541",
+        "matrix3-6e4a65d2063327403e02",
+        "matrix3-6f58c744d4202f112be3",
+        "matrix3-70248ff8346118ef601b",
+        "matrix3-c0620a3854940c063261",
+        "matrix3-dfd1297a8052c02bfde4",
+        "matrix3-efd32a85ef0f802c432a"
+      ],
+      "mcnemar_exact_p": 9.5367431640625e-07,
+      "paired_bootstrap_95_ci": [
+        0.5,
+        0.8125
+      ],
+      "right_only": 0,
+      "right_only_by_family": {},
+      "right_only_case_ids": []
+    },
+    "four_b_vs_nine_b": {
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "choice-exact-replication-v3:four-nine",
+      "cases": 32,
+      "delta": 0.34375,
+      "left_only": 12,
+      "left_only_by_family": {
+        "host_count_exact_replication": 4,
+        "verbal_average_exact_replication": 8
+      },
+      "left_only_case_ids": [
+        "matrix3-0256d4d9e09eaef2821c",
+        "matrix3-05308a87e553381e642e",
+        "matrix3-1b66e4bfc72acaeb3b83",
+        "matrix3-2b05520cf0ad16cb7559",
+        "matrix3-35b18474f586c20b7093",
+        "matrix3-4b815ebd19fab299e1b3",
+        "matrix3-5e98f7a5f5fb70e0147c",
+        "matrix3-6d807ffa812015819541",
+        "matrix3-6f58c744d4202f112be3",
+        "matrix3-c0620a3854940c063261",
+        "matrix3-dfd1297a8052c02bfde4",
+        "matrix3-efd32a85ef0f802c432a"
+      ],
+      "mcnemar_exact_p": 0.00341796875,
+      "paired_bootstrap_95_ci": [
+        0.15625,
+        0.53125
+      ],
+      "right_only": 1,
+      "right_only_by_family": {
+        "verbal_average_exact_replication": 1
+      },
+      "right_only_case_ids": [
+        "matrix3-ddf4c2513d798f9418a6"
+      ]
+    }
+  },
+  "decision": {
+    "benchmark_superiority_claim_allowed": false,
+    "executor_significantly_exceeds_nine_b_on_exact_replication": true,
+    "executor_significantly_improves_over_four_b_direct": true,
+    "independent_holdout_allowed": false,
+    "merge_allowed": false,
+    "next_action": "Preserve verifier v2 as replicated mechanism evidence. Pre-register a benchmark-agnostic transfer intervention that can affect the frozen local and prior three-task suites, then require per-task non-regression before any holdout or training promotion.",
+    "preregistered_executor_vs_nine_b_gate_passed": true,
+    "rl_allowed": false,
+    "scale_allowed": false
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "independent_holdout_rows_loaded": false,
+    "independent_quality_claim_allowed": false,
+    "matrix_training_allowed": false,
+    "target_used_by_executor_parser": false,
+    "training_eligible_cases": 0
+  },
+  "experiment_id": "generic-choice-exact-replication-eval-v3",
+  "identity": {
+    "config_sha256": "c71f0cd6f730946fed6c92c5d2172bbbf8a03c937127de1e9d975d8134270ace",
+    "four_b_model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "four_b_serving_receipt_sha256": "2549527942acfe53a1eb352453649a9ea3cc31d68bb9790c865553ee95c2f578",
+    "matrix_sha256": "0962a82e02151a7af1f3b498bab0f50d8004e630e851401687084e4d77fc8276",
+    "nine_b_model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+    "prior_verifier_report_sha256": "3a8239b047b76774f67bdde5ea1f62b3abdc76ccd0858a2825de9d52b50899fc",
+    "raw_result_sha256": "2720c866ab72090b15feb3ffedd2fc6f66890cac118ad8ab8afb21230fb65c49"
+  },
+  "passed": true,
+  "pre_registration_revision": "3b90f87",
+  "routing": {
+    "expected_route_matches": 32,
+    "fallbacks": 0,
+    "verified_overrides": 32
+  },
+  "schema_version": "nano_harness_public_choice_exact_replication_v3",
+  "validation": {
+    "all_arms_parseable_32": true,
+    "all_rows_scored_32": true,
+    "executor_all_routes_verified": true,
+    "executor_correct_32": true,
+    "executor_vs_four_significant": true,
+    "executor_vs_nine_preregistered_gate_passed": true,
+    "matrix_evaluation_only": true,
+    "training_eligible_zero": true
+  }
+}
