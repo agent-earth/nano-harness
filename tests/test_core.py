@@ -20,6 +20,7 @@ from nano_harness.baseline import (
     _run_protected_math_majority_case,
     _run_protected_math_recovery_case,
     _run_protected_math_short_recovery_case,
+    _run_protected_math_constrained_recovery_case,
     _strategy_for_case,
     build_case,
     compare_baselines,
@@ -1394,6 +1395,77 @@ class CoreTests(unittest.TestCase):
             "short_recovery_prediction",
         )
 
+    def test_constrained_math_recovery_forwards_numeric_regex(self):
+        case = build_case(
+            "gsm8k",
+            "numeric_exact",
+            0,
+            {
+                "question": "What is 7 plus 5?",
+                "answer": "Compute 7 + 5 = 12.\n#### 12",
+            },
+            system_prompt="answer",
+            max_tokens=600,
+        )
+        direct_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="Reasoning without final",
+                    usage={"prompt_tokens": 10, "completion_tokens": 5},
+                    raw={"choices": [{"finish_reason": "length"}]},
+                )
+            ]
+        )
+        recovery_client = ScriptedClient(
+            [
+                ModelReply(
+                    content="FINAL: 12",
+                    usage={"prompt_tokens": 20, "completion_tokens": 4},
+                    raw={"choices": [{"finish_reason": "stop"}]},
+                )
+            ]
+        )
+        manifest = SuiteManifest(
+            schema_version="nano_harness_baseline_suite_v1",
+            suite_id="constrained-recovery-test",
+            selection_seed="fixed",
+            system_prompt="answer",
+            max_tokens=600,
+            temperature=0.0,
+            chat_template_kwargs={"enable_thinking": False},
+            strategy="protected_math_constrained_recovery",
+            benchmark_routing={},
+            draft_max_tokens=256,
+            critique_max_tokens=192,
+            second_solve_max_tokens=32,
+            option_evidence_max_tokens=96,
+            verifier_max_tokens=8,
+            normalize_bare_choice=False,
+            fallback_to_protected_on_parse_failure=False,
+            min_task_groups=1,
+            datasets=(),
+        )
+        reply, stages = _run_protected_math_constrained_recovery_case(
+            case,
+            manifest,
+            ModelConfig(name="test"),
+            {600: direct_client, 32: recovery_client},
+        )
+        self.assertEqual(reply.content, "FINAL: 12")
+        extra = recovery_client.calls[0]["extra_body"]
+        self.assertEqual(
+            extra,
+            {
+                "structured_outputs": {
+                    "regex": r"FINAL: [-+]?(?:[0-9]+(?:\.[0-9]+)?|\.[0-9]+)"
+                }
+            },
+        )
+        self.assertEqual(
+            stages["conditional_recovery"]["structured_outputs"],
+            extra["structured_outputs"],
+        )
+
     def test_baseline_manifest_filters_long_prompts_before_selection(self):
         with tempfile.TemporaryDirectory() as directory:
             from datasets import Dataset
@@ -1441,7 +1513,7 @@ class CoreTests(unittest.TestCase):
             self.assertEqual(len(cases), 1)
             self.assertEqual(cases[0].source_index, 0)
 
-    def test_openai_client_forwards_chat_template_kwargs(self):
+    def test_openai_client_merges_extra_body_with_chat_template_kwargs(self):
         response = MagicMock()
         message = MagicMock()
         message.content = "FINAL: A"
@@ -1464,13 +1536,21 @@ class CoreTests(unittest.TestCase):
                     chat_template_kwargs={"enable_thinking": False},
                 )
             )
-            reply = client.complete([{"role": "user", "content": "answer"}])
+            reply = client.complete(
+                [{"role": "user", "content": "answer"}],
+                extra_body={
+                    "structured_outputs": {"regex": r"FINAL: [A-D]"}
+                },
+            )
 
         self.assertEqual(reply.content, "FINAL: A")
         kwargs = openai.return_value.chat.completions.create.call_args.kwargs
         self.assertEqual(
             kwargs["extra_body"],
-            {"chat_template_kwargs": {"enable_thinking": False}},
+            {
+                "chat_template_kwargs": {"enable_thinking": False},
+                "structured_outputs": {"regex": r"FINAL: [A-D]"},
+            },
         )
 
     def test_baseline_summary_keeps_per_benchmark_metrics(self):

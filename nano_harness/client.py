@@ -37,6 +37,7 @@ class OpenRouterClient:
         self,
         messages: list[dict[str, Any]],
         tools: list[dict[str, Any]] | None = None,
+        extra_body: dict[str, Any] | None = None,
     ) -> ModelReply:
         last_error: Exception | None = None
         for attempt in range(self.config.max_retries):
@@ -47,10 +48,13 @@ class OpenRouterClient:
                     "temperature": self.config.temperature,
                     "max_tokens": self.config.max_tokens,
                 }
+                request_extra = dict(extra_body or {})
                 if self.config.chat_template_kwargs:
-                    kwargs["extra_body"] = {
-                        "chat_template_kwargs": self.config.chat_template_kwargs
-                    }
+                    request_extra["chat_template_kwargs"] = (
+                        self.config.chat_template_kwargs
+                    )
+                if request_extra:
+                    kwargs["extra_body"] = request_extra
                 if tools:
                     kwargs["tools"] = tools
                     kwargs["tool_choice"] = "auto"
@@ -102,11 +106,13 @@ class ScriptedClient:
         self,
         messages: list[dict[str, Any]],
         tools: list[dict[str, Any]] | None = None,
+        extra_body: dict[str, Any] | None = None,
     ) -> ModelReply:
         self.calls.append(
             {
                 "messages": json.loads(json.dumps(messages)),
                 "tools": json.loads(json.dumps(tools)) if tools else None,
+                "extra_body": json.loads(json.dumps(extra_body)) if extra_body else None,
             }
         )
         if not self.replies:
