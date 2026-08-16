@@ -70,3 +70,29 @@ PYTHONPATH=. ../.venv/bin/python scripts/validate_qwen35_baseline.py \
   --case-manifest configs/generated/qwen35_three_task_replication_v1_cases.json
 PYTHONPATH=. ../.venv/bin/python -m pytest -q
 ```
+
+## Result
+
+Qwen3.5-4B scores 163/211 and Qwen3.5-9B scores 151/211. The
+4B-minus-9B paired micro delta is +0.0569, with 95% bootstrap CI
+[0.0000, +0.1185] and exact McNemar p=0.0884. Macro accuracy is 0.6504
+versus 0.5806.
+
+All three task point estimates favor 4B:
+
+- GSM8K: 90/96 versus 89/96;
+- MMLU: 67/96 versus 58/96;
+- GPQA-Diamond: 6/19 versus 4/19.
+
+There are 27 4B-only wins and 15 9B-only wins. The 4B arm has two parse
+failures, while 9B has 33, including 25 on MMLU. This is valid end-to-end
+contract behavior, but downstream data must distinguish format failures from
+semantic answer failures.
+
+The directional holdout5 advantage replicates without task regression, but
+the confidence interval lower bound is zero and p exceeds 0.05. The result
+therefore fails the pre-registered significance rule and does not establish
+statistically significant superiority.
+
+- [`docs/results/three_task_replication_v1.md`](../results/three_task_replication_v1.md)
+- [`docs/results/three_task_replication_v1.public.json`](../results/three_task_replication_v1.public.json)
