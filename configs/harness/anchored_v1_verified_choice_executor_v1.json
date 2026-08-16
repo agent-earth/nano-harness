@@ -1,0 +1,14 @@
+{
+  "ambiguous_fallback": "reuse_direct_output",
+  "baseline_result_path": "results/harness/anchored-v1-choice-calculation-selector-v1/local/result.json",
+  "baseline_result_sha256": "7f9ed333fbf75beea925d3de261587d5225521fa63fecc4bb68c267e9f6cc57e",
+  "dataset_path": "../nano-data-pipeline/datasets/generic_choice_replay_v11.json",
+  "dataset_sha256": "4657e96af9f9d1b81bfdb5fac6a29c31baf24b23d7753508aafdea5603ffd80d",
+  "exact_option_match_required": true,
+  "experiment_id": "anchored-v1-verified-choice-executor-v1",
+  "output_path": "results/harness/anchored-v1-verified-choice-executor-v1/local/result.json",
+  "parser_version": "explicit_two_expression_average_v1",
+  "schema_version": "nano_harness_verified_choice_v1",
+  "supported_format_family": "final_choice",
+  "supported_intent": "average_of_two_expression_results"
+}

@@ -49,6 +49,10 @@ from nano_harness.harness import AgentHarness
 from nano_harness.runner import completed_task_ids, merge_paths, run_config
 from nano_harness.state import StateLedger, compact_messages
 from nano_harness.types import ModelReply, Task
+from nano_harness.verified_choice import (
+    load_config as load_verified_choice_config,
+    verify_explicit_average_choice,
+)
 
 
 class FakeToolExecutor:
@@ -61,6 +65,68 @@ class FakeToolExecutor:
 
 
 class CoreTests(unittest.TestCase):
+    def test_verified_choice_config_is_frozen(self):
+        source = Path(
+            "configs/harness/anchored_v1_verified_choice_executor_v1.json"
+        )
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "config.json"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            config = load_verified_choice_config(path)
+            self.assertTrue(config.exact_option_match_required)
+            raw["ambiguous_fallback"] = "round_to_nearest"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "ambiguous_fallback"):
+                load_verified_choice_config(path)
+
+    def test_verified_choice_selects_unique_exact_average(self):
+        prompt = (
+            "Two players have total scores 27 * 4 and 26 * 7. "
+            "What is the average of the two player totals?\n"
+            "A. 133\nB. 145\nC. 151\nD. 159\n"
+            "Return only one standalone line: FINAL: <letter>."
+        )
+        receipt = verify_explicit_average_choice(prompt)
+        self.assertTrue(receipt["eligible"])
+        self.assertTrue(receipt["override"])
+        self.assertEqual(receipt["selected_letter"], "B")
+        self.assertEqual(receipt["expression_values"], ["108", "182"])
+        self.assertEqual(receipt["result"], "145")
+
+    def test_verified_choice_rejects_fraction_without_exact_option(self):
+        prompt = (
+            "Two players have total scores 51 * 7 and 50 * 6. "
+            "What is the average of the two player totals?\n"
+            "A. 316\nB. 328\nC. 334\nD. 342\n"
+            "Return only one standalone line: FINAL: <letter>."
+        )
+        receipt = verify_explicit_average_choice(prompt)
+        self.assertTrue(receipt["eligible"])
+        self.assertFalse(receipt["override"])
+        self.assertEqual(receipt["result"], "657/2")
+        self.assertEqual(receipt["exact_matching_options"], [])
+        self.assertEqual(receipt["reason"], "no_unique_exact_option_match")
+
+    def test_verified_choice_rejects_unsupported_intent(self):
+        receipt = verify_explicit_average_choice(
+            "What is 7 * 8?\nA. 54\nB. 56\nC. 58\nD. 60"
+        )
+        self.assertFalse(receipt["eligible"])
+        self.assertFalse(receipt["override"])
+        self.assertEqual(receipt["reason"], "unsupported_intent")
+
+    def test_verified_choice_rejects_decimal_expression(self):
+        prompt = (
+            "Two players have total scores 7.5 * 4 and 6 * 5. "
+            "What is the average of the two player totals?\n"
+            "A. 28\nB. 30\nC. 32\nD. 34"
+        )
+        receipt = verify_explicit_average_choice(prompt)
+        self.assertFalse(receipt["eligible"])
+        self.assertFalse(receipt["override"])
+        self.assertEqual(receipt["reason"], "expression_count_not_two")
+
     def test_analog_contract_config_is_frozen(self):
         source = Path(
             "configs/harness/anchored_v1_choice_calculation_selector_v1.json"
