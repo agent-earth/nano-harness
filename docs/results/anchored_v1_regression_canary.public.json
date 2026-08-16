@@ -1,0 +1,49 @@
+{
+  "candidate": {
+    "by_benchmark": {
+      "gpqa_diamond": {
+        "api_errors": 0,
+        "cases": 8,
+        "correct": 4,
+        "length_truncations": 0,
+        "parse_failures": 0
+      },
+      "gsm8k": {
+        "api_errors": 0,
+        "cases": 16,
+        "correct": 15,
+        "length_truncations": 0,
+        "parse_failures": 0
+      },
+      "mmlu": {
+        "api_errors": 0,
+        "cases": 16,
+        "correct": 13,
+        "length_truncations": 0,
+        "parse_failures": 0
+      }
+    },
+    "cases": 40,
+    "correct": 32
+  },
+  "decision": {
+    "full_development_suite_allowed": true,
+    "independent_holdout_allowed": false,
+    "merge_allowed": false,
+    "rl_allowed": false,
+    "scale_allowed": false
+  },
+  "experiment_id": "qwen35-anchored-v1-regression-canary",
+  "identity": {
+    "namespace_receipt_sha256": "2549527942acfe53a1eb352453649a9ea3cc31d68bb9790c865553ee95c2f578",
+    "raw_sha256": "c42b266b234b3f77f9b22ff8f70e5f2c7de6503a9fa96282b7fcfa4522c74b91",
+    "serving_parity_sha256": "8e2d04eae6fe02c23d72e930704ece58788209be6e3214dd21b3f0cf6e08762f"
+  },
+  "passed": true,
+  "policy": {
+    "case_level_publication_allowed": false,
+    "quality_claim_allowed": false,
+    "training_eligible": false
+  },
+  "schema_version": "nano_harness_anchored_v1_canary_public"
+}
