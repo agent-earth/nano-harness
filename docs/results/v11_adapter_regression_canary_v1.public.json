@@ -1,0 +1,84 @@
+{
+  "calibration": {
+    "base_four_b_total": 30,
+    "rejected_v6_total": 28
+  },
+  "candidate": {
+    "api_errors": 0,
+    "by_benchmark": {
+      "gpqa_diamond": {
+        "api_errors": 0,
+        "base_parse_failures": 0,
+        "cases": 8,
+        "correct": 4,
+        "length_truncations": 0,
+        "parse_failures": 0,
+        "parse_non_regression": true,
+        "threshold": 3,
+        "threshold_passed": true
+      },
+      "gsm8k": {
+        "api_errors": 0,
+        "base_parse_failures": 1,
+        "cases": 16,
+        "correct": 15,
+        "length_truncations": 0,
+        "parse_failures": 0,
+        "parse_non_regression": true,
+        "threshold": 14,
+        "threshold_passed": true
+      },
+      "mmlu": {
+        "api_errors": 0,
+        "base_parse_failures": 0,
+        "cases": 16,
+        "correct": 13,
+        "length_truncations": 0,
+        "parse_failures": 0,
+        "parse_non_regression": true,
+        "threshold": 13,
+        "threshold_passed": true
+      }
+    },
+    "cases": 40,
+    "correct": 32,
+    "length_truncations": 0,
+    "parse_failures": 0,
+    "required_total": 30
+  },
+  "decision": {
+    "canary_passed": true,
+    "full_benchmark_allowed": true,
+    "independent_quality_claim_allowed": false,
+    "merge_allowed": false,
+    "next_action": "Pre-register and run the unchanged adapter on the frozen 211-case matched suite. Preserve all raw case evidence locally and report task-level paired comparisons.",
+    "rl_allowed": false,
+    "scale_allowed": false
+  },
+  "identity": {
+    "canary_manifest_sha256": "e213985897e1da260c24e8f383e80d02a3f9c880a09f45e6cc2cc27f51dcf0f8",
+    "candidate_case_id_set_sha256": "84ab55bd0c8ad53d03f87941ff83c66f8be18a3205d3bb6477c3079a190eb402",
+    "candidate_raw_sha256": "85d993405f6f7813e4dfaba2b813719fb3b0abda6558f3827aec463ed591a4cb",
+    "local_gate_report_sha256": "537a981012f2a9f52653bb881f743a966bd8ed9b8b92cc17dc77922f5a8265b6",
+    "model": "qwen3.5-4b-targeted-v11",
+    "namespace_receipt_sha256": "c19ad8955b93dc01a924f9d8eebccf2ae25322c830c67096824db09b6d648fe3",
+    "serving_parity_sha256": "ebc89761a0866007894d351d6ec663c6a9ffdd9f0ecfa6ddc78cda69f8d6aec9"
+  },
+  "passed": true,
+  "policy": {
+    "case_level_publication_allowed": false,
+    "post_v6_calibrated": true,
+    "purpose": "adapter_regression_gate_only",
+    "quality_claim_allowed": false,
+    "source_split": "sealed_eval_canary",
+    "training_eligible": false
+  },
+  "schema_version": "nano_harness_v11_adapter_canary_v1",
+  "serving": {
+    "adapter_parent_matches": true,
+    "base_adapter_logits_differ": true,
+    "namespace_tensor_content_hashes_match": true,
+    "namespace_tensor_count": 224
+  },
+  "suite_id": "qwen35-adapter-regression-canary-v1"
+}
