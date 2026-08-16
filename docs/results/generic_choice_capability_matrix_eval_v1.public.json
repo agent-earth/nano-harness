@@ -1,0 +1,218 @@
+{
+  "arms": {
+    "four_b_direct": {
+      "accuracy": 0.59375,
+      "ambiguity_cases": 16,
+      "by_family": {
+        "duplicate_option_ambiguity": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "explicit_average_exact": {
+          "cases": 8,
+          "correct": 2,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "explicit_average_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "host_count_exact": {
+          "cases": 8,
+          "correct": 4,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "sequential_fraction_exact": {
+          "cases": 8,
+          "correct": 8,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "verbal_average_exact": {
+          "cases": 8,
+          "correct": 5,
+          "parseable": 8,
+          "scored_cases": 8
+        }
+      },
+      "cases": 48,
+      "correct": 19,
+      "parseable": 48,
+      "scored_cases": 32
+    },
+    "four_b_verified_executor": {
+      "accuracy": 0.78125,
+      "ambiguity_cases": 16,
+      "by_family": {
+        "duplicate_option_ambiguity": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "explicit_average_exact": {
+          "cases": 8,
+          "correct": 8,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "explicit_average_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "host_count_exact": {
+          "cases": 8,
+          "correct": 4,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "sequential_fraction_exact": {
+          "cases": 8,
+          "correct": 8,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "verbal_average_exact": {
+          "cases": 8,
+          "correct": 5,
+          "parseable": 8,
+          "scored_cases": 8
+        }
+      },
+      "cases": 48,
+      "correct": 25,
+      "parseable": 48,
+      "scored_cases": 32
+    },
+    "nine_b_direct": {
+      "accuracy": 0.0,
+      "ambiguity_cases": 16,
+      "by_family": {
+        "duplicate_option_ambiguity": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 0,
+          "scored_cases": 0
+        },
+        "explicit_average_exact": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 0,
+          "scored_cases": 8
+        },
+        "explicit_average_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 0,
+          "scored_cases": 0
+        },
+        "host_count_exact": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 0,
+          "scored_cases": 8
+        },
+        "sequential_fraction_exact": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 0,
+          "scored_cases": 8
+        },
+        "verbal_average_exact": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 0,
+          "scored_cases": 8
+        }
+      },
+      "cases": 48,
+      "correct": 0,
+      "failure": "reasoning_truncated_before_final_under_frozen_32_token_budget",
+      "outputs_at_token_cap": 48,
+      "outputs_containing_final": 0,
+      "parseable": 0,
+      "scored_cases": 32,
+      "valid_for_quality_comparison": false
+    }
+  },
+  "decision": {
+    "four_b_exceeds_nine_b_claim_allowed": false,
+    "four_b_significantly_improves_over_direct_on_matrix": true,
+    "independent_holdout_allowed": false,
+    "merge_allowed": false,
+    "next_action": "Pre-register a matched matrix v2 that constrains both 4B and 9B direct decoding to FINAL: [A-D]. Preserve the v1 executor arm and matrix; do not rerun or reinterpret the invalid 9B arm.",
+    "rl_allowed": false,
+    "scale_allowed": false,
+    "verified_executor_capability_supported": true
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "independent_holdout_rows_loaded": false,
+    "independent_quality_claim_allowed": false,
+    "matrix_training_allowed": false,
+    "nine_b_quality_comparison_allowed": false,
+    "target_used_by_executor_parser": false,
+    "training_eligible_cases": 0
+  },
+  "executor_vs_four_b_direct": {
+    "baseline_only": 0,
+    "baseline_only_case_ids": [],
+    "candidate_only": 6,
+    "candidate_only_case_ids": [
+      "matrix-04cba53e856c3bfe63f6",
+      "matrix-52c9d9d61fe8685e44cb",
+      "matrix-6de34b7dd3226c3a7e04",
+      "matrix-81356e16bd9da08729e6",
+      "matrix-896602fdd05bc4571b17",
+      "matrix-a917035c3feeebebd45d"
+    ],
+    "cases": 32,
+    "delta": 0.1875,
+    "fixed_by_family": {
+      "explicit_average_exact": 6
+    },
+    "mcnemar_exact_p": 0.03125,
+    "paired_bootstrap_95_ci": [
+      0.0625,
+      0.3125
+    ]
+  },
+  "experiment_id": "generic-choice-capability-matrix-eval-v1",
+  "identity": {
+    "config_sha256": "f40be9cc5f1a98fb101724bae43a3ede1f477f4cf2d7a4956fa7efc42a2d7257",
+    "four_b_serving_receipt_sha256": "2549527942acfe53a1eb352453649a9ea3cc31d68bb9790c865553ee95c2f578",
+    "matrix_sha256": "5db7561b95f6b951ef7fb45293e24a39276b69b5b43e04c63712f8450e37b933",
+    "raw_result_sha256": "fcb145d64dce23e4558d4004dea3b11f4ef1aa442e9026118abbf6966985d31b"
+  },
+  "passed": true,
+  "pre_registration_revision": "815700d",
+  "routing": {
+    "ambiguity_direct_parity": 16,
+    "ambiguity_overrides": 0,
+    "expected_route_matches": 48,
+    "fallbacks": 40,
+    "verified_overrides": 8
+  },
+  "schema_version": "nano_harness_public_choice_matrix_eval_v1",
+  "validation": {
+    "ambiguity_parity_16": true,
+    "ambiguity_zero_overrides": true,
+    "executor_correct_25": true,
+    "expected_route_matches_48": true,
+    "four_b_direct_correct_19": true,
+    "matrix_cases_48": true,
+    "nine_b_arm_invalid": true,
+    "scored_cases_32": true,
+    "six_fixes_zero_regressions": true,
+    "training_eligible_zero": true
+  }
+}
