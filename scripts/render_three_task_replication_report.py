@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -24,6 +23,7 @@ PATHS = {
     ),
 }
 MANIFEST = Path("configs/harness/qwen35_three_task_replication_v1.yaml")
+PRE_REGISTRATION_REVISION = "2206fe7bc490ffd5d8689380ed01da38256b8ddd"
 
 
 def sha256_file(path: Path) -> str:
@@ -32,15 +32,6 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
-
-
-def git_revision() -> str:
-    return subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
 
 
 def rows(path: Path) -> dict[str, dict[str, Any]]:
@@ -143,7 +134,7 @@ def main() -> None:
     report = {
         "schema_version": "nano_harness_public_three_task_replication_v1",
         "experiment_id": "qwen35-three-task-replication-v1",
-        "code_revision": git_revision(),
+        "code_revision": PRE_REGISTRATION_REVISION,
         "comparison": comparison,
         "costs": costs,
         "contract_audits": {

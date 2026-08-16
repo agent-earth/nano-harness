@@ -3,7 +3,7 @@
     "four_b_raw_sha256": "977a99e978936fbcfc99d45d859a8324746215b3ba518ed3bc5c4a2b5990b33e",
     "nine_b_raw_sha256": "07b442f620245379444f02d633c76502032df84dfe5ad0b74d88996d3c0103bd"
   },
-  "code_revision": "1afd65fe90227daac57b355048cbf6c34a1dedcc",
+  "code_revision": "8776f7b610f8cbb9e8c2716f7cd87b4e828978cd",
   "comparison": {
     "baseline_macro_accuracy": 0.787109375,
     "baseline_model": "qwen3.5-9b",

@@ -20,6 +20,7 @@ PATHS = {
     ),
 }
 MANIFEST = Path("configs/harness/qwen35_large_confirmation_v1.yaml")
+PRE_REGISTRATION_REVISION = "8776f7b610f8cbb9e8c2716f7cd87b4e828978cd"
 
 
 def format_diagnostic() -> dict:
@@ -97,7 +98,7 @@ def main() -> None:
     report = {
         "schema_version": "nano_harness_public_large_confirmation_v1",
         "experiment_id": "qwen35-large-confirmation-v1",
-        "code_revision": base.git_revision(),
+        "code_revision": PRE_REGISTRATION_REVISION,
         "comparison": comparison,
         "costs": costs,
         "contract_audits": {
