@@ -1,0 +1,274 @@
+{
+  "arms": {
+    "four_b_constrained": {
+      "accuracy": 0.5,
+      "ambiguity_cases": 32,
+      "by_family": {
+        "host_count_duplicate_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "host_count_exact": {
+          "cases": 8,
+          "correct": 4,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "host_count_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "verbal_average_duplicate_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "verbal_average_exact": {
+          "cases": 8,
+          "correct": 4,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "verbal_average_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        }
+      },
+      "cases": 48,
+      "correct": 8,
+      "parseable": 48,
+      "scored_cases": 16
+    },
+    "four_b_verified_executor_v2": {
+      "accuracy": 1.0,
+      "ambiguity_cases": 32,
+      "by_family": {
+        "host_count_duplicate_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "host_count_exact": {
+          "cases": 8,
+          "correct": 8,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "host_count_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "verbal_average_duplicate_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "verbal_average_exact": {
+          "cases": 8,
+          "correct": 8,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "verbal_average_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        }
+      },
+      "cases": 48,
+      "correct": 16,
+      "parseable": 48,
+      "scored_cases": 16
+    },
+    "nine_b_constrained": {
+      "accuracy": 0.6875,
+      "ambiguity_cases": 32,
+      "by_family": {
+        "host_count_duplicate_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "host_count_exact": {
+          "cases": 8,
+          "correct": 5,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "host_count_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "verbal_average_duplicate_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        },
+        "verbal_average_exact": {
+          "cases": 8,
+          "correct": 6,
+          "parseable": 8,
+          "scored_cases": 8
+        },
+        "verbal_average_no_exact_option": {
+          "cases": 8,
+          "correct": 0,
+          "parseable": 8,
+          "scored_cases": 0
+        }
+      },
+      "cases": 48,
+      "correct": 11,
+      "parseable": 48,
+      "scored_cases": 16
+    }
+  },
+  "comparisons": {
+    "executor_vs_four_b": {
+      "cases": 16,
+      "delta": 0.5,
+      "left_only": 8,
+      "left_only_by_family": {
+        "host_count_exact": 4,
+        "verbal_average_exact": 4
+      },
+      "left_only_case_ids": [
+        "matrix2-10795ac25a7761efeffd",
+        "matrix2-1626ee473bfa445f34a1",
+        "matrix2-1d5a1dc6a91a9ff8e18a",
+        "matrix2-2c804b8d738bf46f5344",
+        "matrix2-41ca6eb4ffc783d6e523",
+        "matrix2-48b4481944655ad4b723",
+        "matrix2-965c4020063d6b9bb683",
+        "matrix2-d176907afafe0fca7d39"
+      ],
+      "mcnemar_exact_p": 0.0078125,
+      "paired_bootstrap_95_ci": [
+        0.25,
+        0.75
+      ],
+      "right_only": 0,
+      "right_only_by_family": {},
+      "right_only_case_ids": []
+    },
+    "executor_vs_nine_b": {
+      "cases": 16,
+      "delta": 0.3125,
+      "left_only": 5,
+      "left_only_by_family": {
+        "host_count_exact": 3,
+        "verbal_average_exact": 2
+      },
+      "left_only_case_ids": [
+        "matrix2-10795ac25a7761efeffd",
+        "matrix2-1626ee473bfa445f34a1",
+        "matrix2-2c804b8d738bf46f5344",
+        "matrix2-41ca6eb4ffc783d6e523",
+        "matrix2-d176907afafe0fca7d39"
+      ],
+      "mcnemar_exact_p": 0.0625,
+      "paired_bootstrap_95_ci": [
+        0.125,
+        0.5625
+      ],
+      "right_only": 0,
+      "right_only_by_family": {},
+      "right_only_case_ids": []
+    },
+    "four_b_vs_nine_b": {
+      "cases": 16,
+      "delta": -0.1875,
+      "left_only": 0,
+      "left_only_by_family": {},
+      "left_only_case_ids": [],
+      "mcnemar_exact_p": 0.25,
+      "paired_bootstrap_95_ci": [
+        -0.375,
+        0.0
+      ],
+      "right_only": 3,
+      "right_only_by_family": {
+        "host_count_exact": 1,
+        "verbal_average_exact": 2
+      },
+      "right_only_case_ids": [
+        "matrix2-1d5a1dc6a91a9ff8e18a",
+        "matrix2-48b4481944655ad4b723",
+        "matrix2-965c4020063d6b9bb683"
+      ]
+    }
+  },
+  "decision": {
+    "benchmark_superiority_claim_allowed": false,
+    "executor_ci_positive_over_nine_b": true,
+    "executor_significantly_exceeds_nine_b": false,
+    "executor_significantly_improves_over_four_b_direct": true,
+    "independent_holdout_allowed": false,
+    "merge_allowed": false,
+    "next_action": "Pre-register a larger history-disjoint replication of exact host-count and verbal-average cases to test the 5-0 executor advantage over 9B with adequate McNemar power. Preserve all ambiguity families as safety-only and training-forbidden.",
+    "replication_required_for_nine_b_significance": true,
+    "rl_allowed": false,
+    "scale_allowed": false
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "independent_holdout_rows_loaded": false,
+    "independent_quality_claim_allowed": false,
+    "matrix_training_allowed": false,
+    "target_used_by_executor_parser": false,
+    "training_eligible_cases": 0
+  },
+  "experiment_id": "generic-choice-verifier-matrix-eval-v2",
+  "identity": {
+    "config_sha256": "00e5b2125edee0c8e54c771746952375d6227bb69aa518bb195b642e61dd1ef1",
+    "four_b_model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "four_b_serving_receipt_sha256": "2549527942acfe53a1eb352453649a9ea3cc31d68bb9790c865553ee95c2f578",
+    "matrix_sha256": "70330f730f144c1fb05d50a27e566321561451a962d0bdf736f27b8faa2f79b0",
+    "nine_b_model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+    "prior_matrix_report_sha256": "f225e9625701686757601fa615699301cd1b9374c982451e6a6f7998fd13bf11",
+    "raw_result_sha256": "e6b208e1b3d816fc540d6a7c7e9315338751c09804b248691c633186491c4c87"
+  },
+  "passed": true,
+  "pre_registration_revision": "5a38882",
+  "routing": {
+    "ambiguity_direct_parity": 32,
+    "ambiguity_overrides": 0,
+    "expected_route_matches": 48,
+    "fallbacks": 32,
+    "verified_overrides": 16
+  },
+  "schema_version": "nano_harness_public_choice_verifier_matrix_v2",
+  "validation": {
+    "all_arms_parseable_48": true,
+    "ambiguity_parity_32": true,
+    "ambiguity_zero_overrides": true,
+    "executor_correct_16": true,
+    "executor_eight_wins_zero_losses_vs_four": true,
+    "executor_five_wins_zero_losses_vs_nine": true,
+    "executor_vs_four_significant": true,
+    "executor_vs_nine_ci_positive": true,
+    "executor_vs_nine_mcnemar_not_below_005": true,
+    "expected_route_matches_48": true,
+    "four_b_correct_8": true,
+    "four_vs_nine_not_significant": true,
+    "nine_b_correct_11": true,
+    "training_eligible_zero": true
+  }
+}
