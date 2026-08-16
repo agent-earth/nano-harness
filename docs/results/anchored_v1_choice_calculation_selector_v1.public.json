@@ -1,0 +1,149 @@
+{
+  "baseline": {
+    "by_family": {
+      "capability_preservation_choice": {
+        "exact": 6,
+        "failure_sample_ids": [
+          "synthetic-1a7b299fb729cd67bd71",
+          "synthetic-cb1b63a543f33dcb72fe"
+        ],
+        "samples": 8,
+        "semantic_exact": 6
+      },
+      "capability_preservation_numeric": {
+        "exact": 8,
+        "failure_sample_ids": [
+          "synthetic-33e0eb52e48e0c3d5634",
+          "synthetic-3c3b215d2977ecf9e2db",
+          "synthetic-6ff963588953d733c5a3",
+          "synthetic-c3daf536f8bd333e8555",
+          "synthetic-ded38e17d41cc5a613da"
+        ],
+        "samples": 16,
+        "semantic_exact": 11
+      },
+      "semantic_arithmetic_process": {
+        "exact": 8,
+        "failure_sample_ids": [],
+        "samples": 8,
+        "semantic_exact": 8
+      }
+    },
+    "exact": 22,
+    "samples": 32,
+    "semantic_exact": 25
+  },
+  "candidate": {
+    "by_family": {
+      "capability_preservation_choice": {
+        "exact": 6,
+        "failure_sample_ids": [
+          "synthetic-1a7b299fb729cd67bd71",
+          "synthetic-cb1b63a543f33dcb72fe"
+        ],
+        "samples": 8,
+        "semantic_exact": 6
+      },
+      "capability_preservation_numeric": {
+        "exact": 8,
+        "failure_sample_ids": [
+          "synthetic-33e0eb52e48e0c3d5634",
+          "synthetic-3c3b215d2977ecf9e2db",
+          "synthetic-6ff963588953d733c5a3",
+          "synthetic-c3daf536f8bd333e8555",
+          "synthetic-ded38e17d41cc5a613da"
+        ],
+        "samples": 16,
+        "semantic_exact": 11
+      },
+      "semantic_arithmetic_process": {
+        "exact": 8,
+        "failure_sample_ids": [],
+        "samples": 8,
+        "semantic_exact": 8
+      }
+    },
+    "exact": 22,
+    "samples": 32,
+    "semantic_exact": 25
+  },
+  "cost": {
+    "baseline_usage": {
+      "completion_tokens": 973.0,
+      "prompt_tokens": 3306.0,
+      "total_tokens": 4279.0
+    },
+    "candidate_to_baseline_total_token_ratio": 1.448936667445665,
+    "candidate_usage": {
+      "completion_tokens": 1005.0,
+      "prompt_tokens": 5195.0,
+      "total_tokens": 6200.0
+    },
+    "wall_seconds": 107.44921064376831
+  },
+  "decision": {
+    "accepted_local_harness": false,
+    "independent_holdout_allowed": false,
+    "merge_allowed": false,
+    "next_action": "Reject the exact calculation-selector prompt protocol and preserve anchored-v1. Replan from the observed instruction-hierarchy failure without changing this protocol post hoc.",
+    "post_hoc_prompt_or_budget_search_allowed": false,
+    "prior_full_suite_allowed": false,
+    "rl_allowed": false,
+    "scale_allowed": false,
+    "sealed_canary_allowed": false
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "independent_holdout_prompts_loaded": false,
+    "independent_holdout_references_loaded": false,
+    "independent_holdout_run": false,
+    "independent_quality_claim_allowed": false,
+    "prior_full_suite_run": false,
+    "sealed_canary_run": false
+  },
+  "experiment_id": "anchored-v1-choice-calculation-selector-v1",
+  "identity": {
+    "config_sha256": "8727fb9f3d97c860f551fac2046822feec64898e9fe5005271f64df8e247674a",
+    "dataset_sha256": "4657e96af9f9d1b81bfdb5fac6a29c31baf24b23d7753508aafdea5603ffd80d",
+    "raw_result_sha256": "7f9ed333fbf75beea925d3de261587d5225521fa63fecc4bb68c267e9f6cc57e",
+    "serving_adapter_weights_sha256": "9ce7be3954f8e0f3d245fe846d6e35275243b7f0caf66cb847fd716173658649",
+    "serving_receipt_sha256": "2549527942acfe53a1eb352453649a9ea3cc31d68bb9790c865553ee95c2f578"
+  },
+  "local_gate": {
+    "baseline_choice_6": true,
+    "baseline_numeric_11": true,
+    "baseline_process_8": true,
+    "baseline_semantic_25": true,
+    "baseline_strict_22": true,
+    "candidate_choice_at_least_7": false,
+    "candidate_numeric_at_least_11": true,
+    "candidate_process_equals_8": true,
+    "candidate_semantic_at_least_25": true,
+    "candidate_strict_at_least_22": true,
+    "non_choice_outputs_equal_24_of_24": true,
+    "selector_contract_8_of_8": true
+  },
+  "mechanism": {
+    "calculation_final_only_rows": 8,
+    "calculation_rows_with_explicit_work": 0,
+    "changed_choice_sample_ids": [
+      "synthetic-cb1b63a543f33dcb72fe"
+    ],
+    "choice_fixes": 0,
+    "choice_outputs_changed": 1,
+    "choice_regressions": 0,
+    "finding": "calculation_stage_obeyed_original_final_only_contract_instead_of_emitting_explicit_work"
+  },
+  "method": {
+    "calculation_max_tokens": 128,
+    "choice_treated_rows": 8,
+    "non_choice_reused_rows": 24,
+    "selector_max_tokens": 8,
+    "selector_regex": "FINAL: [A-D]",
+    "temperature": 0.0,
+    "thinking_enabled": false
+  },
+  "passed": false,
+  "pre_registration_revision": "f747afe",
+  "schema_version": "nano_harness_public_anchored_choice_calculation_selector_v1"
+}
