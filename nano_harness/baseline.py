@@ -45,6 +45,7 @@ class DatasetSpec:
     scorer: str
     limit: int
     start: int = 0
+    indices: tuple[int, ...] = ()
     max_source_chars: int | None = None
     answer_only: bool = False
     max_tokens: int | None = None
@@ -100,7 +101,15 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         raise ValueError(f"unknown manifest fields: {sorted(unknown)}")
     if raw["schema_version"] != "nano_harness_baseline_suite_v1":
         raise ValueError("unsupported baseline suite schema")
-    datasets = tuple(DatasetSpec(**item) for item in raw["datasets"])
+    datasets = tuple(
+        DatasetSpec(
+            **{
+                **item,
+                "indices": tuple(int(index) for index in item.get("indices", ())),
+            }
+        )
+        for item in raw["datasets"]
+    )
     min_task_groups = int(raw.get("min_task_groups", 3))
     if min_task_groups < 1:
         raise ValueError("min_task_groups must be at least one")
@@ -110,6 +119,22 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         )
     if len({item.name for item in datasets}) != len(datasets):
         raise ValueError("dataset names must be unique")
+    for item in datasets:
+        if item.indices and item.start != 0:
+            raise ValueError(
+                f"{item.name} explicit indices require start=0"
+            )
+        if item.indices and len(item.indices) != item.limit:
+            raise ValueError(
+                f"{item.name} indices count must equal limit"
+            )
+        if (
+            len(set(item.indices)) != len(item.indices)
+            or any(index < 0 for index in item.indices)
+        ):
+            raise ValueError(
+                f"{item.name} indices must be unique and non-negative"
+            )
     strategy = str(raw.get("strategy", "direct"))
     supported_strategies = {
         "direct",
@@ -220,6 +245,35 @@ def load_cases(manifest: SuiteManifest, dataset_root: Path) -> list[BaselineCase
             cases = [
                 case for case in cases if case.source_chars <= spec.max_source_chars
             ]
+        if spec.indices:
+            if spec.start != 0:
+                raise ValueError(
+                    f"{spec.name} explicit indices require start=0"
+                )
+            if len(spec.indices) != spec.limit:
+                raise ValueError(
+                    f"{spec.name} indices count must equal limit"
+                )
+            if (
+                len(set(spec.indices)) != len(spec.indices)
+                or any(index < 0 for index in spec.indices)
+            ):
+                raise ValueError(
+                    f"{spec.name} indices must be unique and non-negative"
+                )
+            by_source_index = {case.source_index: case for case in cases}
+            missing = [
+                index for index in spec.indices if index not in by_source_index
+            ]
+            if missing:
+                raise ValueError(
+                    f"{spec.name} explicit indices are not eligible: "
+                    f"{missing[:5]}"
+                )
+            selected.extend(
+                by_source_index[index] for index in spec.indices
+            )
+            continue
         if spec.start < 0:
             raise ValueError(f"{spec.name} start must be non-negative")
         required = spec.start + spec.limit

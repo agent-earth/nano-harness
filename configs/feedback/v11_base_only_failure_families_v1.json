@@ -1,0 +1,51 @@
+{
+  "families": [
+    {
+      "count": 1,
+      "family": "percentage_increase_total_composition",
+      "task_kind": "numeric_reasoning"
+    },
+    {
+      "count": 1,
+      "family": "packing_efficiency_effective_volume",
+      "task_kind": "numeric_reasoning"
+    },
+    {
+      "count": 1,
+      "family": "weighted_recurring_schedule_total",
+      "task_kind": "numeric_reasoning"
+    },
+    {
+      "count": 1,
+      "family": "developmental_perception_experience_choice",
+      "task_kind": "choice_reasoning"
+    }
+  ],
+  "policy": {
+    "benchmark_rows_training_eligible": false,
+    "canary_rows_training_eligible": false,
+    "contains_case_ids": false,
+    "contains_predictions": false,
+    "contains_prompts": false,
+    "contains_raw_outputs": false,
+    "contains_references": false,
+    "contains_reversible_payloads": false,
+    "direct_training_allowed": false,
+    "fresh_analog_generation_allowed": true,
+    "source_split": "sealed_eval_feedback"
+  },
+  "receipt_id": "v11-base-only-failure-families-v1",
+  "schema_version": "nano_harness_failure_family_receipt_v1",
+  "source": {
+    "experiment_id": "qwen35-v11-full-matched-adapter-v1",
+    "public_report_sha256": "c9515f23256007f1ba5f167b2daecd53bbe99285c227a2c31b096ad0e2736352",
+    "source_case_count": 4,
+    "source_case_id_set_sha256": "7d12b24f2dcb5211a67a30bd73e0a5c9c5c880e5f4355018159f4aab7636261b"
+  },
+  "summary": {
+    "choice_reasoning_families": 1,
+    "families": 4,
+    "numeric_reasoning_families": 3,
+    "source_cases": 4
+  }
+}

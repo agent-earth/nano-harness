@@ -1,0 +1,109 @@
+{
+  "datasets": {
+    "gpqa_diamond": {
+      "dataset_rows": 198,
+      "dataset_sha256": "fdd6e95117cdf87075f56bf673a5bae4680b143bc2d29b486470810122c33f39",
+      "eligible_rows": 187,
+      "historically_seen_indices_sha256": "338feff131a69abced1b9935d035c7a3aa94a5b13d6bc7a049666545c32eac0d",
+      "historically_seen_rows": 163,
+      "history_overlap": 0,
+      "selected_indices": [
+        160,
+        146,
+        155,
+        7,
+        47,
+        192,
+        132,
+        180
+      ],
+      "selected_indices_sha256": "ccaa205ae339e0596e08cbd645b5aa13ad53f0e42f75ae72fb5976adada6b0ef",
+      "selected_rows": 8
+    },
+    "gsm8k": {
+      "dataset_rows": 1319,
+      "dataset_sha256": "ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59",
+      "eligible_rows": 1319,
+      "historically_seen_indices_sha256": "9e64c7e3c64840b2aadb63d9bc1a2747cade07f9375cba54539b01fa7eb82f86",
+      "historically_seen_rows": 1000,
+      "history_overlap": 0,
+      "selected_indices": [
+        155,
+        168,
+        73,
+        169,
+        750,
+        247,
+        812,
+        437,
+        304,
+        403,
+        1178,
+        981,
+        835,
+        1015,
+        772,
+        1110
+      ],
+      "selected_indices_sha256": "07bfbf2936cd6f709007b97e18ced7f08024de6b38751a88852af9ed7753e5a8",
+      "selected_rows": 16
+    },
+    "mmlu": {
+      "dataset_rows": 14042,
+      "dataset_sha256": "02033371a64dbe5a0d8b6fb9d612900afcd0fea5140e53490993a4540b3a58fd",
+      "eligible_rows": 14042,
+      "historically_seen_indices_sha256": "041638f374915e2e15a541d86afbab9bde7b3e3d554a2c83c683be9b0349e873",
+      "historically_seen_rows": 448,
+      "history_overlap": 0,
+      "selected_indices": [
+        12685,
+        11226,
+        125,
+        10883,
+        3686,
+        742,
+        8490,
+        7553,
+        1318,
+        2893,
+        6653,
+        6823,
+        13961,
+        11717,
+        3750,
+        10017
+      ],
+      "selected_indices_sha256": "a79ff3e596409376d9c0c094279b87fd82fb8dce0664047ae53eac43499dfb03",
+      "selected_rows": 16
+    }
+  },
+  "history_snapshot": {
+    "excluded_result_prefix": "qwen35-independent-holdout-v1",
+    "result_files": 77,
+    "result_files_digest": "573f3b2a61b5b881e05fdd61ce6a7bfbd6784e2c9572011aa331cfb8fa60907a"
+  },
+  "policy": {
+    "case_manifest_generated_before_evaluation": false,
+    "prompts_loaded_before_evaluation": false,
+    "purpose": "post_intervention_independent_holdout",
+    "selection_uses_model_outputs": false,
+    "selection_uses_question_content": false,
+    "selection_uses_question_length_for_eligibility": true,
+    "selection_uses_references": false,
+    "selection_uses_scores": false,
+    "selection_uses_source_indices_only": true,
+    "training_eligible": false
+  },
+  "schema_version": "nano_harness_unseen_holdout_selection_v1",
+  "selection_seed": "qwen35-independent-holdout-v1-unseen-source-indices",
+  "suite_id": "qwen35-independent-holdout-v1",
+  "summary": {
+    "by_benchmark": {
+      "gpqa_diamond": 8,
+      "gsm8k": 16,
+      "mmlu": 16
+    },
+    "cases": 40,
+    "history_overlap": 0
+  }
+}

@@ -1513,6 +1513,87 @@ class CoreTests(unittest.TestCase):
             self.assertEqual(len(cases), 1)
             self.assertEqual(cases[0].source_index, 0)
 
+    def test_baseline_manifest_selects_explicit_source_indices(self):
+        with tempfile.TemporaryDirectory() as directory:
+            from datasets import Dataset
+
+            root = Path(directory)
+            path = root / "gsm8k.parquet"
+            Dataset.from_list(
+                [
+                    {
+                        "question": f"What is {index} plus one?",
+                        "answer": f"#### {index + 1}",
+                    }
+                    for index in range(5)
+                ]
+            ).to_parquet(str(path))
+            from nano_harness.baseline import sha256_file
+
+            manifest = SuiteManifest(
+                schema_version="nano_harness_baseline_suite_v1",
+                suite_id="indices-test",
+                selection_seed="fixed",
+                system_prompt="answer",
+                max_tokens=8,
+                temperature=0.0,
+                chat_template_kwargs={"enable_thinking": False},
+                strategy="direct",
+                benchmark_routing={},
+                draft_max_tokens=384,
+                critique_max_tokens=192,
+                second_solve_max_tokens=384,
+                option_evidence_max_tokens=96,
+                verifier_max_tokens=32,
+                normalize_bare_choice=False,
+                fallback_to_protected_on_parse_failure=False,
+                min_task_groups=1,
+                datasets=(
+                    DatasetSpec(
+                        name="gsm8k",
+                        path="gsm8k.parquet",
+                        sha256=sha256_file(path),
+                        scorer="numeric_exact",
+                        limit=3,
+                        indices=(4, 1, 3),
+                    ),
+                ),
+            )
+            cases = load_cases(manifest, root)
+            self.assertEqual(
+                [case.source_index for case in cases],
+                [4, 1, 3],
+            )
+
+    def test_baseline_manifest_rejects_invalid_explicit_indices(self):
+        with tempfile.TemporaryDirectory() as directory:
+            import yaml
+
+            path = Path(directory) / "suite.yaml"
+            raw = {
+                "schema_version": "nano_harness_baseline_suite_v1",
+                "suite_id": "indices-test",
+                "selection_seed": "fixed",
+                "system_prompt": "answer",
+                "max_tokens": 8,
+                "temperature": 0.0,
+                "chat_template_kwargs": {"enable_thinking": False},
+                "min_task_groups": 1,
+                "datasets": [
+                    {
+                        "name": "gsm8k",
+                        "path": "gsm8k.parquet",
+                        "sha256": "0" * 64,
+                        "scorer": "numeric_exact",
+                        "limit": 2,
+                        "indices": [1, 1],
+                    }
+                ],
+            }
+            path.write_text(yaml.safe_dump(raw), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "unique"):
+                load_manifest(path)
+
     def test_openai_client_merges_extra_body_with_chat_template_kwargs(self):
         response = MagicMock()
         message = MagicMock()
