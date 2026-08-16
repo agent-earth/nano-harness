@@ -17,6 +17,10 @@ from nano_harness.baseline import (
 )
 from nano_harness.config import ModelConfig
 from nano_harness.config import load_run_config
+from nano_harness.choice_matrix_eval import (
+    load_config as load_choice_matrix_eval_config,
+)
+from nano_harness.choice_matrix_eval import run as run_choice_matrix_eval
 from nano_harness.runner import merge_paths, run_config, summarize_paths
 from nano_harness.verified_choice import load_config as load_verified_choice_config
 from nano_harness.verified_choice import run as run_verified_choice
@@ -81,6 +85,9 @@ def main() -> None:
     verified_choice_full_parser = subparsers.add_parser("verified-choice-full")
     verified_choice_full_parser.add_argument("--config", required=True)
 
+    choice_matrix_eval_parser = subparsers.add_parser("choice-matrix-eval")
+    choice_matrix_eval_parser.add_argument("--config", required=True)
+
     args = parser.parse_args()
     if args.command == "run":
         summary = run_config(load_run_config(args.config))
@@ -101,6 +108,12 @@ def main() -> None:
     elif args.command == "verified-choice-full":
         summary = run_verified_choice_full(
             load_verified_choice_full_config(args.config)
+        )
+    elif args.command == "choice-matrix-eval":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_choice_matrix_eval(
+            load_choice_matrix_eval_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(

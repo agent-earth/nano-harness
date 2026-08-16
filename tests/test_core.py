@@ -39,6 +39,9 @@ from nano_harness.adapters.clbench import CLBenchAdapter
 from nano_harness.adapters.swebench import extract_patch
 from nano_harness.client import OpenRouterClient, ProviderQuotaError, ScriptedClient
 from nano_harness.coding_tools import CodingToolExecutor
+from nano_harness.choice_matrix_eval import (
+    load_config as load_choice_matrix_eval_config,
+)
 from nano_harness.config import (
     BenchmarkConfig,
     HarnessConfig,
@@ -71,6 +74,21 @@ class FakeToolExecutor:
 
 
 class CoreTests(unittest.TestCase):
+    def test_choice_matrix_eval_config_is_frozen(self):
+        source = Path(
+            "configs/harness/generic_choice_capability_matrix_eval_v1.json"
+        )
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "config.json"
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            config = load_choice_matrix_eval_config(path)
+            self.assertEqual(config.max_tokens, 32)
+            raw["temperature"] = 0.2
+            path.write_text(json.dumps(raw), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "temperature"):
+                load_choice_matrix_eval_config(path)
+
     def test_verified_choice_full_config_is_frozen(self):
         source = Path(
             "configs/harness/anchored_v1_verified_choice_full_v1.json"
