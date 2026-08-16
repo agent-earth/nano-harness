@@ -37,3 +37,16 @@ Promote only if:
 - no API errors occur.
 
 Do not tune on dev15.
+
+## Result
+
+Constrained recovery and 4B direct each score 46/48; 9B direct scores 47/48.
+The 4B direct arm has zero parse failures, so conditional recovery never fires
+and treatment runs at exactly 1.0x direct tokens.
+
+Dev15 cannot establish recovery benefit. Keep the policy frozen and
+pre-register 96 fresh GSM8K cases to observe the rare direct parse-failure
+path.
+
+- [`docs/results/gsm8k_dev15_constrained_recovery_v1.md`](../results/gsm8k_dev15_constrained_recovery_v1.md)
+- [`docs/results/gsm8k_dev15_constrained_recovery_v1.public.json`](../results/gsm8k_dev15_constrained_recovery_v1.public.json)
