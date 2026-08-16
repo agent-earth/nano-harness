@@ -31,6 +31,19 @@ The v6 adapter is served through vLLM 0.19.1 as model
 The adapter tree is immutable and SHA-bound. Raw candidate results remain
 local and ignored.
 
+Qwen3.5 is exposed by vLLM as a multimodal wrapper whose text modules use the
+`language_model.model.layers.*` namespace. PEFT stores the same tensors under
+`model.layers.*`. Before serving, a deterministic local-only conversion:
+
+- changes only that namespace in safetensors keys;
+- preserves all 224 tensor dtype, shape, and content hashes;
+- writes its receipt and converted weights under ignored `results/serving/`;
+- requires base/candidate first-token logits to differ;
+- requires a known validation case to fail under base and pass exact plus
+  semantic verification under the adapter.
+
+The 211-case evaluation is forbidden unless these serving parity gates pass.
+
 ## Frozen Identity
 
 - case manifest SHA256:
@@ -75,6 +88,10 @@ decision on the next training ablation.
 
 ```bash
 PYTHONPATH=. ../.venv/bin/python scripts/validate_v6_matched_adapter.py
+../.venv/bin/python scripts/build_qwen35_vllm_adapter.py \
+  --source ../nano-train/artifacts/arithmetic-process-sft-smoke-v6/adapter \
+  --output results/serving/qwen35-v6-vllm-adapter \
+  --receipt results/serving/qwen35-v6-vllm-adapter.receipt.json
 PYTHONPATH=. ../.venv/bin/python -m nano_harness.cli baseline \
   --manifest configs/harness/qwen35_v6_matched_adapter_v1.yaml \
   --dataset-root ../../datasets \

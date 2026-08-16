@@ -10,6 +10,7 @@ results/**/*.json
 results/**/*.log
 results/**/*.tmp
 results/**/state/
+results/serving/
 results/full/configs/
 !results/**/.gitkeep
 !results/baselines/synthetic_nano9b_base/*.jsonl
