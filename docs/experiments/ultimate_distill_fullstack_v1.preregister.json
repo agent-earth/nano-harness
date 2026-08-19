@@ -1,0 +1,590 @@
+{
+  "acceptance": {
+    "alpha": 0.05,
+    "bootstrap_samples": 10000,
+    "complete_benchmark_superiority": {
+      "all_case_ids_match": true,
+      "all_jsonl_outputs_have_raw_sha256": true,
+      "candidate_accuracy_gt_nine_b": true,
+      "candidate_only_wins_gt_nine_b_only_wins": true,
+      "exact_mcnemar_p_lt_alpha": true,
+      "paired_bootstrap_ci_lower_gt_zero": true,
+      "parser_and_scorer_frozen": true,
+      "zero_api_errors": true
+    },
+    "minimum_complete_benchmarks_won": 3,
+    "twenty_seven_b_parity": {
+      "benchmarks": [
+        "gsm8k",
+        "mmlu"
+      ],
+      "minimum_benchmarks_at_parity": 2,
+      "noninferiority_margin": 0.02,
+      "paired_bootstrap_ci_lower_gte_negative_margin": true
+    }
+  },
+  "campaign_id": "ultimate-distill-fullstack-v1",
+  "candidate_ladder": [
+    {
+      "admission": "4B and 9B model identities, all three complete dataset identities, prompts, parser, scorer, temperature, generation budgets, and bootstrap seeds are frozen before generation.",
+      "depends_on": [],
+      "stage_id": "matched-direct-complete-baselines",
+      "stop_rule": "Stop if any model, case, prompt, scorer, parser, or raw-output identity differs across arms.",
+      "treatment": "Run direct Qwen3.5-4B and Qwen3.5-9B over every row of GSM8K test, MMLU no-train test, and GPQA-Diamond."
+    },
+    {
+      "admission": "The direct complete baselines are valid and the peer verified-execution transfer layer is committed with local and prior-suite non-regression.",
+      "depends_on": [
+        "matched-direct-complete-baselines"
+      ],
+      "stage_id": "skill-harness-complete",
+      "stop_rule": "Reject on any complete-benchmark regression versus direct 4B or any identity mismatch; do not tune on observed full results.",
+      "treatment": "Run the frozen skill-routed and verified-execution harness over the same complete case sets."
+    },
+    {
+      "admission": "Peer paired-consistency replication has passed every pre-registered local significance gate, independent reload, and zero JSON-family regression.",
+      "depends_on": [
+        "matched-direct-complete-baselines"
+      ],
+      "stage_id": "sft-complete",
+      "stop_rule": "Reject the adapter if local replication, reload, or any complete benchmark gate fails.",
+      "treatment": "Evaluate exactly one frozen Qwen3.5-4B SFT/consistency adapter on the same complete case sets."
+    },
+    {
+      "admission": "Both skill-harness-complete and sft-complete independently pass their frozen gates.",
+      "depends_on": [
+        "skill-harness-complete",
+        "sft-complete"
+      ],
+      "stage_id": "sft-plus-harness-complete",
+      "stop_rule": "Reject if the combined arm regresses any benchmark relative to the stronger admitted component.",
+      "treatment": "Compose the admitted adapter and harness without changing either component and evaluate the same complete case sets."
+    },
+    {
+      "admission": "A versioned RL implementation, reward/verifier contract, contamination audit, finite local smoke, independent reload, and one fixed run configuration are committed before any RL optimization.",
+      "depends_on": [
+        "sft-plus-harness-complete"
+      ],
+      "stage_id": "rl-sanity-and-complete",
+      "stop_rule": "Keep RL closed until admission; after admission run once and reject on local or complete-benchmark non-regression failure.",
+      "treatment": "Run a verifier-guided RL sanity check and, only if admitted, one frozen complete-benchmark candidate."
+    },
+    {
+      "admission": "A versioned on-policy distillation implementation, teacher identity, rollout/replay policy, verifier contract, contamination audit, finite smoke, and one fixed run configuration are committed.",
+      "depends_on": [
+        "sft-plus-harness-complete"
+      ],
+      "stage_id": "opd-sanity-and-complete",
+      "stop_rule": "Keep OPD closed until admission; after admission run once and reject on local or complete-benchmark non-regression failure.",
+      "treatment": "Run one on-policy distillation sanity check and, only if admitted, one frozen complete-benchmark candidate."
+    },
+    {
+      "admission": "One 4B candidate passes all three complete-benchmark 9B superiority gates and Qwen3.5-27B-FP8 is installed with frozen model and serving identities.",
+      "depends_on": [
+        "sft-plus-harness-complete"
+      ],
+      "stage_id": "twenty-seven-b-parity",
+      "stop_rule": "No 27B parity claim is allowed without matched case-level outputs and the pre-registered non-inferiority confidence interval.",
+      "treatment": "Evaluate the admitted 4B candidate against matched Qwen3.5-27B-FP8 on complete GSM8K and MMLU."
+    }
+  ],
+  "checks": {
+    "all_artifact_identities_verified": true,
+    "formal_scans_not_reported_as_scores": true,
+    "four_b_and_nine_b_ready": true,
+    "no_model_or_training_execution": true,
+    "peer_dependencies_verified": true,
+    "rl_and_opd_fail_closed": true,
+    "skill_evolution_reproduced": true,
+    "three_complete_benchmarks_verified": true,
+    "twenty_seven_b_missing_is_explicit": true
+  },
+  "claim_boundary": "This receipt inventories and pre-registers one full-stack campaign. It does not start model generation, training, RL, OPD, benchmark scoring, or establish any new 4B superiority claim. Feasibility scans are never scores.",
+  "execution_boundary": {
+    "benchmark_scoring_started": false,
+    "model_generation_started": false,
+    "opd_started": false,
+    "rl_started": false,
+    "this_commit_only_audits_and_preregisters": true,
+    "training_started": false
+  },
+  "identity": {
+    "artifacts": {
+      "benchmark-feasibility-v1": "9dc263660895fde4fdb5f02b3e338f86855a6a93c1adf7db1a0fda6b6b812215",
+      "consistency-replication-config-v1": "534c9d7794643a0a4a4c242995bfe931c9834844bbd20acb6bfe97f42e9a6c8f",
+      "consistency-replication-preregister-v1": "f02d710beef452a6bcb2c8d56d5e4e81efb347bde048b34f7ebe9aba9713b06c",
+      "consistency-replication-release-v1": "db649d2e603a7a24305d01ed108f2fa4f640f1c315a4e07cf4278c5a7534856a",
+      "consistency-v1-result": "76968fc034c0bf6543d3e140129280140274d7296d93834e569de53cd1bfb856",
+      "large-confirmation-result": "c219199324ada3f69d7f4dd3ce460d15c55ab70165aab3f09af13f26424bb80a",
+      "qwen35-local-v5-result": "1d0fcaceb4c5c14344df83a27f82fe7323bffbeaf61f03e9ec8c5ae7af680c93",
+      "skill-candidate-registry-v2": "1a7e7c192cf3e508021230eb0071a7254a0390f16ac9f2dda73824f459decb7f",
+      "skill-contract-suite-v1": "51cf547db645ca16da4c165b4dba020034f1cc374de2bd5b2f76b23d128c8ea1",
+      "skill-parent-registry-v1": "887bd9282907c91d80c14a2d82db7b3a2549b045257dd4385552188ce5cd9865",
+      "skill-sft-accepted-v2": "b5503761900cfa290dba03aff306ff511630d01544a4dab93de3a0be1e74abc1",
+      "skill-sft-release-v2": "26ddb15f5c2e043d20527103a5a59216e54290aabeea2a6d228ebce7b7bb35e3",
+      "three-task-replication-result": "e7aad4abf515de23289359a04a589e0f87d29493cf4b172a8213e369a0cdbd4f",
+      "verified-executor-v3-result": "a047aa1d22cb851184263bfd97ac96b47fbb520681039f44e0e4e42ad1708e68"
+    },
+    "base_revision": "b538464",
+    "config_sha256": "dd756f4ed3db5b7fe18b5f80ef0d29d383fb4a9bcecb598ff0258b6b89d96189"
+  },
+  "inventory": {
+    "capabilities": [
+      {
+        "admission_gate": "Frozen synthetic suite promotion is mechanism evidence only; benchmark use requires a separately frozen case manifest and matched baseline.",
+        "admitted_now": true,
+        "evidence_paths": [
+          "nano_harness/skill_system.py",
+          "nano_harness/skill_evolution.py",
+          "scripts/run_skill_evolution_smoke.py"
+        ],
+        "name": "skill_harness",
+        "status": "implemented"
+      },
+      {
+        "admission_gate": "Use only released non-evaluation data, pre-register config and dev identities, and require independent reload plus corrected verifier gates.",
+        "admitted_now": true,
+        "evidence_paths": [
+          "../nano-train-skillgen-traex-02/nano_train/sft.py",
+          "../nano-train-skillgen-traex-02/docs/results/execution_target_paired_sft_smoke_v1.public.json"
+        ],
+        "name": "sft",
+        "status": "implemented"
+      },
+      {
+        "admission_gate": "Execute the peer-owned replication exactly once from commit 6b6ac50 and config SHA 534c9d77; consume only its committed result.",
+        "admitted_now": true,
+        "evidence_paths": [
+          "../nano-train-skillgen-traex-02/nano_train/paired_consistency.py",
+          "../nano-train-skillgen-traex-02/docs/experiments/consistency_replication_v1.preregister.json"
+        ],
+        "name": "paired_consistency",
+        "status": "implemented"
+      },
+      {
+        "admission_gate": "Before RL, commit a reward/verifier interface, benchmark exclusion audit, finite smoke, independent reload, one fixed optimizer/config, and a no-post-hoc-search decision rule.",
+        "admitted_now": false,
+        "evidence_paths": [],
+        "name": "rl",
+        "status": "missing"
+      },
+      {
+        "admission_gate": "Before OPD, commit teacher/rollout/replay identities, verifier interface, benchmark exclusion audit, finite smoke, one fixed config, and a no-post-hoc-search decision rule.",
+        "admitted_now": false,
+        "evidence_paths": [],
+        "name": "opd",
+        "status": "missing"
+      }
+    ],
+    "complete_benchmarks": [
+      {
+        "complete_definition": "All 1,319 rows in the public GSM8K main test parquet.",
+        "full_dataset_required": true,
+        "name": "gsm8k",
+        "path": "../../../datasets/gsm8k/gsm8k/main/test-00000-of-00001.parquet",
+        "rows": 1319,
+        "rows_verified": true,
+        "scorer": "numeric_exact",
+        "sha256": "ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59"
+      },
+      {
+        "complete_definition": "All 14,042 rows in the public MMLU no-train all/test parquet.",
+        "full_dataset_required": true,
+        "name": "mmlu",
+        "path": "../../../datasets/mmlu_no_train/mmlu_no_train/all/test-00000-of-00001.parquet",
+        "rows": 14042,
+        "rows_verified": true,
+        "scorer": "choice_exact",
+        "sha256": "02033371a64dbe5a0d8b6fb9d612900afcd0fea5140e53490993a4540b3a58fd"
+      },
+      {
+        "complete_definition": "All 198 rows in the public GPQA-Diamond test parquet.",
+        "full_dataset_required": true,
+        "name": "gpqa_diamond",
+        "path": "../../../datasets/GPQA-Diamond/GPQA-Diamond/test/gpqa_diamond.parquet",
+        "rows": 198,
+        "rows_verified": true,
+        "scorer": "choice_exact",
+        "sha256": "fdd6e95117cdf87075f56bf673a5bae4680b143bc2d29b486470810122c33f39"
+      }
+    ],
+    "formal_agent_benchmarks": [
+      {
+        "block_reason": "Official SWE-bench Lite scoring requires repository containers; mount namespaces and Docker are unavailable on this devbox.",
+        "evidence_kind": "local_dataset_load",
+        "feasibility_key": "swebench_lite",
+        "formal_score_available": false,
+        "name": "swebench_lite",
+        "quality_score_claimed": false,
+        "scan_status": "passed",
+        "status": "blocked"
+      },
+      {
+        "block_reason": "ClawBench task validation and dry-run selection do not execute an agent or score outputs.",
+        "evidence_kind": "upstream_task_validation_and_selection",
+        "feasibility_key": "clawbench",
+        "formal_score_available": false,
+        "name": "clawbench",
+        "quality_score_claimed": false,
+        "scan_status": "passed",
+        "status": "blocked"
+      },
+      {
+        "block_reason": "WildClawBench parsing succeeds, but full execution needs unavailable Docker images and task assets.",
+        "evidence_kind": "upstream_task_parser_scan",
+        "feasibility_key": "wildclawbench",
+        "formal_score_available": false,
+        "name": "wildclawbench",
+        "quality_score_claimed": false,
+        "scan_status": "passed",
+        "status": "blocked"
+      },
+      {
+        "block_reason": "Terminal-Bench 2 manifests are present, but official execution requires Harbor and Docker.",
+        "evidence_kind": "task_manifest_and_asset_scan",
+        "feasibility_key": "terminal_bench_2",
+        "formal_score_available": false,
+        "name": "terminal_bench_2",
+        "quality_score_claimed": false,
+        "scan_status": "passed",
+        "status": "blocked"
+      },
+      {
+        "block_reason": "SkillBench security scan evidence is not a paired with-skill/without-skill model-quality score.",
+        "evidence_kind": "upstream_security_scan",
+        "feasibility_key": "skillbench",
+        "formal_score_available": false,
+        "name": "skillbench",
+        "quality_score_claimed": false,
+        "scan_status": "passed",
+        "status": "blocked"
+      }
+    ],
+    "models": [
+      {
+        "config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+        "index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+        "model_id": "qwen3.5-4b",
+        "required_phase": "all",
+        "shards": [
+          {
+            "bytes": 5329398688,
+            "name": "model.safetensors-00001-of-00002.safetensors",
+            "sha256": "26a93f066e1916adb13453dae5a0c707c0fbc71299ed98779571a907b8e74c61",
+            "verified": true
+          },
+          {
+            "bytes": 3990429408,
+            "name": "model.safetensors-00002-of-00002.safetensors",
+            "sha256": "cb544bd9bfae93dc59b0f22b292f5933573854a7f9b97835c67060d7d910e188",
+            "verified": true
+          }
+        ],
+        "status": "ready",
+        "weight_bytes": 9319828096
+      },
+      {
+        "config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+        "index_sha256": "26d3539b516be613f39563617cb9d33b3f83d401298125be392c80cefb8f7fe5",
+        "model_id": "qwen3.5-9b",
+        "required_phase": "all",
+        "shards": [
+          {
+            "bytes": 5276436216,
+            "name": "model.safetensors-00001-of-00004.safetensors",
+            "sha256": "db6f444b43d318c92f360a13a25561a6a65b10c0631b8ed305a426dbaa6c380e",
+            "verified": true
+          },
+          {
+            "bytes": 5335161512,
+            "name": "model.safetensors-00002-of-00004.safetensors",
+            "sha256": "31c7d7e2dd5d207840b31cc59083c8f4c4718959149e0358c0364052bb9a0330",
+            "verified": true
+          },
+          {
+            "bytes": 5368717440,
+            "name": "model.safetensors-00003-of-00004.safetensors",
+            "sha256": "7ec36ba3a4176a44c3c0876ad80c56a2f70c84bf008d82e9501df642f17dadec",
+            "verified": true
+          },
+          {
+            "bytes": 3325995712,
+            "name": "model.safetensors-00004-of-00004.safetensors",
+            "sha256": "b62b0c4cd7e44edee103ee8f4fe225f246d5e768e07bfd5f25b63a8aa1fdd0c6",
+            "verified": true
+          }
+        ],
+        "status": "ready",
+        "weight_bytes": 19306310880
+      },
+      {
+        "block_reason": "oniond lists Qwen3.5-27B-FP8, but the model is absent and the frozen audit observed only 39 GiB free disk; do not evict models, datasets, or evidence without a separately authorized storage plan.",
+        "minimum_free_disk_gib": 70,
+        "model_id": "qwen3.5-27b",
+        "oniond_name": "Qwen3.5-27B-FP8",
+        "required_phase": "twenty-seven-b-parity",
+        "status": "blocked_missing"
+      }
+    ],
+    "peer_dependencies": [
+      {
+        "artifact_ids": [
+          "verified-executor-v3-result"
+        ],
+        "dependency_id": "verified-execution-transfer",
+        "identities_verified": true,
+        "owner_lane": "ultimate-distill-traex-01",
+        "state": "peer_result_required_before_skill-harness-complete"
+      },
+      {
+        "artifact_ids": [
+          "consistency-replication-release-v1",
+          "consistency-replication-config-v1",
+          "consistency-replication-preregister-v1",
+          "consistency-v1-result"
+        ],
+        "dependency_id": "paired-consistency-replication",
+        "identities_verified": true,
+        "owner_lane": "ultimate-distill-skillgen-traex-02",
+        "state": "peer_result_required_before-sft-complete"
+      }
+    ]
+  },
+  "next_executable_slice": {
+    "action": "Generate the frozen all-row case manifest and execute matched 4B/9B direct baselines on GSM8K, MMLU, and GPQA-Diamond without consuming benchmark outputs as training data.",
+    "opd_allowed": false,
+    "rl_allowed": false,
+    "stage_id": "matched-direct-complete-baselines",
+    "training_allowed": false,
+    "twenty_seven_b_allowed": false
+  },
+  "prior_evidence": [
+    {
+      "artifact_id": "qwen35-local-v5-result",
+      "assertions": [
+        {
+          "actual": 72,
+          "equals": 72,
+          "passed": true,
+          "pointer": "/comparison/cases"
+        },
+        {
+          "actual": -0.013888888888888888,
+          "equals": -0.013888888888888888,
+          "passed": true,
+          "pointer": "/comparison/overall_micro/delta"
+        },
+        {
+          "actual": 1.0,
+          "equals": 1.0,
+          "passed": true,
+          "pointer": "/comparison/overall_micro/mcnemar_exact_p"
+        }
+      ],
+      "claim_boundary": "Small matched baseline only; no 4B superiority.",
+      "evidence_id": "small-matched-direct",
+      "identity_verified": true
+    },
+    {
+      "artifact_id": "three-task-replication-result",
+      "assertions": [
+        {
+          "actual": 211,
+          "equals": 211,
+          "passed": true,
+          "pointer": "/comparison/cases"
+        },
+        {
+          "actual": 0.05687203791469194,
+          "equals": 0.05687203791469194,
+          "passed": true,
+          "pointer": "/comparison/overall_micro/delta"
+        },
+        {
+          "actual": 0.08842954698775429,
+          "equals": 0.08842954698775429,
+          "passed": true,
+          "pointer": "/comparison/overall_micro/mcnemar_exact_p"
+        },
+        {
+          "actual": false,
+          "equals": false,
+          "passed": true,
+          "pointer": "/decision/accepted"
+        }
+      ],
+      "claim_boundary": "Directional three-task replication; aggregate significance gate failed.",
+      "evidence_id": "three-task-directional",
+      "identity_verified": true
+    },
+    {
+      "artifact_id": "large-confirmation-result",
+      "assertions": [
+        {
+          "actual": 512,
+          "equals": 512,
+          "passed": true,
+          "pointer": "/comparison/cases"
+        },
+        {
+          "actual": 0.0234375,
+          "equals": 0.0234375,
+          "passed": true,
+          "pointer": "/comparison/overall_micro/delta"
+        },
+        {
+          "actual": 0.14800580076020597,
+          "equals": 0.14800580076020597,
+          "passed": true,
+          "pointer": "/comparison/overall_micro/mcnemar_exact_p"
+        },
+        {
+          "actual": true,
+          "equals": true,
+          "passed": true,
+          "pointer": "/decision/mmlu_official_advantage_significant"
+        },
+        {
+          "actual": false,
+          "equals": false,
+          "passed": true,
+          "pointer": "/decision/gsm8k_non_regression"
+        }
+      ],
+      "claim_boundary": "MMLU-only significant direct evidence; GSM8K regresses and aggregate significance fails.",
+      "evidence_id": "large-direct-confirmation",
+      "identity_verified": true
+    },
+    {
+      "artifact_id": "verified-executor-v3-result",
+      "assertions": [
+        {
+          "actual": true,
+          "equals": true,
+          "passed": true,
+          "pointer": "/passed"
+        },
+        {
+          "actual": true,
+          "equals": true,
+          "passed": true,
+          "pointer": "/decision/executor_significantly_exceeds_nine_b_on_exact_replication"
+        },
+        {
+          "actual": false,
+          "equals": false,
+          "passed": true,
+          "pointer": "/decision/benchmark_superiority_claim_allowed"
+        }
+      ],
+      "claim_boundary": "Significant generic mechanism evidence only; not benchmark superiority.",
+      "evidence_id": "verified-executor-mechanism",
+      "identity_verified": true
+    },
+    {
+      "artifact_id": "consistency-v1-result",
+      "assertions": [
+        {
+          "actual": true,
+          "equals": true,
+          "passed": true,
+          "pointer": "/decision/accepted_local_method_smoke"
+        },
+        {
+          "actual": false,
+          "equals": false,
+          "passed": true,
+          "pointer": "/decision/statistically_supported"
+        },
+        {
+          "actual": false,
+          "equals": false,
+          "passed": true,
+          "pointer": "/decision/benchmark_allowed"
+        }
+      ],
+      "claim_boundary": "Directionally positive local mechanism; replication must pass before benchmark use.",
+      "evidence_id": "paired-consistency-direction",
+      "identity_verified": true
+    }
+  ],
+  "readiness": {
+    "formal_agent_benchmarks": {
+      "blocked_by": [
+        "container mount namespaces are unavailable on this devbox"
+      ],
+      "ready": false
+    },
+    "matched_4b_9b_complete_benchmarks": {
+      "benchmarks": [
+        "gsm8k",
+        "mmlu",
+        "gpqa_diamond"
+      ],
+      "ready": true
+    },
+    "opd": {
+      "blocked_by": [
+        "no versioned on-policy distillation implementation or smoke receipt"
+      ],
+      "ready": false
+    },
+    "rl": {
+      "blocked_by": [
+        "no versioned RL implementation or smoke receipt"
+      ],
+      "ready": false
+    },
+    "twenty_seven_b_parity": {
+      "blocked_by": [
+        "qwen3.5-27b model is not installed",
+        "safe download headroom is not available in the frozen audit"
+      ],
+      "ready": false
+    }
+  },
+  "resource_contract": {
+    "available_disk_gib_at_preregistration": 39,
+    "gpu_count": 2,
+    "gpu_memory_mib_each": 32768,
+    "gpu_model": "Tesla V100-SXM2-32GB",
+    "maximum_concurrent_training_runs": 1,
+    "maximum_parallel_inference_models": 2,
+    "minimum_free_disk_gib_before_new_model_download": 70,
+    "python_environment": "ultimate-distill-workspace/.venv",
+    "serving_policy": "One model per GPU for matched 4B/9B inference; stop serving before any training run.",
+    "storage_policy": "Do not delete models, datasets, raw evidence, adapters, or environments without a separately recorded reversible cleanup decision."
+  },
+  "schema_version": "nano_harness_fullstack_campaign_receipt_v1",
+  "skill_evolution": {
+    "candidate": {
+      "passed": 6,
+      "registry_sha256": "aa338773b7d5f27df025eab2f505544579ded82b3239b9d180f430176d1fa86f",
+      "total": 6
+    },
+    "parent": {
+      "passed": 4,
+      "registry_sha256": "1f0036752f4753af544f91c75936953c5991a61e7ce21bf06dcc67bcc277c153",
+      "total": 6
+    },
+    "promotion": {
+      "aggregate_delta": 0.33333333333333337,
+      "allowed_mutated_skill_ids": [
+        "tool-recovery"
+      ],
+      "candidate_registry_id": "compact-skill-registry-candidate-v2",
+      "candidate_registry_sha256": "aa338773b7d5f27df025eab2f505544579ded82b3239b9d180f430176d1fa86f",
+      "claim_boundary": "synthetic skill-contract promotion only; no model or benchmark quality uplift is established",
+      "parent_registry_id": "compact-skill-registry-parent-v1",
+      "parent_registry_sha256": "1f0036752f4753af544f91c75936953c5991a61e7ce21bf06dcc67bcc277c153",
+      "promoted": true,
+      "protected_families": [
+        "core-safety",
+        "tool-contract"
+      ],
+      "reasons": [],
+      "schema_version": "nano_harness_skill_promotion_v1",
+      "suite_id": "compact-skill-contract-v1"
+    }
+  }
+}
