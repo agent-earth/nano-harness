@@ -1,0 +1,22 @@
+{
+  "registry_id": "compact-skill-registry-parent-v1",
+  "schema_version": "nano_harness_skill_registry_v1",
+  "skills": [
+    {
+      "always": true,
+      "path": "compact-agent-core/SKILL.md",
+      "priority": 0,
+      "required_tags": [],
+      "skill_id": "compact-agent-core"
+    },
+    {
+      "always": false,
+      "path": "tool-recovery/SKILL.md",
+      "priority": 10,
+      "required_tags": [
+        "tool-use"
+      ],
+      "skill_id": "tool-recovery"
+    }
+  ]
+}

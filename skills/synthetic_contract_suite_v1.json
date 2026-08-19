@@ -1,0 +1,104 @@
+{
+  "cases": [
+    {
+      "case_id": "core-state-001",
+      "expected_skills": [
+        "compact-agent-core"
+      ],
+      "family": "core-safety",
+      "forbidden_fragments": [],
+      "required_fragments": [
+        "track objective, constraints, evidence, failures, and pending work"
+      ],
+      "tags": []
+    },
+    {
+      "case_id": "core-verify-002",
+      "expected_skills": [
+        "compact-agent-core"
+      ],
+      "family": "core-safety",
+      "forbidden_fragments": [],
+      "required_fragments": [
+        "verification must directly test the objective"
+      ],
+      "tags": [
+        "planning"
+      ]
+    },
+    {
+      "case_id": "tool-observe-003",
+      "expected_skills": [
+        "compact-agent-core",
+        "tool-recovery"
+      ],
+      "family": "tool-contract",
+      "forbidden_fragments": [],
+      "required_fragments": [
+        "treat every tool response as an observation"
+      ],
+      "tags": [
+        "tool-use"
+      ]
+    },
+    {
+      "case_id": "tool-success-004",
+      "expected_skills": [
+        "compact-agent-core",
+        "tool-recovery"
+      ],
+      "family": "tool-contract",
+      "forbidden_fragments": [],
+      "required_fragments": [
+        "claim success only after a confirming observation"
+      ],
+      "tags": [
+        "tool-use",
+        "verification"
+      ]
+    },
+    {
+      "case_id": "tool-classify-005",
+      "expected_skills": [
+        "compact-agent-core",
+        "tool-recovery"
+      ],
+      "family": "error-recovery",
+      "forbidden_fragments": [],
+      "required_fragments": [
+        "classify the failure before retrying"
+      ],
+      "tags": [
+        "tool-use",
+        "error-recovery"
+      ]
+    },
+    {
+      "case_id": "tool-retry-006",
+      "expected_skills": [
+        "compact-agent-core",
+        "tool-recovery"
+      ],
+      "family": "error-recovery",
+      "forbidden_fragments": [],
+      "required_fragments": [
+        "do not repeat an unchanged failing call"
+      ],
+      "tags": [
+        "tool-use",
+        "error-recovery",
+        "verification"
+      ]
+    }
+  ],
+  "allowed_mutated_skill_ids": [
+    "tool-recovery"
+  ],
+  "minimum_aggregate_delta": 0.2,
+  "protected_families": [
+    "core-safety",
+    "tool-contract"
+  ],
+  "schema_version": "nano_harness_skill_contract_suite_v1",
+  "suite_id": "compact-skill-contract-v1"
+}

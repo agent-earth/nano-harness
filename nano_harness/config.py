@@ -30,6 +30,7 @@ class ModelConfig:
 @dataclass(frozen=True)
 class HarnessConfig:
     strategy: str = "base"
+    skill_registry_path: str | None = None
     max_steps: int = 24
     audit_passes: int = 1
     max_context_chars: int = 90000
@@ -81,9 +82,18 @@ def load_run_config(path: str | Path) -> RunConfig:
     output_dir = Path(raw.get("output_dir", "results"))
     if not output_dir.is_absolute():
         output_dir = (config_path.parent / output_dir).resolve()
+    harness_raw = dict(raw.get("harness", {}))
+    skill_registry_path = harness_raw.get("skill_registry_path")
+    if skill_registry_path is not None:
+        resolved_skill_registry = Path(str(skill_registry_path))
+        if not resolved_skill_registry.is_absolute():
+            resolved_skill_registry = (
+                config_path.parent / resolved_skill_registry
+            ).resolve()
+        harness_raw["skill_registry_path"] = str(resolved_skill_registry)
     return RunConfig(
         model=_strict_dataclass(ModelConfig, model_raw),
-        harness=_strict_dataclass(HarnessConfig, dict(raw.get("harness", {}))),
+        harness=_strict_dataclass(HarnessConfig, harness_raw),
         benchmark=_strict_dataclass(BenchmarkConfig, dict(raw["benchmark"])),
         output_dir=output_dir,
         run_id=str(raw.get("run_id", config_path.stem)),

@@ -10,6 +10,7 @@ from nano_harness.client import OpenRouterClient
 from nano_harness.coding_tools import CodingToolExecutor
 from nano_harness.config import RunConfig
 from nano_harness.harness import AgentHarness
+from nano_harness.skill_system import SkillRegistry
 
 
 ADAPTERS = {
@@ -37,7 +38,21 @@ def run_config(config: RunConfig, client: Any | None = None) -> dict[str, Any]:
         )
     adapter = ADAPTERS[config.benchmark.name]()
     client = client or OpenRouterClient(config.model)
-    harness = AgentHarness(client, config.model.name, config.harness)
+    skill_registry = None
+    if config.harness.strategy == "skill_routed":
+        if not config.harness.skill_registry_path:
+            raise ValueError(
+                "skill_routed strategy requires harness.skill_registry_path"
+            )
+        skill_registry = SkillRegistry.from_manifest(
+            config.harness.skill_registry_path
+        )
+    harness = AgentHarness(
+        client,
+        config.model.name,
+        config.harness,
+        skill_registry=skill_registry,
+    )
     run_dir = config.output_dir / config.run_id
     run_dir.mkdir(parents=True, exist_ok=True)
     output_path = run_dir / (

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tool Recovery"
+  short_description: "Recover compact agents from tool and schema failures"
+  default_prompt: "Use $tool-recovery to handle tools, observations, and recovery safely."

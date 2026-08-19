@@ -1,0 +1,4 @@
+interface:
+  display_name: "Compact Agent Core"
+  short_description: "Plan, track state, and verify compact-agent work"
+  default_prompt: "Use $compact-agent-core to plan, track state, and verify a compact-agent task."

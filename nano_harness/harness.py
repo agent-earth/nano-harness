@@ -7,34 +7,58 @@ from nano_harness.client import ProviderQuotaError
 from nano_harness.config import HarnessConfig
 from nano_harness.contracts import should_audit
 from nano_harness.prompts import AUDIT_SYSTEM, system_prompt
+from nano_harness.skill_system import SkillRegistry
 from nano_harness.state import StateLedger, compact_messages
 from nano_harness.types import Task, TaskResult, ToolExecutor
 
 
 class AgentHarness:
-    def __init__(self, client: Any, model_name: str, config: HarnessConfig):
+    def __init__(
+        self,
+        client: Any,
+        model_name: str,
+        config: HarnessConfig,
+        skill_registry: SkillRegistry | None = None,
+    ):
         self.client = client
         self.model_name = model_name
         self.config = config
+        self.skill_registry = skill_registry
 
     def run(self, task: Task, tool_executor: ToolExecutor | None = None) -> TaskResult:
+        trajectory: list[dict[str, Any]] = []
         messages = [
             {"role": "system", "content": system_prompt(self.config.strategy, task.benchmark)},
-            *task.messages,
         ]
+        if self.config.strategy == "skill_routed":
+            if self.skill_registry is None:
+                raise ValueError(
+                    "skill_routed strategy requires a loaded skill registry"
+                )
+            selected_skills, route_receipt = self.skill_registry.route(task)
+            skill_prompt = self.skill_registry.render(selected_skills)
+            if skill_prompt:
+                messages.append({"role": "system", "content": skill_prompt})
+            trajectory.append(
+                {
+                    "step": 0,
+                    "kind": "skill_route",
+                    **route_receipt,
+                }
+            )
+        messages.extend(task.messages)
         ledger = StateLedger(
             objective=_last_user_content(task.messages),
             constraints=list(task.metadata.get("constraints", [])),
             pending=["Solve the task and produce directly verified output."],
         )
-        trajectory: list[dict[str, Any]] = []
         usage: dict[str, int] = {}
         tool_errors = 0
         tool_count = 0
 
         for step in range(1, self.config.max_steps + 1):
             request_messages = messages
-            if self.config.strategy == "optimized":
+            if self.config.strategy in {"optimized", "skill_routed"}:
                 request_messages = compact_messages(
                     messages,
                     ledger,
@@ -145,7 +169,7 @@ class AgentHarness:
                     final_content, task.metadata
                 )
                 if (
-                    self.config.strategy == "optimized"
+                    self.config.strategy in {"optimized", "skill_routed"}
                     and self.config.audit_passes > 0
                     and audit_needed
                 ):
@@ -291,8 +315,14 @@ class AgentHarness:
         candidate: str,
         detected_errors: list[str],
     ) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
+        routed_system_messages = [
+            message
+            for message in messages
+            if message.get("role") == "system"
+        ]
         audit_messages = [
             {"role": "system", "content": AUDIT_SYSTEM},
+            *routed_system_messages,
             *task.messages,
             {"role": "system", "content": ledger.render(self.config.scratchpad_chars)},
             {
@@ -360,7 +390,7 @@ def _final_failure_type(
         return "empty_output"
     if (
         benchmark == "swebench"
-        and config.strategy == "optimized"
+        and config.strategy in {"optimized", "skill_routed"}
         and config.require_verification
     ):
         weak_markers = ("unable to make", "no changes", "probably fixed")

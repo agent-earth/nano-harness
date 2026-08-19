@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tool Recovery V2"
+  short_description: "Candidate recovery policy for synthetic skill evaluation"
+  default_prompt: "Use $tool-recovery-v2 to test a candidate tool-recovery policy."

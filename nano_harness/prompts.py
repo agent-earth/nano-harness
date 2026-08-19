@@ -100,7 +100,7 @@ CL_OPTIMIZED = dedent(
 def system_prompt(strategy: str, benchmark: str) -> str:
     if strategy == "base":
         return BASE_SYSTEM
-    if strategy != "optimized":
+    if strategy not in {"optimized", "skill_routed"}:
         raise ValueError(f"Unknown harness strategy: {strategy}")
     benchmark_prompt = {
         "swebench": SWE_OPTIMIZED,
