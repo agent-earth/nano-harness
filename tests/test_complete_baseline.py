@@ -45,6 +45,10 @@ class CompleteBaselineTests(unittest.TestCase):
         self.assertEqual(config["serving"]["max_model_len"], 4096)
         self.assertEqual(config["serving"]["vllm_version"], "0.19.1")
         self.assertEqual(
+            config["serving"]["triton_libcuda_path"],
+            "/usr/lib/x86_64-linux-gnu",
+        )
+        self.assertEqual(
             config["uncertainty"],
             {
                 "alpha": 0.05,

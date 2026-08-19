@@ -87,6 +87,11 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "max_num_seqs": 1,
         "health_path": "/v1/models",
         "startup_timeout_seconds": 900,
+        "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+        "triton_libcuda_sha256": (
+            "f2470aa637fa72422534edeaeb9de19afe3d0646388baf7ffb5337b2"
+            "edafc59e"
+        ),
     }:
         raise ValueError("complete baseline serving contract differs")
     return config
@@ -268,6 +273,12 @@ def build_receipt(
         _model_identity(root, model)
         for model in config["model_contracts"]
     ]
+    libcuda_path = (
+        Path(config["serving"]["triton_libcuda_path"])
+        / "libcuda.so.1"
+    ).resolve()
+    if sha256_file(libcuda_path) != config["serving"]["triton_libcuda_sha256"]:
+        raise ValueError("Triton libcuda identity mismatch")
     costs = _historical_costs(
         root,
         config["historical_cost_sources"],
@@ -288,6 +299,10 @@ def build_receipt(
         model["model_id"]: [
             "env",
             f"CUDA_VISIBLE_DEVICES={model['gpu_index']}",
+            (
+                "TRITON_LIBCUDA_PATH="
+                + config["serving"]["triton_libcuda_path"]
+            ),
             config["execution"]["vllm_binary"],
             "serve",
             model["path"],
@@ -413,6 +428,18 @@ def build_receipt(
             },
             "run_shard": run_commands,
             "output_paths": output_paths,
+        },
+        "serving_environment": {
+            "triton_libcuda_path": config["serving"][
+                "triton_libcuda_path"
+            ],
+            "triton_libcuda_sha256": config["serving"][
+                "triton_libcuda_sha256"
+            ],
+            "scope": (
+                "Triton-only driver library discovery; model and inference "
+                "parameters are unchanged."
+            ),
         },
         "resume": {
             "unit": "stable case_id",

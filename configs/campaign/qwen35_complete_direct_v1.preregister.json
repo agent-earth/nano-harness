@@ -78,6 +78,8 @@
     "max_num_batched_tokens": 4096,
     "max_num_seqs": 1,
     "startup_timeout_seconds": 900,
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "triton_libcuda_sha256": "f2470aa637fa72422534edeaeb9de19afe3d0646388baf7ffb5337b2edafc59e",
     "vllm_version": "0.19.1"
   },
   "suite_manifest_path": "configs/baselines/qwen35_complete_direct_v1.yaml",

@@ -89,6 +89,10 @@ MMLU 14,042 行里存在重复题面，旧逻辑会少算 174 行。新 suite �
 - GPU1 / `127.0.0.1:8001`：Qwen3.5-9B；
 - vLLM 0.19.1、FP16、eager、`max_model_len=4096`、
   `gpu_memory_utilization=0.85`、`max_num_seqs=1`；
+- 当前容器的 `ldconfig` 不暴露驱动库，但
+  `/usr/lib/x86_64-linux-gnu/libcuda.so.1` 存在。服务 argv 只为 Triton
+  增加 `TRITON_LIBCUDA_PATH=/usr/lib/x86_64-linux-gnu`，并冻结目标库 SHA；
+  模型和推理参数不变；
 - 启动后必须读取 `/v1/models`，确认 served model name 才能执行 shard。
 
 完整 argv 已保存在 JSON receipt，避免 shell quoting 漂移。

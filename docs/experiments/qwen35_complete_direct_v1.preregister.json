@@ -94,6 +94,7 @@
       "qwen3.5-4b": [
         "env",
         "CUDA_VISIBLE_DEVICES=0",
+        "TRITON_LIBCUDA_PATH=/usr/lib/x86_64-linux-gnu",
         "../../.venv/bin/vllm",
         "serve",
         "../../../models/Qwen3.5-4B",
@@ -118,6 +119,7 @@
       "qwen3.5-9b": [
         "env",
         "CUDA_VISIBLE_DEVICES=1",
+        "TRITON_LIBCUDA_PATH=/usr/lib/x86_64-linux-gnu",
         "../../.venv/bin/vllm",
         "serve",
         "../../../models/Qwen3.5-9B",
@@ -232,7 +234,7 @@
   "identity": {
     "case_contract_sha256": "6dbfe39cc941e17438315cd61d3900bbeb1d6a60615cf3a9f14f01cd1573990c",
     "case_ids_sha256": "d38ee8c3eabbefaf7381253f6a69ba87fa63d9ee25fa4b8aeaa5f2afd73b0c63",
-    "config_sha256": "3d8ba23272528747afcfdc5273ca376598dfa57d003357c12485e9eb89b5298f",
+    "config_sha256": "957009bf75c7259dc3629037a9b14d4bf7ef48969080ad62749ef136f1e337b0",
     "models": [
       {
         "config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
@@ -266,6 +268,11 @@
     "unit": "stable case_id"
   },
   "schema_version": "nano_harness_complete_baseline_receipt_v1",
+  "serving_environment": {
+    "scope": "Triton-only driver library discovery; model and inference parameters are unchanged.",
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "triton_libcuda_sha256": "f2470aa637fa72422534edeaeb9de19afe3d0646388baf7ffb5337b2edafc59e"
+  },
   "sharding": {
     "algorithm": "sha256(case_id) mod num_shards",
     "counts": [

@@ -6,7 +6,7 @@
 训练、RL 或 OPD。
 
 - experiment：`qwen35-complete-direct-v1`
-- config SHA256：`3d8ba23272528747afcfdc5273ca376598dfa57d003357c12485e9eb89b5298f`
+- config SHA256：`957009bf75c7259dc3629037a9b14d4bf7ef48969080ad62749ef136f1e337b0`
 - suite SHA256：`6ec49d522892975e4532954d3bac7c7e5ed9b24e2c698700d5f8a61667753e90`
 - public case contract SHA256：`6dbfe39cc941e17438315cd61d3900bbeb1d6a60615cf3a9f14f01cd1573990c`
 - case IDs SHA256：`d38ee8c3eabbefaf7381253f6a69ba87fa63d9ee25fa4b8aeaa5f2afd73b0c63`
@@ -54,6 +54,10 @@ MMLU 14,042 行里存在重复题面，旧逻辑会少算 174 行。新 suite �
 - GPU1 / `127.0.0.1:8001`：Qwen3.5-9B；
 - vLLM 0.19.1、FP16、eager、`max_model_len=4096`、
   `gpu_memory_utilization=0.85`、`max_num_seqs=1`；
+- 当前容器的 `ldconfig` 不暴露驱动库，但
+  `/usr/lib/x86_64-linux-gnu/libcuda.so.1` 存在。服务 argv 只为 Triton
+  增加 `TRITON_LIBCUDA_PATH=/usr/lib/x86_64-linux-gnu`，并冻结目标库 SHA；
+  模型和推理参数不变；
 - 启动后必须读取 `/v1/models`，确认 served model name 才能执行 shard。
 
 完整 argv 已保存在 JSON receipt，避免 shell quoting 漂移。
