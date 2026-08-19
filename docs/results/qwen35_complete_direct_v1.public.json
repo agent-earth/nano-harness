@@ -1,0 +1,444 @@
+{
+  "arms": {
+    "qwen3.5-4b": {
+      "benchmarks": {
+        "gpqa_diamond": {
+          "accuracy": 0.3838383838383838,
+          "cases": 198,
+          "completed": 198,
+          "completion_tokens": 792,
+          "correct": 76,
+          "errors": 0,
+          "length_truncations": 0,
+          "mean_latency_seconds": 0.25040012121212135,
+          "parse_failures": 0,
+          "prompt_tokens": 53462
+        },
+        "gsm8k": {
+          "accuracy": 0.9120545868081881,
+          "cases": 1319,
+          "completed": 1319,
+          "completion_tokens": 272096,
+          "correct": 1203,
+          "errors": 0,
+          "length_truncations": 31,
+          "mean_latency_seconds": 8.135625420773332,
+          "parse_failures": 31,
+          "prompt_tokens": 180638
+        },
+        "mmlu": {
+          "accuracy": 0.7315909414613303,
+          "cases": 14042,
+          "completed": 14042,
+          "completion_tokens": 56168,
+          "correct": 10273,
+          "errors": 0,
+          "length_truncations": 0,
+          "mean_latency_seconds": 0.23855649052841518,
+          "parse_failures": 0,
+          "prompt_tokens": 2341827
+        }
+      },
+      "completed_cases": 15559,
+      "error_cases": 0,
+      "macro_accuracy": 0.6758279707026341,
+      "total_attempts": 15559,
+      "total_cases": 15559
+    },
+    "qwen3.5-9b": {
+      "benchmarks": {
+        "gpqa_diamond": {
+          "accuracy": 0.3484848484848485,
+          "cases": 198,
+          "completed": 198,
+          "completion_tokens": 841,
+          "correct": 69,
+          "errors": 0,
+          "length_truncations": 3,
+          "mean_latency_seconds": 0.2810504444444444,
+          "parse_failures": 38,
+          "prompt_tokens": 53462
+        },
+        "gsm8k": {
+          "accuracy": 0.9401061410159212,
+          "cases": 1319,
+          "completed": 1319,
+          "completion_tokens": 259488,
+          "correct": 1240,
+          "errors": 0,
+          "length_truncations": 32,
+          "mean_latency_seconds": 7.75101847839272,
+          "parse_failures": 31,
+          "prompt_tokens": 180638
+        },
+        "mmlu": {
+          "accuracy": 0.6456345249964393,
+          "cases": 14042,
+          "completed": 14042,
+          "completion_tokens": 53808,
+          "correct": 9066,
+          "errors": 0,
+          "length_truncations": 30,
+          "mean_latency_seconds": 0.2393274072781667,
+          "parse_failures": 3322,
+          "prompt_tokens": 2341827
+        }
+      },
+      "completed_cases": 15559,
+      "error_cases": 0,
+      "macro_accuracy": 0.6447418381657363,
+      "total_attempts": 15559,
+      "total_cases": 15559
+    }
+  },
+  "claim_boundary": "This establishes the complete matched direct baseline. It proves a significant strict 4B overall/MMLU advantage, a significant GSM8K regression, and no significant GPQA advantage. It does not prove three-benchmark superiority, optimized 4B superiority, 27B parity, SFT/RL/OPD effectiveness, or agent-benchmark quality.",
+  "comparison": {
+    "baseline_macro_accuracy": 0.6447418381657363,
+    "baseline_model": "qwen3.5-9b",
+    "benchmarks": {
+      "gpqa_diamond": {
+        "baseline_accuracy": 0.3484848484848485,
+        "baseline_correct": 69,
+        "baseline_only_case_ids_sha256": "f6ab3cb41d869265327426f8e358d541e3add8882b3dff5688af215b2ee596ae",
+        "baseline_only_examples": [
+          "gpqa_diamond-02ed5e30d3fc3a82",
+          "gpqa_diamond-0de22d23ecc52a64",
+          "gpqa_diamond-23ce8e1b1d9f4479",
+          "gpqa_diamond-248140067af68026",
+          "gpqa_diamond-410f587d582a929e",
+          "gpqa_diamond-416ae3c89493d517",
+          "gpqa_diamond-41719f38b768331a",
+          "gpqa_diamond-418ec16eb96b5e6f",
+          "gpqa_diamond-4c9207ec7f9c96bd",
+          "gpqa_diamond-4f32f920e4969fe4",
+          "gpqa_diamond-5cb0b5c9c748d93c",
+          "gpqa_diamond-656ff263b563ab2d"
+        ],
+        "baseline_parse_failures": 38,
+        "candidate_accuracy": 0.3838383838383838,
+        "candidate_correct": 76,
+        "candidate_only_case_ids_sha256": "ddabbf68bdbb1b6b3a96a697270fb46358841a34e01f103455d74b682cef60ed",
+        "candidate_only_examples": [
+          "gpqa_diamond-06ed171175ff14f1",
+          "gpqa_diamond-0c33b331f9f1d641",
+          "gpqa_diamond-1a8ac51b786669db",
+          "gpqa_diamond-1b00732d7cd33dba",
+          "gpqa_diamond-1eada7429a935288",
+          "gpqa_diamond-216f69b9b9a2a1d2",
+          "gpqa_diamond-283c859517d44494",
+          "gpqa_diamond-2f55ed508a1da2d5",
+          "gpqa_diamond-3100d0ea7b9220c8",
+          "gpqa_diamond-3250cdd176505a78",
+          "gpqa_diamond-41c9d08ecc374b2a",
+          "gpqa_diamond-42d39384fc6d57b1"
+        ],
+        "candidate_parse_failures": 0,
+        "cases": 198,
+        "delta": 0.03535353535353535,
+        "mcnemar_exact_p": 0.41875418826902056,
+        "paired_bootstrap_95_ci": [
+          -0.04040404040404041,
+          0.1111111111111111
+        ],
+        "paired_counts": {
+          "baseline_only": 24,
+          "both_correct": 45,
+          "both_wrong": 98,
+          "candidate_only": 31
+        }
+      },
+      "gsm8k": {
+        "baseline_accuracy": 0.9401061410159212,
+        "baseline_correct": 1240,
+        "baseline_only_case_ids_sha256": "43340db0bb10bc8bbb3bdd5e8fcde5835ef18b0650e46fe44d62f85145a9db12",
+        "baseline_only_examples": [
+          "gsm8k-0030f5ed546101d3",
+          "gsm8k-050969c038c78c9d",
+          "gsm8k-0aa865aa9fb2bc87",
+          "gsm8k-119d47432214c074",
+          "gsm8k-11d1032c7d3a911c",
+          "gsm8k-15b816adbf638dbd",
+          "gsm8k-1d0cbaef80aa508b",
+          "gsm8k-1eb4c816535e490e",
+          "gsm8k-251aac0d31d1f837",
+          "gsm8k-355890f9430fc322",
+          "gsm8k-3aadc960f32150e9",
+          "gsm8k-3ab5677af7a1edf6"
+        ],
+        "baseline_parse_failures": 31,
+        "candidate_accuracy": 0.9120545868081881,
+        "candidate_correct": 1203,
+        "candidate_only_case_ids_sha256": "97cdde0d16b5444fa7b0f8fb88e191e825c029e17c4ed613c5b25d997adf6e08",
+        "candidate_only_examples": [
+          "gsm8k-021f8443e6543a86",
+          "gsm8k-15d02155a0acd1d7",
+          "gsm8k-296260cda5e366ef",
+          "gsm8k-3a437ba4d71996c3",
+          "gsm8k-5a74f6f5cf39c7bc",
+          "gsm8k-5df746cf9e542c06",
+          "gsm8k-65abb844a2fcdf1e",
+          "gsm8k-7b88fae141696a48",
+          "gsm8k-7e410820fba10396",
+          "gsm8k-8bdf7e35aa7163a9",
+          "gsm8k-8e2d2a06059bc514",
+          "gsm8k-a67bc0c259cc11cb"
+        ],
+        "candidate_parse_failures": 31,
+        "cases": 1319,
+        "delta": -0.028051554207733132,
+        "mcnemar_exact_p": 3.7615127804166296e-05,
+        "paired_bootstrap_95_ci": [
+          -0.04094010614101592,
+          -0.015163002274450341
+        ],
+        "paired_counts": {
+          "baseline_only": 58,
+          "both_correct": 1182,
+          "both_wrong": 58,
+          "candidate_only": 21
+        }
+      },
+      "mmlu": {
+        "baseline_accuracy": 0.6456345249964393,
+        "baseline_correct": 9066,
+        "baseline_only_case_ids_sha256": "599d008710815b319ca58e34c8c3626504aa9cf3eb348cf5fa3d22f49706b61c",
+        "baseline_only_examples": [
+          "mmlu-0198d5e036a37501",
+          "mmlu-019973615fe9124b",
+          "mmlu-026e64e5818b095a",
+          "mmlu-02873622087c8980",
+          "mmlu-02cfc245f12f91be",
+          "mmlu-034428888df4abcf",
+          "mmlu-03e0bde51b66f37e",
+          "mmlu-03ec0f7e094a7adf",
+          "mmlu-0450155395aa5ff8",
+          "mmlu-0460170141a1d610",
+          "mmlu-0524add9f45afd5e",
+          "mmlu-05303b3063c69a3b"
+        ],
+        "baseline_parse_failures": 3322,
+        "candidate_accuracy": 0.7315909414613303,
+        "candidate_correct": 10273,
+        "candidate_only_case_ids_sha256": "282b7b9eacca8c8bc641ff0ac4b7a97a1050dac5a177a21b734fad0aa018d12c",
+        "candidate_only_examples": [
+          "mmlu-0012cf3d9b7124b6",
+          "mmlu-00a31f33ffbc38c6",
+          "mmlu-00c962b48870b1ec",
+          "mmlu-00caa6bc2db32ec5",
+          "mmlu-00e9ed0ad58e4051",
+          "mmlu-00f0dd9c9d791fe6",
+          "mmlu-0132422a9bc2aabf",
+          "mmlu-01ca55cc039b4b6f",
+          "mmlu-01d6af1d11526972",
+          "mmlu-01f158c4f299c146",
+          "mmlu-021dd2d47995fb1b",
+          "mmlu-022c5451cb215a28"
+        ],
+        "candidate_parse_failures": 0,
+        "cases": 14042,
+        "delta": 0.08595641646489104,
+        "mcnemar_exact_p": 1.2417186326764373e-112,
+        "paired_bootstrap_95_ci": [
+          0.07855006409343399,
+          0.09350519868964535
+        ],
+        "paired_counts": {
+          "baseline_only": 869,
+          "both_correct": 8197,
+          "both_wrong": 2900,
+          "candidate_only": 2076
+        }
+      }
+    },
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 20260820,
+    "candidate_macro_accuracy": 0.6758279707026341,
+    "candidate_model": "qwen3.5-4b",
+    "cases": 15559,
+    "macro_delta": 0.031086132536897848,
+    "overall_micro": {
+      "baseline_accuracy": 0.666816633459734,
+      "baseline_correct": 10375,
+      "baseline_only_case_ids_sha256": "9feb7a358eb6fbc17ac0d160a8dffef54985414f8dd37cad8be914e6b840e2af",
+      "baseline_only_examples": [
+        "gpqa_diamond-02ed5e30d3fc3a82",
+        "gpqa_diamond-0de22d23ecc52a64",
+        "gpqa_diamond-23ce8e1b1d9f4479",
+        "gpqa_diamond-248140067af68026",
+        "gpqa_diamond-410f587d582a929e",
+        "gpqa_diamond-416ae3c89493d517",
+        "gpqa_diamond-41719f38b768331a",
+        "gpqa_diamond-418ec16eb96b5e6f",
+        "gpqa_diamond-4c9207ec7f9c96bd",
+        "gpqa_diamond-4f32f920e4969fe4",
+        "gpqa_diamond-5cb0b5c9c748d93c",
+        "gpqa_diamond-656ff263b563ab2d"
+      ],
+      "baseline_parse_failures": 3391,
+      "candidate_accuracy": 0.7424641686483707,
+      "candidate_correct": 11552,
+      "candidate_only_case_ids_sha256": "342765a6ad50c5ac5e46e9d0002a7a61ae1673f524530de273bee673a3828c3c",
+      "candidate_only_examples": [
+        "gpqa_diamond-06ed171175ff14f1",
+        "gpqa_diamond-0c33b331f9f1d641",
+        "gpqa_diamond-1a8ac51b786669db",
+        "gpqa_diamond-1b00732d7cd33dba",
+        "gpqa_diamond-1eada7429a935288",
+        "gpqa_diamond-216f69b9b9a2a1d2",
+        "gpqa_diamond-283c859517d44494",
+        "gpqa_diamond-2f55ed508a1da2d5",
+        "gpqa_diamond-3100d0ea7b9220c8",
+        "gpqa_diamond-3250cdd176505a78",
+        "gpqa_diamond-41c9d08ecc374b2a",
+        "gpqa_diamond-42d39384fc6d57b1"
+      ],
+      "candidate_parse_failures": 31,
+      "cases": 15559,
+      "delta": 0.0756475351886368,
+      "mcnemar_exact_p": 3.2992616133426133e-102,
+      "paired_bootstrap_95_ci": [
+        0.06877048653512437,
+        0.08239604087666302
+      ],
+      "paired_counts": {
+        "baseline_only": 951,
+        "both_correct": 9424,
+        "both_wrong": 3056,
+        "candidate_only": 2128
+      }
+    }
+  },
+  "decision": {
+    "complete_benchmark_gates": {
+      "gpqa_diamond": false,
+      "gsm8k": false,
+      "mmlu": true
+    },
+    "complete_benchmarks_significantly_won": 1,
+    "direct_4b_as_final_candidate": false,
+    "direct_baseline_accepted": true,
+    "next_action": "Preserve the full direct baseline. Pre-register a benchmark-blind 4B treatment that targets GSM8K semantic execution and GPQA transfer while preserving MMLU strict performance and tracking loose-format diagnostics.",
+    "opd_allowed": false,
+    "overall_strict_4b_advantage_significant": true,
+    "project_goal_gate_passed": false,
+    "required_complete_benchmarks": 3,
+    "rl_allowed": false,
+    "training_allowed_from_benchmark_data": false
+  },
+  "experiment_id": "qwen35-complete-direct-v1",
+  "failure_analysis": {
+    "gpqa_diamond": "4B strict point estimate is higher but uncertainty includes zero; the loose-format diagnostic favors 9B.",
+    "gsm8k": "4B significantly trails 9B; this is the primary model-quality gap for the next non-benchmark training/harness intervention.",
+    "mmlu": "4B strict advantage is significant, but colon-normalized diagnostics reverse the point estimate because 9B has many recoverable format failures."
+  },
+  "format_diagnostic": {
+    "qwen3.5-4b": {
+      "gpqa_diamond": {
+        "cases": 198,
+        "loose_final_recovered": 0,
+        "loose_final_recovered_correct": 0,
+        "loose_format_diagnostic_accuracy": 0.3838383838383838,
+        "parse_failure_categories": {},
+        "parse_failures": 0,
+        "scope": "Non-scoring diagnostic only; official strict scores and paired statistics remain unchanged.",
+        "strict_accuracy": 0.3838383838383838,
+        "strict_correct": 76
+      },
+      "gsm8k": {
+        "cases": 1319,
+        "loose_final_recovered": 0,
+        "loose_final_recovered_correct": 0,
+        "loose_format_diagnostic_accuracy": 0.9120545868081881,
+        "parse_failure_categories": {
+          "length": 31
+        },
+        "parse_failures": 31,
+        "scope": "Non-scoring diagnostic only; official strict scores and paired statistics remain unchanged.",
+        "strict_accuracy": 0.9120545868081881,
+        "strict_correct": 1203
+      },
+      "mmlu": {
+        "cases": 14042,
+        "loose_final_recovered": 0,
+        "loose_final_recovered_correct": 0,
+        "loose_format_diagnostic_accuracy": 0.7315909414613303,
+        "parse_failure_categories": {},
+        "parse_failures": 0,
+        "scope": "Non-scoring diagnostic only; official strict scores and paired statistics remain unchanged.",
+        "strict_accuracy": 0.7315909414613303,
+        "strict_correct": 10273
+      }
+    },
+    "qwen3.5-9b": {
+      "gpqa_diamond": {
+        "cases": 198,
+        "loose_final_recovered": 35,
+        "loose_final_recovered_correct": 12,
+        "loose_format_diagnostic_accuracy": 0.4090909090909091,
+        "parse_failure_categories": {
+          "final_missing_colon": 35,
+          "length": 3
+        },
+        "parse_failures": 38,
+        "scope": "Non-scoring diagnostic only; official strict scores and paired statistics remain unchanged.",
+        "strict_accuracy": 0.3484848484848485,
+        "strict_correct": 69
+      },
+      "gsm8k": {
+        "cases": 1319,
+        "loose_final_recovered": 0,
+        "loose_final_recovered_correct": 0,
+        "loose_format_diagnostic_accuracy": 0.9401061410159212,
+        "parse_failure_categories": {
+          "length": 31
+        },
+        "parse_failures": 31,
+        "scope": "Non-scoring diagnostic only; official strict scores and paired statistics remain unchanged.",
+        "strict_accuracy": 0.9401061410159212,
+        "strict_correct": 1240
+      },
+      "mmlu": {
+        "cases": 14042,
+        "loose_final_recovered": 3266,
+        "loose_final_recovered_correct": 1760,
+        "loose_format_diagnostic_accuracy": 0.7709727958980203,
+        "parse_failure_categories": {
+          "final_missing_colon": 3266,
+          "length": 30,
+          "other_final_malformed": 26
+        },
+        "parse_failures": 3322,
+        "scope": "Non-scoring diagnostic only; official strict scores and paired statistics remain unchanged.",
+        "strict_accuracy": 0.6456345249964393,
+        "strict_correct": 9066
+      }
+    }
+  },
+  "identity": {
+    "analysis_revision": "398f7160f70a3b76064f4bc94cd1fb45d68945a0",
+    "case_contract_sha256": "858656f58decf8bbc23c70101dabcffc6ef12e049771e043575927743c6cfd10",
+    "case_ids_sha256": "d38ee8c3eabbefaf7381253f6a69ba87fa63d9ee25fa4b8aeaa5f2afd73b0c63",
+    "comparison_sha256": "85841b4641606e3188a055f99269f0c5748b7e58e6724a5e00916e0c4162c5eb",
+    "final_four_b_health_sha256": "18a15d320951ccd9099b8ed098ea1c7e840d06aad38bdc6e99ea3a2a7be18ed2",
+    "final_nine_b_health_sha256": "568a7ab090d9d89395fdf5df4f40c5932a2bdb424659f46387b989042619343d",
+    "four_b_merge_receipt_sha256": "ff33a4ea1f9d9c27148abd2406f14f8e2752d9fcf6fa99b760f4cf8bffc83f71",
+    "four_b_raw_sha256": "b6e35d968dc3ff3311cf991b186e7a4f2a0ff8fe9989b7507f39b75b7aa6aa54",
+    "generation_revision": "543e4b8c4164b50b07a1aa87c16210a158a9f34d",
+    "nine_b_merge_receipt_sha256": "d5931f7f583eef2cbdb802696f140da1edb0c7dc66e6f65f0c9c6c01446c978c",
+    "nine_b_raw_sha256": "a22cade1ea367e6cceddff4e25e88d34360adc005feeed316464b561c151b988",
+    "preregister_sha256": "f041c63d7bec54d48ef1d861492ca65de5d6981b1fdda7e1bba6c4c3add12b38",
+    "smoke_sha256": "cc46d80ad16eb6f11bae10ffae36d91c80664ec5633dba4658d61a2a38299a27",
+    "startup_receipt_sha256": "d4157f935bcaacc4ca227b8f1ea4d500b3291f437f9898d6379a038bae212c41"
+  },
+  "schema_version": "nano_harness_complete_direct_public_v1",
+  "validation": {
+    "both_case_sets_match": true,
+    "case_contract_rows": 15559,
+    "case_ids_sha256_match": true,
+    "models_match_startup_and_final_health": true,
+    "prompt_and_system_hashes_match_contract": true,
+    "raw_outputs_ignored": true,
+    "strict_scores_unchanged_by_format_diagnostic": true,
+    "zero_api_errors": true
+  }
+}
