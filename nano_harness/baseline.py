@@ -1996,8 +1996,18 @@ def _mcnemar_exact_p(candidate_only: int, baseline_only: int) -> float:
     if discordant == 0:
         return 1.0
     tail = min(candidate_only, baseline_only)
-    probability = sum(math.comb(discordant, index) for index in range(tail + 1))
-    return min(1.0, 2.0 * probability / (2**discordant))
+    log_terms = [
+        math.lgamma(discordant + 1)
+        - math.lgamma(index + 1)
+        - math.lgamma(discordant - index + 1)
+        - discordant * math.log(2.0)
+        for index in range(tail + 1)
+    ]
+    maximum = max(log_terms)
+    log_tail_probability = maximum + math.log(
+        sum(math.exp(value - maximum) for value in log_terms)
+    )
+    return min(1.0, math.exp(math.log(2.0) + log_tail_probability))
 
 
 def _aggregate_records(records: list[dict[str, Any]]) -> dict[str, Any]:

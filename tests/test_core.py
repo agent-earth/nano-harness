@@ -27,6 +27,7 @@ from nano_harness.baseline import (
     _run_protected_math_short_recovery_case,
     _run_protected_math_constrained_recovery_case,
     _strategy_for_case,
+    _mcnemar_exact_p,
     build_case,
     compare_baselines,
     extract_prediction,
@@ -2261,6 +2262,20 @@ class CoreTests(unittest.TestCase):
                 first["benchmarks"]["gsm8k"]["candidate_parse_failures"],
                 ["gsm8k-b"],
             )
+
+    def test_mcnemar_exact_is_stable_for_large_discordant_counts(self):
+        self.assertAlmostEqual(_mcnemar_exact_p(4, 0), 0.125)
+        self.assertAlmostEqual(_mcnemar_exact_p(5, 1), 0.21875)
+        self.assertAlmostEqual(
+            _mcnemar_exact_p(2076, 869),
+            1.2417186326741173e-112,
+            delta=5e-124,
+        )
+        self.assertAlmostEqual(
+            _mcnemar_exact_p(2128, 951),
+            3.299261613346318e-102,
+            delta=5e-113,
+        )
 
     def test_model_alias_and_relative_output_resolution(self):
         config = load_run_config("configs/benchmarks/synthetic_base.yaml")
