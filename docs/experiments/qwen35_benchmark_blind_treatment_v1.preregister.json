@@ -1,0 +1,317 @@
+{
+  "admission_gates": {
+    "canary": {
+      "arm_order": [
+        "adapter_only",
+        "arbiter_only",
+        "adapter_plus_arbiter"
+      ],
+      "benchmark_minimum_correct": {
+        "gpqa_diamond": 6,
+        "gsm8k": 90,
+        "mmlu": 67
+      },
+      "cases": 211,
+      "each_arm_evaluated_even_if_an_earlier_arm_fails": true,
+      "maximum_api_errors": 0,
+      "maximum_parse_failures": 2,
+      "minimum_overall_correct": 164,
+      "paired_candidate_only_wins_gt_base_only_wins": true,
+      "purpose": "Admission and ablation only; not a complete benchmark score or independent holdout.",
+      "require_exact_case_identity": true
+    },
+    "complete": {
+      "alpha": 0.05,
+      "bootstrap_samples": 10000,
+      "candidate_accuracy_gt_nine_b": true,
+      "candidate_only_wins_gt_nine_b_only_wins": true,
+      "each_admitted_arm_evaluated_even_if_an_earlier_arm_fails": true,
+      "exact_mcnemar_p_lt_alpha": true,
+      "maximum_api_errors": 0,
+      "minimum_benchmarks_significantly_won": 3,
+      "paired_bootstrap_ci_lower_gt_zero": true,
+      "per_benchmark_non_regression_vs_direct_four_b": true,
+      "strict_score_is_official": true,
+      "track_loose_format_diagnostic_without_rescoring": true
+    },
+    "peer_consistency": {
+      "aggregate_bootstrap_ci_lower_gt_zero": true,
+      "aggregate_exact_mcnemar_p_lt": 0.05,
+      "all_adapter_tensors_finite": true,
+      "every_json_family_non_regression": true,
+      "final_bootstrap_ci_lower_gt_zero": true,
+      "final_exact_mcnemar_p_lt": 0.05,
+      "independent_reload_exact": true,
+      "maximum_final_only_losses": 0,
+      "minimum_final_only_wins": 6,
+      "pair_bootstrap_ci_lower_gt_zero": true,
+      "pair_exact_mcnemar_p_lt": 0.05
+    }
+  },
+  "arms": [
+    {
+      "arm_id": "adapter_only",
+      "base_model": "qwen3.5-4b",
+      "harness_manifest": "configs/harness/qwen35_three_task_replication_v1.yaml",
+      "intervention": "The unique adapter emitted by the accepted peer paired-consistency replication; direct harness unchanged.",
+      "serving_model_name_policy": "Freeze after peer acceptance as qwen3.5-4b-consistency-replication-v1 and bind source and serving adapter SHA256.",
+      "variable_changed": "adapter"
+    },
+    {
+      "arm_id": "arbiter_only",
+      "base_model": "qwen3.5-4b",
+      "harness_manifest": "configs/harness/qwen35_three_task_replication_arbiter_v1.yaml",
+      "intervention": "Base 4B with direct GSM8K/MMLU and the frozen option-evidence conservative arbiter on GPQA only.",
+      "serving_model_name_policy": "qwen3.5-4b",
+      "variable_changed": "gpqa_harness"
+    },
+    {
+      "arm_id": "adapter_plus_arbiter",
+      "base_model": "qwen3.5-4b",
+      "harness_manifest": "configs/harness/qwen35_three_task_replication_arbiter_v1.yaml",
+      "intervention": "The unique accepted consistency adapter composed with the unchanged GPQA-only arbiter.",
+      "serving_model_name_policy": "Same adapter identity as adapter_only; no weight composition or adapter scaling.",
+      "variable_changed": "adapter_and_gpqa_harness"
+    }
+  ],
+  "checks": {
+    "canary_surface_frozen": true,
+    "complete_surface_frozen": true,
+    "dependency_identities_verified": true,
+    "independent_holdout_sealed": true,
+    "no_post_hoc_search_policy_frozen": true,
+    "only_gpqa_harness_changes": true,
+    "peer_owner_and_revision_verified": true,
+    "prior_evidence_verified": true,
+    "strict_score_remains_official": true
+  },
+  "claim_boundary": "This receipt freezes a benchmark-blind treatment ladder after the complete direct baseline was observed but before any treatment canary or complete-benchmark generation. It does not accept the peer adapter, promote the GPQA arbiter, run a treatment, or establish a new model-quality claim.",
+  "decision_policy": {
+    "adapter_identity_source": "Accept exactly the adapter SHA256 in the unique peer result. No second run, checkpoint choice, interpolation, merge, or weight search.",
+    "complete_arm_policy": "Run every arm that independently passes the frozen canary. Do not choose arms using complete-benchmark outcomes.",
+    "forbidden_after_any_treatment_observation": [
+      "training_data_change",
+      "objective_change",
+      "loss_weight_change",
+      "teacher_detach_change",
+      "learning_rate_change",
+      "seed_change",
+      "step_change",
+      "lora_scope_change",
+      "adapter_checkpoint_choice",
+      "adapter_weight_change",
+      "prompt_change",
+      "parser_change",
+      "scorer_change",
+      "token_budget_change",
+      "benchmark_route_change",
+      "arbiter_threshold_change",
+      "case_selection_change"
+    ],
+    "independent_holdout_policy": "Sealed. This preregistration does not authorize access.",
+    "peer_failure_policy": "If any peer significance, stability, reload, or JSON non-regression gate fails, no treatment canary or complete-benchmark generation is allowed.",
+    "rejection_policy": "A failed arm is preserved as negative evidence and cannot be repaired on the observed canary or complete rows."
+  },
+  "evaluation_surfaces": {
+    "canary": {
+      "artifacts": {
+        "baseline_case_manifest_path": {
+          "path": "configs/generated/qwen35_three_task_replication_v1_cases.json",
+          "sha256": "eafbe4d42487a225322dd3b3bdc1d805c065fb15f0f8b968e65ccf747f96976f",
+          "verified": true
+        },
+        "baseline_report_path": {
+          "path": "docs/results/three_task_replication_v1.public.json",
+          "sha256": "e7aad4abf515de23289359a04a589e0f87d29493cf4b172a8213e369a0cdbd4f",
+          "verified": true
+        },
+        "direct_manifest_path": {
+          "path": "configs/harness/qwen35_three_task_replication_v1.yaml",
+          "sha256": "88f6e832d38e739c6b622a30633a2737077fc081037e6e1543cb5763b169a7b9",
+          "verified": true
+        },
+        "gpqa_arbiter_manifest_path": {
+          "path": "configs/harness/qwen35_three_task_replication_arbiter_v1.yaml",
+          "sha256": "da0e6a4bab53861495fc973a2fac57b500c10d6d696a64d72b26280f9a478583",
+          "verified": true
+        }
+      },
+      "manifest_invariance": {
+        "arbiter_max_tokens": 64,
+        "case_selection_equal": true,
+        "dataset_identity_equal": true,
+        "gpqa_only_arbiter": true,
+        "gsm8k_direct_unchanged": true,
+        "mmlu_direct_unchanged": true,
+        "option_evidence_max_tokens": 96
+      }
+    },
+    "complete": {
+      "artifacts": {
+        "baseline_case_manifest_path": {
+          "path": "configs/generated/qwen35_complete_direct_v1_cases.public.json",
+          "sha256": "858656f58decf8bbc23c70101dabcffc6ef12e049771e043575927743c6cfd10",
+          "verified": true
+        },
+        "baseline_report_path": {
+          "path": "docs/results/qwen35_complete_direct_v1.public.json",
+          "sha256": "c9e622872d6ecd87350475011dcd19534c4f574a2999e69541d9b66ae0985152",
+          "verified": true
+        },
+        "direct_manifest_path": {
+          "path": "configs/baselines/qwen35_complete_direct_v1.yaml",
+          "sha256": "6ec49d522892975e4532954d3bac7c7e5ed9b24e2c698700d5f8a61667753e90",
+          "verified": true
+        },
+        "gpqa_arbiter_manifest_path": {
+          "path": "configs/harness/qwen35_complete_arbiter_v1.yaml",
+          "sha256": "e9bbd8146231f71a97f36c631967034f010665450a9eb8522f8c5130b6300245",
+          "verified": true
+        },
+        "preregister_path": {
+          "path": "docs/experiments/qwen35_complete_direct_v1.preregister.json",
+          "sha256": "f041c63d7bec54d48ef1d861492ca65de5d6981b1fdda7e1bba6c4c3add12b38",
+          "verified": true
+        }
+      },
+      "manifest_invariance": {
+        "arbiter_max_tokens": 64,
+        "case_selection_equal": true,
+        "dataset_identity_equal": true,
+        "gpqa_only_arbiter": true,
+        "gsm8k_direct_unchanged": true,
+        "mmlu_direct_unchanged": true,
+        "option_evidence_max_tokens": 96
+      }
+    }
+  },
+  "execution_boundary": {
+    "adapter_result_exists": false,
+    "canary_generation_allowed": false,
+    "complete_treatment_generation_allowed": false,
+    "independent_holdout_allowed": false,
+    "this_commit_only_preregisters": true,
+    "treatment_generation_started": false
+  },
+  "identity": {
+    "base_revision": "b4d8cdf5a32d35962b7aae211259f527a7328026",
+    "config_sha256": "b90f9ab9e1a2328c04f7e005c56373978344caae5763b7f6a25923eaac6a6a7b",
+    "dependencies": [
+      {
+        "path": "../nano-train-skillgen-traex-02/configs/paired_consistency/consistency_replication_v1.json",
+        "sha256": "534c9d7794643a0a4a4c242995bfe931c9834844bbd20acb6bfe97f42e9a6c8f",
+        "verified": true
+      },
+      {
+        "path": "../nano-train-skillgen-traex-02/docs/experiments/consistency_replication_v1.preregister.json",
+        "sha256": "f02d710beef452a6bcb2c8d56d5e4e81efb347bde048b34f7ebe9aba9713b06c",
+        "verified": true
+      },
+      {
+        "path": "../nano-data-pipeline-skillgen-traex-02/manifests/paired_consistency_replication_v1.release.json",
+        "sha256": "db649d2e603a7a24305d01ed108f2fa4f640f1c315a4e07cf4278c5a7534856a",
+        "verified": true
+      }
+    ],
+    "peer_revision": "6b6ac50f706ab29edfce267a4d286ed408628012"
+  },
+  "next_action": "Wait for and consume the peer-owned unique paired-consistency replication result; do not run treatment canary or complete benchmarks.",
+  "peer_result": {
+    "adapter_sha256": null,
+    "admitted": false,
+    "checks": {
+      "result_missing": false
+    },
+    "exists": false,
+    "path": "../nano-train-skillgen-traex-02/docs/results/consistency_replication_v1.public.json",
+    "sha256": null
+  },
+  "prior_evidence": [
+    {
+      "assertions": [
+        {
+          "actual": 1,
+          "equals": 1,
+          "passed": true,
+          "pointer": "/decision/complete_benchmarks_significantly_won"
+        },
+        {
+          "actual": false,
+          "equals": false,
+          "passed": true,
+          "pointer": "/decision/project_goal_gate_passed"
+        },
+        {
+          "actual": false,
+          "equals": false,
+          "passed": true,
+          "pointer": "/decision/rl_allowed"
+        }
+      ],
+      "evidence_id": "complete_direct_baseline",
+      "path": "docs/results/qwen35_complete_direct_v1.public.json",
+      "sha256": "c9e622872d6ecd87350475011dcd19534c4f574a2999e69541d9b66ae0985152",
+      "verified": true
+    },
+    {
+      "assertions": [
+        {
+          "actual": true,
+          "equals": true,
+          "passed": true,
+          "pointer": "/decision/accepted"
+        },
+        {
+          "actual": 2,
+          "equals": 2,
+          "passed": true,
+          "pointer": "/override_analysis/override_count"
+        },
+        {
+          "actual": 0,
+          "equals": 0,
+          "passed": true,
+          "pointer": "/override_analysis/neutral_overrides"
+        }
+      ],
+      "evidence_id": "gpqa_arbiter_dev8_direction",
+      "path": "docs/results/gpqa_dev8_conservative_arbiter_v1.public.json",
+      "sha256": "a00548dfc1ccbf8901b4668e8aa486f4b6269e76e9918505f031d9f9eda5af3c",
+      "verified": true
+    },
+    {
+      "assertions": [
+        {
+          "actual": false,
+          "equals": false,
+          "passed": true,
+          "pointer": "/decision/accepted"
+        },
+        {
+          "actual": 2,
+          "equals": 2,
+          "passed": true,
+          "pointer": "/override_analysis/gpqa_override_count"
+        },
+        {
+          "actual": false,
+          "equals": false,
+          "passed": true,
+          "pointer": "/decision/per_benchmark_non_regression_vs_9b"
+        }
+      ],
+      "evidence_id": "gpqa_arbiter_holdout5_rejection",
+      "path": "docs/results/arbiter_holdout5_v1.public.json",
+      "sha256": "a84ee998a80e41bc2d105a90feaabf3ecbc7e10f51218df0e7dfbdcfbbfab5fb",
+      "verified": true
+    }
+  ],
+  "readiness": {
+    "canary_generation_allowed": false,
+    "complete_treatment_generation_allowed": false,
+    "independent_holdout_allowed": false,
+    "reason": "Peer consistency replication result is absent or fails at least one frozen admission gate."
+  },
+  "schema_version": "nano_harness_benchmark_blind_treatment_receipt_v1",
+  "treatment_id": "qwen35-benchmark-blind-treatment-v1"
+}
