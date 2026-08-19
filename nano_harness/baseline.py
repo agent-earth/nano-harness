@@ -72,6 +72,7 @@ class SuiteManifest:
     fallback_to_protected_on_parse_failure: bool
     min_task_groups: int
     datasets: tuple[DatasetSpec, ...]
+    case_id_policy: str = "content_stable_v1"
 
 
 def load_manifest(path: str | Path) -> SuiteManifest:
@@ -94,6 +95,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         "normalize_bare_choice",
         "fallback_to_protected_on_parse_failure",
         "min_task_groups",
+        "case_id_policy",
         "datasets",
     }
     unknown = set(raw) - expected_keys
@@ -175,6 +177,9 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         raise ValueError(
             "benchmark_routing is only allowed with strategy=benchmark_routing"
         )
+    case_id_policy = str(raw.get("case_id_policy", "content_stable_v1"))
+    if case_id_policy not in {"content_stable_v1", "row_stable_v2"}:
+        raise ValueError("unsupported case_id_policy")
     return SuiteManifest(
         schema_version=raw["schema_version"],
         suite_id=raw["suite_id"],
@@ -196,6 +201,7 @@ def load_manifest(path: str | Path) -> SuiteManifest:
         ),
         min_task_groups=min_task_groups,
         datasets=datasets,
+        case_id_policy=case_id_policy,
     )
 
 
@@ -238,6 +244,7 @@ def load_cases(manifest: SuiteManifest, dataset_root: Path) -> list[BaselineCase
                 answer_only=spec.answer_only,
                 system_prompt=spec.system_prompt or manifest.system_prompt,
                 max_tokens=spec.max_tokens or manifest.max_tokens,
+                case_id_policy=manifest.case_id_policy,
             )
             for index, record in enumerate(records)
         ]
@@ -300,6 +307,7 @@ def build_case(
     answer_only: bool = False,
     system_prompt: str = "",
     max_tokens: int = 0,
+    case_id_policy: str = "content_stable_v1",
 ) -> BaselineCase:
     if benchmark == "gsm8k":
         question = str(record["question"]).strip()
@@ -350,8 +358,14 @@ def build_case(
     else:
         raise ValueError(f"unsupported baseline benchmark: {benchmark}")
 
+    if case_id_policy == "content_stable_v1":
+        case_identity = f"{benchmark}\0{question}"
+    elif case_id_policy == "row_stable_v2":
+        case_identity = f"{benchmark}\0{source_index}\0{question}"
+    else:
+        raise ValueError(f"unsupported case_id_policy: {case_id_policy}")
     case_digest = hashlib.sha256(
-        f"{benchmark}\0{question}".encode("utf-8")
+        case_identity.encode("utf-8")
     ).hexdigest()[:16]
     return BaselineCase(
         case_id=f"{benchmark}-{case_digest}",
@@ -438,8 +452,15 @@ def run_suite(
     dataset_root: Path,
     model: ModelConfig,
     output_path: Path,
+    *,
+    num_shards: int = 1,
+    shard_id: int = 0,
 ) -> dict[str, Any]:
-    cases = load_cases(manifest, dataset_root)
+    cases = select_case_shard(
+        load_cases(manifest, dataset_root),
+        num_shards=num_shards,
+        shard_id=shard_id,
+    )
     clients: dict[int, OpenRouterClient] = {}
     completed = _completed_case_ids(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -595,7 +616,91 @@ def run_suite(
     summary = summarize_baseline(output_path)
     summary["attempted_this_invocation"] = attempted
     summary["output"] = str(output_path)
+    summary["shard"] = {
+        "num_shards": num_shards,
+        "shard_id": shard_id,
+        "selected_cases": len(cases),
+    }
     return summary
+
+
+def select_case_shard(
+    cases: list[BaselineCase],
+    *,
+    num_shards: int,
+    shard_id: int,
+) -> list[BaselineCase]:
+    if num_shards < 1:
+        raise ValueError("num_shards must be at least one")
+    if shard_id < 0 or shard_id >= num_shards:
+        raise ValueError("shard_id must be in [0, num_shards)")
+    if len({case.case_id for case in cases}) != len(cases):
+        raise ValueError("case IDs must be unique before sharding")
+    return [
+        case
+        for case in cases
+        if int(hashlib.sha256(case.case_id.encode()).hexdigest(), 16)
+        % num_shards
+        == shard_id
+    ]
+
+
+def merge_baseline_shards(
+    paths: list[Path],
+    output_path: Path,
+    *,
+    expected_case_ids: set[str],
+) -> dict[str, Any]:
+    if not paths:
+        raise ValueError("baseline merge needs shard paths")
+    latest_by_path: list[dict[str, dict[str, Any]]] = []
+    for path in paths:
+        latest: dict[str, dict[str, Any]] = {}
+        for record in _iter_jsonl(path):
+            latest[str(record["case_id"])] = record
+        latest_by_path.append(latest)
+    owners: dict[str, int] = {}
+    merged: dict[str, dict[str, Any]] = {}
+    for path_index, latest in enumerate(latest_by_path):
+        for case_id, record in latest.items():
+            if case_id in owners:
+                raise ValueError(
+                    f"case appears in multiple shards: {case_id}"
+                )
+            owners[case_id] = path_index
+            merged[case_id] = record
+    actual_case_ids = set(merged)
+    if actual_case_ids != expected_case_ids:
+        raise ValueError(
+            "merged case IDs differ: "
+            f"missing={sorted(expected_case_ids - actual_case_ids)[:5]}, "
+            f"extra={sorted(actual_case_ids - expected_case_ids)[:5]}"
+        )
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = output_path.with_suffix(output_path.suffix + ".tmp")
+    with temporary.open("w", encoding="utf-8") as handle:
+        for case_id in sorted(merged):
+            handle.write(
+                json.dumps(
+                    merged[case_id],
+                    ensure_ascii=False,
+                    sort_keys=True,
+                )
+                + "\n"
+            )
+        handle.flush()
+        os_fsync(handle)
+    temporary.replace(output_path)
+    return {
+        "schema_version": "nano_harness_baseline_merge_v1",
+        "input_paths": [str(path) for path in paths],
+        "output_path": str(output_path),
+        "case_count": len(merged),
+        "case_ids_sha256": hashlib.sha256(
+            "\n".join(sorted(merged)).encode("utf-8")
+        ).hexdigest(),
+        "output_sha256": sha256_file(output_path),
+    }
 
 
 def _strategy_for_case(
@@ -1979,6 +2084,28 @@ def case_manifest(cases: list[BaselineCase]) -> list[dict[str, Any]]:
             "expected": case.expected,
             "scorer": case.scorer,
             "metadata": case.metadata,
+        }
+        for case in cases
+    ]
+
+
+def public_case_contract(
+    cases: list[BaselineCase],
+) -> list[dict[str, Any]]:
+    if len({case.case_id for case in cases}) != len(cases):
+        raise ValueError("public case contract requires unique case IDs")
+    return [
+        {
+            "case_id": case.case_id,
+            "benchmark": case.benchmark,
+            "source_index": case.source_index,
+            "source_chars": case.source_chars,
+            "max_tokens": case.max_tokens,
+            "prompt_sha256": hashlib.sha256(case.prompt.encode()).hexdigest(),
+            "system_prompt_sha256": hashlib.sha256(
+                case.system_prompt.encode()
+            ).hexdigest(),
+            "scorer": case.scorer,
         }
         for case in cases
     ]

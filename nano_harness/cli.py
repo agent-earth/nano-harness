@@ -12,6 +12,7 @@ from nano_harness.baseline import (
     compare_baselines,
     load_cases,
     load_manifest,
+    merge_baseline_shards,
     run_suite,
     summarize_baseline,
 )
@@ -71,6 +72,14 @@ def main() -> None:
     baseline_parser.add_argument("--base-url", default="http://127.0.0.1:8000/v1")
     baseline_parser.add_argument("--api-key-env", default="NANO_HARNESS_API_KEY")
     baseline_parser.add_argument("--output", required=True)
+    baseline_parser.add_argument("--num-shards", type=int, default=1)
+    baseline_parser.add_argument("--shard-id", type=int, default=0)
+
+    baseline_merge_parser = subparsers.add_parser("baseline-merge")
+    baseline_merge_parser.add_argument("--manifest", required=True)
+    baseline_merge_parser.add_argument("--dataset-root", required=True)
+    baseline_merge_parser.add_argument("--input", action="append", required=True)
+    baseline_merge_parser.add_argument("--output", required=True)
 
     cases_parser = subparsers.add_parser("baseline-cases")
     cases_parser.add_argument("--manifest", required=True)
@@ -187,6 +196,24 @@ def main() -> None:
                 chat_template_kwargs=manifest.chat_template_kwargs,
             ),
             Path(args.output),
+            num_shards=args.num_shards,
+            shard_id=args.shard_id,
+        )
+    elif args.command == "baseline-merge":
+        manifest = load_manifest(args.manifest)
+        expected = {
+            case.case_id
+            for case in load_cases(manifest, Path(args.dataset_root))
+        }
+        paths = [
+            Path(path)
+            for pattern in args.input
+            for path in sorted(Path().glob(pattern))
+        ]
+        summary = merge_baseline_shards(
+            paths,
+            Path(args.output),
+            expected_case_ids=expected,
         )
     elif args.command == "baseline-cases":
         manifest = load_manifest(args.manifest)

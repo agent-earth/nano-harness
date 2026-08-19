@@ -1,0 +1,300 @@
+{
+  "cases": {
+    "by_benchmark": {
+      "gpqa_diamond": 198,
+      "gsm8k": 1319,
+      "mmlu": 14042
+    },
+    "case_id_policy": "row_stable_v2",
+    "public_contract_excludes": [
+      "task prompts",
+      "reference answers",
+      "model outputs"
+    ],
+    "total": 15559
+  },
+  "checks": {
+    "all_dataset_rows_included": true,
+    "all_shards_disjoint_and_complete": true,
+    "case_ids_unique": true,
+    "context_4096_pass": true,
+    "models_ready": true,
+    "no_execution_started": true,
+    "policy_fail_closed": true,
+    "row_stable_identity_enabled": true,
+    "suite_identity_pass": true
+  },
+  "claim_boundary": "This receipt freezes the complete matched direct baseline. It does not start serving, generation, scoring, training, RL, or OPD and it does not establish a new model-quality result.",
+  "commands": {
+    "health": {
+      "qwen3.5-4b": [
+        "curl",
+        "-fsS",
+        "http://127.0.0.1:8000/v1/models"
+      ],
+      "qwen3.5-9b": [
+        "curl",
+        "-fsS",
+        "http://127.0.0.1:8001/v1/models"
+      ]
+    },
+    "output_paths": {
+      "qwen3.5-4b": {
+        "merged": "results/full/qwen35-complete-direct-v1/4b/cases.jsonl",
+        "shard_pattern": "results/full/qwen35-complete-direct-v1/4b/shard-*.jsonl"
+      },
+      "qwen3.5-9b": {
+        "merged": "results/full/qwen35-complete-direct-v1/9b/cases.jsonl",
+        "shard_pattern": "results/full/qwen35-complete-direct-v1/9b/shard-*.jsonl"
+      }
+    },
+    "run_shard": {
+      "qwen3.5-4b": [
+        "../../.venv/bin/python",
+        "-m",
+        "nano_harness.cli",
+        "baseline",
+        "--manifest",
+        "configs/baselines/qwen35_complete_direct_v1.yaml",
+        "--dataset-root",
+        "../../../datasets",
+        "--model",
+        "qwen3.5-4b",
+        "--base-url",
+        "http://127.0.0.1:8000/v1",
+        "--output",
+        "results/full/qwen35-complete-direct-v1/4b/shard-<shard_id>.jsonl",
+        "--num-shards",
+        "16",
+        "--shard-id",
+        "<shard_id>"
+      ],
+      "qwen3.5-9b": [
+        "../../.venv/bin/python",
+        "-m",
+        "nano_harness.cli",
+        "baseline",
+        "--manifest",
+        "configs/baselines/qwen35_complete_direct_v1.yaml",
+        "--dataset-root",
+        "../../../datasets",
+        "--model",
+        "qwen3.5-9b",
+        "--base-url",
+        "http://127.0.0.1:8001/v1",
+        "--output",
+        "results/full/qwen35-complete-direct-v1/9b/shard-<shard_id>.jsonl",
+        "--num-shards",
+        "16",
+        "--shard-id",
+        "<shard_id>"
+      ]
+    },
+    "serving": {
+      "qwen3.5-4b": [
+        "env",
+        "CUDA_VISIBLE_DEVICES=0",
+        "../../.venv/bin/vllm",
+        "serve",
+        "../../../models/Qwen3.5-4B",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8000",
+        "--served-model-name",
+        "qwen3.5-4b",
+        "--dtype",
+        "float16",
+        "--max-model-len",
+        "4096",
+        "--gpu-memory-utilization",
+        "0.85",
+        "--enforce-eager",
+        "--max-num-batched-tokens",
+        "4096",
+        "--max-num-seqs",
+        "1"
+      ],
+      "qwen3.5-9b": [
+        "env",
+        "CUDA_VISIBLE_DEVICES=1",
+        "../../.venv/bin/vllm",
+        "serve",
+        "../../../models/Qwen3.5-9B",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8001",
+        "--served-model-name",
+        "qwen3.5-9b",
+        "--dtype",
+        "float16",
+        "--max-model-len",
+        "4096",
+        "--gpu-memory-utilization",
+        "0.85",
+        "--enforce-eager",
+        "--max-num-batched-tokens",
+        "4096",
+        "--max-num-seqs",
+        "1"
+      ]
+    }
+  },
+  "context": {
+    "by_benchmark": {
+      "gpqa_diamond": {
+        "input_max": 2798,
+        "input_p99": 916,
+        "input_plus_budget_max": 2830
+      },
+      "gsm8k": {
+        "input_max": 264,
+        "input_p99": 203,
+        "input_plus_budget_max": 864
+      },
+      "mmlu": {
+        "input_max": 1054,
+        "input_p99": 528,
+        "input_plus_budget_max": 1086
+      }
+    },
+    "max_model_len": 4096
+  },
+  "execution_boundary": {
+    "benchmark_scoring_started": false,
+    "model_generation_started": false,
+    "opd_started": false,
+    "rl_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-complete-direct-v1",
+  "historical_cost_projection": {
+    "by_model_and_benchmark": {
+      "four_b": {
+        "gpqa_diamond": {
+          "historical_seconds_per_case_max": 0.2530925789473684,
+          "historical_seconds_per_case_min": 0.2530925789473684,
+          "projected_wall_seconds_max": 50.11233063157895,
+          "projected_wall_seconds_min": 50.11233063157895
+        },
+        "gsm8k": {
+          "historical_seconds_per_case_max": 9.187806156250003,
+          "historical_seconds_per_case_min": 8.556924183593745,
+          "projected_wall_seconds_max": 12118.716320093754,
+          "projected_wall_seconds_min": 11286.58299816015
+        },
+        "mmlu": {
+          "historical_seconds_per_case_max": 0.24923007031250008,
+          "historical_seconds_per_case_min": 0.24921632291666662,
+          "projected_wall_seconds_max": 3499.688647328126,
+          "projected_wall_seconds_min": 3499.4956063958325
+        }
+      },
+      "nine_b": {
+        "gpqa_diamond": {
+          "historical_seconds_per_case_max": 0.2537569473684211,
+          "historical_seconds_per_case_min": 0.2537569473684211,
+          "projected_wall_seconds_max": 50.243875578947375,
+          "projected_wall_seconds_min": 50.243875578947375
+        },
+        "gsm8k": {
+          "historical_seconds_per_case_max": 8.46371977083333,
+          "historical_seconds_per_case_min": 7.829262921874999,
+          "projected_wall_seconds_max": 11163.646377729163,
+          "projected_wall_seconds_min": 10326.797793953125
+        },
+        "mmlu": {
+          "historical_seconds_per_case_max": 0.23997222656250008,
+          "historical_seconds_per_case_min": 0.2383566770833334,
+          "projected_wall_seconds_max": 3369.690005390626,
+          "projected_wall_seconds_min": 3347.004459604168
+        }
+      }
+    },
+    "scope": "Historical single-request wall times are planning estimates only; actual complete-run times remain measured evidence.",
+    "source_identities": {
+      "large-confirmation-v1": "c219199324ada3f69d7f4dd3ce460d15c55ab70165aab3f09af13f26424bb80a",
+      "three-task-replication-v1": "e7aad4abf515de23289359a04a589e0f87d29493cf4b172a8213e369a0cdbd4f"
+    },
+    "total_per_model": {
+      "four_b": {
+        "projected_wall_seconds_max": 15668.517298053459,
+        "projected_wall_seconds_min": 14836.19093518756
+      },
+      "nine_b": {
+        "projected_wall_seconds_max": 14583.580258698737,
+        "projected_wall_seconds_min": 13724.04612913624
+      }
+    }
+  },
+  "identity": {
+    "case_contract_sha256": "6dbfe39cc941e17438315cd61d3900bbeb1d6a60615cf3a9f14f01cd1573990c",
+    "case_ids_sha256": "d38ee8c3eabbefaf7381253f6a69ba87fa63d9ee25fa4b8aeaa5f2afd73b0c63",
+    "config_sha256": "3d8ba23272528747afcfdc5273ca376598dfa57d003357c12485e9eb89b5298f",
+    "models": [
+      {
+        "config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+        "index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+        "model_id": "qwen3.5-4b",
+        "path": "../../../models/Qwen3.5-4B",
+        "served_model_name": "qwen3.5-4b",
+        "status": "ready"
+      },
+      {
+        "config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+        "index_sha256": "26d3539b516be613f39563617cb9d33b3f83d401298125be392c80cefb8f7fe5",
+        "model_id": "qwen3.5-9b",
+        "path": "../../../models/Qwen3.5-9B",
+        "served_model_name": "qwen3.5-9b",
+        "status": "ready"
+      }
+    ],
+    "suite_manifest_sha256": "6ec49d522892975e4532954d3bac7c7e5ed9b24e2c698700d5f8a61667753e90"
+  },
+  "policy": {
+    "benchmark_outputs_may_enter_sft_dpo_rl_reward_verifier": false,
+    "benchmark_rows_training_eligible": false,
+    "post_observation_prompt_budget_parser_scorer_search": false,
+    "raw_outputs_committed": false
+  },
+  "resume": {
+    "api_error_rows_retried": true,
+    "existing_completed_case_ids_skipped": true,
+    "merge_requires_all_expected_case_ids": true,
+    "unit": "stable case_id"
+  },
+  "schema_version": "nano_harness_complete_baseline_receipt_v1",
+  "sharding": {
+    "algorithm": "sha256(case_id) mod num_shards",
+    "counts": [
+      972,
+      977,
+      971,
+      980,
+      962,
+      975,
+      1015,
+      976,
+      916,
+      959,
+      993,
+      941,
+      954,
+      976,
+      1040,
+      952
+    ],
+    "maximum": 1040,
+    "merge_requires_exact_case_set": true,
+    "minimum": 916,
+    "num_shards": 16
+  },
+  "uncertainty": {
+    "alpha": 0.05,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 20260820,
+    "exact_mcnemar": true
+  }
+}

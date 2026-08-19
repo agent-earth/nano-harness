@@ -32,6 +32,9 @@ from nano_harness.baseline import (
     extract_prediction,
     load_cases,
     load_manifest,
+    merge_baseline_shards,
+    public_case_contract,
+    select_case_shard,
     score_output,
     summarize_baseline,
 )
@@ -434,6 +437,129 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(first.case_id, second.case_id)
         self.assertEqual(first.expected, "12")
         self.assertNotEqual(first.source_index, second.source_index)
+
+    def test_row_stable_case_ids_preserve_duplicate_rows(self):
+        record = {
+            "question": "What is 7 plus 5?",
+            "answer": "Compute 7 + 5 = 12.\n#### 12",
+        }
+        first = build_case(
+            "gsm8k",
+            "numeric_exact",
+            3,
+            record,
+            case_id_policy="row_stable_v2",
+        )
+        second = build_case(
+            "gsm8k",
+            "numeric_exact",
+            99,
+            record,
+            case_id_policy="row_stable_v2",
+        )
+        self.assertNotEqual(first.case_id, second.case_id)
+        self.assertEqual(first.expected, second.expected)
+
+    def test_case_shards_are_deterministic_disjoint_and_complete(self):
+        cases = [
+            build_case(
+                "gsm8k",
+                "numeric_exact",
+                index,
+                {
+                    "question": f"What is {index} plus 1?",
+                    "answer": f"#### {index + 1}",
+                },
+                case_id_policy="row_stable_v2",
+            )
+            for index in range(37)
+        ]
+        first = [
+            select_case_shard(cases, num_shards=5, shard_id=index)
+            for index in range(5)
+        ]
+        second = [
+            select_case_shard(cases, num_shards=5, shard_id=index)
+            for index in range(5)
+        ]
+        self.assertEqual(
+            [[case.case_id for case in shard] for shard in first],
+            [[case.case_id for case in shard] for shard in second],
+        )
+        flattened = [case.case_id for shard in first for case in shard]
+        self.assertEqual(len(flattened), len(cases))
+        self.assertEqual(set(flattened), {case.case_id for case in cases})
+
+    def test_baseline_merge_requires_exact_disjoint_case_set(self):
+        records = [
+            {
+                "schema_version": "nano_harness_baseline_case_v1",
+                "case_id": f"case-{index}",
+                "benchmark": "gsm8k",
+                "model": "model",
+                "status": "completed",
+                "score": 1.0,
+                "prediction": "1",
+                "expected": "1",
+                "latency_seconds": 0.1,
+                "usage": {"total_tokens": 10},
+                "finish_reason": "stop",
+            }
+            for index in range(4)
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            first = root / "first.jsonl"
+            second = root / "second.jsonl"
+            output = root / "merged.jsonl"
+            first.write_text(
+                "\n".join(json.dumps(row) for row in records[:2]) + "\n",
+                encoding="utf-8",
+            )
+            second.write_text(
+                "\n".join(json.dumps(row) for row in records[2:]) + "\n",
+                encoding="utf-8",
+            )
+            receipt = merge_baseline_shards(
+                [first, second],
+                output,
+                expected_case_ids={row["case_id"] for row in records},
+            )
+            self.assertEqual(receipt["case_count"], 4)
+            self.assertEqual(summarize_baseline(output)["total_cases"], 4)
+            with self.assertRaisesRegex(ValueError, "merged case IDs differ"):
+                merge_baseline_shards(
+                    [first],
+                    output,
+                    expected_case_ids={row["case_id"] for row in records},
+                )
+            second.write_text(
+                json.dumps(records[1]) + "\n" + json.dumps(records[2]) + "\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "multiple shards"):
+                merge_baseline_shards(
+                    [first, second],
+                    output,
+                    expected_case_ids={row["case_id"] for row in records[:3]},
+                )
+
+    def test_public_case_contract_excludes_prompts_and_answers(self):
+        case = build_case(
+            "gsm8k",
+            "numeric_exact",
+            0,
+            {
+                "question": "Private benchmark question",
+                "answer": "Hidden work\n#### 12",
+            },
+            case_id_policy="row_stable_v2",
+        )
+        public = public_case_contract([case])[0]
+        self.assertNotIn("prompt", public)
+        self.assertNotIn("expected", public)
+        self.assertNotIn("answer", json.dumps(public))
+        self.assertIn("prompt_sha256", public)
 
     def test_baseline_answer_only_keeps_case_identity_and_changes_contract(self):
         record = {

@@ -1,0 +1,92 @@
+{
+  "execution": {
+    "merged_outputs": {
+      "qwen3.5-4b": "results/full/qwen35-complete-direct-v1/4b/cases.jsonl",
+      "qwen3.5-9b": "results/full/qwen35-complete-direct-v1/9b/cases.jsonl"
+    },
+    "merge_requires_exact_case_set": true,
+    "num_shards": 16,
+    "python_binary": "../../.venv/bin/python",
+    "raw_output_patterns": {
+      "qwen3.5-4b": "results/full/qwen35-complete-direct-v1/4b/shard-*.jsonl",
+      "qwen3.5-9b": "results/full/qwen35-complete-direct-v1/9b/shard-*.jsonl"
+    },
+    "raw_output_template": {
+      "qwen3.5-4b": "results/full/qwen35-complete-direct-v1/4b/shard-<shard_id>.jsonl",
+      "qwen3.5-9b": "results/full/qwen35-complete-direct-v1/9b/shard-<shard_id>.jsonl"
+    },
+    "vllm_binary": "../../.venv/bin/vllm"
+  },
+  "execution_boundary": {
+    "benchmark_scoring_started": false,
+    "model_generation_started": false,
+    "opd_started": false,
+    "rl_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-complete-direct-v1",
+  "historical_cost_sources": [
+    {
+      "id": "three-task-replication-v1",
+      "path": "docs/results/three_task_replication_v1.public.json",
+      "sha256": "e7aad4abf515de23289359a04a589e0f87d29493cf4b172a8213e369a0cdbd4f"
+    },
+    {
+      "id": "large-confirmation-v1",
+      "path": "docs/results/large_confirmation_v1.public.json",
+      "sha256": "c219199324ada3f69d7f4dd3ce460d15c55ab70165aab3f09af13f26424bb80a"
+    }
+  ],
+  "model_contracts": [
+    {
+      "config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+      "gpu_index": 0,
+      "host": "127.0.0.1",
+      "index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+      "model_id": "qwen3.5-4b",
+      "path": "../../../models/Qwen3.5-4B",
+      "port": 8000,
+      "served_model_name": "qwen3.5-4b",
+      "status": "ready"
+    },
+    {
+      "config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+      "gpu_index": 1,
+      "host": "127.0.0.1",
+      "index_sha256": "26d3539b516be613f39563617cb9d33b3f83d401298125be392c80cefb8f7fe5",
+      "model_id": "qwen3.5-9b",
+      "path": "../../../models/Qwen3.5-9B",
+      "port": 8001,
+      "served_model_name": "qwen3.5-9b",
+      "status": "ready"
+    }
+  ],
+  "policy": {
+    "benchmark_outputs_may_enter_sft_dpo_rl_reward_verifier": false,
+    "benchmark_rows_training_eligible": false,
+    "post_observation_prompt_budget_parser_scorer_search": false,
+    "raw_outputs_committed": false
+  },
+  "schema_version": "nano_harness_complete_baseline_preregister_v1",
+  "serving": {
+    "dtype": "float16",
+    "enforce_eager": true,
+    "gpu_memory_utilization": 0.85,
+    "health_path": "/v1/models",
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 4096,
+    "max_num_seqs": 1,
+    "startup_timeout_seconds": 900,
+    "vllm_version": "0.19.1"
+  },
+  "suite_manifest_path": "configs/baselines/qwen35_complete_direct_v1.yaml",
+  "suite_manifest_sha256": "6ec49d522892975e4532954d3bac7c7e5ed9b24e2c698700d5f8a61667753e90",
+  "dataset_root": "../../../datasets",
+  "uncertainty": {
+    "alpha": 0.05,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 20260820,
+    "exact_mcnemar": true
+  }
+}

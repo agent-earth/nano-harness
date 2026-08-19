@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 from collections import Counter
 from pathlib import Path
 
@@ -21,6 +22,8 @@ from nano_harness.baseline import (
 MANIFEST = Path("configs/harness/qwen35_three_task_replication_v1.yaml")
 CASES = Path("configs/generated/qwen35_three_task_replication_v1_cases.json")
 FROZEN = Path("configs/harness/qwen35_arbiter_holdout5_direct_v1.yaml")
+HISTORICAL_REVISION = "a6b1dfa17c2ac330a50d6881f8bc5020c446d599"
+EXPECTED_HISTORICAL_FILES = 51
 
 
 def _contract(path: Path) -> dict:
@@ -73,6 +76,33 @@ def _sorted_cases(spec, manifest, root: Path):
     return cases
 
 
+def _historical_case_paths() -> list[Path]:
+    output = subprocess.run(
+        [
+            "git",
+            "ls-tree",
+            "-r",
+            "--name-only",
+            HISTORICAL_REVISION,
+            "configs/generated",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    paths = [
+        Path(line)
+        for line in output.splitlines()
+        if line.endswith("cases.json")
+    ]
+    if len(paths) != EXPECTED_HISTORICAL_FILES:
+        raise SystemExit(
+            "frozen historical case-file count differs: "
+            f"{len(paths)} != {EXPECTED_HISTORICAL_FILES}"
+        )
+    return paths
+
+
 def main() -> None:
     root = Path("../../datasets")
     manifest = load_manifest(MANIFEST)
@@ -91,10 +121,15 @@ def main() -> None:
 
     historical: set[str] = set()
     historical_files = 0
-    for path in sorted(Path("configs/generated").glob("*cases.json")):
-        if path.resolve() == CASES.resolve():
-            continue
-        rows = json.loads(path.read_text(encoding="utf-8"))
+    for path in _historical_case_paths():
+        rows = json.loads(
+            subprocess.run(
+                ["git", "show", f"{HISTORICAL_REVISION}:{path.as_posix()}"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout
+        )
         historical.update(
             str(row["case_id"])
             for row in rows
