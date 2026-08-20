@@ -27,6 +27,10 @@ CONFIG = (
     ROOT
     / "configs/harness/qwen35_grounded_calculator_canary_v1.json"
 )
+PUBLIC_RESULT = (
+    ROOT
+    / "docs/results/qwen35_grounded_calculator_canary_v1.public.json"
+)
 
 
 class GroundedCalculatorCanaryTests(unittest.TestCase):
@@ -294,6 +298,45 @@ class GroundedCalculatorCanaryTests(unittest.TestCase):
         self.assertIn("只预注册，不生成新的 canary output", markdown)
         self.assertIn("没有 case-ID", markdown)
         self.assertIn("Fraction", markdown)
+
+    def test_public_result_preserves_rejection_and_raw_boundary(self):
+        report = json.loads(PUBLIC_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(report["candidate"]["correct"], 163)
+        self.assertEqual(report["candidate"]["parse_failures"], 1)
+        self.assertEqual(
+            report["routing"],
+            {
+                "eligible_rows": 2,
+                "direct_preserve_rows": 209,
+                "verified_executions": 1,
+                "fallbacks": 1,
+                "plan_calls": 3,
+                "final_feedback_calls": 1,
+                "api_errors": 0,
+            },
+        )
+        self.assertFalse(
+            report["admission_gates"]["overall_correct_at_least_164"]
+        )
+        self.assertFalse(
+            report["admission_gates"]["candidate_only_gt_base_only"]
+        )
+        self.assertTrue(
+            report["admission_gates"]["direct_preservation_exact"]
+        )
+        self.assertFalse(report["decision"]["canary_passed"])
+        self.assertFalse(
+            report["decision"]["complete_benchmark_generation_allowed"]
+        )
+        self.assertFalse(
+            report["decision"][
+                "further_tuning_or_rerun_on_observed_canary_allowed"
+            ]
+        )
+        for receipt in report["eligible_receipts"]:
+            for attempt in receipt["plan_attempts"]:
+                self.assertNotIn("output", attempt)
+                self.assertIn("output_sha256", attempt)
 
 
 if __name__ == "__main__":

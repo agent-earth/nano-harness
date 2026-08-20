@@ -1,0 +1,195 @@
+{
+  "admission_gates": {
+    "candidate_api_errors_zero": true,
+    "candidate_only_gt_base_only": false,
+    "direct_preservation_exact": true,
+    "exact_211_case_identity": true,
+    "gpqa_diamond_at_least_6": true,
+    "gsm8k_at_least_90": true,
+    "mmlu_at_least_67": true,
+    "overall_correct_at_least_164": false,
+    "parse_failures_at_most_2": true,
+    "recovery_api_errors_zero": true,
+    "unsafe_executions_zero": true
+  },
+  "candidate": {
+    "api_errors": 0,
+    "by_benchmark": {
+      "gpqa_diamond": {
+        "accuracy": 0.3157894736842105,
+        "api_errors": 0,
+        "cases": 19,
+        "correct": 6,
+        "parse_failures": 0
+      },
+      "gsm8k": {
+        "accuracy": 0.9375,
+        "api_errors": 0,
+        "cases": 96,
+        "correct": 90,
+        "parse_failures": 1
+      },
+      "mmlu": {
+        "accuracy": 0.6979166666666666,
+        "api_errors": 0,
+        "cases": 96,
+        "correct": 67,
+        "parse_failures": 0
+      }
+    },
+    "cases": 211,
+    "correct": 163,
+    "macro_accuracy": 0.6504020467836257,
+    "parse_failures": 1
+  },
+  "claim_boundary": "This is negative admission evidence for one pre-registered 211-case canary run. It is not a complete benchmark, holdout, training, or final model-superiority result.",
+  "comparisons": {
+    "versus_frozen_four_b_direct": {
+      "baseline_correct": 163,
+      "candidate_correct": 163,
+      "delta": 0.0,
+      "mcnemar_exact_p": 1.0,
+      "paired_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 163,
+        "both_wrong": 48,
+        "candidate_only": 0
+      }
+    },
+    "versus_frozen_nine_b_direct": {
+      "baseline_correct": 151,
+      "candidate_correct": 163,
+      "delta": 0.05687203791469194,
+      "mcnemar_exact_p": 0.08842954698775378,
+      "paired_bootstrap_95_ci": [
+        0.0,
+        0.11848341232227488
+      ],
+      "paired_counts": {
+        "baseline_only": 15,
+        "both_correct": 136,
+        "both_wrong": 33,
+        "candidate_only": 27
+      }
+    }
+  },
+  "decision": {
+    "canary_passed": false,
+    "complete_benchmark_generation_allowed": false,
+    "complete_benchmark_preregistration_allowed": false,
+    "further_tuning_or_rerun_on_observed_canary_allowed": false,
+    "independent_holdout_allowed": false,
+    "next_action": "Close this route. On a new disjoint local synthetic surface, test a typed semantic-skill executor that explicitly grounds linguistic operators and discrete boundary semantics. Do not reuse or rerun the observed 211-case canary.",
+    "route_rejected": true
+  },
+  "eligible_receipts": [
+    {
+      "api_errors": 0,
+      "case_id": "gsm8k-b83fb1e0d547a470",
+      "execution": {
+        "case_id_allowlist_used": false,
+        "executed": false,
+        "executor_uses_case_correctness": false,
+        "executor_uses_expected_answer": false,
+        "expression_sha256": null,
+        "reason": "ungrounded_literal",
+        "result": null
+      },
+      "fallback_used": true,
+      "final_feedback_calls": 0,
+      "plan_attempts": [
+        {
+          "attempt": 1,
+          "executed": false,
+          "output_sha256": "50bd37ceb9c2c5049585b4510b83109d04d81e1624f77c48a24b834adf1e8a26",
+          "reason": "ungrounded_literal"
+        },
+        {
+          "attempt": 2,
+          "executed": false,
+          "output_sha256": "50bd37ceb9c2c5049585b4510b83109d04d81e1624f77c48a24b834adf1e8a26",
+          "reason": "ungrounded_literal"
+        }
+      ],
+      "plan_calls": 2,
+      "reason": "ungrounded_literal"
+    },
+    {
+      "api_errors": 0,
+      "case_id": "gsm8k-f3adde2975dc72c7",
+      "execution": {
+        "case_id_allowlist_used": false,
+        "executed": true,
+        "executor_uses_case_correctness": false,
+        "executor_uses_expected_answer": false,
+        "expression_sha256": "9c5a5e1ad9d57ba6fc1cd10d5d53aebe3765247dc5a25358a2df04f978d3220b",
+        "reason": "verified_grounded_execution",
+        "result": 12
+      },
+      "fallback_used": false,
+      "final_feedback_calls": 1,
+      "plan_attempts": [
+        {
+          "attempt": 1,
+          "executed": true,
+          "output_sha256": "6932ca89954734963ed8e17392f2c90dcb49aef9811d8898c9a9a1344d1b9139",
+          "reason": "verified_grounded_execution"
+        }
+      ],
+      "plan_calls": 1,
+      "reason": "verified_grounded_feedback"
+    }
+  ],
+  "evaluation_boundary": {
+    "canary_outputs_generated": true,
+    "canary_rows_loaded": true,
+    "case_id_allowlist_used": false,
+    "complete_benchmark_rows_loaded": false,
+    "executor_uses_case_correctness": false,
+    "executor_uses_expected_answer": false,
+    "independent_holdout_rows_loaded": false,
+    "training_eligible_cases": 0
+  },
+  "experiment_id": "qwen35-grounded-calculator-canary-v1",
+  "failure_analysis": [
+    {
+      "count": 1,
+      "explanation": "The model emitted an inferred multiplier that was not a numeric literal in the prompt. The source-grounding validator rejected both attempts and reused direct.",
+      "failure_class": "implicit_semantic_constant_rejected"
+    },
+    {
+      "count": 1,
+      "explanation": "The grounded expression computed the exact break-even year, but the task required the first strictly profitable integer year. Verified execution preserved the expression result and therefore remained wrong.",
+      "failure_class": "continuous_break_even_not_strict_year"
+    }
+  ],
+  "identity": {
+    "candidate_raw_sha256": "8f4b2d743b5008de2763af4452c7891641d2065f0293f90ec9497fe5da272c37",
+    "case_manifest_sha256": "eafbe4d42487a225322dd3b3bdc1d805c065fb15f0f8b968e65ccf747f96976f",
+    "config_sha256": "3c4049a89ff34895989a82450d78b1d74c3e5889ac9d24307e2b93f2dfe230a2",
+    "eligible_case_ids_sha256": "755fd35aac339fb701bc081aeb421d184e3c66c1dbdb33f6cbb28b17dab302e5",
+    "four_b_raw_sha256": "c59383d3fd3d6087025d6e1ff649979d9d5a9e8dc73b5429a4f8e9fa41b6b8c7",
+    "manifest_sha256": "88f6e832d38e739c6b622a30633a2737077fc081037e6e1543cb5763b169a7b9",
+    "nine_b_raw_sha256": "ffae93774d51b87a2e29258d170a84f8b165f996e2e78eedd102271dfc260044",
+    "preregister_revision": "860f6fd01aeee47ea92bc7c8731059eef60e16fd",
+    "preregister_sha256": "859beba62fa8caffcc24e010f2824d456ce9acbd150bad2fbef4a120b78cce9d",
+    "raw_result_sha256": "006bf6cd46f92b092138ae7cf659d931e95e80355a3538fdf403226379760c36",
+    "result_revision": "860f6fd01aeee47ea92bc7c8731059eef60e16fd",
+    "service_receipt_sha256": "895bd40d886d870f99230441baecdf1feb926e2992b6a151e54d8165145f1c0d",
+    "v2_report_sha256": "cd20bd3f6abccf3e8b70f8ec6504150dc30665fbe477364608ec8b34366ab0cc"
+  },
+  "routing": {
+    "api_errors": 0,
+    "direct_preserve_rows": 209,
+    "eligible_rows": 2,
+    "fallbacks": 1,
+    "final_feedback_calls": 1,
+    "plan_calls": 3,
+    "verified_executions": 1
+  },
+  "schema_version": "nano_harness_grounded_calculator_canary_public_v1"
+}
