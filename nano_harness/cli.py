@@ -121,6 +121,12 @@ from nano_harness.router_adapter_integration_v2 import (
 from nano_harness.router_adapter_integration_v2 import (
     run as run_router_adapter_integration_v2,
 )
+from nano_harness.router_adapter_integration_v3 import (
+    load_config as load_router_adapter_integration_v3_config,
+)
+from nano_harness.router_adapter_integration_v3 import (
+    run as run_router_adapter_integration_v3,
+)
 
 
 def main() -> None:
@@ -247,6 +253,10 @@ def main() -> None:
         "router-adapter-integration-v2"
     )
     router_adapter_integration_v2_parser.add_argument("--config", required=True)
+    router_adapter_integration_v3_parser = subparsers.add_parser(
+        "router-adapter-integration-v3"
+    )
+    router_adapter_integration_v3_parser.add_argument("--config", required=True)
 
     args = parser.parse_args()
     if args.command == "run":
@@ -362,6 +372,12 @@ def main() -> None:
             os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
         summary = run_router_adapter_integration_v2(
             load_router_adapter_integration_v2_config(args.config)
+        )
+    elif args.command == "router-adapter-integration-v3":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_router_adapter_integration_v3(
+            load_router_adapter_integration_v3_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(
