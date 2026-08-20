@@ -1,0 +1,51 @@
+{
+  "schema_version": "nano_harness_orca_self_consistency_v1",
+  "experiment_id": "orca-math-self-consistency-v1",
+  "dataset_path": "../../../datasets/ultimate-distill/orca-math-preference-v1/dataset.jsonl",
+  "dataset_sha256": "deae4dabda40dcb55cd046dd330387683bdec508cd3085d53974b508ed9ae320",
+  "prior_dpo_v1_preregister_path": "../nano-train-fullstack-traex-03/docs/experiments/orca_math_verifier_dpo_v1.preregister.json",
+  "prior_dpo_v1_preregister_sha256": "3ac9308a3474ed41d13a7ce979a4f9085cf4a76847da106dc8c142b4769aa3e2",
+  "prior_dpo_v2_preregister_path": "../nano-train-fullstack-traex-03/docs/experiments/orca_math_verifier_dpo_suffix_v2.preregister.json",
+  "prior_dpo_v2_preregister_sha256": "f38264475ad31179326402f70b57dd99dd91f823b223af13d1cc0e3def7c2ee9",
+  "prior_dpo_v2_result_path": "../nano-train-fullstack-traex-03/docs/results/orca_math_verifier_dpo_suffix_v2.public.json",
+  "prior_dpo_v2_result_sha256": "f4aec16cd85c4c44493e60f3a0f539e4a4bcd7d98a68993fb91c690f3862cb0f",
+  "selection_seed": "orca-math-self-consistency-v1:20260821",
+  "cases_by_stratum": {"short": 24, "medium": 48, "long": 24},
+  "four_b": {
+    "base_url": "http://127.0.0.1:8000/v1",
+    "model": "qwen3.5-4b",
+    "model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670"
+  },
+  "nine_b": {
+    "base_url": "http://127.0.0.1:8001/v1",
+    "model": "qwen3.5-9b",
+    "model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05"
+  },
+  "direct": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_tokens": 384
+  },
+  "candidate": {
+    "replicas": 5,
+    "minimum_agreement": 4,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_tokens": 384,
+    "seed_base": 2026082100,
+    "fallback": "frozen_four_b_direct"
+  },
+  "statistics": {
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 20260821,
+    "alpha": 0.05,
+    "minimum_candidate_only_wins": 6
+  },
+  "output_dir": "results/harness/orca-math-self-consistency-v1",
+  "boundary": {
+    "expected_answer_used_during_generation": false,
+    "benchmark_rows_used": false,
+    "training_allowed": false,
+    "complete_benchmark_allowed_after_local_gate_only": true
+  }
+}
