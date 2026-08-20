@@ -1,0 +1,61 @@
+{
+  "benchmark_accessed": false,
+  "canary_accessed": false,
+  "claim_boundary": "This receipt proves only base plus original/remapped LoRA readiness. It contains no model generation or quality evidence.",
+  "config_sha256": "025f6208541ae0e88a4853eceb04d2f185293daccb650890d43d297e86b0c7b6",
+  "evaluation_started": false,
+  "experiment_id": "qwen35-router-serving-parity-v1",
+  "generation_started": false,
+  "health_sha256": "41759de59c5e1da25c8f03175d89a921820aeb41ab4e2b81256439365372d6d4",
+  "healthy": true,
+  "holdout_accessed": false,
+  "model_health": {
+    "qwen3.5-4b": {
+      "max_model_len": 4096,
+      "owned_by": "vllm",
+      "parent": null,
+      "root": "../../../models/Qwen3.5-4B"
+    },
+    "qwen3.5-router-original-v1": {
+      "max_model_len": null,
+      "owned_by": "vllm",
+      "parent": "qwen3.5-4b",
+      "root": "../nano-train-fullstack-traex-03/artifacts/qwen35-router-classification-sft-smoke-v1/adapter"
+    },
+    "qwen3.5-router-remapped-v1": {
+      "max_model_len": null,
+      "owned_by": "vllm",
+      "parent": "qwen3.5-4b",
+      "root": "results/serving/qwen35-router-v1-remapped"
+    }
+  },
+  "models": {
+    "base": "qwen3.5-4b",
+    "original": "qwen3.5-router-original-v1",
+    "remapped": "qwen3.5-router-remapped-v1"
+  },
+  "original_adapter_sha256": "48d72666cf269f64825791801c71aad5ae1d9e97cbc70574c216b12974e46e63",
+  "preregister_sha256": "be4bece33f078c64f25a831de279bf5ba9e037e4c8871db55a367a4039c6f47c",
+  "recorded_unix": 1787229827,
+  "remap_receipt_sha256": "04ae7daa74eefbd891f4fb1ea9b4d29cc3cbcd59dbb22fcb6565488e5363cefb",
+  "remapped_adapter_sha256": "fbaa39dcb3fcf34e9aab280308cb5a5416094c1968e4ac3a69cd739a806ecc49",
+  "schema_version": "nano_harness_router_serving_parity_service_v1",
+  "service_revision": "ad98b908195fa2eb8fa4929d3bfc8148f3697c0c",
+  "serving": {
+    "base_url": "http://127.0.0.1:8000/v1",
+    "dtype": "float16",
+    "enable_lora": true,
+    "enforce_eager": true,
+    "gpu_index": 0,
+    "gpu_memory_utilization": 0.85,
+    "host": "127.0.0.1",
+    "max_lora_rank": 8,
+    "max_loras": 2,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 4096,
+    "max_num_seqs": 1,
+    "port": 8000,
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "vllm_version": "0.19.1"
+  }
+}

@@ -26,6 +26,9 @@ from scripts.render_router_serving_parity_v1 import gates
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/harness/qwen35_router_serving_parity_v1.json"
+PUBLIC_RESULT = (
+    ROOT / "docs/results/qwen35_router_serving_parity_v1.public.json"
+)
 
 
 class RouterServingParityTests(unittest.TestCase):
@@ -230,6 +233,45 @@ class RouterServingParityTests(unittest.TestCase):
         self.assertTrue(all(gates(raw).values()))
         raw["hf_output_matches"]["remapped"] = 191
         self.assertFalse(gates(raw)["remapped_hf_output_match_192"])
+
+    def test_public_result_supports_namespace_root_cause_only(self):
+        report = json.loads(PUBLIC_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(
+            {
+                arm: summary["exact"]
+                for arm, summary in report["summaries"].items()
+            },
+            {"base": 112, "original": 112, "remapped": 192},
+        )
+        self.assertEqual(
+            report["hf_output_matches"],
+            {"base": 112, "original": 112, "remapped": 192},
+        )
+        self.assertEqual(
+            report["original_vs_remapped"],
+            {
+                "both_exact": 112,
+                "remapped_only": 80,
+                "original_only": 0,
+                "both_wrong": 0,
+            },
+        )
+        decision = report["decision"]
+        self.assertTrue(decision["serving_namespace_root_cause_supported"])
+        self.assertTrue(decision["remapped_adapter_serving_admitted"])
+        self.assertTrue(
+            decision["fresh_integration_v2_preregistration_allowed"]
+        )
+        self.assertFalse(decision["fresh_integration_v2_generation_allowed"])
+        self.assertFalse(decision["observed_integration_v1_rerun_allowed"])
+        self.assertFalse(decision["real_question_scan_allowed"])
+        self.assertFalse(decision["benchmark_allowed"])
+        self.assertFalse(decision["training_or_rl_allowed"])
+        self.assertTrue(all(decision["gates"].values()))
+        self.assertEqual(
+            report["evaluation_boundary"]["fresh_integration_rows_loaded"],
+            False,
+        )
 
 
 if __name__ == "__main__":
