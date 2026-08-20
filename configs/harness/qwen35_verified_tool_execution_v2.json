@@ -1,0 +1,39 @@
+{
+  "execution_boundary": {
+    "benchmark_accessed": false,
+    "canary_accessed": false,
+    "evaluation_started": false,
+    "model_generation_started": false,
+    "service_reused": true,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-verified-tool-execution-v2",
+  "output_path": "results/harness/qwen35-verified-tool-execution-v2/result.json",
+  "parent_config_path": "configs/harness/qwen35_verified_tool_execution_v1.json",
+  "parent_config_sha256": "538cbcde51ccb8ad43e4f91db4201a2ffd835c1493a5b2bd58177db7dcab3cd3",
+  "plan_structured_output_regex_by_family": {
+    "box_total": "TOOL: box_total \\{\"boxes\":-?[0-9]+,\"items_per_box\":-?[0-9]+,\"loose_items\":-?[0-9]+\\}",
+    "labor_total": "TOOL: labor_total \\{\"hourly_rate\":-?[0-9]+,\"regular_hours\":-?[0-9]+,\"bonus\":-?[0-9]+\\}",
+    "paired_average": "TOOL: paired_average \\{\"first_total\":-?[0-9]+,\"second_total\":-?[0-9]+\\}",
+    "remaining_stock": "TOOL: remaining_stock \\{\"starting_units\":-?[0-9]+,\"batches_used\":-?[0-9]+,\"units_per_batch\":-?[0-9]+\\}"
+  },
+  "policy": {
+    "contains_benchmark_outputs": false,
+    "contains_benchmark_rows": false,
+    "contains_canary_rows": false,
+    "contains_holdout_rows": false,
+    "evaluation_only": true,
+    "executor_uses_case_correctness": false,
+    "executor_uses_expected_answer": false,
+    "post_observation_prompt_parser_budget_search": false,
+    "training_eligible": false,
+    "uses_observed_quality_outputs": false
+  },
+  "prior_v1_report_path": "docs/results/qwen35_verified_tool_execution_v1.public.json",
+  "prior_v1_report_sha256": "6baa2f1e5fc30efa1e07f169588847d09f41fca79ead5af235a75f643e0deb07",
+  "schema_version": "nano_harness_verified_tool_execution_v2",
+  "service_receipt_sha256": "895bd40d886d870f99230441baecdf1feb926e2992b6a151e54d8165145f1c0d",
+  "skill_router": "case_family_to_single_tool_v1",
+  "value_offset": 90000
+}
