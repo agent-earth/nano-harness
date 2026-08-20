@@ -7,8 +7,12 @@ import unittest
 from pathlib import Path
 
 from nano_harness.baseline import sha256_file
+from nano_harness.baseline import BaselineCase
+from nano_harness.client import ScriptedClient
+from nano_harness.types import ModelReply
 from nano_harness.v5_complete_treatment import (
     CONFIG_SHA256,
+    generate_candidate,
     jsonl_ids,
     load_config,
 )
@@ -20,6 +24,27 @@ CONFIG = ROOT / "configs/campaign/qwen35_v5_complete_treatment_v1.json"
 
 
 class V5CompleteTreatmentTests(unittest.TestCase):
+    def make_case(
+        self,
+        *,
+        benchmark: str,
+        prompt: str,
+        scorer: str,
+    ) -> BaselineCase:
+        return BaselineCase(
+            case_id=f"{benchmark}-test",
+            benchmark=benchmark,
+            prompt=prompt,
+            draft_prompt=prompt,
+            expected="__SEALED_DURING_GENERATION__",
+            scorer=scorer,
+            source_index=0,
+            source_chars=len(prompt),
+            system_prompt="system",
+            max_tokens=32,
+            metadata={},
+        )
+
     def test_config_freezes_three_task_routes_and_closed_boundary(self):
         config = load_config(CONFIG)
         self.assertEqual(
@@ -102,6 +127,95 @@ class V5CompleteTreatmentTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "config SHA"):
                 load_config(path)
         self.assertEqual(sha256_file(CONFIG), CONFIG_SHA256)
+
+    def test_candidate_generation_preserves_mmlu_without_calls(self):
+        config = load_config(CONFIG)
+        case = self.make_case(
+            benchmark="mmlu",
+            prompt="Question and choices",
+            scorer="choice_exact",
+        )
+        empty = ScriptedClient([])
+        candidate, receipt = generate_candidate(
+            case,
+            {
+                "case_id": case.case_id,
+                "output": "FINAL: B",
+                "prediction": "B",
+                "usage": {},
+            },
+            config,
+            calculator_client=empty,
+            choice_review_client=empty,
+            choice_confirmation_client=empty,
+        )
+        self.assertEqual(candidate["output"], "FINAL: B")
+        self.assertEqual(receipt["model_calls"], 0)
+        self.assertFalse(receipt["override"])
+        self.assertEqual(empty.calls, [])
+
+    def test_gsm8k_requires_two_grounded_results(self):
+        config = load_config(CONFIG)
+        case = self.make_case(
+            benchmark="gsm8k",
+            prompt="Problem: There are 3 groups with 4 items each.",
+            scorer="numeric_exact",
+        )
+        calculator = ScriptedClient(
+            [
+                ModelReply(content="CALC: 3 * 4"),
+                ModelReply(content="CALC: 3 * 4"),
+                ModelReply(content="CALC: 3 + 4"),
+            ]
+        )
+        candidate, receipt = generate_candidate(
+            case,
+            {
+                "case_id": case.case_id,
+                "output": "FINAL: 7",
+                "prediction": "7",
+                "usage": {},
+            },
+            config,
+            calculator_client=calculator,
+            choice_review_client=ScriptedClient([]),
+            choice_confirmation_client=ScriptedClient([]),
+        )
+        self.assertEqual(candidate["output"], "FINAL: 12")
+        self.assertTrue(receipt["override"])
+        self.assertEqual(receipt["consensus_result"], 12)
+        self.assertEqual(receipt["api_errors"], 0)
+
+    def test_gpqa_requires_two_reviews_and_confirmation(self):
+        config = load_config(CONFIG)
+        case = self.make_case(
+            benchmark="gpqa_diamond",
+            prompt="Question\nA. one\nB. two\nC. three\nD. four",
+            scorer="choice_exact",
+        )
+        candidate, receipt = generate_candidate(
+            case,
+            {
+                "case_id": case.case_id,
+                "output": "FINAL: A",
+                "prediction": "A",
+                "usage": {},
+            },
+            config,
+            calculator_client=ScriptedClient([]),
+            choice_review_client=ScriptedClient(
+                [
+                    ModelReply(content="FINAL: C"),
+                    ModelReply(content="FINAL: C"),
+                ]
+            ),
+            choice_confirmation_client=ScriptedClient(
+                [ModelReply(content="FINAL: C")]
+            ),
+        )
+        self.assertEqual(candidate["output"], "FINAL: C")
+        self.assertTrue(receipt["override"])
+        self.assertEqual(receipt["confirmation"], "C")
 
 
 if __name__ == "__main__":
