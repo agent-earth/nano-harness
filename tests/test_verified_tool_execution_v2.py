@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import importlib.util
 import json
 import re
 import tempfile
@@ -21,6 +22,14 @@ from nano_harness.verified_tool_execution_v2 import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/harness/qwen35_verified_tool_execution_v2.json"
+RENDER_PATH = ROOT / "scripts/render_verified_tool_execution_v2.py"
+RENDER_SPEC = importlib.util.spec_from_file_location(
+    "render_verified_tool_execution_v2",
+    RENDER_PATH,
+)
+RENDER_MODULE = importlib.util.module_from_spec(RENDER_SPEC)
+assert RENDER_SPEC.loader is not None
+RENDER_SPEC.loader.exec_module(RENDER_MODULE)
 
 
 class VerifiedToolExecutionV2Tests(unittest.TestCase):
@@ -122,6 +131,66 @@ class VerifiedToolExecutionV2Tests(unittest.TestCase):
                     path.write_text(json.dumps(altered), encoding="utf-8")
                     with self.assertRaisesRegex(ValueError, error):
                         load_config(path)
+
+    def test_gate_admits_complete_zero_loss_skill_routing(self):
+        by_family = {
+            family: {"cases": 64, "correct": 0, "parseable": 64}
+            for family in FAMILIES
+        }
+        raw = {
+            "arms": {
+                "four_b_direct": {
+                    "cases": 256,
+                    "correct": 30,
+                    "accuracy": 30 / 256,
+                    "parseable": 256,
+                    "by_family": copy.deepcopy(by_family),
+                },
+                "nine_b_direct": {
+                    "cases": 256,
+                    "correct": 19,
+                    "accuracy": 19 / 256,
+                    "parseable": 256,
+                    "by_family": copy.deepcopy(by_family),
+                },
+                "four_b_skill_verified_tool": {
+                    "cases": 256,
+                    "correct": 256,
+                    "accuracy": 1.0,
+                    "parseable": 256,
+                    "by_family": {
+                        family: {
+                            "cases": 64,
+                            "correct": 64,
+                            "parseable": 64,
+                        }
+                        for family in FAMILIES
+                    },
+                },
+            },
+            "routing": {
+                "skill_routes": 256,
+                "single_tool_exposures": 256,
+                "verified_executions": 256,
+                "plan_retries": 0,
+                "fallbacks": 0,
+                "final_feedback_calls": 256,
+            },
+        }
+        comparison = {
+            "candidate_accuracy": 1.0,
+            "baseline_accuracy": 0.1,
+            "paired_bootstrap_95_ci": [0.8, 0.95],
+            "mcnemar_exact_p": 1e-30,
+            "paired_counts": {
+                "candidate_only": 226,
+                "baseline_only": 0,
+            },
+        }
+        gates = RENDER_MODULE.admission_gates(
+            raw, comparison, comparison
+        )
+        self.assertTrue(all(gates.values()))
 
 
 if __name__ == "__main__":
