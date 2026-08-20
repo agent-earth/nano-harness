@@ -21,6 +21,9 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = (
     ROOT / "configs/harness/qwen35_semantic_skill_applicability_v1.json"
 )
+PUBLIC_RESULT = (
+    ROOT / "docs/results/qwen35_semantic_skill_applicability_v1.public.json"
+)
 
 
 class SemanticSkillApplicabilityTests(unittest.TestCase):
@@ -152,6 +155,37 @@ class SemanticSkillApplicabilityTests(unittest.TestCase):
         self.assertIn("不读 answer", markdown)
         self.assertIn("eligible rows = 0", markdown)
         self.assertIn("scan started：false", markdown)
+
+    def test_public_result_closes_zero_coverage_transfer(self):
+        report = json.loads(PUBLIC_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(report["scan"]["cases"], 15559)
+        self.assertEqual(
+            report["scan"]["route_counts"],
+            {"route_missing": 15559},
+        )
+        self.assertEqual(
+            report["scan"]["extraction_failures"],
+            {"route_missing": 15559},
+        )
+        self.assertEqual(report["scan"]["eligible_rows"], 0)
+        decision = report["decision"]
+        self.assertFalse(decision["transfer_preregistration_allowed"])
+        self.assertFalse(decision["model_generation_allowed"])
+        self.assertFalse(decision["benchmark_generation_allowed"])
+        self.assertFalse(decision["canary_rerun_allowed"])
+        self.assertFalse(decision["holdout_allowed"])
+        self.assertFalse(decision["training_allowed"])
+        self.assertFalse(
+            decision["post_scan_route_or_extractor_change_allowed"]
+        )
+        boundary = report["scan_boundary"]
+        self.assertTrue(boundary["question_column_only"])
+        self.assertFalse(boundary["answer_columns_loaded"])
+        self.assertFalse(boundary["choices_column_loaded"])
+        self.assertFalse(boundary["model_outputs_loaded"])
+        self.assertFalse(boundary["raw_questions_published"])
+        self.assertFalse(boundary["case_ids_published"])
+        self.assertFalse(boundary["model_generation_started"])
 
 
 if __name__ == "__main__":

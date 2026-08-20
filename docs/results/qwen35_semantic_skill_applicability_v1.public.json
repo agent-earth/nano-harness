@@ -1,0 +1,85 @@
+{
+  "claim_boundary": "This is a question-only applicability scan, not a benchmark quality score. Zero coverage rejects only the unchanged exact-marker transfer. No answer, choice, model output, raw question, or case identity is published.",
+  "decision": {
+    "benchmark_generation_allowed": false,
+    "canary_rerun_allowed": false,
+    "holdout_allowed": false,
+    "model_generation_allowed": false,
+    "next_action": "Close unchanged semantic-skill real-task transfer. Preserve zero-coverage evidence and change mechanism only on fresh non-benchmark data.",
+    "post_scan_route_or_extractor_change_allowed": false,
+    "training_allowed": false,
+    "transfer_preregistration_allowed": false
+  },
+  "experiment_id": "qwen35-semantic-skill-applicability-v1",
+  "identity": {
+    "complete_case_manifest_sha256": "858656f58decf8bbc23c70101dabcffc6ef12e049771e043575927743c6cfd10",
+    "complete_manifest_sha256": "6ec49d522892975e4532954d3bac7c7e5ed9b24e2c698700d5f8a61667753e90",
+    "complete_report_sha256": "c9e622872d6ecd87350475011dcd19534c4f574a2999e69541d9b66ae0985152",
+    "config_sha256": "3cd70401fe00fcfe6664c7209438349a0f72882599a8f697d5784fc04a792c74",
+    "eligible_case_ids_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mechanism_config_sha256": "4e5785b9b4fc9dd5b3a76a95b438c2f2c3d505a2fae6231b81cfbf53ebbd6ad9",
+    "mechanism_report_sha256": "fe53a512cbf0b6ada65ed3ae27c5f3dc90165e367cfecdb58307dd030d017d5f",
+    "preregister_revision": "0f3b1ed833ad64bf9c09c2f4468fa45262d3f53f",
+    "preregister_sha256": "8b754f42b0704bb5425b4ab936382ffded8774f19fa70f69f01f71e5437c277c",
+    "question_hashes_sha256": "86965ce6f6835ae455fe4c5ed56e37e61459e71312bee5bd99226e9c24bf97cc",
+    "raw_result_sha256": "68b197992a5b8c427b6b9cb319d30d781e5d18eb029b90e81b8571cd5ad5c2a4",
+    "replication_report_sha256": "da143f04a30775f73a147374844deb3b7b0534a0d2bd40a55cc9af9fc14335f0",
+    "result_revision": "0f3b1ed833ad64bf9c09c2f4468fa45262d3f53f"
+  },
+  "mechanism": {
+    "extractor": {
+      "name": "exact_labeled_integer_fields_v1",
+      "patterns_sha256": {
+        "first_strict_profit_period": "2c24be8916768af3ea3e16cd4f0c98d1c1a03f1e0243ef6d89b34bd72da7a347",
+        "implicit_scale_total": "16d3687c3b1012de320e83301d896d3b900213a1126e941d73d2d1936f377995"
+      },
+      "requires_all_labeled_integer_fields": true,
+      "requires_route_before_extraction": true,
+      "uses_case_correctness": false,
+      "uses_expected_answer": false
+    },
+    "router": {
+      "minimum_eligible_rows_for_transfer": 1,
+      "name": "prompt_marker_to_single_semantic_skill_v1",
+      "route_markers": {
+        "first_strict_profit_period": [
+          "first whole period when cumulative profit is strictly positive"
+        ],
+        "implicit_scale_total": [
+          "more than double the number of slots",
+          "more than triple the number of slots"
+        ]
+      },
+      "router_uses_case_metadata": false
+    }
+  },
+  "scan": {
+    "cases": 15559,
+    "cases_by_benchmark": {
+      "gpqa_diamond": 198,
+      "gsm8k": 1319,
+      "mmlu": 14042
+    },
+    "eligible_by_benchmark": {},
+    "eligible_by_family": {},
+    "eligible_rows": 0,
+    "extraction_failures": {
+      "route_missing": 15559
+    },
+    "route_counts": {
+      "route_missing": 15559
+    }
+  },
+  "scan_boundary": {
+    "answer_columns_loaded": false,
+    "case_correctness_used": false,
+    "case_ids_published": false,
+    "choices_column_loaded": false,
+    "expected_answers_used": false,
+    "model_generation_started": false,
+    "model_outputs_loaded": false,
+    "question_column_only": true,
+    "raw_questions_published": false
+  },
+  "schema_version": "nano_harness_semantic_skill_applicability_public_v1"
+}
