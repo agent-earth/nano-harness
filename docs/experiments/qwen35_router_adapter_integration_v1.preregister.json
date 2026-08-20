@@ -1,0 +1,927 @@
+{
+  "acceptance": {
+    "all_three_arms_complete_and_parseable_128": true,
+    "benchmark_generation_allowed_after_pass": false,
+    "canary_rerun_allowed_after_pass": false,
+    "candidate_vs_four_b_maximum_losses": 0,
+    "candidate_vs_four_b_minimum_wins": 12,
+    "candidate_vs_four_b_significant": true,
+    "candidate_vs_nine_b_maximum_losses": 0,
+    "candidate_vs_nine_b_minimum_wins": 12,
+    "candidate_vs_nine_b_significant": true,
+    "every_family_non_regression": true,
+    "fallbacks_zero": true,
+    "holdout_allowed_after_pass": false,
+    "negative_candidate_exact_direct_parity": true,
+    "negative_false_positive_routes_zero": true,
+    "positive_feedback_result_matches_64": true,
+    "positive_verified_executions_64": true,
+    "question_only_scan_preregistration_allowed_after_pass": true,
+    "router_a_recall_32": true,
+    "router_b_recall_32": true,
+    "router_c_precision_64": true,
+    "router_outputs_parseable_128": true,
+    "training_or_rl_allowed_after_pass": false
+  },
+  "case_contract": {
+    "case_contract_sha256": "d14d2e641c7af4dd11b2522b9ef237c8b89d8ccdbb2076971da292bc4aed49fe",
+    "case_count": 128,
+    "cases": [
+      {
+        "case_id": "router-adapter-remaining_stock-a65ba9e732f74f5e",
+        "family": "remaining_stock",
+        "prompt_sha256": "59438a8b3fb9d471ecb0bfeaa837a4a67e831b96d2f222b3f4dcb6793257b256",
+        "source_facts_sha256": "5f12e242c772ca830b0953c0c46457e767d4999a1856dec2a2854727bbc304ed"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-9c23c5bb6f01a520",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "a74a5703a24b79f12c6be08579f1f5f29d4f02d799f731f3ab290c60b893b3d9",
+        "source_facts_sha256": "df6e3793dee3c4813a8c06696f2f824d5845446eca5f12076f71df045be50826"
+      },
+      {
+        "case_id": "router-adapter-box_total-ea13648dc4bc3852",
+        "family": "box_total",
+        "prompt_sha256": "ca63fa977b54a08a07b534119d9972c1e5d27c937b1c3ab1613c38b921e0405c",
+        "source_facts_sha256": "3fb773a553d814793d87a97fd1dfdac1e347950d330425467f74ac15251b27a3"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-11ee754679c1310d",
+        "family": "remaining_stock",
+        "prompt_sha256": "87da6083c1a8a54aafc6f58b3bd22462a76559f0c861c9ef39e43a27731eaef2",
+        "source_facts_sha256": "741bf17461f3e406198a9e4f3c131fabdb444db16cd69925f78775b11e32b138"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-1b45788186ba0297",
+        "family": "remaining_stock",
+        "prompt_sha256": "334d3a4a998fd72f483ad0835c1dd60e77bdb36022abcad6e7d38d56da5a74cd",
+        "source_facts_sha256": "f533d496bc0ea63bafca3c3ec77e969e483ecd800114c65a03fe58b92f879dc4"
+      },
+      {
+        "case_id": "router-adapter-box_total-2d4a96844e2bd2c9",
+        "family": "box_total",
+        "prompt_sha256": "c37608351a7d6509583296e75f043478b4f7c8ba38195575606d30ee8ee63fe2",
+        "source_facts_sha256": "85a06dabcf89b4c6ca07a5c1ec8011e402928f6943390db3b718f052156a442e"
+      },
+      {
+        "case_id": "router-adapter-box_total-8c79b1654adfc45a",
+        "family": "box_total",
+        "prompt_sha256": "51a13d67580d9aa18da933cfe40d971ee80b4513c54c2d330809547585be8bc9",
+        "source_facts_sha256": "4454fb989f43cd85a403387adc6d78abbb9a097c1fcfb7b28fbd22dafbaf7fcc"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-b9a4304a934a60e2",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "3fec004c8f7457d35cae488e4aa99e558ecd93c48dcc8b03236acbba344d7f1e",
+        "source_facts_sha256": "e603ac69a33295d12adf596426147804c7304c8dfcedb05c4c73f3c7a47dffb1"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-9762f28d4a9720d4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "4800cf2284f56abff91c56494872fee44bfe1f513eb85ad455051f4eaa32d466",
+        "source_facts_sha256": "6aadeb264be5e67a38f96f1130e66bdc64ac50696c2ef7d08277fc25183c585f"
+      },
+      {
+        "case_id": "router-adapter-box_total-e3d7c325b355928d",
+        "family": "box_total",
+        "prompt_sha256": "c672db5db6a292a74b699e2ea066a081499ed222819068a4f7d272c33a847130",
+        "source_facts_sha256": "e5f85d2669b620215653409026b435f4ae3ecca09109767f38f71d9f1a737379"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-fca051f9a04160b1",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "45bd102879f5c326645ad1730baa87cfb41f321fb7775c5900aa58d3ab45e2fe",
+        "source_facts_sha256": "09f06984096c9df60ae84d63b11c4f8a6aed71f1f25b64e5803fb25cc3e644b6"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-6915dca01d129c57",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "c139f2eac36892efa965d586f5bbd379f9fd118f1ded46935fd7224e047033d0",
+        "source_facts_sha256": "2a634ee3ff011b90f121fd2ce9905743a43e66b91ce71a76569fcc1ccb1d0a92"
+      },
+      {
+        "case_id": "router-adapter-box_total-a6addcd359716cf6",
+        "family": "box_total",
+        "prompt_sha256": "69a9b5fecab85ec4fff0f54f1882b0162df957ce7fcf407b0c7cfbad44922c20",
+        "source_facts_sha256": "558cf4dd0b4fce1af90eed8aef784e0fd57f0c168d896fcd181c44bd38e5e646"
+      },
+      {
+        "case_id": "router-adapter-box_total-0e49dec2ef2cd665",
+        "family": "box_total",
+        "prompt_sha256": "6d956110d97634a1372b616089268e5bb56ddd688a23df09c38fd32aa46c45e3",
+        "source_facts_sha256": "aed0edb0545ba3f5c086eb3d17d19a7ef013ff86556b00aaeec1bf33cde164b3"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-8bddb3cf0f2121f3",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "56abb96ab7ff2e56e0e03aff589faf3be7758f9dc6c1431c27115586f7acb177",
+        "source_facts_sha256": "28babdd2b7bc7647719fc3a59eaa4ef3620da186abd459983104202d2c49e630"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-4b69ff6c4ed6e6c4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "d98df407c278a059e95fa7d2117d12ac0db249d48a73d5a222cc401ec29c8215",
+        "source_facts_sha256": "3712f3c6e807e8bcd4752b81f5cbd5801d2c02285f2e0f568e44aa0931074df7"
+      },
+      {
+        "case_id": "router-adapter-box_total-8c53468b8fb1c45e",
+        "family": "box_total",
+        "prompt_sha256": "e3c6c0c6d9fbef4e4878ec6dc3c926924cff0632ce9308e6b460a83cffc5a9e4",
+        "source_facts_sha256": "ff62df7d816ed4ae35a6e404bb95d61f410d82c2df4cd49971ba5372e725eea3"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-ecf80a2b7d60083a",
+        "family": "remaining_stock",
+        "prompt_sha256": "b5691f2ee6dc64a7ddd9022f78e360b4b93345fb372ae852ffefa520ce991e38",
+        "source_facts_sha256": "8b114531edc27b2b341a6c41db117636b730a538faf3d945af4ecc857e0389ab"
+      },
+      {
+        "case_id": "router-adapter-box_total-54c6b8b0a16806fc",
+        "family": "box_total",
+        "prompt_sha256": "490f314cd0a9e97288d14d9ac7a780e254d02c3b094cb0d9a896e48ed3971257",
+        "source_facts_sha256": "aaf75eda56c11a46e79cc7611fc02f3ebfd4d02fa516c0c5d4d4b7d0d642452e"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-855863bd13c272f0",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "e36b45505dcda68cf90883ccb891f0ea5209ee73e1d8f94c5ced53b09c0d0bc0",
+        "source_facts_sha256": "aecd34404bc92d3d57827f49aa31a9bb4e51610cbe47f47313a7bdf2e91d68f1"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-7421b634eec51acd",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "a4028efaf3603e61e6a897e170b6eaf299f8a6ec1edb82352bbe146a95c36b67",
+        "source_facts_sha256": "55a0e05f035ea5dccf6344d1359d267111c371a5810fc8ac37533c22adfedcf6"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-3732645773a5f8d3",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "da806625327591ac3de576010ef70f8df367e0812be6f2953b2992b6ff69b4f6",
+        "source_facts_sha256": "1857829eda5e06d704485630dfe619ba00c5d4261f859daa151901aecac648c5"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-dc62957c28e14e40",
+        "family": "remaining_stock",
+        "prompt_sha256": "595cedff08bf8e214e73aeca7a3043bc110204be69d2d7238b3dfa08a8cacc66",
+        "source_facts_sha256": "2bdc24b3e5f7c48c7bafa7270e69aa9a095b8c01e098e21e1ec79937808daa7d"
+      },
+      {
+        "case_id": "router-adapter-box_total-6c4a3186d773cfa1",
+        "family": "box_total",
+        "prompt_sha256": "15e933efdc0e9ad9de2c5762e0f46bf6595674ea4b19d309c569224185d5237a",
+        "source_facts_sha256": "f270a02fe02ec11ba0332be6adbe50d42ac9fedb29d2d8a3e4a8fb60bbfdda7a"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-94b7a120cfec867a",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "6880b405b7b1e319eaa1117cba4dbc2ffc295d75c191bacee9f6f65407ae1f59",
+        "source_facts_sha256": "a2c18ff8bc3e1caf1f7824d143e256b50ca002b75117fba4c8eb45862bb46434"
+      },
+      {
+        "case_id": "router-adapter-box_total-a7c7c0383a765afe",
+        "family": "box_total",
+        "prompt_sha256": "40438f3c655e7f856e048a79b53bcf9bb1151efbfd9df8aab19e3d021419a542",
+        "source_facts_sha256": "f425280a8d5e5ceea69e8e8a2a903a5b42d08658f5d52d21ce514bdef6ce1dd6"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-9c38e8b991cdaa8b",
+        "family": "remaining_stock",
+        "prompt_sha256": "09218d6c192a0c1f1efe59cdfdfd38af7e25e4ef77c97bf59bac3679d45061cb",
+        "source_facts_sha256": "e4e360d1d022fadaf26709075c2abc2e55f02d1a17d2103bc5e5c5355d6d294e"
+      },
+      {
+        "case_id": "router-adapter-box_total-6adcff097e781e66",
+        "family": "box_total",
+        "prompt_sha256": "1a92b2ae62ac361cb2d65e7551cb04d4db5f438b325dfd6cac2a866da6f956f6",
+        "source_facts_sha256": "f94680cc7e5124715bf2e894f7294af10d453ecba407a6a11f0078ee51e29f06"
+      },
+      {
+        "case_id": "router-adapter-box_total-fb74fcae7fa87cf4",
+        "family": "box_total",
+        "prompt_sha256": "ae1ab526646fb622d581d55ecfd56ef18be502692748e1374e7d286ea1a201fa",
+        "source_facts_sha256": "7f1d69a4e80297a43401537251ba4239ad82e5ede881f955c7cc3929648643b9"
+      },
+      {
+        "case_id": "router-adapter-box_total-0e79b66fa0964201",
+        "family": "box_total",
+        "prompt_sha256": "09a8f293ce06f75c24aa5d02e431ee3abec5069db6cb5d5a925b5c8fcec871e9",
+        "source_facts_sha256": "15f323823bbc386fa09f1865bf77effdb384ea9b56256c7830a53f34ca485d81"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-ce243339192add9a",
+        "family": "remaining_stock",
+        "prompt_sha256": "07559330b6426a95077bc692708da837140884bdf075aedebf32417789525e87",
+        "source_facts_sha256": "035417eb3ce7599d39255d8b6f33fe74eb9d0c5343aac7704c1172e0012ed7b8"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-5d84d1e9006e46f5",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "e58a7c007bf370b5980dfc6564ac3d30b49262454dbe3f887e94112ca2e5e3ae",
+        "source_facts_sha256": "32a4812552eac1a21b08ed6daad0cfedd3894e2dc578ab9bd3a1b11a83ab4358"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-a8ef10e2a1ec5b2b",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "19ef40a30248389686ffe598c6d5d75c7004de0693820b5c2721cb81f60ba020",
+        "source_facts_sha256": "1b3f7f7d8550bc64ed9467dd45c3d6abad29302f59f9b3a7cc69605311910a2e"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-0ff1971e967280e2",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "80030f45182491e8ae6135e0b7260da1bc730d02eb2a6ad935d4b6d14b696a8d",
+        "source_facts_sha256": "ca6b0a92a34b5ac0183946be9a08961fedd187b482a325e856fdb094734ea118"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-425cacba18b638a2",
+        "family": "remaining_stock",
+        "prompt_sha256": "6f03ff1682ea1a132f738088c805077bfbff124f3867582c2c6501fac0588a51",
+        "source_facts_sha256": "55a12cd3d17c7278c11d58e1c73f06960f0c4b31a91c1e1ea4063c30f3b71b39"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-e40cfbcd6615f9d3",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "a7b975fad1e2b6d76e4d4631a208fb236da45b32b9a375e5f83f0b441eda3ff9",
+        "source_facts_sha256": "cc03dfa96082e44f44f839b5ade8d8381378591a078c0aea9bab65943bbc406b"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-a014387d80b3f49f",
+        "family": "remaining_stock",
+        "prompt_sha256": "43edf15dd2a22d6e4603d878c5f72e5b8624722a0cd69936e5edc851f486c1a0",
+        "source_facts_sha256": "a98756b92ad95ff5e19dfbe89de3ba3cff56b051f7ecce0710958128813418a2"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-31f3d10bec0abb8b",
+        "family": "remaining_stock",
+        "prompt_sha256": "a4a65621d93c72c332d4dbc4d093c5c05099224eb233703f0da33b85aae7f32b",
+        "source_facts_sha256": "e46d9b9b08174404bc1a26b940e9fa1c4df2b3858a784bdf301b7733e36caa42"
+      },
+      {
+        "case_id": "router-adapter-box_total-a46ccc54333e3aae",
+        "family": "box_total",
+        "prompt_sha256": "7b5a8264e2a42caec1abb4d7fe5d7dcb2706c8e9bb1de6a0e618c3213152e393",
+        "source_facts_sha256": "65244975921263f7608e46d4c6cc87b9db1e8bc8da0cac7f590ad4d26f4691fd"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-e93dcea41da19ded",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "bc3f96c19d008bc7f1c9ba9da1f39a5ac96fd487e8b7b4637a35db85902c82ab",
+        "source_facts_sha256": "f92698e3f95a69cc91e3b032240ce1fdaf527d53b5e8b80322792841c4dc62f4"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-e2f2e5120b6244b9",
+        "family": "remaining_stock",
+        "prompt_sha256": "d81a0e041afe6dae34381948b157c33c869f2ad7797d5846d01182909caf3250",
+        "source_facts_sha256": "f1bb25f72b1ef18d0eb56a60cb6190271acbb53b26333fa693c1b6289b8e28c8"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-f44c904b95913de6",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "9cc90da856129868945ccd624fd757dc238412b43779a1ed7d49f227405df6b4",
+        "source_facts_sha256": "7b1c03f345099e78067b0fafbd41541a532a00153c9138d34890fb872feaf0cb"
+      },
+      {
+        "case_id": "router-adapter-box_total-80a6c4f1db74fa8f",
+        "family": "box_total",
+        "prompt_sha256": "330a01427ae450902405c00ec5ad36cb2ca12cf7f8c18793d3217afa5465b28d",
+        "source_facts_sha256": "88f429d4fc5ac128538ca8c8d669506ceff950ae0cbd43a9b7c51b6640812f61"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-0d795560435d82f4",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "e54fcb34dcfbda33623a660ae90ecbfad2ac3a9d740794ba9583e53b9a6a2993",
+        "source_facts_sha256": "90bc5484d2aab95c40fed0abf84762293db281dd66431e08f3a42558cb5814ec"
+      },
+      {
+        "case_id": "router-adapter-box_total-39e8c8187c02dd6d",
+        "family": "box_total",
+        "prompt_sha256": "ea6bfcac36308f91378c8c83bab1d10f980ceca0e4e5907964f8212b7d359930",
+        "source_facts_sha256": "f4d05f89282eb6d6e9f1e9f57e556566c0b158a5c6ff4256c11c533e3e98ce88"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-e29747ee77366fe3",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "fb30e9964303cad49c6a40836098197ef9e4f29f332eca74c4c553170f75d67b",
+        "source_facts_sha256": "28f256ab227b4cbc0de0f25512b68434b31034cb2acb7f5c0cd79f66c6a5c4b4"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-d5478255ca54d2f4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "4006677156c4a16e84b0a6618b2251ed388b40bf59afb41c135f8df31bfbb9e9",
+        "source_facts_sha256": "28f95aac57436360acd53551599c3c4ca9c80a2885aae326d4ab257852252e94"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-526c1771cbaa1bad",
+        "family": "remaining_stock",
+        "prompt_sha256": "cb443da67937c79c7bd2f29f0db5ffafe54072bda6776c80f5085c6d960f78fc",
+        "source_facts_sha256": "e4dee81537a64bedc7cfb163aadd5f3b3850af08f1deff54820570da83f8c9a3"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-6fd352a427bb739c",
+        "family": "remaining_stock",
+        "prompt_sha256": "b285dc5d46c8f66319b3dc7b1952006aa0cd2845ea21276537a95060878460d7",
+        "source_facts_sha256": "d226da0447907467eac71e30d7327dffb4e2ca6350402fe7afe5dd5f6b6fc1b3"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-9e81137160ab04e4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "ab2bd21e1ee2eb9de249902c91ec5f0a02a102193345e409b18a69cbfc39f8b7",
+        "source_facts_sha256": "9a1860ba7778fa1fa8bba678351e54182525dd3b4c99cbb793e708e29c250016"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-638f3460a47815ec",
+        "family": "remaining_stock",
+        "prompt_sha256": "648d3fcd4ef4192b1858f597a0b2370a6b4d13f6b93d231556f37e1e4e31cf7d",
+        "source_facts_sha256": "3b150c2ea03e940f23af944c50d0cd7d4663f62b0a3fe81aea066b0b8a806e32"
+      },
+      {
+        "case_id": "router-adapter-box_total-62aeb1750f2d52ae",
+        "family": "box_total",
+        "prompt_sha256": "6315b4eb4286e2b7b629ed27329a50ef1f136c23ede5043de59cf31aece7e16b",
+        "source_facts_sha256": "836b4af9cb94a297432e2f97e7f3a423edb28663f3dcae74cddb86aa5eca80be"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-39e0917d50ab1901",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "411af58c32125b3ec0e2506eef465d5c9e6716ed23a1ba7a1ceb4cc8d9389160",
+        "source_facts_sha256": "9598130fb8ae6e3698246c509dc9ce47312a6503b2858652170c574137e52d8c"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-25c6127cd8395856",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "e21a4905687bbb86d6bd6c6418c4514fb7edf53fbef77a479284f7e1d616aa10",
+        "source_facts_sha256": "f5708fee270bc5c8761ce95fb37f32fde8cf10d04754e5e196fa286ae7ec458f"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-7434eb2a1b04ee49",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "3db93d876a1e1e4ae6ff318e1178531d37ad5e4dd0d3251111f9ea491572696e",
+        "source_facts_sha256": "f43ab4b25a2082520f97e26a3b0c1b6756e591bbe7ad2490c127dba99221de11"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-06e175b44410adca",
+        "family": "remaining_stock",
+        "prompt_sha256": "1d825fe6ed8509fe95baf1991bfaa7dc8d0467d03d079f335d710ebb4cd75ead",
+        "source_facts_sha256": "7629a81ca09b8a2842e2626edcd192ffbe87924f20009d9a1b6f4da99503fa86"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-fcee63ad3a6cb1e3",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "c92f5cb6a471334182bb2c5b08e9ada859340a00229ba9dcfa1b5284096ec846",
+        "source_facts_sha256": "945b1397b76b845e2554182ba8e1046ee78167bd56ac742d2667894443a9b06b"
+      },
+      {
+        "case_id": "router-adapter-box_total-19dfcd8fd92a9185",
+        "family": "box_total",
+        "prompt_sha256": "680fdedafce201f095d1885c1396b27e37a280ab35f396c7d5d81153ac66b946",
+        "source_facts_sha256": "092cee7c3cb9058bd039d15c20828dd9b4b202c4114847b33e8ed0dcaebe2862"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-0b12920d3e1abb90",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "be48357eb9e88d20adf811cd36c1c52efa0832c527c485e3cfc028c728781967",
+        "source_facts_sha256": "b3f7a934a4ab31e74bb0cc48c577e0c1fc0dee446ee8d35e4af241146a87b735"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-ded900fe80265abf",
+        "family": "remaining_stock",
+        "prompt_sha256": "77270acc16a8185a0f2dcad6d1c69549c55bd62fbc692ecdb2d1a77f5e0e5666",
+        "source_facts_sha256": "da142fb291ef72be08ab61883dfc11ccb1d3677c9451c0df33343674d8d619d2"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-b9cfbaa0920f335b",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "a6f46c54d3732a4422d82018856ae9c5c466eda18edf6fca6a870c24f131352a",
+        "source_facts_sha256": "1d5ede47eb21eaf74c9f231c8c97450142097ddf6b97d73628b100cf835a8cd1"
+      },
+      {
+        "case_id": "router-adapter-box_total-81a3c6aa087db8ab",
+        "family": "box_total",
+        "prompt_sha256": "ae200c756d1c87ae89f4585ea0200ad16ee2562fbed661d7ed6f9b18b8df1470",
+        "source_facts_sha256": "06555bb9fbab3f8d6ef2a60568d40447da1278faf55993e6de571a07e2cd539d"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-d318ce6acc2592d1",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "76d37584a58a32f6024a8afb0914b6140d2a19d4efc2aead0078bba9e653570d",
+        "source_facts_sha256": "a22024c1712ff2c25095cf8b0cc35d0b278201d5d779dd23b075b5a8e0547aa1"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-b7b58a5281af0e55",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "6838281147950e760d4797e5c14b4693cfbc3a56710a60680da1e31a7a42bc8e",
+        "source_facts_sha256": "3e63c9fba9047de322c9b355cb1ebd0a4ce2ba119afd86492d711e0d3276ec0a"
+      },
+      {
+        "case_id": "router-adapter-box_total-36770738664fcc87",
+        "family": "box_total",
+        "prompt_sha256": "9e741172fb25a1b29d4199bdc3999f64050d073d4800a75ba271ae9ca91ee6e8",
+        "source_facts_sha256": "487a83cf67adde4bfb08160ba12b7d845cbaabd2fc74105ccd99a6a17e4ec748"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-c42ae04083a8b2a2",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "6edeab85dd592f9f823e0f4fdd8d7698d2833f51d112c33ba1fc6d8882dec9b4",
+        "source_facts_sha256": "0f22e125c25641ecafe3e980e9bb0c02e198d2e7293e5deb21a28ed5452acc00"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-4684496d4fea0105",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ff7b42f6d109e5bb8136f186380605c9c14d655a7a7c6b22583d58c468048742",
+        "source_facts_sha256": "f412880885571123fa5afd469b0c0ba5ef567f06506c274ef99a8545f705f65b"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-64ddbe3dc4f295de",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "11115d43f5002ee79b1a3e663cb717c972b7e91f4e0b74f8d4d39148a6bf20cd",
+        "source_facts_sha256": "fab65a44fc03e77e292e252533207732171354d2165f14a53401fae251a444b5"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-ddae4bd9d33e0f52",
+        "family": "remaining_stock",
+        "prompt_sha256": "c27a07b59fc2bb6ebe1ce6db89282d03f6cff456cd7674fcb7ee39fbcf810e82",
+        "source_facts_sha256": "55edc21f8bdfa988cfe5f6d23aa4bee7a27aabda01be097274aee286679ea365"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-b6d0150a81f2192a",
+        "family": "remaining_stock",
+        "prompt_sha256": "75e6a419ee91c449b3b57e9196ca3e992dec484e33fee28b234b6427907f8133",
+        "source_facts_sha256": "a8ff08fa20e0e77e00973f1cf7d2bec3ab41cb6a5bf51037ae74886e405a64b1"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-abb5ec5ed1e98568",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "79aa1d41796d14ffb7a906914911c35fe212a3d5eb9d3d4cda09bd8194adf6ad",
+        "source_facts_sha256": "0dfb6f77e9e2f0ef0b4a0d8ffbc431779705ffe2b117b7569106f960cc47c9e5"
+      },
+      {
+        "case_id": "router-adapter-box_total-083e64c13a01aac1",
+        "family": "box_total",
+        "prompt_sha256": "b79f2127de857c002d6886f10f2cca065ae306ce5e8ddac584bf75f4636ca514",
+        "source_facts_sha256": "028fd4d0af59eaa0c8a26f54be76363a4275f9715cbac1d1fee87cc1563370f3"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-74be19dfdf6f95be",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "f14e57535c9040fce6ae02858585b585ec28ab17a2edf2f8024e7a48ea11ade0",
+        "source_facts_sha256": "df673a067f69d55802e70374cd039389fde61f3eac9683536d4bfabe5f63ea3c"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-1e808f8fad7fb3b3",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "d70b5a727cf616dbc638dce4011e5077c7846d89974ce05fd93fd48d5a4b8805",
+        "source_facts_sha256": "ecdf6e7e4fd2402a368f7ae6371126ae3ce6a9c328027939c134a196ea800396"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-7e9aaae008e7f48d",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ac0671e01692244d0b5ce87ff7e6f42dcd14a9dfe95c0f01a6ea05b3ad7fb7de",
+        "source_facts_sha256": "108e6540f90cf8deb93405ccd9cf1a7e9084d026b0e0794aac59b952c2b1469a"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-ff4979bff0b6af39",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "990f2971531ec433a0439077a9957e5f339d8abdb951910b85ab015a5cdc76bf",
+        "source_facts_sha256": "a26d3b5ee998e3893fe4896fcdb819e92b991db068bdedcdaa37a713bb45f5aa"
+      },
+      {
+        "case_id": "router-adapter-box_total-d425cdc9081cb85f",
+        "family": "box_total",
+        "prompt_sha256": "823b915560b8fccdb33ba4446441c784dc428ee67c23e623b053fbba3cc12e06",
+        "source_facts_sha256": "787aaf26633e73a037cbfb17c0193940e5d7841eb67a797fb9a0c7d3af71cd31"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-315ea84d42d7ec26",
+        "family": "remaining_stock",
+        "prompt_sha256": "d44199f34ec0ea09e8c0d42260df27d53ac538b276a189c7a9782584c4412c78",
+        "source_facts_sha256": "7b23521fa0c1b2d71f335a485d05c3512673b2da4acee156cf509819d5f7648e"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-0793286056c22deb",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ce422c96d20399a81ebce2ac4c5b25dd0c13b92b25b243fed6ffa4fe50fc3f66",
+        "source_facts_sha256": "a6fbb20016831cbb17cc1f526e2083f423483a156e4816c5273aaa70280ae6e4"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-cb72d27bef70d682",
+        "family": "remaining_stock",
+        "prompt_sha256": "b40ad65da88bc3e632387f94fb551a3b6254279a9406fdcd6ca5f2367f47ee29",
+        "source_facts_sha256": "53457811137fe2cf6dc8a2ff1d6ed393603b55137c2754c5158d72a6706907e3"
+      },
+      {
+        "case_id": "router-adapter-box_total-302c987257afe161",
+        "family": "box_total",
+        "prompt_sha256": "82a50d87eba8d8511cf60d9f702e1aa34055c0eb680f5ea147fb525f69511103",
+        "source_facts_sha256": "959d18bfea8123258408cc0e8a64da0b8458915974c5cd30660618a08f3f7345"
+      },
+      {
+        "case_id": "router-adapter-box_total-6ee91c73196fe368",
+        "family": "box_total",
+        "prompt_sha256": "51d1b239bca847a348df04bcf36c03b73b65de309cc9d2c7f32ab6784df097c0",
+        "source_facts_sha256": "65afb72bbe31a0f9b3537b3a34d8ad82133a4ed70c16ac200efa0891d53278d2"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-1aa021827111c56a",
+        "family": "remaining_stock",
+        "prompt_sha256": "6cb607300534cd108ef89ecd2f6f0e3c1a3fd46f9f294adf1eb47c1b43644f9e",
+        "source_facts_sha256": "05c575b9d569a551cdbed51e985aadfde47ff41ea287463bfdf88c809805a232"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-3b376e23fc82c106",
+        "family": "remaining_stock",
+        "prompt_sha256": "77abf19023dd52c64a11e5c4d96bf7e8dfc27eb38563aae57184743ee5d5b576",
+        "source_facts_sha256": "f4b371525f873b256da8d4cff13f7990448419c31b3d2cc358ea978b14124d9e"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-f45dcb3e4622c9be",
+        "family": "remaining_stock",
+        "prompt_sha256": "cfed5340cfe6cc3714153c9b02d0bc5a1b2cf9901dc159a866b4fe9c2b82ab07",
+        "source_facts_sha256": "a5c9693541355380c2d3951d99c7df2c71d3a8cc2682db557b7dcf65bbfc591d"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-b815cc89f124cd87",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "d65241d2a064db9801f9c5d85ad5185e5f924ff88cf4182963f507be6f06b1fd",
+        "source_facts_sha256": "5380ca777159db753654330354d11a9572c8dd13dbce79a58d012cf3f814493c"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-e0c8dd99afe4f311",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ee96d563cf0f355c108babbf5c03632cac999999f9140bdf43d38792d4e57036",
+        "source_facts_sha256": "44e579f8891f2b537d799e6a4943ea1fe846ac030806bccc53d8275b4d06018d"
+      },
+      {
+        "case_id": "router-adapter-box_total-5521e6005a26965b",
+        "family": "box_total",
+        "prompt_sha256": "ab9e0051245ac9a3fa52032ecfb0c7d7c2dfd2cdad3594f6a416fcda767c2657",
+        "source_facts_sha256": "550cf438dcde9d119ee603258745c1de4a3578efc3daf6f22d2b80950eb79ac0"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-8f297bc4e5b80003",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "82d7850e0372034f3bffc4b21df16fa9cee383a9347f185ec19946e73a2a6a60",
+        "source_facts_sha256": "75f6d13cf1cdb156e777ae6d9d99b0ac1e0fe007f069974ef1593e417f164948"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-00961d526a37b265",
+        "family": "remaining_stock",
+        "prompt_sha256": "fac9e762e25d6f942063b01161411f812684f6f5e2eab6712fd0a3d24a738879",
+        "source_facts_sha256": "43c8535138676205ab053445270e73523a9f047b53ddd9d0c44e37692bf8b486"
+      },
+      {
+        "case_id": "router-adapter-box_total-2f90fa5e3e5476ed",
+        "family": "box_total",
+        "prompt_sha256": "0071dc722360c92921f388c58a683f69e5bb6e039215ec118e006ef8a2f9dd0a",
+        "source_facts_sha256": "e6c4e4072c87f992d3cb75679c4b72a41d49090ec13c2399b814c658fcd4dea7"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-96413c01a7178033",
+        "family": "remaining_stock",
+        "prompt_sha256": "73e2e5cfee8125de9c4c504fb317f450531e537e8d0e8e56883f9893136b4e24",
+        "source_facts_sha256": "f802fad60648db59b18bd8eeccedea711aa57907d1b8d2f122de7cd2e8584559"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-431d90d13242a0fb",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "441ce63578643094f4c8de7bd48d5232948e2ea1acf060e353c5b3617455620a",
+        "source_facts_sha256": "a7766410b537c5ab29d894295f2195949bb221619b524fa20f93afc4d8b73533"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-f983ddabfa2f1c28",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "69e3e8281a5c809bccadaea483746416051355b5efec2d47ffa4cf8aee4f3819",
+        "source_facts_sha256": "c24489532ae3e47a4202a698c64ebba1dc550d41fdd2c6a9e03aae6bce9ca038"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-70b3f1b03e1c5863",
+        "family": "remaining_stock",
+        "prompt_sha256": "7bb5c13b4addcdd058a8978059cc44a6982f881dfad88009c5933fabca8795e0",
+        "source_facts_sha256": "477792b8145e4a1a289281e09d58136472e09f5d2484732d07de281b85ec01d4"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-bc3f9f0ff7d46ffb",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "8bcb3ae82b37d01c0e2e1a2966d46d72968ef235080a113479df392802d62097",
+        "source_facts_sha256": "2cc7454d4d8f9c53aaf6a38d43e320234f8486a7581442d0ae9a24decd9e4fe2"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-635e5d5e05e18116",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "64516be9fa229cb316c62cfbd39d80739050b366d132fb2f9ffb64de69f714df",
+        "source_facts_sha256": "cad05db8d4fb6af6ac5e0eb4f29d199c43c1234873217269e1fa1845d5f46666"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-b4f46efa98fab9ec",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "39f6de9086eb686f9bd54449d171404cb8d1983d34fd26a49b3870f2bb795cf8",
+        "source_facts_sha256": "2904eb7d04edca4cd7ce8e2db850c9528d6a20a7c186aa55e6db3283530b512d"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-681a4b7ab1abfbf0",
+        "family": "remaining_stock",
+        "prompt_sha256": "1e2675ec6247f5b05f01474cdc4c0c9da55ad13c68e3560faede9580f2421d8c",
+        "source_facts_sha256": "2fab170e358a75a229f04a89c6eaf4973f7b4e2f234b1a86c7215cafbbfe4b08"
+      },
+      {
+        "case_id": "router-adapter-box_total-61ecfb481378044b",
+        "family": "box_total",
+        "prompt_sha256": "5f8712ed0e0df9dcbe0cdd9c0128e98d3452a5e9b17f7d0f71dbc19d50cef511",
+        "source_facts_sha256": "c83394003c820b56907c9cbb26dd2ba7fd7216c2a79605fdd7cdd7ac4bf95d9c"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-41c9a406efd969c2",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "6e7a733687218207d989114205f3d39bd935050796ce1efa15c97b4c5697e724",
+        "source_facts_sha256": "ac70905fb7b594fa8d980033966ed70a19147d4124a2f9b2219df1b8c82afd82"
+      },
+      {
+        "case_id": "router-adapter-box_total-1defb9e7cf8bd5fd",
+        "family": "box_total",
+        "prompt_sha256": "1b1fbb5e310a01049297739a7600a3956b28111c8c32eb7dd4191306fa7a4d84",
+        "source_facts_sha256": "68f045a41233998095e72f06eed77f2f2132a927ad35a761ad2d179e656b9c18"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-08bdc1386d8d9220",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "78f37026ce01f9f44f30de5a046f36980b94cb0eb9499dafdd938aff2fbe646e",
+        "source_facts_sha256": "0f6b46ef7329554f47bf331f9bf6f7613d81275914fddfa15c506bfda968a7ac"
+      },
+      {
+        "case_id": "router-adapter-box_total-716236390cd81063",
+        "family": "box_total",
+        "prompt_sha256": "5b7884230ad8a0a778aa51e85bc2f39e2870bcdbb2d3941a83511d48506865f8",
+        "source_facts_sha256": "d79a8c64c43db44fcf4fe07a5b88a7a64f0d1e6ec3fe054bd7c373e0f680d278"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-d66663bbb417fd0f",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "05a9acf2d260bd2aee6ddc36ba707b4a7f49223f9753a14d91b9f934d8f6ebc5",
+        "source_facts_sha256": "821a8c7dd8a4894e0e995554a45ab34a6d7bb04b2a85121419770aa9f6cb4176"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-06a26d229c69affd",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "d0acb8d1aae14674d19164c591962b13c5ea76563fb0dbbf6888b587501d8cc6",
+        "source_facts_sha256": "df5885515d0b698eb159f7f829b49e8cd9351b2a63f7a85c0a4781abf65c5958"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-7d7fbd0cec81226f",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "96db51e3ce91e9fa78f32b780f22f7a726f656a1a60d08941ef08e97a29227ae",
+        "source_facts_sha256": "fca78fe8b0692de0dc3ab8b025fefc4faff98e4133a3118a00e86eb5469c7ebe"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-cc0fd1c81fcbb623",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "7fba11bfb3cffb863bec3b742c0dbd4e34b4e43fe13494bc303d192003cef469",
+        "source_facts_sha256": "5f8b7eb357b141f16a565a69cc368e1a9e8623b2170c79d58774868ffb26216e"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-88590cacbbe0a657",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "54896aef31257577778b4baa62870860f8ccf80802a7d6bf1435b586b3113d69",
+        "source_facts_sha256": "1f9decec50ead708777bd2bba617c0b7c613bfa071682a3ac9cc85b98e272e94"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-5b7d7b1a6dbd54d0",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "94760a3931d7472b15ace1737e8b750f1263c1632458ab30a2b9b39c20654167",
+        "source_facts_sha256": "b6933d35969d76e1fde86bd94a3a60289498ec2e0a53543d04c3ff1f5f9c1578"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-c89d8ede8dd60d93",
+        "family": "remaining_stock",
+        "prompt_sha256": "8bda7843c473acda4fca79dc9273c7569bc2b30566c0b531bc07ebe1a9939b22",
+        "source_facts_sha256": "e36b605c01fb04e5b4e79928932f67e94d44280fba6f0d1c107e994cc7271026"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-73850e97268407da",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "70acce9cbda585a5afcd6249a33ce9d36fa76c99c6ac9cc8477039d3b439a23b",
+        "source_facts_sha256": "8e474e0d8afeb31520b8cc96388373f52236335e90fc9875b3983a3c7a3b9253"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-ecd12ff2b3300961",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "48d6332a6a46fb22ce130a5578c78b4f534a417b28e7ee14f17f19ea4910a04a",
+        "source_facts_sha256": "db51f25520e0f0feb5037745734d815a10abce5c331ff0060b09ac736d2bf8f9"
+      },
+      {
+        "case_id": "router-adapter-box_total-784473685611c0db",
+        "family": "box_total",
+        "prompt_sha256": "b8f5cc6fc971c49cf58c9f2b119690420b514d4a4e2a00d210b8780bb57a39b8",
+        "source_facts_sha256": "efd752038c3c3e4c65237c407d76921353e9bfb5e1fddd44d17ab328b6cd7b9b"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-7e4678b88e51b3ad",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "13eef491f4a84fda96b4b579ea242faa641e0e733b0e891f10ecc10e73fafca8",
+        "source_facts_sha256": "0918e9d7202417daf2f1e634c8ac336f58b7e5f3f19143b89c8db9d8d55d7233"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-b7b6951b8855b362",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "3730be74fb4ddbce9124461eb0c2db0f107c58de507020348473618cd73f0a88",
+        "source_facts_sha256": "7ed417c2deccefe7b0185cc82fa5b0814383dfb23315ed970fdaef2e1fd8e971"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-5f792b1eedfc7721",
+        "family": "remaining_stock",
+        "prompt_sha256": "b234ade67dc98fdc738cc46abb8a6ce443af5dc3a1eee34573bba9c88c8f100e",
+        "source_facts_sha256": "e84c11362fb822a783b6bf0d78c43885407e941c0dbf05883b4c5482ecc0f48d"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-24e8571e863df78f",
+        "family": "remaining_stock",
+        "prompt_sha256": "05a55ec6d4f1b1e815c31364f85d1beab04fc7ec74bb4f31d43a2273a3cff6cd",
+        "source_facts_sha256": "f248e44eb402f9adbada20e211b587c90425dc0afc5063eccc3b25d47beb76b2"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-35400361de292b4a",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "331b9a3ca3ba1dcf0d4bad87a3bc24100a22c5328f495061376938a96388837e",
+        "source_facts_sha256": "21a4f9a70f71e98ba423ab14e0058e104af3c19f401d358fddfb4245dc3d2187"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-ac30d5a6771aa686",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "160e9d6b3caece89f0155a171688533f8e92b2d2762fe85110f9dcdd167d94d6",
+        "source_facts_sha256": "c5735d1efede50550fd266ce87f7cc9c8ad20bd315e7787fd26e5d1783153937"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-894e0bcd24577ac5",
+        "family": "remaining_stock",
+        "prompt_sha256": "284f790d11a7b84fd7ceae3fa2df23a0e8832da9467927a362bb7f7969d75c7e",
+        "source_facts_sha256": "ccc6fcba82006b0dd77f1cc57a10e8bf55a5e31942d453ac128298d8dbe9c9e6"
+      },
+      {
+        "case_id": "router-adapter-box_total-72256343543256de",
+        "family": "box_total",
+        "prompt_sha256": "81cc83ec12120623e8827644b9f96815d7608f95dd1d4bc2ce0d4e14e48ee7a7",
+        "source_facts_sha256": "eaea25f05af991f3062a4482b9a5301fa6b08d0f86f26b23d686c26e994eda52"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-f442116c99c3a2dc",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "ae15f08f05b049ab5025384d80a3af5bcf85e516584d1026320614d44f24a2ce",
+        "source_facts_sha256": "6055bed90c46a2f25e3a17b058a24b8484cccde7a95a73f8e7818ea3759c8e36"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-51bb9589e5c100b8",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "7e715d869a2003eb2b232843ea8937d31b133f9bd16073d94142a9762e1aa4db",
+        "source_facts_sha256": "2d57e06f822102b6b283e2834a27e44fce1ac784fd5646d615385b19a07dd6af"
+      },
+      {
+        "case_id": "router-adapter-remaining_stock-173fbde57c0416ef",
+        "family": "remaining_stock",
+        "prompt_sha256": "ca7432ca3005a912ac043a062475cde7c12237f98252d5832044d58a4ec1f40c",
+        "source_facts_sha256": "581c3b6bd147d8b3054652eb7bacf8b36b375c0c8a42f45053008430a9d45872"
+      },
+      {
+        "case_id": "router-adapter-implicit_scale_total-fd7a51815034efce",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "d2a013cb1794d585ede51cc35cdfc64af1bea72d79d8939493e8cdbb5980274f",
+        "source_facts_sha256": "37ed4817a029e4fa223eeed4de8addce34f1449a7d020d94152a14fd649195c4"
+      },
+      {
+        "case_id": "router-adapter-box_total-25acb67a0ffdfdda",
+        "family": "box_total",
+        "prompt_sha256": "08757e0e1b8af616b3e3bba98238a53ca5547ca0a36fca6ca6417c802e12cbab",
+        "source_facts_sha256": "1660604f98eacc9a163773a0e2d37bef75299412af16cadf0d7e970378ed186b"
+      },
+      {
+        "case_id": "router-adapter-first_strict_profit_period-2e3d3849f641ba58",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "a64f4a04b6e5582886608487b4b34dc7355cd0695dc16cf9b095221112e87308",
+        "source_facts_sha256": "cc7f1bffbac91df3a27a54ef46e0a133713be4688bb3d1981b7ad32b8aa793a0"
+      }
+    ],
+    "schema_version": "nano_harness_verified_tool_contract_v1"
+  },
+  "claim_boundary": "This pre-registers one fresh synthetic adapter integration. It starts no service, model generation, evaluation, benchmark, canary, holdout, training, or RL work.",
+  "decision_policy": {
+    "failed": "Publish negative evidence, reject this adapter integration, and do not tune or rerun on the observed surface.",
+    "forbidden_after_observation": [
+      "adapter_change",
+      "adapter_weight_change",
+      "case_change",
+      "seed_or_value_range_change",
+      "router_prompt_change",
+      "router_regex_change",
+      "router_budget_change",
+      "tool_schema_change",
+      "skill_prompt_change",
+      "validator_or_feedback_change",
+      "fallback_change",
+      "gate_change",
+      "arm_rerun",
+      "benchmark_access",
+      "canary_access",
+      "holdout_access"
+    ],
+    "passed": "Publish the local result and separately pre-register one question-only real-surface adapter scan."
+  },
+  "execution_boundary": {
+    "adapter_service_started": false,
+    "benchmark_accessed": false,
+    "canary_accessed": false,
+    "evaluation_started": false,
+    "holdout_accessed": false,
+    "model_generation_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "executor": {
+    "base_model": "qwen3.5-4b",
+    "direct_fallback_on_invalid_plan_or_feedback": true,
+    "feedback_result_equality_required": true,
+    "final_max_tokens": 32,
+    "maximum_plan_input_tokens": {
+      "first_strict_profit_period": 127,
+      "implicit_scale_total": 112
+    },
+    "plan_max_tokens": 96,
+    "plan_retry_limit": 1,
+    "skill_prompts_sha256": {
+      "first_strict_profit_period": "28d6b0ceab85fe762aad27185c1450d467061e50dd41c8b521f0b51af757b0b0",
+      "implicit_scale_total": "0cc473897177f02bf7696fa6742502e62a0e0db46246074e81e96094ae59858a"
+    },
+    "tool_regex_by_family": {
+      "first_strict_profit_period": "TOOL: first_strict_profit_period \\{\"setup_cost\":[0-9]+,\"units_per_period\":[0-9]+,\"price_per_unit\":[0-9]+,\"recurring_cost\":[0-9]+\\}",
+      "implicit_scale_total": "TOOL: implicit_scale_total \\{\"rows\":[0-9]+,\"columns\":[0-9]+,\"extra\":[0-9]+,\"scale_word\":\"(?:double|triple)\"\\}"
+    },
+    "unsupported_route": "direct_preserve"
+  },
+  "experiment_id": "qwen35-router-adapter-integration-v1",
+  "freshness": {
+    "benchmark_rows_or_outputs_loaded": false,
+    "canary_rows_or_outputs_loaded": false,
+    "case_seed": 20260825,
+    "history_disjoint_prompt_overlap": {
+      "prior_binary_prompts": 0,
+      "prior_multiclass_prompts": 0,
+      "router_training_prompts": 0
+    },
+    "holdout_rows_or_outputs_loaded": false,
+    "prior_binary_prompts_hashed": 128,
+    "prior_multiclass_prompts_hashed": 256,
+    "training_prompts_hashed": 960
+  },
+  "identity": {
+    "adapter_config_sha256": "21be3fad7bb20d9c475ac6c0f317813c2160b3419433b40ca2d3d6c387ea3f49",
+    "adapter_model_sha256": "8dfe3a89bf20325a50b9a4c168c4e9039c5f7e84721dd8d5f8b21e3ad829b9ec",
+    "adapter_sha256": "48d72666cf269f64825791801c71aad5ae1d9e97cbc70574c216b12974e46e63",
+    "case_contract_sha256": "d14d2e641c7af4dd11b2522b9ef237c8b89d8ccdbb2076971da292bc4aed49fe",
+    "code_revision": "5486f693fd4796b104fad3da7056499351891705",
+    "config_sha256": "4eb7000201530ecb2ced96f4b1d490d115f4c1e1c6a6cb008cf64d5dc403d4c4",
+    "mechanism_config_sha256": "4e5785b9b4fc9dd5b3a76a95b438c2f2c3d505a2fae6231b81cfbf53ebbd6ad9",
+    "router_training_data_sha256": "dacd3663639fe9ddc054865b87afdd0c918f0fddb12c8c9355819d4bbce95d65",
+    "sft_report_sha256": "c8af17cfa2fb77b594a9b34deaeccf27273491da6c350c3c5deb1435a9336c69"
+  },
+  "router": {
+    "max_tokens": 8,
+    "maximum_input_tokens": 123,
+    "served_adapter_name": "qwen3.5-router-v1",
+    "structured_output_regex": "FINAL: [A-C]",
+    "system_prompt_matches_training_contract": true,
+    "system_prompt_sha256": "9d9174e1a0404bfc406fb73894d8408207693ee66a5bf3807de9e8b579139e3f",
+    "uses_case_correctness": false,
+    "uses_case_metadata": false,
+    "uses_expected_answer": false
+  },
+  "schema_version": "nano_harness_router_adapter_integration_preregister_v1",
+  "service_launch": {
+    "base_url": "http://127.0.0.1:8000/v1",
+    "dtype": "float16",
+    "enable_lora": true,
+    "enforce_eager": true,
+    "gpu_index": 0,
+    "gpu_memory_utilization": 0.85,
+    "host": "127.0.0.1",
+    "max_lora_rank": 8,
+    "max_loras": 1,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 4096,
+    "max_num_seqs": 1,
+    "port": 8000,
+    "served_base_model": "qwen3.5-4b",
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "vllm_version": "0.19.1"
+  },
+  "surface": {
+    "cases": 128,
+    "expected_label_counts": {
+      "A": 32,
+      "B": 32,
+      "C": 64
+    },
+    "family_counts": {
+      "box_total": 32,
+      "first_strict_profit_period": 32,
+      "implicit_scale_total": 32,
+      "remaining_stock": 32
+    },
+    "negative_cases": 64,
+    "positive_cases": 64
+  }
+}
