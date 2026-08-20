@@ -1,0 +1,95 @@
+{
+  "adapter_tokenizer_json_sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+  "adapter_tokenizer_path": "../nano-train-fullstack-traex-03/artifacts/qwen35-router-classification-sft-smoke-v1/adapter",
+  "base_tokenizer_json_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+  "base_tokenizer_path": "../../../models/Qwen3.5-4B",
+  "chat_template_kwargs": {
+    "enable_thinking": false
+  },
+  "dataset_path": "../nano-data-pipeline-fullstack-traex-03/datasets/qwen35_router_classification_v1.json",
+  "dataset_sha256": "dacd3663639fe9ddc054865b87afdd0c918f0fddb12c8c9355819d4bbce95d65",
+  "execution_boundary": {
+    "benchmark_accessed": false,
+    "canary_accessed": false,
+    "evaluation_started": false,
+    "holdout_accessed": false,
+    "model_generation_started": false,
+    "parity_service_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-router-serving-parity-v1",
+  "generation_max_tokens": 8,
+  "hf_generations_path": "../nano-train-fullstack-traex-03/artifacts/qwen35-router-classification-sft-smoke-v1/generations.json",
+  "hf_generations_sha256": "226d8ed88197ebb847d216364f4e84b6654e69150c4fdca75867d4297d9dcfff",
+  "hf_reload_path": "../nano-train-fullstack-traex-03/artifacts/qwen35-router-classification-sft-smoke-v1/reload_validation.json",
+  "hf_reload_sha256": "645b61a679b213e6bdb86d9c884e47c25049ad671051bd026050833ad97fd316",
+  "integration_report_path": "docs/results/qwen35_router_adapter_integration_v1.public.json",
+  "integration_report_sha256": "9b01a9b6d6011f657696b0cebf9de8853b16fd2406802b14ca203d3500288f70",
+  "namespace_audit": {
+    "original_parsed_module": "model.layers.0.mlp.down_proj",
+    "remapped_parsed_module": "language_model.model.layers.0.mlp.down_proj",
+    "source_prefix": "base_model.model.model.layers.",
+    "target_prefix": "base_model.model.language_model.model.layers.",
+    "vllm_text_module_prefix": "language_model.model.layers."
+  },
+  "original_adapter_path": "../nano-train-fullstack-traex-03/artifacts/qwen35-router-classification-sft-smoke-v1/adapter",
+  "original_adapter_tree_sha256": "48d72666cf269f64825791801c71aad5ae1d9e97cbc70574c216b12974e46e63",
+  "original_adapter_weights_sha256": "8dfe3a89bf20325a50b9a4c168c4e9039c5f7e84721dd8d5f8b21e3ad829b9ec",
+  "output_path": "results/harness/qwen35-router-serving-parity-v1/result.json",
+  "policy": {
+    "contains_benchmark_outputs": false,
+    "contains_benchmark_rows": false,
+    "contains_canary_rows": false,
+    "contains_fresh_integration_rows": false,
+    "contains_holdout_rows": false,
+    "diagnostic_only": true,
+    "post_observation_prompt_parser_budget_search": false,
+    "training_eligible": false
+  },
+  "remap_converter_path": "scripts/build_qwen35_vllm_adapter.py",
+  "remap_converter_sha256": "355c25fd07a38aae456a01982351c6836fdceff2f12cacb146138d810d260702",
+  "remap_receipt_path": "results/serving/qwen35-router-v1-remapped.receipt.json",
+  "remap_receipt_sha256": "04ae7daa74eefbd891f4fb1ea9b4d29cc3cbcd59dbb22fcb6565488e5363cefb",
+  "remapped_adapter_path": "results/serving/qwen35-router-v1-remapped",
+  "remapped_adapter_tree_sha256": "fbaa39dcb3fcf34e9aab280308cb5a5416094c1968e4ac3a69cd739a806ecc49",
+  "remapped_adapter_weights_sha256": "9475d69207fa1db9b0106e420637c6f764d907baa2048c4b73f19773d6e2042b",
+  "route_structured_output_regex": "FINAL: [A-C]",
+  "schema_version": "nano_harness_router_serving_parity_v1",
+  "served_models": {
+    "base": "qwen3.5-4b",
+    "original": "qwen3.5-router-original-v1",
+    "remapped": "qwen3.5-router-remapped-v1"
+  },
+  "service_launch": {
+    "base_url": "http://127.0.0.1:8000/v1",
+    "dtype": "float16",
+    "enable_lora": true,
+    "enforce_eager": true,
+    "gpu_index": 0,
+    "gpu_memory_utilization": 0.85,
+    "host": "127.0.0.1",
+    "max_lora_rank": 8,
+    "max_loras": 2,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 4096,
+    "max_num_seqs": 1,
+    "port": 8000,
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "vllm_version": "0.19.1"
+  },
+  "service_receipt_path": "docs/experiments/qwen35_router_serving_parity_service_v1.public.json",
+  "sft_report_path": "../nano-train-fullstack-traex-03/docs/results/qwen35_router_classification_sft_v1.public.json",
+  "sft_report_sha256": "c8af17cfa2fb77b594a9b34deaeccf27273491da6c350c3c5deb1435a9336c69",
+  "system_prompt": "Classify the task for a semantic tool router. Return exactly one line: FINAL: A for implicit rectangular scale totals, FINAL: B for first strictly profitable whole periods, or FINAL: C for every unsupported task.",
+  "temperature": 0.0,
+  "validation_rows": 192
+  ,
+  "vllm_source_files": {
+    "../../.venv/lib/python3.11/site-packages/vllm/lora/lora_model.py": "5b8da6cd6dc5c63d2974ff2eec7157db6c8657d0aa21a93755c8345e03674a0d",
+    "../../.venv/lib/python3.11/site-packages/vllm/lora/utils.py": "f0fd4df62c028e2d408edf7020dae7374ff0c2f3d3f878315f96f869c26e65b4",
+    "../../.venv/lib/python3.11/site-packages/vllm/lora/worker_manager.py": "8d457a062d6e02b6630a6bfc721d70269afa56d1a97511d0e6b4b4946519fe85",
+    "../../.venv/lib/python3.11/site-packages/vllm/model_executor/models/qwen3_5.py": "5ce2151170c38c2a2718e3a9386598c0660d30db5ab8844fd284e08633ebc904",
+    "../../.venv/lib/python3.11/site-packages/vllm/model_executor/models/qwen3_vl.py": "78ef9783baa036b471fe3773d709ecfb631523e17c6013a5b31ba659df86438a"
+  }
+}

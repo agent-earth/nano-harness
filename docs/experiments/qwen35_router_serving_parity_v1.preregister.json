@@ -1,0 +1,1494 @@
+{
+  "acceptance": {
+    "all_outputs_parseable_192": true,
+    "all_three_arms_complete_192": true,
+    "benchmark_allowed_after_pass": false,
+    "fresh_integration_v2_preregistration_allowed_after_pass": true,
+    "namespace_root_cause_supported_after_pass": true,
+    "observed_integration_v1_rerun_allowed_after_pass": false,
+    "original_hf_output_match_less_than_192": true,
+    "real_question_scan_allowed_after_pass": false,
+    "remap_tensor_content_unchanged": true,
+    "remapped_each_label_exact_64": true,
+    "remapped_exact_192": true,
+    "remapped_exact_greater_than_original": true,
+    "remapped_hf_output_match_192": true,
+    "training_or_rl_allowed_after_pass": false
+  },
+  "arms": {
+    "base": "qwen3.5-4b",
+    "content_identical_remapped_namespace": "qwen3.5-router-remapped-v1",
+    "original_peft_namespace": "qwen3.5-router-original-v1"
+  },
+  "case_contract": {
+    "case_contract_sha256": "b87e3fd102b3cfb765e79add32124529fce68a5e0fa5e33680cd32534b5eb2c2",
+    "case_count": 192,
+    "cases": [
+      {
+        "label": "C",
+        "prompt_sha256": "09039ebc1af148f341263bea92591f581a0f1f23e1778c6144ab8b4054286b75",
+        "sample_id": "synthetic-001572d2c60d4e0c82e4",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "a59eb4be672b53b0d6d1c83f894bec75324b83cb8bcfb98bad673d48b0fb67a2",
+        "sample_id": "synthetic-00d578937867efdcbddf",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "d50471f05361ffb8ee979e03bab82f24413d4d15464da8cd88c469a469d5e2ab",
+        "sample_id": "synthetic-00ea9142200f45ea896d",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "830065b6b4ddb5e3616bcdd5a72f3da98df51beb91cbfd37ee24738dbdf52d1c",
+        "sample_id": "synthetic-040efa956486eeeba665",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "f258ecaa44365a7655ac854bb735d44deab38fbb94b1726d7b852de48ce0494d",
+        "sample_id": "synthetic-0433242be3ed94f404c3",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "4c7488dabab22f240c3a3e031cec51706d50c452aa5ebee9edf4fa559dbb7372",
+        "sample_id": "synthetic-046b08ff5ab3a4b1bf01",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "bde9f40f68c65b09a85a696532eeb09864e0f7fbc82b176d1546653c055ca44a",
+        "sample_id": "synthetic-057ad6a5ac4bd479d230",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "0a851beb0e3de04b119630c4096e7d53f16fe560869b4f33237f118f036b9a45",
+        "sample_id": "synthetic-05872893da0e28ab57a6",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "bd14897325205a039f895fee50d64abaed966fdb3424af87db285eb3408b8b95",
+        "sample_id": "synthetic-05ed1b84dcf0cefdf246",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "04005fd37692a62d943d72a6313f2d393ba2b3e655b335e3b2246e5706ba6b86",
+        "sample_id": "synthetic-081d55f8bf09dfae1d6e",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "29bdfcaa8e4edd2dc9b001fa288257e983fd9e9fe050a461d1ceb0cb3dd0c2be",
+        "sample_id": "synthetic-09b797e853a77f06f180",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "03c80ab300fc59515eadd38b4a5641e930696996002163c42174879c7848db7a",
+        "sample_id": "synthetic-0a0fd86f9ad149f644ad",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "ca042c275631798e1e5fe2d8163e57076396b8928b0cccdfa6e9597910e5e389",
+        "sample_id": "synthetic-0b037f2aec605f4bbdf1",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "11728758de39851e25d608ed0e6a3f22952e7a339f86b3c95639b7f6300e534a",
+        "sample_id": "synthetic-0bbca8e61b7b3677eb66",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "1adce5a31ab7feee4d28ac12d60cac317a419b713ac5b21b6032f1aad226296d",
+        "sample_id": "synthetic-0def99290548f48ba916",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "6c12c6e52bf1b1ebf0fa31a808e5f021024feff0eb6ff984f9ac97956a5d7454",
+        "sample_id": "synthetic-0ea682f15258dff7a327",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "478f4495e055d17817e0607c07fca0de2345b0891a01af2384c1d0d0471c9c17",
+        "sample_id": "synthetic-124cf0d6e1661a26288d",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "1e84d9789e88a5e837d1fc96a59e07e0f8e054809b35a8dd6e18ad28e1f314f8",
+        "sample_id": "synthetic-135e38312ece61d80244",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "1662fecbe7718f14f97d8be28ab975baf312d98e66d0bab6b19642121be6cde5",
+        "sample_id": "synthetic-13a7193964f681980f98",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "aba53da9f9ea52262c1b3d1c66d718532a280508869cc5a4053808a93fc61ea6",
+        "sample_id": "synthetic-146d96f2c19ccd471a65",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "10441fb670638b587a3df26d3c2458f4ca15b3effaaed890f734a351ffb1b534",
+        "sample_id": "synthetic-1a803f902dfc39f8909e",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "bc48a4b398282bf589468bc9faa740283f5c78614cb3501207af03a70808920f",
+        "sample_id": "synthetic-1ea47e66a6b674c3802f",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "6b3b8c03bd0850324ebcc6402bd76031031cf1b45e7a8d458027ad661f3eda07",
+        "sample_id": "synthetic-1f4f6f9d854ff575f89a",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "750f3d80fa9c4f364683f2ab026d48698f40a773b690f0fd744d1c327359dd70",
+        "sample_id": "synthetic-21f79f809735a8169c95",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "b106cbdc20ea2cd47caa2f7b3117f8cd375bd77d829c31f399004a154f30a4de",
+        "sample_id": "synthetic-22ff6edfee21eae453b0",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "551232af9a3995c2a8f115abfc6595630fa2f72ed5a8ac88d9f298ee86d7b6c4",
+        "sample_id": "synthetic-24e7e164fd056451bbfc",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "71da3683f8572a5df645f45adfa560a5df883022bcfb9ff78297aa94245e9cca",
+        "sample_id": "synthetic-250c82d6386e53f1544a",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "54a17d2d7a0766df53b7f88f3eaf0b5f611b914ee732286b34e3c177ad090da0",
+        "sample_id": "synthetic-25b64ba4ee0032e5608b",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "35fd864b06f0aacef3f9e0dfda5e3d86dcd2a2893f3ac7cc5ac2fbe793c5efa9",
+        "sample_id": "synthetic-25daf1d0746a939eacd1",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "2fe231bb7495245dc3edfef0b998d2c30814f4821f1d8dcf59ba35a3f02821f7",
+        "sample_id": "synthetic-26a95a2c7e76b70e35ad",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "e8fecc45b0a6c269a95a9f7011b328831744ddeae4cf6e26e19e0c405a585018",
+        "sample_id": "synthetic-27fe28b8ceb11e06d2e8",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "c23cf9f38754e7b887908ce90307b468c64d9f56a0b2bc4b9a05e083684f372b",
+        "sample_id": "synthetic-2a332e645a6cb734e468",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "1ad47ab72e299cec0b4f2536c2772c984cb0328281b018347e992e500abf02ef",
+        "sample_id": "synthetic-2c0fb50b8fe26c22cc8e",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "dc5f3bf193cfa0d6efd3cd02a6de6035e839bd81bf746551de8d01a76a7f8ed5",
+        "sample_id": "synthetic-2c4309442afb8d684616",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "6e5c2a70023ceb487b0da2a34fcfb117f5f8b591dc5e2560ef8d4fd9ad65e39b",
+        "sample_id": "synthetic-2c46a17d56954d6eff94",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "300b4a7e109fbf40ab57e6d97ffd2378d7d57193e08ccb24e15a1287281ff63b",
+        "sample_id": "synthetic-2d57ccdb93e802db1ca7",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "7ad8a6c2e6d934f86bab96605eda3b4f7bdaf9856652041159e80513c0c7ce1c",
+        "sample_id": "synthetic-2d91a9925aa659c22214",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "610de08b6d3c91f4aebb90771cc052a195c5583097e3ddc2604e67a03f9aa944",
+        "sample_id": "synthetic-2df873fd2de267c57311",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "4329cb8387c30cffffcfa65652ffef44670144d824fecb17e130b3f47526b37f",
+        "sample_id": "synthetic-2eba7e9ed08df8a2e8e9",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "23b5974e2b099837206ce69aa4d2e4c8ef8eade263e5e2fd7bd4e79355baac8c",
+        "sample_id": "synthetic-30af2708464af3141b4e",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "45e8bcf377bd2d54bb759a7f3fe5275e87126cb7ddfdf78cd58f64be1a465ded",
+        "sample_id": "synthetic-32ebd40d8105e0cb3967",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "3cb056f4e3f9173d8e5d32beec32fb73a58912ded64ebdc692e832449f0ddb81",
+        "sample_id": "synthetic-3530282e93d45755463d",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "32949ce68a8b3af06338ea2457f7b2f20997767ab66156a24b47522de0f8b768",
+        "sample_id": "synthetic-39598463c218a28d582e",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "cdaabad87bc62fe2d4a3e9bc1e543df7c8d868ec05faee736ce3b564857537ca",
+        "sample_id": "synthetic-396d2758f94e8c6fbba4",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "20ff89256133f77ac93e4d7494e2d697a4b5600b166336e443bcbcf2cd419eb5",
+        "sample_id": "synthetic-3dd2bb8cac1dac049c85",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "f3b1301ff86240d5d9d5e1412ba65854e919dc56d415aa5f56eedb12082d4bbd",
+        "sample_id": "synthetic-3e2515cb38820c82fcc9",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "4740082123869c132bccaf52a5c91f1d6286b37208fb3b62e3f1ba34d6a54338",
+        "sample_id": "synthetic-3f6bd34640a45b8bdaf3",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "3e2bd4351ea9c02f9a5abe207268a3e15ff8f836884f25b1aafbbdc2f26bfd8c",
+        "sample_id": "synthetic-3fcbfe4ef3e3526892c7",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "4d5049b294ff17fc340499b44d8ec7f079cbe5870c85b978812361c5bd41f54c",
+        "sample_id": "synthetic-3fd9a3666d4dfdc5daee",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "26e19637ef416cabcd76572413141d49184872c5dad633311bde6faa7b66ff9d",
+        "sample_id": "synthetic-401d967ea0612bb1bea5",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "e70cebe011e59428992700b1151992b3799b5f0559c45901d8347708fe46d459",
+        "sample_id": "synthetic-41c2087caeb21a39ab28",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "1c1fc9e30e60d6684fc457d9a3527ba0bceb369ee526927b793a8c44ce703904",
+        "sample_id": "synthetic-423ac6cdf08300215cf8",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "93b998ecbe9666841047d15521344f72efe4617cd9b9f6d2ec65432489dd3541",
+        "sample_id": "synthetic-435957ee5460deaf9f4b",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "e6585b725819e11b6b6506feb8d3b27f1b1bf0d38cc7892c1bcba79353cf9cc0",
+        "sample_id": "synthetic-44b1869492c334646b5d",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "add55b59c818b7c7a790ac1eeb5697849d002d73c6174b1d70609c37c21e5329",
+        "sample_id": "synthetic-44be318d89b1fe4b7d4b",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "d639109cfb46d439c1a0fa09604ceae9d485c533e6b55fa1188b01c1273b9ad0",
+        "sample_id": "synthetic-45a5610c7489f63ffd04",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "4017bd6f2dcb0da854fba39b6179e4921774fbb0f8b62f6636f4bdeacd8533c9",
+        "sample_id": "synthetic-48a5cdbba6af6bcf05d6",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "afbff507e4e13517e3d3c95ded523aa80a817a8b29a787fc6c6bf78e862f86a5",
+        "sample_id": "synthetic-4c39caf9a4767faa48e7",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "919024d7937d0f40bf0896ab22f635971435b639f8ed964f95c56652912eccf0",
+        "sample_id": "synthetic-4db5fcda995368de6ee7",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "2e73ab4e26d7a699b1e49288f36e396fbc06fef24bc8567bb8c1ee5b08e3eb7b",
+        "sample_id": "synthetic-4e283b1a34da993bad6d",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "31e0e2deeb1e0a79f6aec2964c56f8fb1cdbbafcda95a8a34d4138670b79f46d",
+        "sample_id": "synthetic-4fc482c05a2b49813a30",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "2eede93f3f7fe3698cb4293a4fbc54a93e4453f83dbf075b3775d09c64b12091",
+        "sample_id": "synthetic-513f23004ab91f537993",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "6bb0edc225ed840f409197cb1d288dea713b8b8d7b7885dcb4210c0a758259b8",
+        "sample_id": "synthetic-51938e12391884964b3c",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "228d38f79a87fd5d9acc4cec3d268bc42a82ba26634707725d06557d00619d36",
+        "sample_id": "synthetic-51d7360a284a8e4d8623",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "6934fb29f6dcb4f9314fbc8f56affd602a996cf51326cb8f766f682407477229",
+        "sample_id": "synthetic-52127753c54b8d9957e0",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "8dc8797165d3632cc9875cf81ad29d8b6e885cadbe84345aa668a64b1db36d87",
+        "sample_id": "synthetic-57d23dafd1d4892d3ca6",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "6202c3f77fb8761e66073e875248647aa6c55fc0de761e0348aae07beadb6fa8",
+        "sample_id": "synthetic-59d44303b574cc99b619",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "a3c4eb34e2eb93ee37d8fa1eda7dc5f72fa09f5d1f9db7b042f4a32b1777dc30",
+        "sample_id": "synthetic-5abbf96161331c838a28",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "c3a58dfc7f312f45a40fcdfe48f687e7fc4e949b7a9d382f69d828543450b58d",
+        "sample_id": "synthetic-5b888aadd29349046590",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "61014ea3be1a244e5190a41cc3bbc8ef9235b7d028ac0e7905360c8c20aec5d0",
+        "sample_id": "synthetic-5c22802422cca694b1db",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "9bc655c32de0fd835f9372b96d20320ba4dbbd733f83e176c38dbc908c0d533c",
+        "sample_id": "synthetic-5c44589593252d7762c7",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "5d0560338b8e970515d12a7888fb2c64a334ea1ef162fa2855bd5b11b12164f5",
+        "sample_id": "synthetic-5d12d99d963a0df605a9",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "c0187c72a5e782b3d3691875285206c39de424ae32a5b91723d7cc19ac13ec16",
+        "sample_id": "synthetic-5d189d5142074d4be91b",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "376e61ce1c80bb7820356b616a22da60ef2fb0206c3e7133ff57c7c34e7ae756",
+        "sample_id": "synthetic-5e44c6995f55dcf35fa1",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "6ea94ff1f386a5fcff29804ac35442b834a7c2c99e7dbc9646ad6c8a9a760919",
+        "sample_id": "synthetic-5e48617441f5ea7787d4",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "fa59d9269c3d4caf5f6cf3308147d1e5d2cb4ce3da39c3d1089109fcd3781af7",
+        "sample_id": "synthetic-5f5e3683d1c3b7b7a266",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "cfbd6ffeb0be38cf35aa536a99e9be6d95324062902651ebfe379bac3679624d",
+        "sample_id": "synthetic-630436dfbee5ab322c40",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "7ffa8a1c0e5583cb68632b779e98a7e38101e52ad8d54f2083ba3f50bfc481f2",
+        "sample_id": "synthetic-63aec4213b81f9a33356",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "b7356b5d65a0ec9b015a0ca0882c28fdb9263f339a6930890dfed0451f81e181",
+        "sample_id": "synthetic-63fe8c24efe2d4368694",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "13ef3f661b4acd4b16a2eab48fb66210b3217c9e9d7e3707629d15bb8de0cbf1",
+        "sample_id": "synthetic-646682d5d63fb168fea3",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "94b75b2f4a14132543e7a9ed79fb5c2ad432c2bb410bc6a5f51b32e18f26a4bf",
+        "sample_id": "synthetic-6583aa04cb4f2eeec498",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "dedf8379803613af4669710b275253d1ecc0e0880d5dde272db257caa284303e",
+        "sample_id": "synthetic-67c171dceaa382f48c07",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "5346cda7f77c808327be12705eee9b31edb353b6e42299080eab6e305ebf8cfd",
+        "sample_id": "synthetic-67d57bfc79b14076f384",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "73c40a47923ac069fb95abce3cac3f68ed494c290923bdc4fb93ab52a9d0d63c",
+        "sample_id": "synthetic-684ab2276d710cf1f356",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "ce85a075110d832edab338be45069e02cb55e2a9fb1f54dcea9a92ce313e38ea",
+        "sample_id": "synthetic-6b6521a27c9134038f23",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "265e24489b7e709b5cbe23f2a2105ff75d0413263c6a5dc6557d2ac68b81b3bb",
+        "sample_id": "synthetic-751ae1e35e28b78a2e7e",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "e80dda872bb8b340721d7e22ad3805f40aae34b81a9f6c216f5a558ad0f0d740",
+        "sample_id": "synthetic-753b52b0d57e40234ed7",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "b54e90829f1f4322886cc01f1e9a969772c4e808333e9df3963913d1320a8067",
+        "sample_id": "synthetic-75c73c1c127e2e9c82c0",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "7b32c1a446e071e1629c2f4705a163a89e02b44146c1b2bff24077d2bacbd579",
+        "sample_id": "synthetic-75f887a5bd4930fcf89d",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "adc2c8ea42bff3d9972ad115581b15efd4025d833e2042e4d7b4a9f3e20b1614",
+        "sample_id": "synthetic-769b5cc7f539d6e81369",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "7ca08efc156f1c775929236440524ed923dc80ed86f116cf2aa4cd81ef162133",
+        "sample_id": "synthetic-76e4575e93d2ace155f3",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "50bcad34f4e41027125a912753ad4a19e74b7b8635ec6cd1c86dd910fedb8509",
+        "sample_id": "synthetic-77bbd42c17fc346e1b29",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "2e34050c3bd41f8153c60d9f08a7f19b9ec49ec916e1325f3d0749069b5c7bce",
+        "sample_id": "synthetic-780cf018a0c87d31dc48",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "3942f1063e5e0ab567550832c2b8198a8d790af6bcbf5191fa24eec472b2dff8",
+        "sample_id": "synthetic-788ae02f95b6e47529ec",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "1b98be991a1b0d90b69cbaba424d11656471d3c8c2afaca12a4b11a44d8489e0",
+        "sample_id": "synthetic-78907124e8d23b5bcc7d",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "9affdf8486ef7bca0e0cf740ee8e54e3c1cfdaf40f8ca7f447359e5a77b10ead",
+        "sample_id": "synthetic-7893818331876c0465d1",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "3b885006b1b1da07eb5c0c7496a7fa2f410f292b57be94982394e64c8d0f2b0d",
+        "sample_id": "synthetic-79725a060df91b136f89",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "a7a570110d1d8ea613e7191c7b5454c97e24a197e84a953a20a438359643e0e1",
+        "sample_id": "synthetic-7a029cf8daa09256427a",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "5a19a017e228062836ff5aaaf1c021f9af5edb3583ec368b03390ab8f6203265",
+        "sample_id": "synthetic-7aef193133ed7d42c7fa",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "aea2a1c1461272aa40d341194a8f8abc4b1c5c85bb18bbdd594456955233cb8c",
+        "sample_id": "synthetic-7d5df8accace764b4de5",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "15d19fd2be1e59508d57966b3002655ee92c1adf722d33847a2104bc16e0e7e1",
+        "sample_id": "synthetic-7d7a1a53a8617cf5d019",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "31ef8d192ac8d9a9610192fe66a5ba87e789575b9876b26e229ba713e1636225",
+        "sample_id": "synthetic-802344f375a5fa4c7a5f",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "0fe14207fefb2dfc595f7f526bc31814767a44bd480beeafed233285b57192a9",
+        "sample_id": "synthetic-82a606b92c046cfac893",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "2634eb108f498376af7b37f9c4fc6831cfd6f8cf7fc5034241a486cfa1060518",
+        "sample_id": "synthetic-834e5c8da365db556781",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "9c4a53ae1f18a254354330205899e58d1c4f51c6d19665abe81bc5d26b635f39",
+        "sample_id": "synthetic-851eaedd1561b1b664cf",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "9cb2dbcaa5545f4e98536aed3ce7cb8a72c46e373ee093248f889ef3b403429f",
+        "sample_id": "synthetic-86d7ed08c2f4ba53db96",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "a3613b1f0aef880c8ed79b25b417e779054df1e781c4229de61608b5dd9eb553",
+        "sample_id": "synthetic-889639488dab9c1b1c39",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "418f7bba88734aeeab7fbb6c0d81e99d2292412d77e693f871457996308b824e",
+        "sample_id": "synthetic-8b0535ef9854faebff5a",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "83e0227f896b291f574a6c128767e0bdbbf9676ed7b33d19a86f2b4f3410915f",
+        "sample_id": "synthetic-8b3b63135a8ac38ebe94",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "8695dfa1d29053fdb22ff7e0e7733b3b64c8e78c8a4fc4bcc5dbaa8a8b2c7455",
+        "sample_id": "synthetic-8d663ea8fe7c4e876289",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "df8ca6a7b462164ec39de9a2bc651c52d2060f469eb78621d3d57ab259cd147d",
+        "sample_id": "synthetic-8e0c71a39e447c904574",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "52cc0911732233d88728c99ff9ee42c8695829b4d48abf317cb45ba7b4c74b8f",
+        "sample_id": "synthetic-92bfcfd6183c5aa37dea",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "3189a2ef2722aaefb1284c4a4d59c3c0c89c0db525ac06779d155bd02339bd02",
+        "sample_id": "synthetic-94672b3d6583d8b4bac3",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "8ebe2e518ba04a8df3b42e0335cb96dbab49cd54907d3ac9f345ad09cfe42843",
+        "sample_id": "synthetic-9565fc7fc43f72a4b8e6",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "5968293c646c478345d6741e60d4bf8c6bb1f9139dc475acb28bf57ee2360e5e",
+        "sample_id": "synthetic-98718de661e3c71cc019",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "8a8d77718533bf32e14a0cf543d7494971af29cb03a60f1ea85d861d90f91c5d",
+        "sample_id": "synthetic-987230da6bfd38f57540",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "66209c99ad069c0296270e3287a23aaaf5385af755185b265796250be1d6b606",
+        "sample_id": "synthetic-98a7f6e9bcb498e186f9",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "70f1294bdf56e50b4e65c4768c7471bd60bac7e57a04f42768626c2c7a31a9e3",
+        "sample_id": "synthetic-9aa8201e2bd1deced29e",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "494f16e0e4ac34bd208df22666ffb4ee03130a33b2a580cd9d7f8f931223cdce",
+        "sample_id": "synthetic-9b619480608232557ff5",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "701c7f42ea605c048662424f5af4cb66224261f4fff8a72c5f2007ab599dccb2",
+        "sample_id": "synthetic-9d32d7c2166cedd9c801",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "0c23bf7a2542e95cb04881ae01f03af17165bc9d9f52538e163bb5cf2122f48c",
+        "sample_id": "synthetic-9eb3afea6488bfc3e570",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "78d456572ac7e7728e73cafdb92d33cd82a19d5f79f0c29ab2dda1dd53a1ea2a",
+        "sample_id": "synthetic-9f6ae1b902957c3ac63e",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "d679937b888af0e17a7c8d0d8436d812a6cba5c08a3eb49b7fc4258985ab5fa2",
+        "sample_id": "synthetic-a015a1f599e2223e62ee",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "c28f8877c4fef6cfde8c4ed652e3d6b6d9e7f07241bd41d605042d56cfc909b8",
+        "sample_id": "synthetic-a4cf3341cfb7452452e4",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "5447924ae555d1e15ea371bb90e6d2ca5ff22f3929b86e68e82d0ea87ddc079b",
+        "sample_id": "synthetic-a5a028040fd8153be12b",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "cac450be761b4800781a4237cc4932b0466bc6443fae56a637ad8353e80378c8",
+        "sample_id": "synthetic-a7d97ce78b5bc6a1cf05",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "221f4bbeb39cd8543eb1933dcc5eaea3134f2f3422252d56e4715f61b7867f3d",
+        "sample_id": "synthetic-a8cfb9bcf7ac16dc965e",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "3094b7b496fcb72df4703011d9f2c1de07e809e944145c0f7df68bad9f6676a9",
+        "sample_id": "synthetic-ad50680f026f13fb04ab",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "a51d583bd82598753cabba8773f5d0bc38d3764db478eedc121667fbbf2b2391",
+        "sample_id": "synthetic-ae364a4503047f49df17",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "38d24a9413141eb7d8a858191a151575188081e88ba60918d950eb7b1ea1c469",
+        "sample_id": "synthetic-ae5214cbaa7bb5a7ac80",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "6b34cecec7e1129f888724a96454a557477dc05487e053145dcbdaf7118e6bfa",
+        "sample_id": "synthetic-af65bb006fcceebdc11f",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "7638a81c96f2fca878e5524877364fe64adc8f67cd740db01d0aa28c8ea1c22e",
+        "sample_id": "synthetic-afca2c8b3d8a76b535e3",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "5e9a76ddfe25eafa42686a1a627eab2a93d56afd400b06d102a1ce23fc1437f0",
+        "sample_id": "synthetic-b094e6e1ee593462b238",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "16fd45a5e584ebcb474e41bc2f15a561b3ca92739ae28b7540c39f804df581c1",
+        "sample_id": "synthetic-b140de5a30178f8f68d3",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "ccd249262ebcbb321a9fd4d29e60ec52d8c77f8fd219b5660cfa667b263ffdc4",
+        "sample_id": "synthetic-b158de57b528497f6b89",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "87705dbfc6aa9a91edcf1367204101de1d7c9dca87bf06d26a63a632a26336f4",
+        "sample_id": "synthetic-b2d8441cb9baaf57807f",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "be46f73816f5d560f77185b693792c3c62be15daf17d0d9fea41e8d0071bc9b6",
+        "sample_id": "synthetic-b580d581e415137f80ad",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "fd4c34bd615ad7a0ae2555812e292a4a5fa66760ff06dd399c189349c3a5cc34",
+        "sample_id": "synthetic-b624eff1508f28679460",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "9a5cdc47bed0c1b0fd8241c18efd1daf2fd91dc241eec0ec0291391abbaedee0",
+        "sample_id": "synthetic-b757ccdd0a9135c219c9",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "1bb54b181c66a7373864663cd107eb908fc701659a453395551ebcb6688bba0b",
+        "sample_id": "synthetic-b8e13d80157ec1909689",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "cb5e6a2ddc307a7218711bbf614a280bac000513b74ef8fad79f16a0c8a4de42",
+        "sample_id": "synthetic-bc594f3ec98ab737357e",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "d213ce28564fe1e6190225561651f68f26415db87e662fb8d2737d4f82507b93",
+        "sample_id": "synthetic-bead93558b82d4ca5d00",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "773bc72d50274ef54abffc86b4b6bcdf287e26d0cab0caa1cc73164e4c7c87e2",
+        "sample_id": "synthetic-c0350ea0fb672ffc9692",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "a752665673288aa1482d17e5f5b350df831f0552987ae30e9a5bb9f66f2db909",
+        "sample_id": "synthetic-c054697153bfd18eab43",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "101fb35ba9e5690da03e477a9e5bcac75cf12a69671277161587f22faeb7ab6f",
+        "sample_id": "synthetic-c339b60b77a2c150d49d",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "cdfb6db0a1337b547e189bf2ad93b0d998a31b347153b6a9b42064e522a87db2",
+        "sample_id": "synthetic-c35bb1b2bbe1beb438fa",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "e24198f03d40571f20ca0587a5a55b1b40732fa899991cdfbf60b25dcf95743d",
+        "sample_id": "synthetic-c6ed7666f3c227da756c",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "dbeaf2b48d81187512fa81864de931345e99182f40203c5379a681c91256367a",
+        "sample_id": "synthetic-c87227b4448553ea3677",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "e02feb515210bc8cef37f5a33ffd90a46dca2b0b7aacccb49823a8bc3de23bf2",
+        "sample_id": "synthetic-c8b85464e3fd8885e846",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "7a7a92451c2e61e87f4532eeb27c039c6d3e9ea119d7138d67bb4bd6ce3c4bdc",
+        "sample_id": "synthetic-cd94de263eb985ec5bb5",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "4d280d2574dd1d712d40130a15718bcffa89a26cd226113394d30a6c45800f5f",
+        "sample_id": "synthetic-cde1878ce6940c545a3e",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "bf06b36ac2c1f3863f435e9d3f950fd80e33ff85b91c9d8c99d1c98fd251f5b5",
+        "sample_id": "synthetic-cefcc87e0c254d01572d",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "412322dbb35a14a5a04e0c7fa2f18c472d6aa9c30e12b6f945f549c081d2cc12",
+        "sample_id": "synthetic-d1870857a73c21485eb7",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "19525333402c7aafd64acf67c83f70b477f0567c286fb1e01786199ae07637de",
+        "sample_id": "synthetic-d1aae5a9326cc2f14aa1",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "54ab0251953004b9f053f5367a76867485515848c1d866e04283fd6f15a8e157",
+        "sample_id": "synthetic-d1e266abc7d6ad27ce98",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "de7f46dd7633deea8268d68133a55b6a896811ecff6a2ea40e8c3f81c160c0b7",
+        "sample_id": "synthetic-d1e6ef263cb0e9f18645",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "5e010e797ff6a7bd2b536f186d306933bd2a61fe974922595e50d4b30bc5694c",
+        "sample_id": "synthetic-d21b2f54b3d5c6d507e6",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "c1a43bd4485206ae3beaad7cbf982b8630982677e0c469ca077c430f7d58c2dd",
+        "sample_id": "synthetic-d3102d7435df7ce71b23",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "56fc12a52a9503afe9c035ad56db0a4e57ee505f8fad85e653e100646ac8be81",
+        "sample_id": "synthetic-d41f11619a4e78ce923f",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "71424c9eac02f0b4b27516cb3117880d7025fa3db5a7ccd504267ff3debd5d05",
+        "sample_id": "synthetic-d5c60442baab791f2a96",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "107ba8d322cfae897ba4de85d1004a8a32106160b62fcc1b7a9033d04c8c24d9",
+        "sample_id": "synthetic-d6fe7c1b5709acb464e6",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "ec64ab2097b6f4ed666cee76b61c2e3fff9f4777ad6e9eed49767486cafb75dd",
+        "sample_id": "synthetic-d773e68c4d6b6c8b5a09",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "3e5c0d0e3c886cb878c2bbbefa14b97f3346741df108b462932c73d96f0c1262",
+        "sample_id": "synthetic-d77c45b8434528645ca8",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "5a4afcbb2a13689aad6556fd89b3c5730642be2b5318ea48663d05a221e975ea",
+        "sample_id": "synthetic-d7acddb57bfc2c45a1a5",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "ff8347bc41eaee7caadbbfef1a1056f291464e5dfd1cdd34a4ef979944187b8e",
+        "sample_id": "synthetic-d7db6fd0a12fd7dedb4d",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "3022377cedd88daf28b63ca27ca9e4902b36af4107fd07abc78df0a46cef9537",
+        "sample_id": "synthetic-dbbdd5b7b9676c67dd3c",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "401d440267f4c9392fbca50c7e77b3c6214bb9892e81f79795cf55dc4f4cbafb",
+        "sample_id": "synthetic-dd482b853ecf25547e13",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "f023d4fb3db35248292e8a019001b7a342636c553f514f3dab45fefe0e3767a4",
+        "sample_id": "synthetic-dd79982b12620ef3b3e1",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "8ef74a81f1a78a845577e6078a115004592ab2ddd5deb1ba8d4b8c62fc5b0afb",
+        "sample_id": "synthetic-dda828788f2e924158a7",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "338955d7f5d7b8bf9b2b8f9363d5c28ae04da5c826c430a46e24b65bc0728ede",
+        "sample_id": "synthetic-de571cafb726e3bfa3bb",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "f566d1f1056a640a3235550e2e85a009599dcb5bdccde2a31cd436bd6e760f14",
+        "sample_id": "synthetic-de8f6afed0e8f19ef79b",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "391eb9f9d0b03e7b6649cd8d0decb1cbfc09a7268dbcf9f7c7cea27cc6d931c9",
+        "sample_id": "synthetic-df474efa6fe722c9dc37",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "235e05014c9e5f0fca3afaa10bf26b8aacaa708574d3d4d3602fcf3cca12984c",
+        "sample_id": "synthetic-dfa4132802bc362f8ceb",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "5cedd7c8f12f2a20c671826f49e9eeedca5cfc994910f13a75daffb71f21b31f",
+        "sample_id": "synthetic-e04284a83028ae1c1ebe",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "9c8258f60e90d3baa0d2ed2cfe9a78d777cc950f077c4daed0be1361f67c0e24",
+        "sample_id": "synthetic-e1b778d8c7835c5bb1be",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "d0fe52dc28f3077e3408cb78d22c76d8f63379b9e64f5b76116e905befe93f57",
+        "sample_id": "synthetic-e32f3f303db519e45b5e",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "18326b10943bbf42552ff173876285f18942a37880d72f3c1559434d3d22e44b",
+        "sample_id": "synthetic-e54956ea34f232773cf8",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "b6fa3b3f5bf4c40c26e45b8ca660d4a0c332a691f95c9ab52d44d1d3cc6125ed",
+        "sample_id": "synthetic-e589f2532a0bc59392e6",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "73c2e0147925b5e5577959c341a56792c9e561dfe58e4d3022f3a25f7de485bc",
+        "sample_id": "synthetic-e7c96016f1b3ec2aacca",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "ffc4aa652495dbdf8d2c8d8a24c2f2f2c7f14f8f6638f8593b93020eab9e4e50",
+        "sample_id": "synthetic-e941d786184aab926fb1",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "b15ccacd7799604d718fe06b6d1d3a15c8500bbc58243311ea77777b13592082",
+        "sample_id": "synthetic-ea95189cf288333afcae",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "be3c80cc2289cced5bb9deb093cada7fc92335fac29190e028ff0a9f32faa0df",
+        "sample_id": "synthetic-efe9e326a77cc9e95afd",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "A",
+        "prompt_sha256": "649b94c616e0fc2f4f0dadd82d6947f0d6e239eaf7a33fd35d9235c0b8fa1c10",
+        "sample_id": "synthetic-f14dff274c6452e1f177",
+        "target": "FINAL: A",
+        "task_family": "router_a"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "5a2eda8bc5b02c325110e558665b4eb3e2435fa628420defecf69e52bca9a600",
+        "sample_id": "synthetic-f296379ffe20682e7bc1",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "5c116a28e10cd7038b9fa7790b26d31e62a5f8e137a96c869e13df2daf2e7ac2",
+        "sample_id": "synthetic-f5653cac67f2a2ce8282",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "310e0d1cc14878212a52b42213dd1a636d88c82e6f5491851d0b219ac4001e43",
+        "sample_id": "synthetic-f6148439b2d589fee04b",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "1da4b27ce4f3852b30d4db03028f9b87fe1b26a6226cb5971a6da97059a6bc70",
+        "sample_id": "synthetic-f98cf996692352ad166c",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "cf4b9390f6706ae73ba92fa9760fc62f4ba32339ca2fd303e2011177f89f4e59",
+        "sample_id": "synthetic-f9dc41bf27e6d1bb558b",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "3206998d0c9fc96b8077087827b34c79b0efef818709514b59e7bd5d3ca5e0e0",
+        "sample_id": "synthetic-fa81bda0a363a234a3b1",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "B",
+        "prompt_sha256": "c4192b0eb21a3d3a8362c7c5a1d529485677ac2066b616e02ec8041ffc87ecef",
+        "sample_id": "synthetic-fcc56f18965cc0e64b7c",
+        "target": "FINAL: B",
+        "task_family": "router_b"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "07e3621e4aaebb71d11dcc3ac4aaef0bafb0d9b0e2b6a0a1e51589de3c275fb5",
+        "sample_id": "synthetic-fccd183c6624b0e0cafb",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      },
+      {
+        "label": "C",
+        "prompt_sha256": "2d87a11c9abeb99d756e03d143b325ca6cea837b461a0a79788a3f8e8e14afb7",
+        "sample_id": "synthetic-fe9d48758ade97bc0dd3",
+        "target": "FINAL: C",
+        "task_family": "router_c"
+      }
+    ],
+    "schema_version": "nano_harness_router_serving_parity_contract_v1"
+  },
+  "claim_boundary": "This pre-registers a serving-parity diagnosis on 192 already observed SFT validation rows. It starts no service or model generation and does not access the rejected fresh integration, benchmark, canary, holdout, training, or RL data.",
+  "decision_policy": {
+    "failed": "Publish unresolved serving-parity evidence and do not generate a new integration or train.",
+    "forbidden_after_observation": [
+      "rerun_observed_integration_v1",
+      "change_adapter_tensors",
+      "change_validation_rows",
+      "change_prompt_or_parser",
+      "change_budget_or_temperature",
+      "change_parity_gates",
+      "real_question_scan",
+      "benchmark_access",
+      "canary_access",
+      "holdout_access",
+      "training",
+      "rl"
+    ],
+    "passed": "Publish namespace-root-cause evidence and separately pre-register a new history-disjoint integration v2 using the content-identical remapped adapter."
+  },
+  "execution_boundary": {
+    "benchmark_accessed": false,
+    "canary_accessed": false,
+    "evaluation_started": false,
+    "holdout_accessed": false,
+    "model_generation_started": false,
+    "parity_service_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-router-serving-parity-v1",
+  "generation": {
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "max_tokens": 8,
+    "structured_output_regex": "FINAL: [A-C]",
+    "system_prompt_sha256": "9d9174e1a0404bfc406fb73894d8408207693ee66a5bf3807de9e8b579139e3f",
+    "temperature": 0.0
+  },
+  "identity": {
+    "case_contract_sha256": "b87e3fd102b3cfb765e79add32124529fce68a5e0fa5e33680cd32534b5eb2c2",
+    "code_revision": "5aa2db008dedb5970fbae5cc1a3dc62489fe31b4",
+    "config_sha256": "025f6208541ae0e88a4853eceb04d2f185293daccb650890d43d297e86b0c7b6",
+    "dataset_sha256": "dacd3663639fe9ddc054865b87afdd0c918f0fddb12c8c9355819d4bbce95d65",
+    "hf_generations_sha256": "226d8ed88197ebb847d216364f4e84b6654e69150c4fdca75867d4297d9dcfff",
+    "hf_reload_sha256": "645b61a679b213e6bdb86d9c884e47c25049ad671051bd026050833ad97fd316",
+    "integration_report_sha256": "9b01a9b6d6011f657696b0cebf9de8853b16fd2406802b14ca203d3500288f70",
+    "original_adapter_sha256": "48d72666cf269f64825791801c71aad5ae1d9e97cbc70574c216b12974e46e63",
+    "remap_converter_sha256": "355c25fd07a38aae456a01982351c6836fdceff2f12cacb146138d810d260702",
+    "remap_receipt_sha256": "04ae7daa74eefbd891f4fb1ea9b4d29cc3cbcd59dbb22fcb6565488e5363cefb",
+    "remapped_adapter_sha256": "fbaa39dcb3fcf34e9aab280308cb5a5416094c1968e4ac3a69cd739a806ecc49",
+    "sft_report_sha256": "c8af17cfa2fb77b594a9b34deaeccf27273491da6c350c3c5deb1435a9336c69"
+  },
+  "namespace_audit": {
+    "original_adapter_weights_sha256": "8dfe3a89bf20325a50b9a4c168c4e9039c5f7e84721dd8d5f8b21e3ad829b9ec",
+    "original_example_key": "base_model.model.model.layers.0.mlp.down_proj.lora_A.weight",
+    "original_parsed_module": "model.layers.0.mlp.down_proj",
+    "remapped_adapter_weights_sha256": "9475d69207fa1db9b0106e420637c6f764d907baa2048c4b73f19773d6e2042b",
+    "remapped_example_key": "base_model.model.language_model.model.layers.0.mlp.down_proj.lora_A.weight",
+    "remapped_parsed_module": "language_model.model.layers.0.mlp.down_proj",
+    "source_prefix": "base_model.model.model.layers.",
+    "target_prefix": "base_model.model.language_model.model.layers.",
+    "tensor_content_hashes_match": true,
+    "tensor_count": 224,
+    "vllm_source_files": {
+      "../../.venv/lib/python3.11/site-packages/vllm/lora/lora_model.py": "5b8da6cd6dc5c63d2974ff2eec7157db6c8657d0aa21a93755c8345e03674a0d",
+      "../../.venv/lib/python3.11/site-packages/vllm/lora/utils.py": "f0fd4df62c028e2d408edf7020dae7374ff0c2f3d3f878315f96f869c26e65b4",
+      "../../.venv/lib/python3.11/site-packages/vllm/lora/worker_manager.py": "8d457a062d6e02b6630a6bfc721d70269afa56d1a97511d0e6b4b4946519fe85",
+      "../../.venv/lib/python3.11/site-packages/vllm/model_executor/models/qwen3_5.py": "5ce2151170c38c2a2718e3a9386598c0660d30db5ab8844fd284e08633ebc904",
+      "../../.venv/lib/python3.11/site-packages/vllm/model_executor/models/qwen3_vl.py": "78ef9783baa036b471fe3773d709ecfb631523e17c6013a5b31ba659df86438a"
+    },
+    "vllm_text_module_prefix": "language_model.model.layers."
+  },
+  "schema_version": "nano_harness_router_serving_parity_preregister_v1",
+  "service_launch": {
+    "base_url": "http://127.0.0.1:8000/v1",
+    "dtype": "float16",
+    "enable_lora": true,
+    "enforce_eager": true,
+    "gpu_index": 0,
+    "gpu_memory_utilization": 0.85,
+    "host": "127.0.0.1",
+    "max_lora_rank": 8,
+    "max_loras": 2,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 4096,
+    "max_num_seqs": 1,
+    "port": 8000,
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "vllm_version": "0.19.1"
+  },
+  "surface": {
+    "benchmark_rows_or_outputs": 0,
+    "canary_rows_or_outputs": 0,
+    "fresh_integration_rows_or_outputs": 0,
+    "hf_post_exact": 192,
+    "holdout_rows_or_outputs": 0,
+    "label_counts": {
+      "A": 64,
+      "B": 64,
+      "C": 64
+    },
+    "maximum_input_tokens": 126,
+    "rows": 192,
+    "source": "already_observed_sft_validation_only"
+  },
+  "tokenizer_audit": {
+    "adapter_tokenizer_json_sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "base_tokenizer_json_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+    "checks": {
+      "all_case_prompt_ids_equal": true,
+      "all_target_ids_equal": true,
+      "chat_template_equal": true,
+      "class_equal": true,
+      "length_equal": true,
+      "special_tokens_equal": true,
+      "vocab_equal": true
+    },
+    "semantic_equivalence_passed": true
+  }
+}
