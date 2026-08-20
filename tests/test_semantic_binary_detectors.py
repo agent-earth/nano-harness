@@ -29,6 +29,9 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = (
     ROOT / "configs/harness/qwen35_semantic_binary_detectors_v1.json"
 )
+PUBLIC_RESULT = (
+    ROOT / "docs/results/qwen35_semantic_binary_detectors_v1.public.json"
+)
 
 
 class SemanticBinaryDetectorsTests(unittest.TestCase):
@@ -215,6 +218,75 @@ class SemanticBinaryDetectorsTests(unittest.TestCase):
         self.assertIn("双 NO 或双 YES", markdown)
         self.assertIn("positive recall 64/64", markdown)
         self.assertIn("question-only real detector scan", markdown)
+
+    def test_public_result_rejects_all_no_detectors(self):
+        report = json.loads(PUBLIC_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(
+            report["routing"],
+            {
+                "cases": 128,
+                "detector_correct": 64,
+                "positive_cases": 64,
+                "positive_route_correct": 0,
+                "negative_cases": 64,
+                "negative_none_correct": 64,
+                "negative_false_positive_routes": 0,
+                "conflicts": 0,
+                "verified_executions": 0,
+                "fallbacks": 0,
+            },
+        )
+        self.assertEqual(
+            report["confusion"],
+            [
+                {
+                    "expected_route": "NONE",
+                    "selected_route": "NONE",
+                    "cases": 64,
+                },
+                {
+                    "expected_route": "first_strict_profit_period",
+                    "selected_route": "NONE",
+                    "cases": 32,
+                },
+                {
+                    "expected_route": "implicit_scale_total",
+                    "selected_route": "NONE",
+                    "cases": 32,
+                },
+            ],
+        )
+        self.assertEqual(
+            report["detector_counts"],
+            [
+                {
+                    "detector": "first_strict_profit_period",
+                    "yes": False,
+                    "cases": 128,
+                },
+                {
+                    "detector": "implicit_scale_total",
+                    "yes": False,
+                    "cases": 128,
+                },
+            ],
+        )
+        decision = report["decision"]
+        self.assertFalse(decision["detectors_admitted"])
+        self.assertTrue(decision["negative_precision_supported"])
+        self.assertFalse(decision["positive_recall_supported"])
+        self.assertFalse(
+            decision["real_question_detector_scan_preregistration_allowed"]
+        )
+        self.assertFalse(decision["benchmark_generation_allowed"])
+        self.assertFalse(decision["canary_rerun_allowed"])
+        self.assertFalse(decision["independent_holdout_allowed"])
+        self.assertFalse(decision["training_allowed"])
+        self.assertFalse(
+            decision["further_tuning_or_rerun_on_observed_cases_allowed"]
+        )
+        self.assertFalse(decision["gates"]["positive_route_recall_64"])
+        self.assertTrue(decision["gates"]["negative_none_correct_64"])
 
 
 if __name__ == "__main__":

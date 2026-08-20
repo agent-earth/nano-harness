@@ -1,0 +1,282 @@
+{
+  "arms": {
+    "four_b_binary_detectors": {
+      "accuracy": 0.0,
+      "by_family": {
+        "box_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "first_strict_profit_period": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "implicit_scale_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "remaining_stock": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        }
+      },
+      "cases": 128,
+      "correct": 0,
+      "parseable": 128
+    },
+    "four_b_direct": {
+      "accuracy": 0.0,
+      "by_family": {
+        "box_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "first_strict_profit_period": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "implicit_scale_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "remaining_stock": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        }
+      },
+      "cases": 128,
+      "correct": 0,
+      "parseable": 128
+    },
+    "nine_b_direct": {
+      "accuracy": 0.0,
+      "by_family": {
+        "box_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "first_strict_profit_period": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "implicit_scale_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "remaining_stock": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        }
+      },
+      "cases": 128,
+      "correct": 0,
+      "parseable": 128
+    }
+  },
+  "claim_boundary": "This is negative fresh-local detector evidence. It establishes zero unsupported false positives only because both detectors always returned NO; positive recall is zero. It authorizes no real scan, benchmark generation, canary, holdout, or training.",
+  "comparisons": {
+    "candidate_vs_four_b": {
+      "baseline_accuracy": 0.0,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-semantic-binary-detectors-v1:candidate-four",
+      "candidate_accuracy": 0.0,
+      "candidate_only_case_ids": [],
+      "cases": 128,
+      "delta": 0.0,
+      "mcnemar_exact_p": 1.0,
+      "paired_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 0,
+        "both_wrong": 128,
+        "candidate_only": 0
+      }
+    },
+    "candidate_vs_nine_b": {
+      "baseline_accuracy": 0.0,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-semantic-binary-detectors-v1:candidate-nine",
+      "candidate_accuracy": 0.0,
+      "candidate_only_case_ids": [],
+      "cases": 128,
+      "delta": 0.0,
+      "mcnemar_exact_p": 1.0,
+      "paired_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 0,
+        "both_wrong": 128,
+        "candidate_only": 0
+      }
+    },
+    "four_b_vs_nine_b": {
+      "baseline_accuracy": 0.0,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-semantic-binary-detectors-v1:four-nine",
+      "candidate_accuracy": 0.0,
+      "candidate_only_case_ids": [],
+      "cases": 128,
+      "delta": 0.0,
+      "mcnemar_exact_p": 1.0,
+      "paired_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 0,
+        "both_wrong": 128,
+        "candidate_only": 0
+      }
+    }
+  },
+  "confusion": [
+    {
+      "cases": 64,
+      "expected_route": "NONE",
+      "selected_route": "NONE"
+    },
+    {
+      "cases": 32,
+      "expected_route": "first_strict_profit_period",
+      "selected_route": "NONE"
+    },
+    {
+      "cases": 32,
+      "expected_route": "implicit_scale_total",
+      "selected_route": "NONE"
+    }
+  ],
+  "data": {
+    "benchmark_canary_holdout_rows_or_outputs": 0,
+    "cases": 128,
+    "family_counts": {
+      "box_total": 32,
+      "first_strict_profit_period": 32,
+      "implicit_scale_total": 32,
+      "remaining_stock": 32
+    },
+    "freshness": {
+      "benchmark_outputs_loaded": false,
+      "benchmark_prompt_overlap": {
+        "gpqa_diamond": 0,
+        "gsm8k": 0,
+        "mmlu": 0
+      },
+      "benchmark_rows_hashed": {
+        "gpqa_diamond": 198,
+        "gsm8k": 1319,
+        "mmlu": 14042
+      },
+      "canary_rows_or_outputs_loaded": false,
+      "holdout_rows_loaded": false,
+      "prior_surface_prompt_overlap": {
+        "choice_capability_matrix_v1": 0,
+        "choice_exact_replication_v3": 0,
+        "choice_verifier_matrix_v2": 0
+      }
+    },
+    "negative_cases": 64,
+    "positive_cases": 64,
+    "training_eligible_cases": 0
+  },
+  "decision": {
+    "benchmark_generation_allowed": false,
+    "canary_rerun_allowed": false,
+    "detectors_admitted": false,
+    "further_tuning_or_rerun_on_observed_cases_allowed": false,
+    "gates": {
+      "all_detector_outputs_parseable": true,
+      "all_rows_complete_and_parseable": true,
+      "candidate_vs_four_b_maximum_losses": true,
+      "candidate_vs_four_b_minimum_wins": false,
+      "candidate_vs_four_b_significant": false,
+      "candidate_vs_nine_b_maximum_losses": true,
+      "candidate_vs_nine_b_minimum_wins": false,
+      "candidate_vs_nine_b_significant": false,
+      "conflicts_zero": true,
+      "detector_composition_correct_128": false,
+      "every_family_non_regression": true,
+      "fallbacks_zero": true,
+      "negative_candidate_exact_direct_parity": true,
+      "negative_false_positive_routes_zero": true,
+      "negative_none_correct_64": true,
+      "positive_route_recall_64": false,
+      "positive_verified_executions_64": false
+    },
+    "independent_holdout_allowed": false,
+    "negative_precision_supported": true,
+    "next_action": "Reject binary detectors. Both emitted NO for every case. Do not tune or rerun. Move router learning into a separately pre-registered synthetic SFT classification objective with broad paraphrase positives and unsupported negatives; keep typed executors frozen.",
+    "positive_recall_supported": false,
+    "real_question_detector_scan_preregistration_allowed": false,
+    "training_allowed": false
+  },
+  "detector_counts": [
+    {
+      "cases": 128,
+      "detector": "first_strict_profit_period",
+      "yes": false
+    },
+    {
+      "cases": 128,
+      "detector": "implicit_scale_total",
+      "yes": false
+    }
+  ],
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "detectors_use_case_correctness": false,
+    "detectors_use_case_metadata": false,
+    "detectors_use_expected_answer": false,
+    "executor_uses_case_correctness": false,
+    "executor_uses_expected_answer": false,
+    "holdout_rows_loaded": false,
+    "training_eligible_cases": 0
+  },
+  "experiment_id": "qwen35-semantic-binary-detectors-v1",
+  "identity": {
+    "case_contract_sha256": "a3993974c923b5cab4b8570642226076a8b9c51ead24175773681a8c84b624a5",
+    "config_sha256": "32c1d877a1cecdb9041fc88226fa2e52890390712f449a8552be0a1202d88748",
+    "mechanism_config_sha256": "4e5785b9b4fc9dd5b3a76a95b438c2f2c3d505a2fae6231b81cfbf53ebbd6ad9",
+    "multiclass_report_sha256": "c8e4034a27e925025589bc1a8a52abc6720ee0d7fc97e03983ff192cd44c3742",
+    "preregister_revision": "83835e3f9a13ad5145fd95205b49e2ff66ee6a31",
+    "preregister_sha256": "27a3a425a79852666069345d51c494e981b5ae0664a5c9aa41f17140b842e832",
+    "raw_result_sha256": "5915d5e8c3e05aaae353eeee514a9145f4dc58113a268a94290b0098df543df6",
+    "result_revision": "83835e3f9a13ad5145fd95205b49e2ff66ee6a31"
+  },
+  "routing": {
+    "cases": 128,
+    "conflicts": 0,
+    "detector_correct": 64,
+    "fallbacks": 0,
+    "negative_cases": 64,
+    "negative_false_positive_routes": 0,
+    "negative_none_correct": 64,
+    "positive_cases": 64,
+    "positive_route_correct": 0,
+    "verified_executions": 0
+  },
+  "schema_version": "nano_harness_semantic_binary_detectors_public_v1"
+}
