@@ -25,7 +25,10 @@ from scripts.preregister_router_adapter_integration_v3 import (
     build_receipt,
     render_markdown,
 )
-from scripts.render_router_adapter_integration_v3 import admission_gates
+from scripts.render_router_adapter_integration_v3 import (
+    admission_gates,
+    summarize_all_families,
+)
 from scripts.render_router_adapter_integration_v3_service import (
     build_receipt as build_service,
 )
@@ -299,12 +302,13 @@ class RouterAdapterIntegrationV3Tests(unittest.TestCase):
         }
         rows = [
             {
+                "family": case["family"],
                 "output": "FINAL: 1",
                 "prediction": 1,
                 "parseable": True,
                 "correct": True,
             }
-            for _ in cases
+            for case in cases
         ]
         raw = {
             "arms": arms,
@@ -317,6 +321,7 @@ class RouterAdapterIntegrationV3Tests(unittest.TestCase):
             "receipts": receipts,
             "candidate_rows": copy.deepcopy(rows),
             "four_b_rows": copy.deepcopy(rows),
+            "nine_b_rows": copy.deepcopy(rows),
         }
         comparison = {
             "candidate_accuracy": 1.0,
@@ -334,6 +339,28 @@ class RouterAdapterIntegrationV3Tests(unittest.TestCase):
         decision = admission_gates(raw, comparison, comparison)
         self.assertFalse(decision["each_c_subtype_recall_16"])
         self.assertFalse(decision["negative_false_positive_routes_zero"])
+
+    def test_renderer_summarizes_all_ten_families(self):
+        config = load_config(CONFIG)
+        cases = build_cases(config)
+        families = (*POSITIVE_FAMILIES, *config.negative_subtypes)
+        rows = [
+            {
+                "family": case["family"],
+                "parseable": True,
+                "correct": case["expected_label"] == "C",
+            }
+            for case in cases
+        ]
+        summary = summarize_all_families(rows, families)
+        self.assertEqual(set(summary["by_family"]), set(families))
+        self.assertEqual(
+            {row["cases"] for row in summary["by_family"].values()},
+            {16},
+        )
+        self.assertEqual(summary["cases"], 160)
+        self.assertEqual(summary["parseable"], 160)
+        self.assertEqual(summary["correct"], 128)
 
 
 if __name__ == "__main__":

@@ -59,6 +59,28 @@ def committed_preregister_sha256() -> str:
     return hashlib.sha256(content).hexdigest()
 
 
+def summarize_all_families(
+    rows: list[dict],
+    families: tuple[str, ...],
+) -> dict:
+    by_family = {}
+    for family in families:
+        selected = [row for row in rows if row["family"] == family]
+        by_family[family] = {
+            "cases": len(selected),
+            "parseable": sum(row["parseable"] for row in selected),
+            "correct": sum(row["correct"] for row in selected),
+        }
+    correct = sum(row["correct"] for row in rows)
+    return {
+        "cases": len(rows),
+        "parseable": sum(row["parseable"] for row in rows),
+        "correct": correct,
+        "accuracy": correct / len(rows),
+        "by_family": by_family,
+    }
+
+
 def admission_gates(
     raw: dict,
     candidate_vs_four: dict,
@@ -68,6 +90,21 @@ def admission_gates(
     arms = raw["arms"]
     routing = raw["routing"]
     cases = build_cases(config)
+    families = (*POSITIVE_FAMILIES, *config.negative_subtypes)
+    extended_arms = {
+        "four_b_direct": summarize_all_families(
+            raw["four_b_rows"],
+            families,
+        ),
+        "nine_b_direct": summarize_all_families(
+            raw["nine_b_rows"],
+            families,
+        ),
+        "four_b_router_adapter_v3": summarize_all_families(
+            raw["candidate_rows"],
+            families,
+        ),
+    }
     return {
         "all_three_arms_complete_and_parseable_160": all(
             arms[name]["cases"] == 160 and arms[name]["parseable"] == 160
@@ -158,11 +195,15 @@ def admission_gates(
             <= config.maximum_harness_losses
         ),
         "every_family_non_regression": all(
-            arms["four_b_router_adapter_v3"]["by_family"][family]["correct"]
-            >= arms["four_b_direct"]["by_family"][family]["correct"]
-            and arms["four_b_router_adapter_v3"]["by_family"][family]["correct"]
-            >= arms["nine_b_direct"]["by_family"][family]["correct"]
-            for family in (*POSITIVE_FAMILIES, *config.negative_subtypes)
+            extended_arms["four_b_router_adapter_v3"]["by_family"][family][
+                "correct"
+            ]
+            >= extended_arms["four_b_direct"]["by_family"][family]["correct"]
+            and extended_arms["four_b_router_adapter_v3"]["by_family"][family][
+                "correct"
+            ]
+            >= extended_arms["nine_b_direct"]["by_family"][family]["correct"]
+            for family in families
         ),
     }
 
@@ -273,6 +314,20 @@ def build_report() -> dict:
     )
     admitted = all(decision_gates.values())
     all_families = (*POSITIVE_FAMILIES, *config.negative_subtypes)
+    extended_arms = {
+        "four_b_direct": summarize_all_families(
+            raw["four_b_rows"],
+            all_families,
+        ),
+        "nine_b_direct": summarize_all_families(
+            raw["nine_b_rows"],
+            all_families,
+        ),
+        "four_b_router_adapter_v3": summarize_all_families(
+            raw["candidate_rows"],
+            all_families,
+        ),
+    }
     routing_by_family = {
         family: {
             "cases": sum(case["family"] == family for case in cases),
@@ -346,7 +401,7 @@ def build_report() -> dict:
             "integration_v1_or_v2_rows_or_outputs_loaded": False,
             "training_eligible_cases": 0,
         },
-        "arms": raw["arms"],
+        "arms": extended_arms,
         "routing": raw["routing"],
         "routing_by_family": routing_by_family,
         "confusion": [
@@ -386,7 +441,42 @@ def build_report() -> dict:
                 "or V3."
             ),
         },
+        "mechanism_conclusion": {
+            "router_transfer_succeeded": (
+                raw["routing"]["correct"] == 160
+                and raw["routing"]["negative_false_positive_routes"] == 0
+            ),
+            "verified_positive_execution_succeeded": (
+                raw["routing"]["verified_executions"] == 32
+                and raw["routing"]["fallbacks"] == 0
+            ),
+            "direct_preserve_policy_rejected": not decision_gates[
+                "candidate_vs_nine_b_maximum_losses"
+            ],
+            "reason": (
+                "C routes preserve the 4B direct answer exactly, so the "
+                "candidate inherits 4B losses on negative families where 9B "
+                "direct is stronger. The router is not the failed component."
+            ),
+            "observed_9b_only_cases": candidate_vs_nine["paired_counts"][
+                "baseline_only"
+            ],
+            "post_observation_policy_tuning_allowed": False,
+        },
         "evaluation_boundary": raw["evaluation_boundary"],
+        "reporting_incident": {
+            "initial_renderer_status": "failed_before_decision",
+            "root_cause": (
+                "legacy summarize_rows exposed only four historical families "
+                "and omitted six newly added negative subtypes"
+            ),
+            "repair": (
+                "recompute all ten family aggregates from the unchanged raw "
+                "rows before applying the original frozen gates"
+            ),
+            "model_rerun": False,
+            "raw_result_sha256_unchanged": sha256_file(RAW),
+        },
         "claim_boundary": (
             "This is fresh synthetic transfer evidence for the remapped "
             "adapter across A, B, and eight C subtypes. It is not benchmark, "

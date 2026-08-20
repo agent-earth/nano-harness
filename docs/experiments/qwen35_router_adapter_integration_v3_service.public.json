@@ -1,0 +1,75 @@
+{
+  "benchmark_accessed": false,
+  "canary_accessed": false,
+  "claim_boundary": "This receipt proves only 4B, 9B, and remapped-router service readiness for the frozen V3 contract. It contains no generation.",
+  "config_sha256": "0f7f2aedf12d63a651c79f4b06417de45cc5bd83b48a9be5ab396282baed048a",
+  "experiment_id": "qwen35-router-adapter-integration-v3",
+  "four_health_sha256": "85cdceea067117663b066ec489e4e8dd66dc6a0cb6fb8e630a19792815980bc8",
+  "healthy": true,
+  "holdout_accessed": false,
+  "integration_v1_or_v2_rerun": false,
+  "model_health": {
+    "qwen3.5-4b": {
+      "max_model_len": 4096,
+      "owned_by": "vllm",
+      "parent": null,
+      "root": "../../../models/Qwen3.5-4B"
+    },
+    "qwen3.5-9b": {
+      "max_model_len": 4096,
+      "owned_by": "vllm",
+      "parent": null,
+      "root": "../../../models/Qwen3.5-9B"
+    },
+    "qwen3.5-router-negative-diversity-v2-remapped": {
+      "max_model_len": null,
+      "owned_by": "vllm",
+      "parent": "qwen3.5-4b",
+      "root": "results/serving/qwen35-router-negative-diversity-v2-remapped"
+    }
+  },
+  "models": {
+    "four_b_base": "qwen3.5-4b",
+    "nine_b_base": "qwen3.5-9b",
+    "remapped_router": "qwen3.5-router-negative-diversity-v2-remapped"
+  },
+  "nine_health_sha256": "608c4559a38883771b003e148ac4e9417464c419672190416f74a4235e8d65ae",
+  "preregister_sha256": "ff8a811e787e486241e24461f3b7a8f3c292a38bec82d7496d56a5733c38559b",
+  "recorded_unix": 1787238842,
+  "remapped_adapter_sha256": "cea357d281ed100437268e213564fc5a5c00e6024b0c7a4be207cc686453e3f9",
+  "remapped_adapter_weights_sha256": "9566725bc8f7e2d607a0f0a3f20443c35ffa5fb2174a5aca3e5cf1797cfd3e90",
+  "schema_version": "nano_harness_router_adapter_integration_v3_service",
+  "service_revision": "394c67590769d822d08cac2bffc51f4c7d40bc0f",
+  "serving": {
+    "four_b": {
+      "base_url": "http://127.0.0.1:8000/v1",
+      "dtype": "float16",
+      "enable_lora": true,
+      "enforce_eager": true,
+      "gpu_index": 0,
+      "gpu_memory_utilization": 0.85,
+      "host": "127.0.0.1",
+      "max_lora_rank": 8,
+      "max_loras": 1,
+      "max_model_len": 4096,
+      "max_num_batched_tokens": 4096,
+      "max_num_seqs": 1,
+      "port": 8000
+    },
+    "nine_b": {
+      "base_url": "http://127.0.0.1:8001/v1",
+      "dtype": "float16",
+      "enforce_eager": true,
+      "gpu_index": 1,
+      "gpu_memory_utilization": 0.85,
+      "host": "127.0.0.1",
+      "max_model_len": 4096,
+      "max_num_batched_tokens": 4096,
+      "max_num_seqs": 1,
+      "port": 8001
+    },
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "vllm_version": "0.19.1"
+  },
+  "v3_generation_started": false
+}

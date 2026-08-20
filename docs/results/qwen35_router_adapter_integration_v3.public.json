@@ -1,0 +1,594 @@
+{
+  "arms": {
+    "four_b_direct": {
+      "accuracy": 0.18125,
+      "by_family": {
+        "box_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "first_strict_profit_period": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "implicit_scale_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "paired_average": {
+          "cases": 16,
+          "correct": 6,
+          "parseable": 16
+        },
+        "percentage_change": {
+          "cases": 16,
+          "correct": 14,
+          "parseable": 16
+        },
+        "quotient_remainder": {
+          "cases": 16,
+          "correct": 2,
+          "parseable": 16
+        },
+        "remaining_stock": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "single_operation": {
+          "cases": 16,
+          "correct": 7,
+          "parseable": 16
+        },
+        "time_conversion": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "weighted_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        }
+      },
+      "cases": 160,
+      "correct": 29,
+      "parseable": 160
+    },
+    "four_b_router_adapter_v3": {
+      "accuracy": 0.38125,
+      "by_family": {
+        "box_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "first_strict_profit_period": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "implicit_scale_total": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "paired_average": {
+          "cases": 16,
+          "correct": 6,
+          "parseable": 16
+        },
+        "percentage_change": {
+          "cases": 16,
+          "correct": 14,
+          "parseable": 16
+        },
+        "quotient_remainder": {
+          "cases": 16,
+          "correct": 2,
+          "parseable": 16
+        },
+        "remaining_stock": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "single_operation": {
+          "cases": 16,
+          "correct": 7,
+          "parseable": 16
+        },
+        "time_conversion": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "weighted_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        }
+      },
+      "cases": 160,
+      "correct": 61,
+      "parseable": 160
+    },
+    "nine_b_direct": {
+      "accuracy": 0.25625,
+      "by_family": {
+        "box_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "first_strict_profit_period": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "implicit_scale_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "paired_average": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "percentage_change": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "quotient_remainder": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "remaining_stock": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "single_operation": {
+          "cases": 16,
+          "correct": 8,
+          "parseable": 16
+        },
+        "time_conversion": {
+          "cases": 16,
+          "correct": 1,
+          "parseable": 16
+        },
+        "weighted_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        }
+      },
+      "cases": 160,
+      "correct": 41,
+      "parseable": 160
+    }
+  },
+  "claim_boundary": "This is fresh synthetic transfer evidence for the remapped adapter across A, B, and eight C subtypes. It is not benchmark, canary, holdout, training, RL, or final model-superiority evidence.",
+  "comparisons": {
+    "candidate_vs_four_b": {
+      "baseline_accuracy": 0.18125,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-router-adapter-integration-v3:candidate-four",
+      "candidate_accuracy": 0.38125,
+      "candidate_only_case_ids": [
+        "router-adapter-v3-first_strict_profit_period-02943146d0daf82b",
+        "router-adapter-v3-first_strict_profit_period-09796563d9bd3796",
+        "router-adapter-v3-first_strict_profit_period-28b5d4dae91750c8",
+        "router-adapter-v3-first_strict_profit_period-5943f88aafd8c47d",
+        "router-adapter-v3-first_strict_profit_period-5dcba60d0257b44f",
+        "router-adapter-v3-first_strict_profit_period-911e23ccaaaf8612",
+        "router-adapter-v3-first_strict_profit_period-95ab9f48f2f4ae83",
+        "router-adapter-v3-first_strict_profit_period-ae40948e2fe488dc",
+        "router-adapter-v3-first_strict_profit_period-b1b72db3249622a7",
+        "router-adapter-v3-first_strict_profit_period-b585b9d6d926ddfb",
+        "router-adapter-v3-first_strict_profit_period-b8cdf5005cb25623",
+        "router-adapter-v3-first_strict_profit_period-c548febb6480e7bb",
+        "router-adapter-v3-first_strict_profit_period-c57aa7f7858272c9",
+        "router-adapter-v3-first_strict_profit_period-cd545da492e2450b",
+        "router-adapter-v3-first_strict_profit_period-e42374d5db94d8eb",
+        "router-adapter-v3-first_strict_profit_period-f85e237cc8ba6365",
+        "router-adapter-v3-implicit_scale_total-09ba27f4298c35c1",
+        "router-adapter-v3-implicit_scale_total-1031f7b8fb17ac24",
+        "router-adapter-v3-implicit_scale_total-12ac44efd086ea71",
+        "router-adapter-v3-implicit_scale_total-15678c99bb71e654",
+        "router-adapter-v3-implicit_scale_total-1d892314df22749f",
+        "router-adapter-v3-implicit_scale_total-229863b2ae9acbb8",
+        "router-adapter-v3-implicit_scale_total-2b93a8bf8ddde35f",
+        "router-adapter-v3-implicit_scale_total-3526925535d9d2bb",
+        "router-adapter-v3-implicit_scale_total-40febd2713626dca",
+        "router-adapter-v3-implicit_scale_total-4375bff2ad704cd6",
+        "router-adapter-v3-implicit_scale_total-a500954e8c244656",
+        "router-adapter-v3-implicit_scale_total-bd2b1c9c5e25f284",
+        "router-adapter-v3-implicit_scale_total-c975431c268dffb2",
+        "router-adapter-v3-implicit_scale_total-d061ac43382a616d",
+        "router-adapter-v3-implicit_scale_total-eb5b518462e09b84",
+        "router-adapter-v3-implicit_scale_total-fae10a5b9dc57f59"
+      ],
+      "cases": 160,
+      "delta": 0.2,
+      "mcnemar_exact_p": 4.656612873077393e-10,
+      "paired_bootstrap_95_ci": [
+        0.1375,
+        0.2625
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 29,
+        "both_wrong": 99,
+        "candidate_only": 32
+      }
+    },
+    "candidate_vs_nine_b": {
+      "baseline_accuracy": 0.25625,
+      "baseline_only_case_ids": [
+        "router-adapter-v3-paired_average-1fc08559296dc4cd",
+        "router-adapter-v3-paired_average-268943165ea86f59",
+        "router-adapter-v3-paired_average-66596f47246322db",
+        "router-adapter-v3-paired_average-7118a57608dabe24",
+        "router-adapter-v3-paired_average-77e42b0314a808bb",
+        "router-adapter-v3-paired_average-811e4c43f7c71bcb",
+        "router-adapter-v3-paired_average-9af3ad20cd98303f",
+        "router-adapter-v3-paired_average-b0ae7449494ff146",
+        "router-adapter-v3-paired_average-b8b1c95953a5bc94",
+        "router-adapter-v3-paired_average-ed4752f95274f3e9",
+        "router-adapter-v3-percentage_change-7751d59d8604fe24",
+        "router-adapter-v3-percentage_change-a2bb67eaac5afb46",
+        "router-adapter-v3-single_operation-f7f129198c15a9b8",
+        "router-adapter-v3-time_conversion-ac184c6800faef9a"
+      ],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-router-adapter-integration-v3:candidate-nine",
+      "candidate_accuracy": 0.38125,
+      "candidate_only_case_ids": [
+        "router-adapter-v3-first_strict_profit_period-02943146d0daf82b",
+        "router-adapter-v3-first_strict_profit_period-09796563d9bd3796",
+        "router-adapter-v3-first_strict_profit_period-28b5d4dae91750c8",
+        "router-adapter-v3-first_strict_profit_period-5943f88aafd8c47d",
+        "router-adapter-v3-first_strict_profit_period-5dcba60d0257b44f",
+        "router-adapter-v3-first_strict_profit_period-911e23ccaaaf8612",
+        "router-adapter-v3-first_strict_profit_period-95ab9f48f2f4ae83",
+        "router-adapter-v3-first_strict_profit_period-ae40948e2fe488dc",
+        "router-adapter-v3-first_strict_profit_period-b1b72db3249622a7",
+        "router-adapter-v3-first_strict_profit_period-b585b9d6d926ddfb",
+        "router-adapter-v3-first_strict_profit_period-b8cdf5005cb25623",
+        "router-adapter-v3-first_strict_profit_period-c548febb6480e7bb",
+        "router-adapter-v3-first_strict_profit_period-c57aa7f7858272c9",
+        "router-adapter-v3-first_strict_profit_period-cd545da492e2450b",
+        "router-adapter-v3-first_strict_profit_period-e42374d5db94d8eb",
+        "router-adapter-v3-first_strict_profit_period-f85e237cc8ba6365",
+        "router-adapter-v3-implicit_scale_total-09ba27f4298c35c1",
+        "router-adapter-v3-implicit_scale_total-1031f7b8fb17ac24",
+        "router-adapter-v3-implicit_scale_total-12ac44efd086ea71",
+        "router-adapter-v3-implicit_scale_total-15678c99bb71e654",
+        "router-adapter-v3-implicit_scale_total-1d892314df22749f",
+        "router-adapter-v3-implicit_scale_total-229863b2ae9acbb8",
+        "router-adapter-v3-implicit_scale_total-2b93a8bf8ddde35f",
+        "router-adapter-v3-implicit_scale_total-3526925535d9d2bb",
+        "router-adapter-v3-implicit_scale_total-40febd2713626dca",
+        "router-adapter-v3-implicit_scale_total-4375bff2ad704cd6",
+        "router-adapter-v3-implicit_scale_total-a500954e8c244656",
+        "router-adapter-v3-implicit_scale_total-bd2b1c9c5e25f284",
+        "router-adapter-v3-implicit_scale_total-c975431c268dffb2",
+        "router-adapter-v3-implicit_scale_total-d061ac43382a616d",
+        "router-adapter-v3-implicit_scale_total-eb5b518462e09b84",
+        "router-adapter-v3-implicit_scale_total-fae10a5b9dc57f59",
+        "router-adapter-v3-quotient_remainder-5e06caa2cf8ec101",
+        "router-adapter-v3-quotient_remainder-88e5b3d486aca96b"
+      ],
+      "cases": 160,
+      "delta": 0.125,
+      "mcnemar_exact_p": 0.005515201485501109,
+      "paired_bootstrap_95_ci": [
+        0.04375,
+        0.20625
+      ],
+      "paired_counts": {
+        "baseline_only": 14,
+        "both_correct": 27,
+        "both_wrong": 85,
+        "candidate_only": 34
+      }
+    },
+    "four_b_vs_nine_b": {
+      "baseline_accuracy": 0.25625,
+      "baseline_only_case_ids": [
+        "router-adapter-v3-paired_average-1fc08559296dc4cd",
+        "router-adapter-v3-paired_average-268943165ea86f59",
+        "router-adapter-v3-paired_average-66596f47246322db",
+        "router-adapter-v3-paired_average-7118a57608dabe24",
+        "router-adapter-v3-paired_average-77e42b0314a808bb",
+        "router-adapter-v3-paired_average-811e4c43f7c71bcb",
+        "router-adapter-v3-paired_average-9af3ad20cd98303f",
+        "router-adapter-v3-paired_average-b0ae7449494ff146",
+        "router-adapter-v3-paired_average-b8b1c95953a5bc94",
+        "router-adapter-v3-paired_average-ed4752f95274f3e9",
+        "router-adapter-v3-percentage_change-7751d59d8604fe24",
+        "router-adapter-v3-percentage_change-a2bb67eaac5afb46",
+        "router-adapter-v3-single_operation-f7f129198c15a9b8",
+        "router-adapter-v3-time_conversion-ac184c6800faef9a"
+      ],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-router-adapter-integration-v3:four-nine",
+      "candidate_accuracy": 0.18125,
+      "candidate_only_case_ids": [
+        "router-adapter-v3-quotient_remainder-5e06caa2cf8ec101",
+        "router-adapter-v3-quotient_remainder-88e5b3d486aca96b"
+      ],
+      "cases": 160,
+      "delta": -0.075,
+      "mcnemar_exact_p": 0.004180908203125,
+      "paired_bootstrap_95_ci": [
+        -0.125,
+        -0.03125
+      ],
+      "paired_counts": {
+        "baseline_only": 14,
+        "both_correct": 27,
+        "both_wrong": 117,
+        "candidate_only": 2
+      }
+    }
+  },
+  "confusion": [
+    {
+      "cases": 16,
+      "expected_label": "A",
+      "selected_label": "A"
+    },
+    {
+      "cases": 16,
+      "expected_label": "B",
+      "selected_label": "B"
+    },
+    {
+      "cases": 128,
+      "expected_label": "C",
+      "selected_label": "C"
+    }
+  ],
+  "data": {
+    "benchmark_canary_holdout_rows_or_outputs": 0,
+    "cases": 160,
+    "family_counts": {
+      "box_total": 16,
+      "first_strict_profit_period": 16,
+      "implicit_scale_total": 16,
+      "paired_average": 16,
+      "percentage_change": 16,
+      "quotient_remainder": 16,
+      "remaining_stock": 16,
+      "single_operation": 16,
+      "time_conversion": 16,
+      "weighted_total": 16
+    },
+    "freshness": {
+      "benchmark_outputs_loaded": false,
+      "benchmark_prompt_overlap": {
+        "gpqa_diamond": 0,
+        "gsm8k": 0,
+        "mmlu": 0
+      },
+      "benchmark_rows_hashed": {
+        "gpqa_diamond": 198,
+        "gsm8k": 1319,
+        "mmlu": 14042
+      },
+      "canary_rows_or_outputs_loaded": false,
+      "case_seed": 20260828,
+      "history_disjoint_prompt_overlap": {
+        "integration_v1_prompts": 0,
+        "integration_v2_prompts": 0,
+        "prior_binary_prompts": 0,
+        "prior_multiclass_prompts": 0,
+        "router_training_prompts": 0
+      },
+      "holdout_rows_or_outputs_loaded": false,
+      "integration_v1_or_v2_outputs_loaded": false,
+      "integration_v1_prompts_hashed": 128,
+      "integration_v2_prompts_hashed": 128,
+      "prior_binary_prompts_hashed": 128,
+      "prior_multiclass_prompts_hashed": 256,
+      "prior_surface_prompt_overlap": {
+        "choice_capability_matrix_v1": 0,
+        "choice_exact_replication_v3": 0,
+        "choice_verifier_matrix_v2": 0
+      },
+      "training_prompts_hashed": 7680,
+      "value_offset": 8000000
+    },
+    "integration_v1_or_v2_rows_or_outputs_loaded": false,
+    "negative_cases": 128,
+    "positive_cases": 32,
+    "training_eligible_cases": 0
+  },
+  "decision": {
+    "adapter_integration_v3_admitted": false,
+    "benchmark_generation_allowed": false,
+    "benchmark_treatment_preregistration_allowed": false,
+    "canary_allowed": false,
+    "further_tuning_allowed": false,
+    "gates": {
+      "all_three_arms_complete_and_parseable_160": true,
+      "candidate_vs_four_b_maximum_losses": true,
+      "candidate_vs_four_b_minimum_wins": true,
+      "candidate_vs_four_b_significant": true,
+      "candidate_vs_nine_b_maximum_losses": false,
+      "candidate_vs_nine_b_minimum_wins": true,
+      "candidate_vs_nine_b_significant": true,
+      "each_c_subtype_recall_16": true,
+      "every_family_non_regression": false,
+      "fallbacks_zero": true,
+      "negative_candidate_exact_direct_parity": true,
+      "negative_false_positive_routes_zero": true,
+      "positive_feedback_result_matches_32": true,
+      "positive_verified_executions_32": true,
+      "router_a_recall_16": true,
+      "router_b_recall_16": true,
+      "router_c_recall_128": true,
+      "router_outputs_parseable_160": true
+    },
+    "holdout_allowed": false,
+    "integration_v1_rerun_allowed": false,
+    "integration_v2_rerun_allowed": false,
+    "integration_v3_rerun_allowed": false,
+    "next_action": "Reject this router treatment. Do not rerun or tune V1, V2, or V3.",
+    "training_or_rl_allowed": false
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "executor_uses_case_correctness": false,
+    "executor_uses_expected_answer": false,
+    "holdout_rows_loaded": false,
+    "integration_v1_or_v2_rows_or_outputs_loaded": false,
+    "router_uses_case_correctness": false,
+    "router_uses_case_metadata": false,
+    "router_uses_expected_answer": false,
+    "training_eligible_cases": 0
+  },
+  "experiment_id": "qwen35-router-adapter-integration-v3",
+  "identity": {
+    "case_contract_sha256": "b15bf58f89faff6212b5a16133c07bdfe9e83547be1ef6a6bda33454ec51d410",
+    "config_sha256": "0f7f2aedf12d63a651c79f4b06417de45cc5bd83b48a9be5ab396282baed048a",
+    "integration_v1_report_sha256": "9b01a9b6d6011f657696b0cebf9de8853b16fd2406802b14ca203d3500288f70",
+    "integration_v2_report_sha256": "251e6b45cbcd487079a4c52815eae5c24e89765b5b4f6521f4b7fb0a34a8f5b9",
+    "parity_report_sha256": "28fe9e86c4ab80fc83618d34c4d9bb9a0e9ac158ac640781685ff23d778b5d3c",
+    "preregister_sha256": "ff8a811e787e486241e24461f3b7a8f3c292a38bec82d7496d56a5733c38559b",
+    "raw_result_sha256": "2f714c345778ab885859f35d7a06a06abbc7664caca2691517a7fe9b7d24984f",
+    "remapped_adapter_sha256": "cea357d281ed100437268e213564fc5a5c00e6024b0c7a4be207cc686453e3f9",
+    "result_revision": "394c67590769d822d08cac2bffc51f4c7d40bc0f",
+    "service_receipt_sha256": "9a72fcb04391a62e4c1526a51112bc516de5c7251c6b5a00a085365a23e7bdb8"
+  },
+  "mechanism_conclusion": {
+    "direct_preserve_policy_rejected": true,
+    "observed_9b_only_cases": 14,
+    "post_observation_policy_tuning_allowed": false,
+    "reason": "C routes preserve the 4B direct answer exactly, so the candidate inherits 4B losses on negative families where 9B direct is stronger. The router is not the failed component.",
+    "router_transfer_succeeded": true,
+    "verified_positive_execution_succeeded": true
+  },
+  "reporting_incident": {
+    "initial_renderer_status": "failed_before_decision",
+    "model_rerun": false,
+    "raw_result_sha256_unchanged": "2f714c345778ab885859f35d7a06a06abbc7664caca2691517a7fe9b7d24984f",
+    "repair": "recompute all ten family aggregates from the unchanged raw rows before applying the original frozen gates",
+    "root_cause": "legacy summarize_rows exposed only four historical families and omitted six newly added negative subtypes"
+  },
+  "routing": {
+    "cases": 160,
+    "correct": 160,
+    "fallbacks": 0,
+    "negative_c_correct": 128,
+    "negative_cases": 128,
+    "negative_false_positive_routes": 0,
+    "positive_cases": 32,
+    "positive_correct": 32,
+    "verified_executions": 32
+  },
+  "routing_by_family": {
+    "box_total": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "C": 16
+      },
+      "verified_executions": 0
+    },
+    "first_strict_profit_period": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "B": 16
+      },
+      "verified_executions": 16
+    },
+    "implicit_scale_total": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "A": 16
+      },
+      "verified_executions": 16
+    },
+    "paired_average": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "C": 16
+      },
+      "verified_executions": 0
+    },
+    "percentage_change": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "C": 16
+      },
+      "verified_executions": 0
+    },
+    "quotient_remainder": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "C": 16
+      },
+      "verified_executions": 0
+    },
+    "remaining_stock": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "C": 16
+      },
+      "verified_executions": 0
+    },
+    "single_operation": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "C": 16
+      },
+      "verified_executions": 0
+    },
+    "time_conversion": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "C": 16
+      },
+      "verified_executions": 0
+    },
+    "weighted_total": {
+      "cases": 16,
+      "fallbacks": 0,
+      "route_correct": 16,
+      "selected_labels": {
+        "C": 16
+      },
+      "verified_executions": 0
+    }
+  },
+  "schema_version": "nano_harness_router_adapter_integration_public_v3"
+}
