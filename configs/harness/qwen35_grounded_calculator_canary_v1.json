@@ -1,0 +1,83 @@
+{
+  "admission_gates": {
+    "benchmark_minimum_correct": {
+      "gpqa_diamond": 6,
+      "gsm8k": 90,
+      "mmlu": 67
+    },
+    "cases": 211,
+    "maximum_api_errors": 0,
+    "maximum_parse_failures": 2,
+    "minimum_overall_correct": 164,
+    "paired_candidate_only_wins_gt_base_only_wins": true,
+    "require_direct_preservation_outside_eligible_rows": true,
+    "require_exact_case_identity": true,
+    "require_zero_unsafe_executions": true
+  },
+  "baseline_report_path": "docs/results/three_task_replication_v1.public.json",
+  "baseline_report_sha256": "e7aad4abf515de23289359a04a589e0f87d29493cf4b172a8213e369a0cdbd4f",
+  "candidate_output_path": "results/harness/qwen35-grounded-calculator-canary-v1/candidate.jsonl",
+  "case_manifest_path": "configs/generated/qwen35_three_task_replication_v1_cases.json",
+  "case_manifest_sha256": "eafbe4d42487a225322dd3b3bdc1d805c065fb15f0f8b968e65ccf747f96976f",
+  "dataset_root": "../../../datasets",
+  "execution_boundary": {
+    "canary_inputs_audited": true,
+    "canary_generation_started": false,
+    "complete_benchmark_started": false,
+    "independent_holdout_accessed": false,
+    "model_generation_started": false,
+    "prior_direct_outputs_loaded": true,
+    "service_reused": true,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-grounded-calculator-canary-v1",
+  "final_max_tokens": 32,
+  "four_b_raw_path": "../../nano-harness/results/harness/qwen35-three-task-replication-v1/4b/cases.jsonl",
+  "four_b_raw_sha256": "c59383d3fd3d6087025d6e1ff649979d9d5a9e8dc73b5429a4f8e9fa41b6b8c7",
+  "manifest_path": "configs/harness/qwen35_three_task_replication_v1.yaml",
+  "manifest_sha256": "88f6e832d38e739c6b622a30633a2737077fc081037e6e1543cb5763b169a7b9",
+  "maximum_absolute_value": 1000000000000000,
+  "maximum_ast_nodes": 64,
+  "maximum_expression_chars": 160,
+  "nine_b_raw_path": "../../nano-harness/results/harness/qwen35-three-task-replication-v1/9b/cases.jsonl",
+  "nine_b_raw_sha256": "ffae93774d51b87a2e29258d170a84f8b165f996e2e78eedd102271dfc260044",
+  "output_path": "results/harness/qwen35-grounded-calculator-canary-v1/result.json",
+  "plan_max_tokens": 96,
+  "plan_retry_limit": 1,
+  "plan_structured_output_regex": "CALC: [0-9+\\-*/(). ]+",
+  "policy": {
+    "case_id_allowlist_used": false,
+    "contains_candidate_canary_outputs_before_run": false,
+    "contains_prior_direct_canary_outputs": true,
+    "contains_canary_rows": true,
+    "contains_holdout_rows": false,
+    "evaluation_only": true,
+    "executor_uses_case_correctness": false,
+    "executor_uses_expected_answer": false,
+    "post_observation_prompt_parser_budget_search": false,
+    "training_eligible": false,
+    "uses_expected_answer_for_routing": false
+  },
+  "recovery_eligibility": {
+    "benchmark": "gsm8k",
+    "case_correctness_used": false,
+    "case_id_allowlist_used": false,
+    "direct_prediction_is_none": true,
+    "direct_status": "completed",
+    "expected_answer_used": false
+  },
+  "route_by_benchmark": {
+    "gpqa_diamond": "direct_preserve",
+    "gsm8k": "grounded_calculator_on_direct_parse_failure",
+    "mmlu": "direct_preserve"
+  },
+  "schema_version": "nano_harness_grounded_calculator_canary_v1",
+  "service_receipt_sha256": "895bd40d886d870f99230441baecdf1feb926e2992b6a151e54d8165145f1c0d",
+  "v2_config_path": "configs/harness/qwen35_verified_tool_execution_v2.json",
+  "v2_config_sha256": "ae6740e37da66b393f0732e7d86b785148e9d6fc663cbbdea0c8554d68f5ae0f",
+  "v2_preregister_path": "docs/experiments/qwen35_verified_tool_execution_v2.preregister.json",
+  "v2_preregister_sha256": "1c312a575b4c4bc4000e64495f3157ceff529361d5c0dc43112b318faf1c0797",
+  "v2_report_path": "docs/results/qwen35_verified_tool_execution_v2.public.json",
+  "v2_report_sha256": "cd20bd3f6abccf3e8b70f8ec6504150dc30665fbe477364608ec8b34366ab0cc"
+}

@@ -1,0 +1,113 @@
+{
+  "admission_gates": {
+    "benchmark_minimum_correct": {
+      "gpqa_diamond": 6,
+      "gsm8k": 90,
+      "mmlu": 67
+    },
+    "cases": 211,
+    "maximum_api_errors": 0,
+    "maximum_parse_failures": 2,
+    "minimum_overall_correct": 164,
+    "paired_candidate_only_wins_gt_base_only_wins": true,
+    "require_direct_preservation_outside_eligible_rows": true,
+    "require_exact_case_identity": true,
+    "require_zero_unsafe_executions": true
+  },
+  "claim_boundary": "This is a pre-registration based on the already-public 211-case contract and frozen prior direct raw identities. It generates no new candidate canary output. A future pass is admission evidence only and is not a complete benchmark or holdout claim.",
+  "decision_policy": {
+    "failed": "Preserve the result as negative evidence. Do not tune or rerun on the observed 211 rows.",
+    "forbidden_after_observation": [
+      "eligibility_rule_change",
+      "case_id_allowlist",
+      "prompt_change",
+      "regex_change",
+      "AST_grammar_change",
+      "grounding_rule_change",
+      "retry_change",
+      "budget_change",
+      "temperature_change",
+      "model_or_service_change",
+      "fallback_change",
+      "parser_or_scorer_change",
+      "admission_gate_change",
+      "candidate_rerun",
+      "complete_benchmark_access_before_canary_pass",
+      "independent_holdout_access"
+    ],
+    "passed": "Publish the canary result, then separately pre-register the same GSM8K recovery route on the complete three-task suite."
+  },
+  "execution_boundary": {
+    "canary_generation_started": false,
+    "canary_inputs_audited": true,
+    "complete_benchmark_started": false,
+    "independent_holdout_accessed": false,
+    "model_generation_started": false,
+    "prior_direct_outputs_loaded": true,
+    "service_reused": true,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-grounded-calculator-canary-v1",
+  "identity": {
+    "baseline_report_sha256": "e7aad4abf515de23289359a04a589e0f87d29493cf4b172a8213e369a0cdbd4f",
+    "case_manifest_sha256": "eafbe4d42487a225322dd3b3bdc1d805c065fb15f0f8b968e65ccf747f96976f",
+    "code_revision": "612e5a44dcbda2c382e67cb0d049100e0943eea8",
+    "config_sha256": "3c4049a89ff34895989a82450d78b1d74c3e5889ac9d24307e2b93f2dfe230a2",
+    "eligible_case_ids_sha256": "755fd35aac339fb701bc081aeb421d184e3c66c1dbdb33f6cbb28b17dab302e5",
+    "four_b_raw_sha256": "c59383d3fd3d6087025d6e1ff649979d9d5a9e8dc73b5429a4f8e9fa41b6b8c7",
+    "manifest_sha256": "88f6e832d38e739c6b622a30633a2737077fc081037e6e1543cb5763b169a7b9",
+    "nine_b_raw_sha256": "ffae93774d51b87a2e29258d170a84f8b165f996e2e78eedd102271dfc260044",
+    "service_receipt_sha256": "895bd40d886d870f99230441baecdf1feb926e2992b6a151e54d8165145f1c0d",
+    "v2_config_sha256": "ae6740e37da66b393f0732e7d86b785148e9d6fc663cbbdea0c8554d68f5ae0f",
+    "v2_preregister_sha256": "1c312a575b4c4bc4000e64495f3157ceff529361d5c0dc43112b318faf1c0797",
+    "v2_report_sha256": "cd20bd3f6abccf3e8b70f8ec6504150dc30665fbe477364608ec8b34366ab0cc"
+  },
+  "route": {
+    "by_benchmark": {
+      "gpqa_diamond": "direct_preserve",
+      "gsm8k": "grounded_calculator_on_direct_parse_failure",
+      "mmlu": "direct_preserve"
+    },
+    "direct_preserve": "Every MMLU and GPQA row and every parseable GSM8K row reuses the frozen 4B direct output byte-for-byte for scoring fields.",
+    "final_max_tokens": 32,
+    "gsm8k_recovery": [
+      "ask 4B for one CALC expression under the frozen regex",
+      "parse a bounded Python expression AST without eval",
+      "allow only +, -, *, /, parentheses, and unary signs",
+      "require every numeric literal value to occur in the prompt",
+      "execute with exact rational arithmetic and require an integer",
+      "send the verified result to the same 4B for a 32-token FINAL",
+      "reuse the frozen direct output on any failure"
+    ],
+    "maximum_absolute_value": 1000000000000000,
+    "maximum_ast_nodes": 64,
+    "maximum_expression_chars": 160,
+    "maximum_feedback_input_tokens": 181,
+    "maximum_plan_input_tokens": 190,
+    "plan_max_tokens": 96,
+    "plan_regex": "CALC: [0-9+\\-*/(). ]+",
+    "plan_retry_limit": 1
+  },
+  "schema_version": "nano_harness_grounded_calculator_canary_preregister_v1",
+  "surface": {
+    "benchmark_counts": {
+      "gpqa_diamond": 19,
+      "gsm8k": 96,
+      "mmlu": 96
+    },
+    "case_id_allowlist_used": false,
+    "cases": 211,
+    "eligibility_rule": {
+      "benchmark": "gsm8k",
+      "case_correctness_used": false,
+      "case_id_allowlist_used": false,
+      "direct_prediction_is_none": true,
+      "direct_status": "completed",
+      "expected_answer_used": false
+    },
+    "prior_direct_four_b_correct": 163,
+    "prior_direct_nine_b_correct": 151,
+    "prior_direct_parse_failure_eligible_rows": 2
+  }
+}

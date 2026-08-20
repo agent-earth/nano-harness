@@ -61,6 +61,12 @@ from nano_harness.verified_tool_execution_v2 import (
 from nano_harness.verified_tool_execution_v2 import (
     run as run_verified_tool_execution_v2,
 )
+from nano_harness.grounded_calculator_canary import (
+    load_config as load_grounded_calculator_canary_config,
+)
+from nano_harness.grounded_calculator_canary import (
+    run as run_grounded_calculator_canary,
+)
 
 
 def main() -> None:
@@ -147,6 +153,10 @@ def main() -> None:
         "verified-tool-execution-v2"
     )
     verified_tool_v2_parser.add_argument("--config", required=True)
+    grounded_calculator_canary_parser = subparsers.add_parser(
+        "grounded-calculator-canary"
+    )
+    grounded_calculator_canary_parser.add_argument("--config", required=True)
 
     args = parser.parse_args()
     if args.command == "run":
@@ -204,6 +214,12 @@ def main() -> None:
             os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
         summary = run_verified_tool_execution_v2(
             load_verified_tool_execution_v2_config(args.config)
+        )
+    elif args.command == "grounded-calculator-canary":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_grounded_calculator_canary(
+            load_grounded_calculator_canary_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(
