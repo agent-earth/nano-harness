@@ -31,6 +31,9 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = (
     ROOT / "configs/harness/qwen35_semantic_skill_replication_v1.json"
 )
+PUBLIC_RESULT = (
+    ROOT / "docs/results/qwen35_semantic_skill_replication_v1.public.json"
+)
 
 
 def normalized_hash(text: str) -> str:
@@ -239,6 +242,53 @@ class SemanticSkillReplicationTests(unittest.TestCase):
         self.assertIn("中小整数", markdown)
         self.assertIn("parent prompt overlap：0", markdown)
         self.assertIn("不允许重跑已观察 canary", markdown)
+
+    def test_public_result_admits_preregistration_not_generation(self):
+        report = json.loads(PUBLIC_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(
+            report["arms"]["four_b_semantic_skills"]["correct"],
+            256,
+        )
+        self.assertEqual(report["arms"]["four_b_direct"]["correct"], 5)
+        self.assertEqual(report["arms"]["nine_b_direct"]["correct"], 4)
+        self.assertEqual(
+            report["routing"],
+            {
+                "prompt_routes": 256,
+                "single_tool_exposures": 256,
+                "verified_executions": 256,
+                "plan_retries": 0,
+                "fallbacks": 0,
+                "final_feedback_calls": 256,
+                "feedback_result_matches": 256,
+            },
+        )
+        versus_four = report["comparisons"]["harness_vs_four_b"]
+        versus_nine = report["comparisons"]["harness_vs_nine_b"]
+        self.assertEqual(versus_four["paired_counts"]["candidate_only"], 251)
+        self.assertEqual(versus_four["paired_counts"]["baseline_only"], 0)
+        self.assertGreater(versus_four["paired_bootstrap_95_ci"][0], 0)
+        self.assertEqual(versus_nine["paired_counts"]["candidate_only"], 252)
+        self.assertEqual(versus_nine["paired_counts"]["baseline_only"], 0)
+        self.assertGreater(versus_nine["paired_bootstrap_95_ci"][0], 0)
+        decision = report["decision"]
+        self.assertTrue(decision["replication_admitted"])
+        self.assertTrue(
+            decision["real_task_transfer_preregistration_allowed"]
+        )
+        self.assertFalse(decision["real_task_generation_allowed"])
+        self.assertFalse(decision["canary_rerun_allowed"])
+        self.assertFalse(decision["benchmark_generation_allowed"])
+        self.assertFalse(decision["independent_holdout_allowed"])
+        self.assertFalse(decision["training_allowed"])
+        self.assertFalse(
+            decision["further_tuning_or_rerun_on_observed_cases_allowed"]
+        )
+        self.assertEqual(
+            report["data"]["benchmark_canary_holdout_rows_or_outputs"],
+            0,
+        )
+        self.assertEqual(report["data"]["training_eligible_cases"], 0)
 
 
 if __name__ == "__main__":
