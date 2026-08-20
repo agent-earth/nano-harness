@@ -85,6 +85,12 @@ from nano_harness.semantic_skill_applicability import (
 from nano_harness.semantic_skill_applicability import (
     run as run_semantic_skill_applicability,
 )
+from nano_harness.semantic_model_router import (
+    load_config as load_semantic_model_router_config,
+)
+from nano_harness.semantic_model_router import (
+    run as run_semantic_model_router,
+)
 
 
 def main() -> None:
@@ -187,6 +193,10 @@ def main() -> None:
         "semantic-skill-applicability"
     )
     semantic_skill_applicability_parser.add_argument("--config", required=True)
+    semantic_model_router_parser = subparsers.add_parser(
+        "semantic-model-router"
+    )
+    semantic_model_router_parser.add_argument("--config", required=True)
 
     args = parser.parse_args()
     if args.command == "run":
@@ -266,6 +276,12 @@ def main() -> None:
     elif args.command == "semantic-skill-applicability":
         summary = run_semantic_skill_applicability(
             load_semantic_skill_applicability_config(args.config)
+        )
+    elif args.command == "semantic-model-router":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_semantic_model_router(
+            load_semantic_model_router_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(
