@@ -31,6 +31,9 @@ from scripts.render_router_adapter_service_v1 import build_receipt as build_serv
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/harness/qwen35_router_adapter_integration_v1.json"
+PUBLIC_RESULT = (
+    ROOT / "docs/results/qwen35_router_adapter_integration_v1.public.json"
+)
 
 
 class RouterAdapterIntegrationTests(unittest.TestCase):
@@ -333,6 +336,61 @@ class RouterAdapterIntegrationTests(unittest.TestCase):
         ):
             gates = admission_gates(raw, losing, comparison)
         self.assertFalse(gates["candidate_vs_four_b_maximum_losses"])
+
+    def test_public_result_rejects_unsupported_route_collapse(self):
+        report = json.loads(PUBLIC_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(
+            report["routing"],
+            {
+                "cases": 128,
+                "correct": 64,
+                "positive_cases": 64,
+                "positive_correct": 64,
+                "negative_cases": 64,
+                "negative_c_correct": 0,
+                "negative_false_positive_routes": 64,
+                "verified_executions": 64,
+                "fallbacks": 64,
+            },
+        )
+        self.assertEqual(
+            report["confusion"],
+            [
+                {
+                    "expected_label": "A",
+                    "selected_label": "A",
+                    "cases": 32,
+                },
+                {
+                    "expected_label": "B",
+                    "selected_label": "B",
+                    "cases": 32,
+                },
+                {
+                    "expected_label": "C",
+                    "selected_label": "A",
+                    "cases": 64,
+                },
+            ],
+        )
+        decision = report["decision"]
+        self.assertFalse(decision["adapter_integration_admitted"])
+        self.assertFalse(
+            decision["question_only_scan_preregistration_allowed"]
+        )
+        self.assertFalse(decision["question_only_scan_generation_allowed"])
+        self.assertFalse(decision["benchmark_generation_allowed"])
+        self.assertFalse(decision["training_or_rl_allowed"])
+        self.assertTrue(decision["gates"]["router_a_recall_32"])
+        self.assertTrue(decision["gates"]["router_b_recall_32"])
+        self.assertFalse(decision["gates"]["router_c_precision_64"])
+        self.assertFalse(
+            decision["gates"]["negative_false_positive_routes_zero"]
+        )
+        self.assertFalse(decision["gates"]["fallbacks_zero"])
+        self.assertTrue(
+            decision["gates"]["candidate_vs_nine_b_significant"]
+        )
 
 
 if __name__ == "__main__":

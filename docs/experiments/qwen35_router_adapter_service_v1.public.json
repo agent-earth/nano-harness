@@ -1,0 +1,53 @@
+{
+  "adapter_config_sha256": "21be3fad7bb20d9c475ac6c0f317813c2160b3419433b40ca2d3d6c387ea3f49",
+  "adapter_model_sha256": "8dfe3a89bf20325a50b9a4c168c4e9039c5f7e84721dd8d5f8b21e3ad829b9ec",
+  "adapter_sha256": "48d72666cf269f64825791801c71aad5ae1d9e97cbc70574c216b12974e46e63",
+  "base_model": "qwen3.5-4b",
+  "benchmark_accessed": false,
+  "canary_accessed": false,
+  "claim_boundary": "This receipt proves only exact base-plus-LoRA service readiness. It contains no model generation or quality evidence.",
+  "config_sha256": "4eb7000201530ecb2ced96f4b1d490d115f4c1e1c6a6cb008cf64d5dc403d4c4",
+  "evaluation_started": false,
+  "experiment_id": "qwen35-router-adapter-integration-v1",
+  "generation_started": false,
+  "health_sha256": "a6a326e1e0d583730275a2fb6398b5b17382a7a39aa37563e030961c89762eaf",
+  "healthy": true,
+  "holdout_accessed": false,
+  "models": {
+    "qwen3.5-4b": {
+      "max_model_len": 4096,
+      "owned_by": "vllm",
+      "parent": null,
+      "root": "../../../models/Qwen3.5-4B"
+    },
+    "qwen3.5-router-v1": {
+      "max_model_len": null,
+      "owned_by": "vllm",
+      "parent": "qwen3.5-4b",
+      "root": "../nano-train-fullstack-traex-03/artifacts/qwen35-router-classification-sft-smoke-v1/adapter"
+    }
+  },
+  "preregister_sha256": "ed5c4e6800385e7a4bfce0aed027bd1f81a6854bb1ed5b3f6aa0cc6e808491f3",
+  "recorded_unix": 1787227533,
+  "schema_version": "nano_harness_router_adapter_service_v1",
+  "served_adapter_name": "qwen3.5-router-v1",
+  "service_revision": "cf8abe8330215a15573f2b6157a140563bc44fca",
+  "serving": {
+    "base_url": "http://127.0.0.1:8000/v1",
+    "dtype": "float16",
+    "enable_lora": true,
+    "enforce_eager": true,
+    "gpu_index": 0,
+    "gpu_memory_utilization": 0.85,
+    "host": "127.0.0.1",
+    "max_lora_rank": 8,
+    "max_loras": 1,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 4096,
+    "max_num_seqs": 1,
+    "port": 8000,
+    "served_base_model": "qwen3.5-4b",
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "vllm_version": "0.19.1"
+  }
+}
