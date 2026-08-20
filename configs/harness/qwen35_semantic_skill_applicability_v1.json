@@ -1,0 +1,52 @@
+{
+  "complete_case_manifest_path": "configs/generated/qwen35_complete_direct_v1_cases.public.json",
+  "complete_case_manifest_sha256": "858656f58decf8bbc23c70101dabcffc6ef12e049771e043575927743c6cfd10",
+  "complete_manifest_path": "configs/baselines/qwen35_complete_direct_v1.yaml",
+  "complete_manifest_sha256": "6ec49d522892975e4532954d3bac7c7e5ed9b24e2c698700d5f8a61667753e90",
+  "complete_report_path": "docs/results/qwen35_complete_direct_v1.public.json",
+  "complete_report_sha256": "c9e622872d6ecd87350475011dcd19534c4f574a2999e69541d9b66ae0985152",
+  "dataset_root": "../../../datasets",
+  "execution_boundary": {
+    "benchmark_generation_started": false,
+    "canary_rerun_started": false,
+    "holdout_accessed": false,
+    "model_generation_started": false,
+    "scan_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "expected_cases_by_benchmark": {
+    "gpqa_diamond": 198,
+    "gsm8k": 1319,
+    "mmlu": 14042
+  },
+  "experiment_id": "qwen35-semantic-skill-applicability-v1",
+  "mechanism_config_path": "configs/harness/qwen35_semantic_skill_execution_v1.json",
+  "mechanism_config_sha256": "4e5785b9b4fc9dd5b3a76a95b438c2f2c3d505a2fae6231b81cfbf53ebbd6ad9",
+  "mechanism_report_path": "docs/results/qwen35_semantic_skill_execution_v1.public.json",
+  "mechanism_report_sha256": "fe53a512cbf0b6ada65ed3ae27c5f3dc90165e367cfecdb58307dd030d017d5f",
+  "minimum_eligible_rows_for_transfer": 1,
+  "output_path": "results/harness/qwen35-semantic-skill-applicability-v1/result.json",
+  "policy": {
+    "evaluation_only": true,
+    "loads_answer_columns": false,
+    "loads_choices_column": false,
+    "loads_model_outputs": false,
+    "loads_question_column_only": true,
+    "post_scan_route_or_extractor_change": false,
+    "router_uses_case_metadata": false,
+    "scan_only": true,
+    "training_eligible": false,
+    "uses_case_correctness": false,
+    "uses_expected_answer": false
+  },
+  "question_column_by_benchmark": {
+    "gpqa_diamond": "question",
+    "gsm8k": "question",
+    "mmlu": "question"
+  },
+  "replication_report_path": "docs/results/qwen35_semantic_skill_replication_v1.public.json",
+  "replication_report_sha256": "da143f04a30775f73a147374844deb3b7b0534a0d2bd40a55cc9af9fc14335f0",
+  "schema_version": "nano_harness_semantic_skill_applicability_v1",
+  "source_fact_extractor": "exact_labeled_integer_fields_v1"
+}

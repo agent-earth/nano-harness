@@ -79,6 +79,12 @@ from nano_harness.semantic_skill_replication import (
 from nano_harness.semantic_skill_replication import (
     run as run_semantic_skill_replication,
 )
+from nano_harness.semantic_skill_applicability import (
+    load_config as load_semantic_skill_applicability_config,
+)
+from nano_harness.semantic_skill_applicability import (
+    run as run_semantic_skill_applicability,
+)
 
 
 def main() -> None:
@@ -177,6 +183,10 @@ def main() -> None:
         "semantic-skill-replication"
     )
     semantic_skill_replication_parser.add_argument("--config", required=True)
+    semantic_skill_applicability_parser = subparsers.add_parser(
+        "semantic-skill-applicability"
+    )
+    semantic_skill_applicability_parser.add_argument("--config", required=True)
 
     args = parser.parse_args()
     if args.command == "run":
@@ -252,6 +262,10 @@ def main() -> None:
             os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
         summary = run_semantic_skill_replication(
             load_semantic_skill_replication_config(args.config)
+        )
+    elif args.command == "semantic-skill-applicability":
+        summary = run_semantic_skill_applicability(
+            load_semantic_skill_applicability_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(
