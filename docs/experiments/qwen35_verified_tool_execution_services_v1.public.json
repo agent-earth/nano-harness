@@ -1,0 +1,48 @@
+{
+  "benchmark_accessed": false,
+  "canary_accessed": false,
+  "claim_boundary": "This receipt establishes only exact local serving readiness. It is not model generation, harness quality, benchmark, canary, or holdout evidence.",
+  "evaluation_started": false,
+  "experiment_id": "qwen35-verified-tool-execution-v1",
+  "generation_started": false,
+  "identity": {
+    "config_sha256": "538cbcde51ccb8ad43e4f91db4201a2ffd835c1493a5b2bd58177db7dcab3cd3",
+    "four_b_model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "four_b_model_index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+    "nine_b_model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+    "nine_b_model_index_sha256": "26d3539b516be613f39563617cb9d33b3f83d401298125be392c80cefb8f7fe5",
+    "preregister_sha256": "97c2b54ca691708149b9e987e65dc88df829a953bf33edb4ed0c0c78f6fd0dfb",
+    "service_revision": "d90e251375900e127c57361dd1146340a9b5ca0e"
+  },
+  "models": {
+    "qwen3.5-4b": {
+      "gpu_index": 0,
+      "health_sha256": "6ecdb0b39b6e692701c03ea073efbeeca6e5f723e1514da1b7a621989964dbee",
+      "max_model_len": 4096,
+      "port": 8000,
+      "root": "../../../models/Qwen3.5-4B",
+      "served_model": "qwen3.5-4b"
+    },
+    "qwen3.5-9b": {
+      "gpu_index": 1,
+      "health_sha256": "ca87bb18b2b1f0b791eff5b80c9a2f883935db8dce9fb88fc2d3351d5a8bf36c",
+      "max_model_len": 4096,
+      "port": 8001,
+      "root": "../../../models/Qwen3.5-9B",
+      "served_model": "qwen3.5-9b"
+    }
+  },
+  "recorded_unix": 1787212743,
+  "schema_version": "nano_harness_verified_tool_services_v1",
+  "serving": {
+    "dtype": "float16",
+    "enforce_eager": true,
+    "gpu_memory_utilization": 0.85,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 4096,
+    "max_num_seqs": 1,
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "triton_libcuda_sha256": "f2470aa637fa72422534edeaeb9de19afe3d0646388baf7ffb5337b2edafc59e",
+    "vllm_version": "0.19.1"
+  }
+}
