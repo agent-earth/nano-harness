@@ -91,6 +91,12 @@ from nano_harness.semantic_model_router import (
 from nano_harness.semantic_model_router import (
     run as run_semantic_model_router,
 )
+from nano_harness.semantic_binary_detectors import (
+    load_config as load_semantic_binary_detectors_config,
+)
+from nano_harness.semantic_binary_detectors import (
+    run as run_semantic_binary_detectors,
+)
 
 
 def main() -> None:
@@ -197,6 +203,10 @@ def main() -> None:
         "semantic-model-router"
     )
     semantic_model_router_parser.add_argument("--config", required=True)
+    semantic_binary_detectors_parser = subparsers.add_parser(
+        "semantic-binary-detectors"
+    )
+    semantic_binary_detectors_parser.add_argument("--config", required=True)
 
     args = parser.parse_args()
     if args.command == "run":
@@ -282,6 +292,12 @@ def main() -> None:
             os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
         summary = run_semantic_model_router(
             load_semantic_model_router_config(args.config)
+        )
+    elif args.command == "semantic-binary-detectors":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_semantic_binary_detectors(
+            load_semantic_binary_detectors_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(
