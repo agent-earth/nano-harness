@@ -30,6 +30,9 @@ from scripts.preregister_semantic_skill_execution_v1 import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/harness/qwen35_semantic_skill_execution_v1.json"
+PUBLIC_RESULT = (
+    ROOT / "docs/results/qwen35_semantic_skill_execution_v1.public.json"
+)
 
 
 class SemanticSkillExecutionTests(unittest.TestCase):
@@ -320,6 +323,70 @@ class SemanticSkillExecutionTests(unittest.TestCase):
         self.assertIn("Typed Semantic Skill", markdown)
         self.assertIn("prompt marker", markdown)
         self.assertIn("canary accessed：false", markdown)
+
+    def test_public_result_admits_only_fresh_local_replication(self):
+        report = json.loads(PUBLIC_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(
+            report["arms"]["four_b_semantic_skills"]["correct"],
+            256,
+        )
+        self.assertEqual(report["arms"]["four_b_direct"]["correct"], 0)
+        self.assertEqual(report["arms"]["nine_b_direct"]["correct"], 0)
+        self.assertEqual(
+            report["routing"],
+            {
+                "prompt_routes": 256,
+                "single_tool_exposures": 256,
+                "verified_executions": 256,
+                "plan_retries": 0,
+                "fallbacks": 0,
+                "final_feedback_calls": 256,
+                "feedback_result_matches": 256,
+            },
+        )
+        for name in ("harness_vs_four_b", "harness_vs_nine_b"):
+            comparison = report["comparisons"][name]
+            self.assertEqual(comparison["delta"], 1.0)
+            self.assertEqual(
+                comparison["paired_bootstrap_95_ci"],
+                [1.0, 1.0],
+            )
+            self.assertEqual(
+                comparison["paired_counts"]["candidate_only"],
+                256,
+            )
+            self.assertEqual(
+                comparison["paired_counts"]["baseline_only"],
+                0,
+            )
+        decision = report["decision"]
+        self.assertTrue(decision["local_semantic_skill_admitted"])
+        self.assertTrue(
+            decision["fresh_local_replication_preregistration_allowed"]
+        )
+        self.assertFalse(
+            decision["fresh_local_replication_generation_allowed"]
+        )
+        self.assertFalse(decision["canary_allowed"])
+        self.assertFalse(decision["benchmark_allowed"])
+        self.assertFalse(decision["independent_holdout_allowed"])
+        self.assertFalse(decision["training_allowed"])
+        self.assertFalse(
+            decision["further_tuning_or_rerun_on_observed_cases_allowed"]
+        )
+        self.assertEqual(
+            report["data"]["benchmark_canary_holdout_rows_or_outputs"],
+            0,
+        )
+        self.assertEqual(report["data"]["training_eligible_cases"], 0)
+        self.assertEqual(len(report["interrupted_preflights"]), 2)
+        self.assertTrue(
+            all(
+                row["model_generation_started"] is False
+                and row["result_artifact_created"] is False
+                for row in report["interrupted_preflights"]
+            )
+        )
 
 
 if __name__ == "__main__":
