@@ -49,6 +49,12 @@ from nano_harness.verified_choice_full import (
     load_config as load_verified_choice_full_config,
 )
 from nano_harness.verified_choice_full import run as run_verified_choice_full
+from nano_harness.verified_tool_execution import (
+    load_config as load_verified_tool_execution_config,
+)
+from nano_harness.verified_tool_execution import (
+    run as run_verified_tool_execution,
+)
 
 
 def main() -> None:
@@ -127,6 +133,10 @@ def main() -> None:
         "choice-exact-replication-eval"
     )
     choice_exact_replication_parser.add_argument("--config", required=True)
+    verified_tool_parser = subparsers.add_parser(
+        "verified-tool-execution"
+    )
+    verified_tool_parser.add_argument("--config", required=True)
 
     args = parser.parse_args()
     if args.command == "run":
@@ -172,6 +182,12 @@ def main() -> None:
             os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
         summary = run_choice_exact_replication_eval(
             load_choice_exact_replication_eval_config(args.config)
+        )
+    elif args.command == "verified-tool-execution":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_verified_tool_execution(
+            load_verified_tool_execution_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(
