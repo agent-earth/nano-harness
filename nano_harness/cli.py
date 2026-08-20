@@ -127,6 +127,12 @@ from nano_harness.router_adapter_integration_v3 import (
 from nano_harness.router_adapter_integration_v3 import (
     run as run_router_adapter_integration_v3,
 )
+from nano_harness.router_skill_fallback_v4 import (
+    load_config as load_router_skill_fallback_v4_config,
+)
+from nano_harness.router_skill_fallback_v4 import (
+    run as run_router_skill_fallback_v4,
+)
 
 
 def main() -> None:
@@ -257,6 +263,10 @@ def main() -> None:
         "router-adapter-integration-v3"
     )
     router_adapter_integration_v3_parser.add_argument("--config", required=True)
+    router_skill_fallback_v4_parser = subparsers.add_parser(
+        "router-skill-fallback-v4"
+    )
+    router_skill_fallback_v4_parser.add_argument("--config", required=True)
 
     args = parser.parse_args()
     if args.command == "run":
@@ -378,6 +388,12 @@ def main() -> None:
             os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
         summary = run_router_adapter_integration_v3(
             load_router_adapter_integration_v3_config(args.config)
+        )
+    elif args.command == "router-skill-fallback-v4":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_router_skill_fallback_v4(
+            load_router_skill_fallback_v4_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(
