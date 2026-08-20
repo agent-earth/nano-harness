@@ -109,6 +109,12 @@ from nano_harness.router_serving_parity import (
 from nano_harness.router_serving_parity import (
     run as run_router_serving_parity,
 )
+from nano_harness.router_serving_parity_v2 import (
+    load_config as load_router_serving_parity_v2_config,
+)
+from nano_harness.router_serving_parity_v2 import (
+    run as run_router_serving_parity_v2,
+)
 from nano_harness.router_adapter_integration_v2 import (
     load_config as load_router_adapter_integration_v2_config,
 )
@@ -233,6 +239,10 @@ def main() -> None:
         "router-serving-parity"
     )
     router_serving_parity_parser.add_argument("--config", required=True)
+    router_serving_parity_v2_parser = subparsers.add_parser(
+        "router-serving-parity-v2"
+    )
+    router_serving_parity_v2_parser.add_argument("--config", required=True)
     router_adapter_integration_v2_parser = subparsers.add_parser(
         "router-adapter-integration-v2"
     )
@@ -340,6 +350,12 @@ def main() -> None:
             os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
         summary = run_router_serving_parity(
             load_router_serving_parity_config(args.config)
+        )
+    elif args.command == "router-serving-parity-v2":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_router_serving_parity_v2(
+            load_router_serving_parity_v2_config(args.config)
         )
     elif args.command == "router-adapter-integration-v2":
         if not os.getenv("NANO_HARNESS_API_KEY"):
