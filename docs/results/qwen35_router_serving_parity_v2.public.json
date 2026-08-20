@@ -1,0 +1,172 @@
+{
+  "claim_boundary": "This is serving-parity evidence on already observed SFT dev rows. It is not fresh-transfer, benchmark, canary, holdout, training, RL, or model-superiority evidence.",
+  "data": {
+    "benchmark_rows_or_outputs": 0,
+    "c_subtype_counts": {
+      "box_total": 64,
+      "paired_average": 64,
+      "percentage_change": 64,
+      "quotient_remainder": 64,
+      "remaining_stock": 64,
+      "single_operation": 64,
+      "time_conversion": 64,
+      "weighted_total": 64
+    },
+    "canary_rows_or_outputs": 0,
+    "fresh_integration_rows_or_outputs": 0,
+    "hf_post_exact": 1536,
+    "holdout_rows_or_outputs": 0,
+    "label_counts": {
+      "A": 512,
+      "B": 512,
+      "C": 512
+    },
+    "maximum_input_tokens": 146,
+    "rows": 1536,
+    "source": "already_observed_sft_validation_only"
+  },
+  "decision": {
+    "benchmark_allowed": false,
+    "canary_allowed": false,
+    "fresh_integration_v3_generation_allowed": false,
+    "fresh_integration_v3_preregistration_allowed": true,
+    "gates": {
+      "all_outputs_parseable_1536": true,
+      "each_c_subtype_exact_and_hf_match_64": true,
+      "each_label_exact_and_hf_match_512": true,
+      "remap_tensor_content_unchanged": true,
+      "remapped_complete_1536": true,
+      "remapped_exact_1536": true,
+      "remapped_hf_output_match_1536": true
+    },
+    "holdout_allowed": false,
+    "next_action": "Pre-register one history-disjoint integration v3 using the admitted remapped adapter. Do not generate before commit.",
+    "observed_integration_v1_or_v2_rerun_allowed": false,
+    "real_question_scan_allowed": false,
+    "remapped_adapter_serving_admitted": true,
+    "training_or_rl_allowed": false
+  },
+  "evaluation_boundary": {
+    "benchmark_outputs_loaded": false,
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "fresh_integration_outputs_loaded": false,
+    "fresh_integration_rows_loaded": false,
+    "holdout_rows_loaded": false,
+    "only_observed_sft_validation_rows_loaded": true,
+    "training_eligible_cases": 0
+  },
+  "experiment_id": "qwen35-router-serving-parity-v2",
+  "identity": {
+    "case_contract_sha256": "9b295456d56c7cb7d6acf2ecf2666ab50ad1fe564852080288ab31e9a36422d0",
+    "config_sha256": "10f351e9e7209695a5a66f79b18a7265a7da3c66410be21fef584f0474e28b3b",
+    "original_adapter_sha256": "c40b6ab8811f162b60e6e290c7a9defbc0c013b239282bfbe8313eb986524c04",
+    "preregister_sha256": "0ab39b8deb0269b9db171660c47bd16fe6fcd5bb8883b3879eacbc826ecece63",
+    "raw_result_sha256": "df856042081d61a17ec71cb90ef47e83ebe8460084c901f770eda66347c9bc94",
+    "remap_receipt_sha256": "e438d0b6ad5eae3822ab53fac3cd6898bb7eb5247830126e4da5a62e6b3e41f5",
+    "remapped_adapter_sha256": "cea357d281ed100437268e213564fc5a5c00e6024b0c7a4be207cc686453e3f9",
+    "result_revision": "91de2bb321c876d3bbf308d4cc97cfb495872555",
+    "service_receipt_sha256": "c7ba00646eba567646c35fe5d558bf60eb125f688791125d3aa92dde585b17be"
+  },
+  "namespace_audit": {
+    "original_adapter_weights_sha256": "c65868ea448cfef36577c6af3eedc88f9a9b4cb9ec6ca5be0ec9d6d929000b71",
+    "original_example_key": "base_model.model.model.layers.0.mlp.down_proj.lora_A.weight",
+    "original_parsed_module": "model.layers.0.mlp.down_proj",
+    "remapped_adapter_weights_sha256": "9566725bc8f7e2d607a0f0a3f20443c35ffa5fb2174a5aca3e5cf1797cfd3e90",
+    "remapped_example_key": "base_model.model.language_model.model.layers.0.mlp.down_proj.lora_A.weight",
+    "remapped_parsed_module": "language_model.model.layers.0.mlp.down_proj",
+    "root_cause_already_established_by": "docs/results/qwen35_router_serving_parity_v1.public.json",
+    "source_prefix": "base_model.model.model.layers.",
+    "target_prefix": "base_model.model.language_model.model.layers.",
+    "tensor_content_hashes_match": true,
+    "tensor_count": 224,
+    "vllm_source_files": {
+      "../../.venv/lib/python3.11/site-packages/vllm/lora/lora_model.py": "5b8da6cd6dc5c63d2974ff2eec7157db6c8657d0aa21a93755c8345e03674a0d",
+      "../../.venv/lib/python3.11/site-packages/vllm/lora/utils.py": "f0fd4df62c028e2d408edf7020dae7374ff0c2f3d3f878315f96f869c26e65b4",
+      "../../.venv/lib/python3.11/site-packages/vllm/lora/worker_manager.py": "8d457a062d6e02b6630a6bfc721d70269afa56d1a97511d0e6b4b4946519fe85",
+      "../../.venv/lib/python3.11/site-packages/vllm/model_executor/models/qwen3_5.py": "5ce2151170c38c2a2718e3a9386598c0660d30db5ab8844fd284e08633ebc904",
+      "../../.venv/lib/python3.11/site-packages/vllm/model_executor/models/qwen3_vl.py": "78ef9783baa036b471fe3773d709ecfb631523e17c6013a5b31ba659df86438a"
+    },
+    "vllm_text_module_prefix": "language_model.model.layers."
+  },
+  "schema_version": "nano_harness_router_serving_parity_public_v2",
+  "summary": {
+    "accuracy": 1.0,
+    "by_family": {
+      "router_a": {
+        "exact": 512,
+        "hf_output_matches": 512,
+        "samples": 512
+      },
+      "router_b": {
+        "exact": 512,
+        "hf_output_matches": 512,
+        "samples": 512
+      },
+      "router_c": {
+        "exact": 512,
+        "hf_output_matches": 512,
+        "samples": 512
+      }
+    },
+    "c_by_subtype": {
+      "box_total": {
+        "exact": 64,
+        "hf_output_matches": 64,
+        "samples": 64
+      },
+      "paired_average": {
+        "exact": 64,
+        "hf_output_matches": 64,
+        "samples": 64
+      },
+      "percentage_change": {
+        "exact": 64,
+        "hf_output_matches": 64,
+        "samples": 64
+      },
+      "quotient_remainder": {
+        "exact": 64,
+        "hf_output_matches": 64,
+        "samples": 64
+      },
+      "remaining_stock": {
+        "exact": 64,
+        "hf_output_matches": 64,
+        "samples": 64
+      },
+      "single_operation": {
+        "exact": 64,
+        "hf_output_matches": 64,
+        "samples": 64
+      },
+      "time_conversion": {
+        "exact": 64,
+        "hf_output_matches": 64,
+        "samples": 64
+      },
+      "weighted_total": {
+        "exact": 64,
+        "hf_output_matches": 64,
+        "samples": 64
+      }
+    },
+    "exact": 1536,
+    "hf_output_matches": 1536,
+    "samples": 1536
+  },
+  "tokenizer_audit": {
+    "adapter_tokenizer_json_sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "base_tokenizer_json_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+    "checks": {
+      "all_case_prompt_ids_equal": true,
+      "all_target_ids_equal": true,
+      "chat_template_equal": true,
+      "class_equal": true,
+      "length_equal": true,
+      "special_tokens_equal": true,
+      "vocab_equal": true
+    },
+    "semantic_equivalence_passed": true
+  }
+}
