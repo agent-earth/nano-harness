@@ -194,11 +194,21 @@ def build_report() -> dict:
             if (
                 skill.get("schema_version")
                 != "nano_harness_router_c_skill_receipt_v4"
-                or skill.get("executed") is not True
                 or skill.get("executor_uses_expected_answer") is not False
                 or skill.get("executor_uses_case_correctness") is not False
                 or skill.get("selector_uses_case_metadata") is not False
-                or receipt.get("fallback_used") is not False
+                or (
+                    skill.get("executed") is True
+                    and receipt.get("fallback_used") is not False
+                )
+                or (
+                    skill.get("executed") is not True
+                    and (
+                        skill.get("eligible") is not False
+                        or not skill.get("reason")
+                        or receipt.get("fallback_used") is not True
+                    )
+                )
             ):
                 raise ValueError("router skill fallback v4 C receipt differs")
         else:
@@ -287,6 +297,42 @@ def build_report() -> dict:
         }
         for family in families
     }
+    c_failure_analysis = {
+        family: {
+            "cases": sum(case["family"] == family for case in cases),
+            "executed": sum(
+                case["family"] == family
+                and bool(
+                    raw["receipts"][case["case_id"]]
+                    .get("c_skill_receipt", {})
+                    .get("executed")
+                )
+                for case in cases
+            ),
+            "fallbacks": sum(
+                case["family"] == family
+                and bool(
+                    raw["receipts"][case["case_id"]].get("fallback_used")
+                )
+                for case in cases
+            ),
+            "failure_reasons": dict(
+                sorted(
+                    Counter(
+                        raw["receipts"][case["case_id"]]
+                        .get("c_skill_receipt", {})
+                        .get("reason")
+                        for case in cases
+                        if case["family"] == family
+                        and not raw["receipts"][case["case_id"]]
+                        .get("c_skill_receipt", {})
+                        .get("executed")
+                    ).items()
+                )
+            ),
+        }
+        for family in C_FAMILIES
+    }
     return {
         "schema_version": "nano_harness_router_skill_fallback_public_v4",
         "experiment_id": config.experiment_id,
@@ -314,6 +360,7 @@ def build_report() -> dict:
         "arms": arms,
         "routing": raw["routing"],
         "routing_by_family": routing_by_family,
+        "c_skill_failure_analysis": c_failure_analysis,
         "comparisons": {
             "candidate_vs_four_b": candidate_vs_four,
             "candidate_vs_nine_b": candidate_vs_nine,
@@ -336,6 +383,24 @@ def build_report() -> dict:
                 else
                 "Reject V4. Do not rerun or tune V1-V4."
             ),
+        },
+        "mechanism_conclusion": {
+            "router_transfer_succeeded": raw["routing"]["correct"] == 160,
+            "ab_verified_execution_succeeded": (
+                raw["routing"]["ab_verified_executions"] == 32
+            ),
+            "shared_c_skill_selector_admitted": (
+                raw["routing"]["c_skill_executions"] == 128
+                and raw["routing"]["fallbacks"] == 0
+            ),
+            "failed_c_skill_cases": 128
+            - raw["routing"]["c_skill_executions"],
+            "dominant_failures": {
+                family: row["fallbacks"]
+                for family, row in c_failure_analysis.items()
+                if row["fallbacks"]
+            },
+            "post_observation_skill_prompt_or_schema_tuning_allowed": False,
         },
         "evaluation_boundary": raw["evaluation_boundary"],
         "claim_boundary": (
@@ -373,6 +438,18 @@ with eight typed, deterministic skills on 160 history-disjoint prompts.
 {json.dumps(report['routing_by_family'], indent=2, sort_keys=True)}
 ```
 
+## C Skill Failures
+
+```json
+{json.dumps(report['c_skill_failure_analysis'], indent=2, sort_keys=True)}
+```
+
+The router remains correct on all 160 cases and A/B verified execution remains
+32/32. The shared eight-skill selector executes 108/128 C cases; all 16
+quotient cases and four single-operation cases fall back after typed
+source-fact mismatch. The deterministic executors are not the failed
+component.
+
 ## Paired Comparisons
 
 | Comparison | Delta | 95% CI | Wins | Losses | McNemar p |
@@ -398,6 +475,10 @@ with eight typed, deterministic skills on 160 history-disjoint prompts.
 V1-V4 cannot be rerun. Passing permits only a separately pre-registered
 benchmark treatment. Benchmark generation, canary, holdout, training, and RL
 remain closed.
+
+```json
+{json.dumps(report['mechanism_conclusion'], indent=2, sort_keys=True)}
+```
 
 ## Evidence
 

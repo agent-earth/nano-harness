@@ -1,0 +1,44 @@
+{
+  "benchmark_accessed": false,
+  "canary_accessed": false,
+  "claim_boundary": "This receipt proves only 4B, 9B, and remapped-router service readiness for V4. It contains no generation or quality evidence.",
+  "config_sha256": "240b6e5273c5c0bd111e5c76fa3ab37697f19f6d7666d64129ecdb6d00563f89",
+  "experiment_id": "qwen35-router-skill-fallback-v4",
+  "four_health_sha256": "a06987513bc20ca48e2a54cc095222f7a711521e59f779cd86e0369b6b9f77b8",
+  "healthy": true,
+  "holdout_accessed": false,
+  "integration_v1_v2_v3_rerun": false,
+  "model_health": {
+    "qwen3.5-4b": {
+      "max_model_len": 4096,
+      "owned_by": "vllm",
+      "parent": null,
+      "root": "../../../models/Qwen3.5-4B"
+    },
+    "qwen3.5-9b": {
+      "max_model_len": 4096,
+      "owned_by": "vllm",
+      "parent": null,
+      "root": "../../../models/Qwen3.5-9B"
+    },
+    "qwen3.5-router-negative-diversity-v2-remapped": {
+      "max_model_len": null,
+      "owned_by": "vllm",
+      "parent": "qwen3.5-4b",
+      "root": "results/serving/qwen35-router-negative-diversity-v2-remapped"
+    }
+  },
+  "models": {
+    "four_b_base": "qwen3.5-4b",
+    "nine_b_base": "qwen3.5-9b",
+    "remapped_router": "qwen3.5-router-negative-diversity-v2-remapped"
+  },
+  "nine_health_sha256": "64e48409057ab5f0eef3cca5c1d35d84d8a0a8654b79ec9f1b2e7743a0fd7d46",
+  "preregister_sha256": "00a1db518d93219b8fff86651adbc0bb5589522d19f1ebf81d4050103eb7f2ae",
+  "recorded_unix": 1787240703,
+  "remapped_adapter_sha256": "cea357d281ed100437268e213564fc5a5c00e6024b0c7a4be207cc686453e3f9",
+  "remapped_adapter_weights_sha256": "9566725bc8f7e2d607a0f0a3f20443c35ffa5fb2174a5aca3e5cf1797cfd3e90",
+  "schema_version": "nano_harness_router_skill_fallback_v4_service",
+  "service_revision": "0e78b2a04477f2d3a872be2c01ebd581eff78828",
+  "v4_generation_started": false
+}

@@ -27,6 +27,7 @@ from scripts.preregister_router_skill_fallback_v4 import (
     render_markdown,
 )
 from scripts.render_router_skill_fallback_v4 import admission_gates
+from scripts.render_router_skill_fallback_v4 import build_report
 from scripts.render_router_skill_fallback_v4_service import (
     build_receipt as build_service,
 )
@@ -326,6 +327,32 @@ class RouterSkillFallbackV4Tests(unittest.TestCase):
         raw["routing"]["c_skill_executions"] = 127
         gates = admission_gates(raw, comparison, comparison)
         self.assertFalse(gates["c_skill_verified_executions_128"])
+
+    def test_public_result_preserves_v4_negative_evidence(self):
+        report = build_report()
+        self.assertFalse(
+            report["decision"]["router_skill_fallback_v4_admitted"]
+        )
+        self.assertEqual(report["routing"]["correct"], 160)
+        self.assertEqual(report["routing"]["ab_verified_executions"], 32)
+        self.assertEqual(report["routing"]["c_skill_executions"], 108)
+        self.assertEqual(report["routing"]["fallbacks"], 20)
+        self.assertEqual(
+            report["mechanism_conclusion"]["dominant_failures"],
+            {
+                "quotient_remainder": 16,
+                "single_operation": 4,
+            },
+        )
+        self.assertFalse(
+            report["mechanism_conclusion"][
+                "post_observation_skill_prompt_or_schema_tuning_allowed"
+            ]
+        )
+        self.assertEqual(
+            report["identity"]["raw_result_sha256"],
+            "b92bcf4c4bbb56c5247aa2bacf54a9161b041e9252e344d41a9af74271359354",
+        )
 
 
 if __name__ == "__main__":

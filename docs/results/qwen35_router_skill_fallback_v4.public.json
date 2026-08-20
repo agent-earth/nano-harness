@@ -1,0 +1,700 @@
+{
+  "arms": {
+    "four_b_direct": {
+      "accuracy": 0.25,
+      "by_family": {
+        "box_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "first_strict_profit_period": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "implicit_scale_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "paired_average": {
+          "cases": 16,
+          "correct": 15,
+          "parseable": 16
+        },
+        "percentage_change": {
+          "cases": 16,
+          "correct": 15,
+          "parseable": 16
+        },
+        "quotient_remainder": {
+          "cases": 16,
+          "correct": 2,
+          "parseable": 16
+        },
+        "remaining_stock": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "single_operation": {
+          "cases": 16,
+          "correct": 8,
+          "parseable": 16
+        },
+        "time_conversion": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "weighted_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        }
+      },
+      "cases": 160,
+      "correct": 40,
+      "parseable": 160
+    },
+    "four_b_router_skill_v4": {
+      "accuracy": 0.8875,
+      "by_family": {
+        "box_total": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "first_strict_profit_period": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "implicit_scale_total": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "paired_average": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "percentage_change": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "quotient_remainder": {
+          "cases": 16,
+          "correct": 2,
+          "parseable": 16
+        },
+        "remaining_stock": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "single_operation": {
+          "cases": 16,
+          "correct": 12,
+          "parseable": 16
+        },
+        "time_conversion": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        },
+        "weighted_total": {
+          "cases": 16,
+          "correct": 16,
+          "parseable": 16
+        }
+      },
+      "cases": 160,
+      "correct": 142,
+      "parseable": 160
+    },
+    "nine_b_direct": {
+      "accuracy": 0.275,
+      "by_family": {
+        "box_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "first_strict_profit_period": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "implicit_scale_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "paired_average": {
+          "cases": 16,
+          "correct": 15,
+          "parseable": 16
+        },
+        "percentage_change": {
+          "cases": 16,
+          "correct": 15,
+          "parseable": 16
+        },
+        "quotient_remainder": {
+          "cases": 16,
+          "correct": 6,
+          "parseable": 16
+        },
+        "remaining_stock": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "single_operation": {
+          "cases": 16,
+          "correct": 8,
+          "parseable": 16
+        },
+        "time_conversion": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        },
+        "weighted_total": {
+          "cases": 16,
+          "correct": 0,
+          "parseable": 16
+        }
+      },
+      "cases": 160,
+      "correct": 44,
+      "parseable": 160
+    }
+  },
+  "c_skill_failure_analysis": {
+    "box_total": {
+      "cases": 16,
+      "executed": 16,
+      "failure_reasons": {},
+      "fallbacks": 0
+    },
+    "paired_average": {
+      "cases": 16,
+      "executed": 16,
+      "failure_reasons": {},
+      "fallbacks": 0
+    },
+    "percentage_change": {
+      "cases": 16,
+      "executed": 16,
+      "failure_reasons": {},
+      "fallbacks": 0
+    },
+    "quotient_remainder": {
+      "cases": 16,
+      "executed": 0,
+      "failure_reasons": {
+        "source_facts_mismatch": 16
+      },
+      "fallbacks": 16
+    },
+    "remaining_stock": {
+      "cases": 16,
+      "executed": 16,
+      "failure_reasons": {},
+      "fallbacks": 0
+    },
+    "single_operation": {
+      "cases": 16,
+      "executed": 12,
+      "failure_reasons": {
+        "source_facts_mismatch": 4
+      },
+      "fallbacks": 4
+    },
+    "time_conversion": {
+      "cases": 16,
+      "executed": 16,
+      "failure_reasons": {},
+      "fallbacks": 0
+    },
+    "weighted_total": {
+      "cases": 16,
+      "executed": 16,
+      "failure_reasons": {},
+      "fallbacks": 0
+    }
+  },
+  "claim_boundary": "This is fresh synthetic evidence for a router plus eight typed C-skill fallback. It is not benchmark or final superiority evidence.",
+  "comparisons": {
+    "candidate_vs_four_b": {
+      "baseline_accuracy": 0.25,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-router-skill-fallback-v4:candidate-four",
+      "candidate_accuracy": 0.8875,
+      "candidate_only_case_ids": [
+        "router-skill-v4-box_total-062334d7df65b074",
+        "router-skill-v4-box_total-0c9d528cf51184af",
+        "router-skill-v4-box_total-2fde2cf88a52cc2e",
+        "router-skill-v4-box_total-333598e4c1ad7bb0",
+        "router-skill-v4-box_total-622776fa198eef8d",
+        "router-skill-v4-box_total-7491f1a161620f1c",
+        "router-skill-v4-box_total-7500886f0a6a193f",
+        "router-skill-v4-box_total-7894e52a84114916",
+        "router-skill-v4-box_total-78f26ae4c3d79e2a",
+        "router-skill-v4-box_total-80cc8e773b99deda",
+        "router-skill-v4-box_total-9d50598fb1a06c78",
+        "router-skill-v4-box_total-a65316e7d0b5b24c",
+        "router-skill-v4-box_total-ab27938e5517df5e",
+        "router-skill-v4-box_total-b063359d7d7ddea8",
+        "router-skill-v4-box_total-bd80a20e26adcddd",
+        "router-skill-v4-box_total-efaf6b7c9c7969db",
+        "router-skill-v4-first_strict_profit_period-1288dc12a59656a1",
+        "router-skill-v4-first_strict_profit_period-12f06f34bb562e7d",
+        "router-skill-v4-first_strict_profit_period-1392a0705f5bfcac",
+        "router-skill-v4-first_strict_profit_period-180e3bb2a9310272",
+        "router-skill-v4-first_strict_profit_period-568cfc3667a6b888",
+        "router-skill-v4-first_strict_profit_period-935d3f0b3611f855",
+        "router-skill-v4-first_strict_profit_period-b79b2f6eefcf3243",
+        "router-skill-v4-first_strict_profit_period-c823574b96ec8d2d",
+        "router-skill-v4-first_strict_profit_period-d073a8953cf319e6",
+        "router-skill-v4-first_strict_profit_period-d543d996f8c0a087",
+        "router-skill-v4-first_strict_profit_period-e42ef80f66ebd482",
+        "router-skill-v4-first_strict_profit_period-e72ce79ff3299be9",
+        "router-skill-v4-first_strict_profit_period-e8f5c80d38ccdeff",
+        "router-skill-v4-first_strict_profit_period-ed2915420f6d2f4a",
+        "router-skill-v4-first_strict_profit_period-ed68579e4a70dc26",
+        "router-skill-v4-first_strict_profit_period-f28f5a08960152d5",
+        "router-skill-v4-implicit_scale_total-01724d988c8ec4bc",
+        "router-skill-v4-implicit_scale_total-15db9a27553612bb",
+        "router-skill-v4-implicit_scale_total-1646c0ce70aa6264",
+        "router-skill-v4-implicit_scale_total-3c1c337efa0b4e37",
+        "router-skill-v4-implicit_scale_total-42f4b2992bc2425e",
+        "router-skill-v4-implicit_scale_total-6d9d0e02e6c58e9c",
+        "router-skill-v4-implicit_scale_total-7822dd9a954d0f09",
+        "router-skill-v4-implicit_scale_total-886c034b1af3c96a",
+        "router-skill-v4-implicit_scale_total-8e59b402b029f5d3",
+        "router-skill-v4-implicit_scale_total-96fdf9bfe10a1b20",
+        "router-skill-v4-implicit_scale_total-bdfb40cde9673570",
+        "router-skill-v4-implicit_scale_total-c275761cfbc5e6b8",
+        "router-skill-v4-implicit_scale_total-cb8e8eba4c11c720",
+        "router-skill-v4-implicit_scale_total-e6754b74903ec1a1",
+        "router-skill-v4-implicit_scale_total-ed7a10d76af87c54",
+        "router-skill-v4-implicit_scale_total-fd8e4cfe331732c8",
+        "router-skill-v4-paired_average-e415eaf1776fc476",
+        "router-skill-v4-percentage_change-1c65e6b8958c11f1",
+        "router-skill-v4-remaining_stock-12e3f227b4fa8993",
+        "router-skill-v4-remaining_stock-19ede03b432355e8",
+        "router-skill-v4-remaining_stock-4a8ffc2a6fae10b5",
+        "router-skill-v4-remaining_stock-4b287fc4886c12a3",
+        "router-skill-v4-remaining_stock-576c7643bf96ed7f",
+        "router-skill-v4-remaining_stock-681f2888c32b0af6",
+        "router-skill-v4-remaining_stock-9fe9cc43ceb85ce3",
+        "router-skill-v4-remaining_stock-a30d645ce3d6b996",
+        "router-skill-v4-remaining_stock-bd4b9f7947a1a657",
+        "router-skill-v4-remaining_stock-ca1493744f0131a5",
+        "router-skill-v4-remaining_stock-d95e7869ec1d44ff",
+        "router-skill-v4-remaining_stock-dbcebcf24b5ccf3f",
+        "router-skill-v4-remaining_stock-dd998ac5a8192861",
+        "router-skill-v4-remaining_stock-e24f618351bdbbf3",
+        "router-skill-v4-remaining_stock-ea46702973d54b84",
+        "router-skill-v4-remaining_stock-fdfe64ad5c957731",
+        "router-skill-v4-single_operation-007c1dc7978486c7",
+        "router-skill-v4-single_operation-1085f2b7c30c89c6",
+        "router-skill-v4-single_operation-6fc9df22128e7b12",
+        "router-skill-v4-single_operation-722aee697adfebd1",
+        "router-skill-v4-time_conversion-2b3d877b56da9156",
+        "router-skill-v4-time_conversion-2c246be85621afcc",
+        "router-skill-v4-time_conversion-3790392c7e102c93",
+        "router-skill-v4-time_conversion-3a99a34f083d8408",
+        "router-skill-v4-time_conversion-4573275005a73da2",
+        "router-skill-v4-time_conversion-509d74ed0ac9c21a",
+        "router-skill-v4-time_conversion-5cd56692466d9e8d",
+        "router-skill-v4-time_conversion-615b288b329db036",
+        "router-skill-v4-time_conversion-90f1560b1cfaebfb",
+        "router-skill-v4-time_conversion-a9817eac2587f0de",
+        "router-skill-v4-time_conversion-bc192b592478417b",
+        "router-skill-v4-time_conversion-e130466e4148249d",
+        "router-skill-v4-time_conversion-e58d5411512142ff",
+        "router-skill-v4-time_conversion-e77f3d3d8fe466f6",
+        "router-skill-v4-time_conversion-eae11b285b338df4",
+        "router-skill-v4-time_conversion-ed103710d3847d11",
+        "router-skill-v4-weighted_total-5e30e2f1c13f5e5a",
+        "router-skill-v4-weighted_total-6656b41229f7158f",
+        "router-skill-v4-weighted_total-6eb7f1d0159212cc",
+        "router-skill-v4-weighted_total-703a804463f6ab9d",
+        "router-skill-v4-weighted_total-78a2ef963d9af7f3",
+        "router-skill-v4-weighted_total-83ca28ea2dda9092",
+        "router-skill-v4-weighted_total-b969c75fe459af25",
+        "router-skill-v4-weighted_total-bcfbdaf3bff15ef5",
+        "router-skill-v4-weighted_total-bd776d805df3778c",
+        "router-skill-v4-weighted_total-c9b5f9d66da350d6",
+        "router-skill-v4-weighted_total-caf5a908be114b91",
+        "router-skill-v4-weighted_total-e138f1a660051773",
+        "router-skill-v4-weighted_total-e36049d096e2b941",
+        "router-skill-v4-weighted_total-eec871cb6332968d",
+        "router-skill-v4-weighted_total-f8e43100ed61796c",
+        "router-skill-v4-weighted_total-fbcb8087fb895ad0"
+      ],
+      "cases": 160,
+      "delta": 0.6375,
+      "mcnemar_exact_p": 3.944304526105059e-31,
+      "paired_bootstrap_95_ci": [
+        0.5625,
+        0.7125
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 40,
+        "both_wrong": 18,
+        "candidate_only": 102
+      }
+    },
+    "candidate_vs_nine_b": {
+      "baseline_accuracy": 0.275,
+      "baseline_only_case_ids": [
+        "router-skill-v4-quotient_remainder-0151a87d74efe103",
+        "router-skill-v4-quotient_remainder-18531cdacfc1f1e3",
+        "router-skill-v4-quotient_remainder-31911ba30748f7de",
+        "router-skill-v4-quotient_remainder-dba31bd8d84c0215"
+      ],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-router-skill-fallback-v4:candidate-nine",
+      "candidate_accuracy": 0.8875,
+      "candidate_only_case_ids": [
+        "router-skill-v4-box_total-062334d7df65b074",
+        "router-skill-v4-box_total-0c9d528cf51184af",
+        "router-skill-v4-box_total-2fde2cf88a52cc2e",
+        "router-skill-v4-box_total-333598e4c1ad7bb0",
+        "router-skill-v4-box_total-622776fa198eef8d",
+        "router-skill-v4-box_total-7491f1a161620f1c",
+        "router-skill-v4-box_total-7500886f0a6a193f",
+        "router-skill-v4-box_total-7894e52a84114916",
+        "router-skill-v4-box_total-78f26ae4c3d79e2a",
+        "router-skill-v4-box_total-80cc8e773b99deda",
+        "router-skill-v4-box_total-9d50598fb1a06c78",
+        "router-skill-v4-box_total-a65316e7d0b5b24c",
+        "router-skill-v4-box_total-ab27938e5517df5e",
+        "router-skill-v4-box_total-b063359d7d7ddea8",
+        "router-skill-v4-box_total-bd80a20e26adcddd",
+        "router-skill-v4-box_total-efaf6b7c9c7969db",
+        "router-skill-v4-first_strict_profit_period-1288dc12a59656a1",
+        "router-skill-v4-first_strict_profit_period-12f06f34bb562e7d",
+        "router-skill-v4-first_strict_profit_period-1392a0705f5bfcac",
+        "router-skill-v4-first_strict_profit_period-180e3bb2a9310272",
+        "router-skill-v4-first_strict_profit_period-568cfc3667a6b888",
+        "router-skill-v4-first_strict_profit_period-935d3f0b3611f855",
+        "router-skill-v4-first_strict_profit_period-b79b2f6eefcf3243",
+        "router-skill-v4-first_strict_profit_period-c823574b96ec8d2d",
+        "router-skill-v4-first_strict_profit_period-d073a8953cf319e6",
+        "router-skill-v4-first_strict_profit_period-d543d996f8c0a087",
+        "router-skill-v4-first_strict_profit_period-e42ef80f66ebd482",
+        "router-skill-v4-first_strict_profit_period-e72ce79ff3299be9",
+        "router-skill-v4-first_strict_profit_period-e8f5c80d38ccdeff",
+        "router-skill-v4-first_strict_profit_period-ed2915420f6d2f4a",
+        "router-skill-v4-first_strict_profit_period-ed68579e4a70dc26",
+        "router-skill-v4-first_strict_profit_period-f28f5a08960152d5",
+        "router-skill-v4-implicit_scale_total-01724d988c8ec4bc",
+        "router-skill-v4-implicit_scale_total-15db9a27553612bb",
+        "router-skill-v4-implicit_scale_total-1646c0ce70aa6264",
+        "router-skill-v4-implicit_scale_total-3c1c337efa0b4e37",
+        "router-skill-v4-implicit_scale_total-42f4b2992bc2425e",
+        "router-skill-v4-implicit_scale_total-6d9d0e02e6c58e9c",
+        "router-skill-v4-implicit_scale_total-7822dd9a954d0f09",
+        "router-skill-v4-implicit_scale_total-886c034b1af3c96a",
+        "router-skill-v4-implicit_scale_total-8e59b402b029f5d3",
+        "router-skill-v4-implicit_scale_total-96fdf9bfe10a1b20",
+        "router-skill-v4-implicit_scale_total-bdfb40cde9673570",
+        "router-skill-v4-implicit_scale_total-c275761cfbc5e6b8",
+        "router-skill-v4-implicit_scale_total-cb8e8eba4c11c720",
+        "router-skill-v4-implicit_scale_total-e6754b74903ec1a1",
+        "router-skill-v4-implicit_scale_total-ed7a10d76af87c54",
+        "router-skill-v4-implicit_scale_total-fd8e4cfe331732c8",
+        "router-skill-v4-paired_average-e415eaf1776fc476",
+        "router-skill-v4-percentage_change-2c531eac678c97ff",
+        "router-skill-v4-remaining_stock-12e3f227b4fa8993",
+        "router-skill-v4-remaining_stock-19ede03b432355e8",
+        "router-skill-v4-remaining_stock-4a8ffc2a6fae10b5",
+        "router-skill-v4-remaining_stock-4b287fc4886c12a3",
+        "router-skill-v4-remaining_stock-576c7643bf96ed7f",
+        "router-skill-v4-remaining_stock-681f2888c32b0af6",
+        "router-skill-v4-remaining_stock-9fe9cc43ceb85ce3",
+        "router-skill-v4-remaining_stock-a30d645ce3d6b996",
+        "router-skill-v4-remaining_stock-bd4b9f7947a1a657",
+        "router-skill-v4-remaining_stock-ca1493744f0131a5",
+        "router-skill-v4-remaining_stock-d95e7869ec1d44ff",
+        "router-skill-v4-remaining_stock-dbcebcf24b5ccf3f",
+        "router-skill-v4-remaining_stock-dd998ac5a8192861",
+        "router-skill-v4-remaining_stock-e24f618351bdbbf3",
+        "router-skill-v4-remaining_stock-ea46702973d54b84",
+        "router-skill-v4-remaining_stock-fdfe64ad5c957731",
+        "router-skill-v4-single_operation-007c1dc7978486c7",
+        "router-skill-v4-single_operation-1085f2b7c30c89c6",
+        "router-skill-v4-single_operation-6fc9df22128e7b12",
+        "router-skill-v4-single_operation-722aee697adfebd1",
+        "router-skill-v4-time_conversion-2b3d877b56da9156",
+        "router-skill-v4-time_conversion-2c246be85621afcc",
+        "router-skill-v4-time_conversion-3790392c7e102c93",
+        "router-skill-v4-time_conversion-3a99a34f083d8408",
+        "router-skill-v4-time_conversion-4573275005a73da2",
+        "router-skill-v4-time_conversion-509d74ed0ac9c21a",
+        "router-skill-v4-time_conversion-5cd56692466d9e8d",
+        "router-skill-v4-time_conversion-615b288b329db036",
+        "router-skill-v4-time_conversion-90f1560b1cfaebfb",
+        "router-skill-v4-time_conversion-a9817eac2587f0de",
+        "router-skill-v4-time_conversion-bc192b592478417b",
+        "router-skill-v4-time_conversion-e130466e4148249d",
+        "router-skill-v4-time_conversion-e58d5411512142ff",
+        "router-skill-v4-time_conversion-e77f3d3d8fe466f6",
+        "router-skill-v4-time_conversion-eae11b285b338df4",
+        "router-skill-v4-time_conversion-ed103710d3847d11",
+        "router-skill-v4-weighted_total-5e30e2f1c13f5e5a",
+        "router-skill-v4-weighted_total-6656b41229f7158f",
+        "router-skill-v4-weighted_total-6eb7f1d0159212cc",
+        "router-skill-v4-weighted_total-703a804463f6ab9d",
+        "router-skill-v4-weighted_total-78a2ef963d9af7f3",
+        "router-skill-v4-weighted_total-83ca28ea2dda9092",
+        "router-skill-v4-weighted_total-b969c75fe459af25",
+        "router-skill-v4-weighted_total-bcfbdaf3bff15ef5",
+        "router-skill-v4-weighted_total-bd776d805df3778c",
+        "router-skill-v4-weighted_total-c9b5f9d66da350d6",
+        "router-skill-v4-weighted_total-caf5a908be114b91",
+        "router-skill-v4-weighted_total-e138f1a660051773",
+        "router-skill-v4-weighted_total-e36049d096e2b941",
+        "router-skill-v4-weighted_total-eec871cb6332968d",
+        "router-skill-v4-weighted_total-f8e43100ed61796c",
+        "router-skill-v4-weighted_total-fbcb8087fb895ad0"
+      ],
+      "cases": 160,
+      "delta": 0.6125,
+      "mcnemar_exact_p": 1.2735868422334435e-25,
+      "paired_bootstrap_95_ci": [
+        0.525,
+        0.69375
+      ],
+      "paired_counts": {
+        "baseline_only": 4,
+        "both_correct": 40,
+        "both_wrong": 14,
+        "candidate_only": 102
+      }
+    },
+    "four_b_vs_nine_b": {
+      "baseline_accuracy": 0.275,
+      "baseline_only_case_ids": [
+        "router-skill-v4-percentage_change-1c65e6b8958c11f1",
+        "router-skill-v4-quotient_remainder-0151a87d74efe103",
+        "router-skill-v4-quotient_remainder-18531cdacfc1f1e3",
+        "router-skill-v4-quotient_remainder-31911ba30748f7de",
+        "router-skill-v4-quotient_remainder-dba31bd8d84c0215"
+      ],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-router-skill-fallback-v4:four-nine",
+      "candidate_accuracy": 0.25,
+      "candidate_only_case_ids": [
+        "router-skill-v4-percentage_change-2c531eac678c97ff"
+      ],
+      "cases": 160,
+      "delta": -0.025,
+      "mcnemar_exact_p": 0.21875,
+      "paired_bootstrap_95_ci": [
+        -0.05625,
+        0.0
+      ],
+      "paired_counts": {
+        "baseline_only": 5,
+        "both_correct": 39,
+        "both_wrong": 115,
+        "candidate_only": 1
+      }
+    }
+  },
+  "data": {
+    "benchmark_canary_holdout_rows_or_outputs": 0,
+    "cases": 160,
+    "family_counts": {
+      "box_total": 16,
+      "first_strict_profit_period": 16,
+      "implicit_scale_total": 16,
+      "paired_average": 16,
+      "percentage_change": 16,
+      "quotient_remainder": 16,
+      "remaining_stock": 16,
+      "single_operation": 16,
+      "time_conversion": 16,
+      "weighted_total": 16
+    },
+    "freshness": {
+      "benchmark_outputs_loaded": false,
+      "benchmark_prompt_overlap": {
+        "gpqa_diamond": 0,
+        "gsm8k": 0,
+        "mmlu": 0
+      },
+      "benchmark_rows_hashed": {
+        "gpqa_diamond": 198,
+        "gsm8k": 1319,
+        "mmlu": 14042
+      },
+      "canary_rows_or_outputs_loaded": false,
+      "case_seed": 20260829,
+      "history_disjoint_prompt_overlap": {
+        "integration_v1_prompts": 0,
+        "integration_v2_prompts": 0,
+        "integration_v3_prompts": 0,
+        "router_training_prompts": 0
+      },
+      "holdout_rows_or_outputs_loaded": false,
+      "integration_v1_prompts_hashed": 128,
+      "integration_v1_v2_v3_outputs_loaded": false,
+      "integration_v2_prompts_hashed": 128,
+      "integration_v3_prompts_hashed": 160,
+      "prior_surface_prompt_overlap": {
+        "choice_capability_matrix_v1": 0,
+        "choice_exact_replication_v3": 0,
+        "choice_verifier_matrix_v2": 0
+      },
+      "training_prompts_hashed": 7680,
+      "value_offset": 12000000
+    },
+    "training_eligible_cases": 0
+  },
+  "decision": {
+    "benchmark_generation_allowed": false,
+    "benchmark_treatment_preregistration_allowed": false,
+    "canary_allowed": false,
+    "further_tuning_allowed": false,
+    "gates": {
+      "ab_verified_executions_32": true,
+      "all_three_arms_complete_and_parseable_160": true,
+      "c_skill_result_exact_128": false,
+      "c_skill_verified_executions_128": false,
+      "candidate_vs_four_b_maximum_losses": true,
+      "candidate_vs_four_b_minimum_wins": true,
+      "candidate_vs_four_b_significant": true,
+      "candidate_vs_nine_b_maximum_losses": false,
+      "candidate_vs_nine_b_minimum_wins": true,
+      "candidate_vs_nine_b_significant": true,
+      "every_family_non_regression": false,
+      "fallbacks_zero": false,
+      "router_outputs_parseable_and_correct_160": true
+    },
+    "holdout_allowed": false,
+    "next_action": "Reject V4. Do not rerun or tune V1-V4.",
+    "router_skill_fallback_v4_admitted": false,
+    "training_or_rl_allowed": false,
+    "v1_v2_v3_v4_rerun_allowed": false
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "executor_uses_case_correctness": false,
+    "executor_uses_expected_answer": false,
+    "holdout_rows_loaded": false,
+    "integration_v1_v2_v3_rows_or_outputs_loaded": false,
+    "router_uses_case_correctness": false,
+    "router_uses_case_metadata": false,
+    "router_uses_expected_answer": false,
+    "skill_selector_uses_case_metadata": false,
+    "training_eligible_cases": 0
+  },
+  "experiment_id": "qwen35-router-skill-fallback-v4",
+  "identity": {
+    "case_contract_sha256": "4ef38ad28852928cd9b584ca509290d7327123fdbb3c442242e16da3b3194b01",
+    "config_sha256": "240b6e5273c5c0bd111e5c76fa3ab37697f19f6d7666d64129ecdb6d00563f89",
+    "integration_v3_report_sha256": "cfbd0edbc74739eb1d0a860c19cca2c07edfd52093d7ccf7f86e114f33a2ac03",
+    "preregister_sha256": "00a1db518d93219b8fff86651adbc0bb5589522d19f1ebf81d4050103eb7f2ae",
+    "raw_result_sha256": "b92bcf4c4bbb56c5247aa2bacf54a9161b041e9252e344d41a9af74271359354",
+    "remapped_adapter_sha256": "cea357d281ed100437268e213564fc5a5c00e6024b0c7a4be207cc686453e3f9",
+    "result_revision": "0e78b2a04477f2d3a872be2c01ebd581eff78828",
+    "service_receipt_sha256": "7296b49dce16aa07a79379741c6b86086d33692c1081b4befe4a4a336829eeb5"
+  },
+  "mechanism_conclusion": {
+    "ab_verified_execution_succeeded": true,
+    "dominant_failures": {
+      "quotient_remainder": 16,
+      "single_operation": 4
+    },
+    "failed_c_skill_cases": 20,
+    "post_observation_skill_prompt_or_schema_tuning_allowed": false,
+    "router_transfer_succeeded": true,
+    "shared_c_skill_selector_admitted": false
+  },
+  "routing": {
+    "ab_verified_executions": 32,
+    "c_skill_executions": 108,
+    "cases": 160,
+    "correct": 160,
+    "fallbacks": 20,
+    "negative_cases": 128,
+    "positive_cases": 32
+  },
+  "routing_by_family": {
+    "box_total": {
+      "cases": 16,
+      "fallbacks": 0,
+      "router_correct": 16,
+      "verified_executions": 16
+    },
+    "first_strict_profit_period": {
+      "cases": 16,
+      "fallbacks": 0,
+      "router_correct": 16,
+      "verified_executions": 16
+    },
+    "implicit_scale_total": {
+      "cases": 16,
+      "fallbacks": 0,
+      "router_correct": 16,
+      "verified_executions": 16
+    },
+    "paired_average": {
+      "cases": 16,
+      "fallbacks": 0,
+      "router_correct": 16,
+      "verified_executions": 16
+    },
+    "percentage_change": {
+      "cases": 16,
+      "fallbacks": 0,
+      "router_correct": 16,
+      "verified_executions": 16
+    },
+    "quotient_remainder": {
+      "cases": 16,
+      "fallbacks": 16,
+      "router_correct": 16,
+      "verified_executions": 0
+    },
+    "remaining_stock": {
+      "cases": 16,
+      "fallbacks": 0,
+      "router_correct": 16,
+      "verified_executions": 16
+    },
+    "single_operation": {
+      "cases": 16,
+      "fallbacks": 4,
+      "router_correct": 16,
+      "verified_executions": 12
+    },
+    "time_conversion": {
+      "cases": 16,
+      "fallbacks": 0,
+      "router_correct": 16,
+      "verified_executions": 16
+    },
+    "weighted_total": {
+      "cases": 16,
+      "fallbacks": 0,
+      "router_correct": 16,
+      "verified_executions": 16
+    }
+  },
+  "schema_version": "nano_harness_router_skill_fallback_public_v4"
+}
