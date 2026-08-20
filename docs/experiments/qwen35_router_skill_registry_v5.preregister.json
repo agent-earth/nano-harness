@@ -1,0 +1,1098 @@
+{
+  "acceptance": {
+    "ab_verified_32": true,
+    "benchmark_generation_allowed_after_pass": false,
+    "benchmark_treatment_preregistration_allowed_after_pass": true,
+    "c_single_skill_verified_128": true,
+    "candidate_vs_four_significant_zero_loss": true,
+    "candidate_vs_nine_significant_zero_loss": true,
+    "every_family_non_regression": true,
+    "fallbacks_zero": true,
+    "registry_unique_c_128_ab_false_zero": true,
+    "router_correct_160": true,
+    "v1_v2_v3_v4_v5_rerun_allowed_after_pass": false
+  },
+  "case_contract": {
+    "case_contract_sha256": "24211fb1eb73f14a23d80ee365c496d6fab586fcc59f2ca2ddbccc92377371bb",
+    "case_count": 160,
+    "cases": [
+      {
+        "case_id": "router-skill-v5-weighted_total-10f9f28a5d528b3d",
+        "family": "weighted_total",
+        "prompt_sha256": "c6cfda986a9f4564af98ea04813503537307d00e387eb195e55eab1e2b09dc34",
+        "source_facts_sha256": "cef492fdaad16e15205a3b39dd7dc69898cb7555bcf0e4ccf60f24ac54965498"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-1923faeccdc3b835",
+        "family": "paired_average",
+        "prompt_sha256": "83fa9bb519ea3e3af4090a710948416595196e9524eddd54b627de0f1a712e67",
+        "source_facts_sha256": "a9f3ffa7107e2b28f936afefc55419eec8965d7436463baecde65d9c6179079b"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-c8be8310896eb34d",
+        "family": "remaining_stock",
+        "prompt_sha256": "9088c44585402e89fd82335298e9693a0b629004e6273a3b73994fb982060d83",
+        "source_facts_sha256": "1ed6767c2a5d50eb92f0c0f4a54b427ff78d08fc88727b303ce76cff6b1738c9"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-a456bcb3579aa84f",
+        "family": "paired_average",
+        "prompt_sha256": "29278a170e68cd76da2b7cb6b15efece572feec2ff3e46726ff256f7e3efeea3",
+        "source_facts_sha256": "0192ce50a40a92ccfd29806de9e9618d9a7e884b8f90d01b12333293566c35d6"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-5f0e228351c1cf36",
+        "family": "time_conversion",
+        "prompt_sha256": "6f1ff12e3edf2e94ff09918b168524bdb4f26c72fcb39e4b341bce9dc757639b",
+        "source_facts_sha256": "7104bf6d07c4d34c678dc38162c5b328d80bfe10cc0e3d0d180589b7d862d5d7"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-cc65b73bdb544064",
+        "family": "quotient_remainder",
+        "prompt_sha256": "ac1c6900dfb827041be87880469878b401a957637e8f6a8d0e083cfcb70bec87",
+        "source_facts_sha256": "92ac28dc0b5b06c43a536a86a9374d28782e6564f800e17f1ab3d14a43c3dbf0"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-602164e53c8ed592",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "66969e13b11b33adc5626d046237ff3b510da891f86930e291f64211fc965cb7",
+        "source_facts_sha256": "2ca04ecfee305bfaf5399e120d515ff3fbf28e55f67aa528acbaf2d80c94b6e1"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-9f7bc22a5f4d20c8",
+        "family": "box_total",
+        "prompt_sha256": "385005a3d4bff84d3262d78046db2b9f8db0cfdc3eb8da5b302be552e70b9024",
+        "source_facts_sha256": "9a02e1f51e2c2eab7ba21a431b48d02214da57663611195f07a6cba94fe15539"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-cc89d5843d5e7bce",
+        "family": "quotient_remainder",
+        "prompt_sha256": "5d973fb4ce624549d0c343fc4ee18c20fb90fc47b9f35ce2a7d32e64e23e9c51",
+        "source_facts_sha256": "367b185823aacef06b7c43ca7ee5acf79971ec1d35d5e2ca0facf32832020bf8"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-dc6c6cefaa9a1950",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "b6b9706fddd4212d0b437bea2221756a3852b2ad6faa2289f92b149528f32ec9",
+        "source_facts_sha256": "52c32da9a127fbc2decc40bcb55f1dfe3785cde79e45c6defc87bd160fbcec03"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-8c91e8afbfc69953",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "1b8dfee1677b768d79dfbc904698fc77995f97f5a7c121542f19412e5919ec8d",
+        "source_facts_sha256": "5c741763a1aa44e932c87b2520bc065ef6689259b8510466303d71f93c833258"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-ea70bfcd0bcc8115",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "c9eea5972d419d3201dd613c17561ae7f2310c7034aa6ec2b4093a7dce9e0bc9",
+        "source_facts_sha256": "14b792fd4f6e47a499df7db37c73f50cd69dcd12c59c7bb913ddc74b81a92225"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-4a32015511317cd7",
+        "family": "time_conversion",
+        "prompt_sha256": "272ef9cbffe768c8db3d890f7c8baeb35b6e22fbd33b222ebf2cffb88cc7cddc",
+        "source_facts_sha256": "8dcb9bfcca5f5eac40dabd9a035c24245a7118b5888d164aac2b90e4721c6e5f"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-fdec48c19f8df432",
+        "family": "remaining_stock",
+        "prompt_sha256": "565800925a354312b843f024684053665221edd480083958e3e69a126884d051",
+        "source_facts_sha256": "d71d4e2fd6bd9bca8adfe0324580eab35870d5d470bff208c2087bb2ec373200"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-f2b2ef5b59b4bc7b",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "c6da8b69a79ffe1fb1befa792038405433bf7079675a34ee49ac14f3ed94abe5",
+        "source_facts_sha256": "50cb026bb814e6adebce5c8f85a1c47d31c04652f594da96d3a60db5a5c8d9f5"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-3d79f381caadb722",
+        "family": "single_operation",
+        "prompt_sha256": "c15ad72fb2251a3961ca3489b3808ccd138462b13f1fe99ea0ec9106e4b3ba30",
+        "source_facts_sha256": "7153d1c92213d768e428310c752d5e155e1323ba464bdb740590c038bac3d5a9"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-8fc4a1bda80af82d",
+        "family": "weighted_total",
+        "prompt_sha256": "983447ceaa7367cad46de9755b5d3d9ef8ded21f296388aaf9c6101a90c13565",
+        "source_facts_sha256": "4e392b958e5c5e93cb7d87854f740cf4c9d1848010c922037d69fbd620571c53"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-acde2c2ce207ab1e",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "7760e90911a9cf16aa00bff1026eb78bc81db3233747894245bbb29f1837934a",
+        "source_facts_sha256": "248dafa8c659c1805c0aaf44f808b8d33fa7374e57ad081147fd36242e5d4d22"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-6a8cbf3d4fc72628",
+        "family": "weighted_total",
+        "prompt_sha256": "1a7f286533ab7db97e792f03e7b541c855aaf8671f42efc02008769ddbf7d871",
+        "source_facts_sha256": "dad03bd50c1c749b432b021d8f207ab835f7eeb2571a7acda9c20d597de5f954"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-1d33567bc2a380a5",
+        "family": "quotient_remainder",
+        "prompt_sha256": "edd02a84837fc6148573e1f30265c8699ddd39dc14dd1cf12f6e74356de662d5",
+        "source_facts_sha256": "86da329afe828133dcf77f108c238f7c20475a313e939b48d42aeb77bdd06de4"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-285d3414563720e1",
+        "family": "percentage_change",
+        "prompt_sha256": "0dd58ecd8a96bdc608b6486771ce13c730b0d4d3df79af191b03609bfb4218ff",
+        "source_facts_sha256": "5fb289a090f3269a90f64fc5af57c3e20fb164f6eae56e7f7ae7f03bedc1d7b7"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-db49ba296aa131b9",
+        "family": "percentage_change",
+        "prompt_sha256": "c0b4ed64a2f3e5c576ee0f81925e95485be4d85f26cbb3c3a22ed4c57f0ffe6c",
+        "source_facts_sha256": "0e235b3a354d8473293af99c5165b6a555adf8cc1d7feb6d55d8fa8f08c8c9e0"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-7b6cb08d8bbdc709",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "2cf804b54f982a0786312425c23a3ba9fcddc8332fa47145f494b62951b62430",
+        "source_facts_sha256": "e864bd25a8425b80cc601c02d4e554e837c408a6932e3d563b58db0ebe6ca64b"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-e23d42c5bdce3291",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "fe6146d3b39de69b7b11a6ed756a6978b94a0c479984e6a224a709a19b13eb2f",
+        "source_facts_sha256": "e30e4007011fda0a2992e85ac0a22b61745e13cbaa8fdaf408f85874dc652952"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-95c4728ad03445ab",
+        "family": "weighted_total",
+        "prompt_sha256": "01c19d2db8695260d183790c5cb48ae566ff79faabfe5150f41bb2f2704752db",
+        "source_facts_sha256": "31f3cc133d77de0ca0b6208d0a0485b33b4e23191a6dd32215ab756da04bc5b0"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-e73e4bc3ac080d09",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "3e2888fe8fcbf8a5aa96e5d02104534b516936c06100df719bccf6d8c380df43",
+        "source_facts_sha256": "05f66f7713627fb545fe03459dd2e477de0b45ee6c4e76924c3d0b467f598a02"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-c2048053fc0fe567",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "41049b297254adf1a3e06c434ae19cebb698e0bf3b9b9d918e32ed9bd9a6e469",
+        "source_facts_sha256": "f2cc46f3309d024fdd6627794c113d4d6413007e4e5580d941db90d3e25854c2"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-4ad1ba88905d2a55",
+        "family": "paired_average",
+        "prompt_sha256": "9c2e721a3290dfe9783300b4c952678f677f79cf38feee3b20f8856d4d847070",
+        "source_facts_sha256": "26012b3867d09c773ea24232e74f90712cb1fff699b69b414d6d206c6e995086"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-3bd9a5930da9afc6",
+        "family": "percentage_change",
+        "prompt_sha256": "074f7346eeddb0344ea8781f6c17e9d0b8bf500f5ac63eadd33c686c483e992a",
+        "source_facts_sha256": "b1bbdf3e35c06841cd18b7f663f917fd140bae5de7ded5f95a9370769dffcda8"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-bff78156d90784ed",
+        "family": "time_conversion",
+        "prompt_sha256": "d7eb1108f333ae122f4b0d2e2ec9871452c246f6e6d0d90d7a3a82ecc5721b8d",
+        "source_facts_sha256": "dd3139388bc176ea836d2920be3419483614791654314a220aad569fc69b496f"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-1fe967f610f92b9b",
+        "family": "quotient_remainder",
+        "prompt_sha256": "6fda24cdc5988a4486d4a9064a8e183a00cb5f4f2bd5d5a50147a8a4a793f4f5",
+        "source_facts_sha256": "fc76454a9c7bae8bb00e47cb2b2b3dfe69239b73678c78373e3df4f21231f96a"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-07e986925774d538",
+        "family": "paired_average",
+        "prompt_sha256": "a2b0f2578a98702651c407c0a9e1170d1180dadfc8c917c9c996db4943b4f730",
+        "source_facts_sha256": "1abc5336a43ce30d2fbbd41da30b6ba239fbbbabd5a2f74fc6f0fa6743aee0de"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-776e2d74ea788fd0",
+        "family": "quotient_remainder",
+        "prompt_sha256": "b692013398c6b3d1eedb1f1b725d8acc00181e26ee7fd6878d5249333a22a2a5",
+        "source_facts_sha256": "21adc28d19c93b2f584d78640a5605e26be0a37e0e31802704e9e66f2ade7bcd"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-a74e140338978ef8",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "31c004624b258ffafb6b6688f1c7ae9cc6bd660d6e829da82a08504cad7c3dd5",
+        "source_facts_sha256": "55c865a488a22108a8c67b11da037092f4bd476ea786715d92d42e3c9484c1fe"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-4489292fe6790750",
+        "family": "single_operation",
+        "prompt_sha256": "66c52bca67608c564fcdaaf3786ec519ded23057d1c0422019f3ad78ad9f6d1d",
+        "source_facts_sha256": "903080ff619b8b289ae2af5330e502ca6c8f021a19bf90a23d5c3fbfab8b2a83"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-cbb62fb5d275b290",
+        "family": "paired_average",
+        "prompt_sha256": "7960d5ba2cde7ee4a1e9336cf0db81be2d01dbb06e45f08725bc92ddb50e2de2",
+        "source_facts_sha256": "750b4a8d9fe36eee91702fd182ddf82c7b2dc24eb6a3f64caa628b279bed6647"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-1d245b61aead1a76",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "69b670b334198efaaf527b7d0057256890b52c10aa1fd0184895c4528051b871",
+        "source_facts_sha256": "9ec8cc4679be071f12c206b8732e7260fe20da3bc3ac3abbcebae048f3521ca3"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-05618ec7ac2907a1",
+        "family": "weighted_total",
+        "prompt_sha256": "a61d288a519f4dde9141471c0ca8cffd5b81a365fb0e1896d1e6a390c95fb1fc",
+        "source_facts_sha256": "a4980dab94b1b515038c49a7856175ca86bbf5dd37422494d85c3a12518e3f80"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-b3edc9b96d8def66",
+        "family": "percentage_change",
+        "prompt_sha256": "337b339ab49a19fddf9833e44fbcda58306540c8f685a86142409f7ca736d0a7",
+        "source_facts_sha256": "7e200c9b1377f5f0371e0e12a198ce50bc6009710201142b4fa2f9c00f5f6e94"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-baf2ae3d14140e4d",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "eacfd0d6c9ca95f4da2d05cb7ea782193718805c2357e9f735eaee7c85a3ba9b",
+        "source_facts_sha256": "676a6f9f75241b2a1c12defdb08ab9052b09064ea29d176fdb2cedf4d667bacb"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-c1bc075646512d51",
+        "family": "single_operation",
+        "prompt_sha256": "032b9a505e43e272f5afd5e7dc1be7ed1d7c833132c0cf0e783688a9334b52f4",
+        "source_facts_sha256": "d77c661bae9b935a01745eddf52e97c99065aacf4b9aeb0c9c71a2f8923f8b59"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-3283befda17eee23",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "8886f152e70ada4ff44be27edb01e8b093293b20c9f935c825e9895d3588f55e",
+        "source_facts_sha256": "d502762458124bf5c4adb911bc21e322312c0b3e605f2b6d68720818e2efff62"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-8acbc632e54de8b5",
+        "family": "single_operation",
+        "prompt_sha256": "b9937f0614e292234c39a5dec0457bb4411469f231ee6796ef6d5741a8b23ed0",
+        "source_facts_sha256": "c09e4c3db20581da55b41309d2caec32ecfc67046aac8a2f8e60277de41e872b"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-6d1511286509d0e2",
+        "family": "time_conversion",
+        "prompt_sha256": "5002b8fcb9988be64dc9701734db2e702416f032b16c33b9aaf87dbb7950c740",
+        "source_facts_sha256": "87c3fd65c4b19be3163eabe3faaaa6ecb86429d39a32d516e597f33825234243"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-38e4a80135935944",
+        "family": "weighted_total",
+        "prompt_sha256": "d092ac00509d03eddfa032063502ef9e9aefae4d352409705563a9dd04cbf9b5",
+        "source_facts_sha256": "07dbc98c7a0200335cbb78d62df64c2d2da4c46b1e66ffaf330f4eb062add3ab"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-05a9b8c5d1c31130",
+        "family": "quotient_remainder",
+        "prompt_sha256": "51802ede6dc252871a94b4f5170fc4a570702eeba8bec4322f68d4e9c30e0253",
+        "source_facts_sha256": "8418d9b5ee8591c10f107bc8bd084b8302164786f2e9d3d0cf3fe348121c1a96"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-c54ef4b8abe476e2",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "a101f2b47c75c4ec1793ebc296bca92b760da6b8901b47dea4086cdd54e5d6f5",
+        "source_facts_sha256": "69051c2a7f5908bb8588e41f709ac32ff9f46a0792c20bd4ce663a9affc53e79"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-433807828bc5d9aa",
+        "family": "single_operation",
+        "prompt_sha256": "416ca675c393e32f5a2ed4534e187e946c8ae049540840629b5e7d5de092bd9d",
+        "source_facts_sha256": "0ba947646672d28db16f41abce102c2db2455cb2b74073f4c47e2447882c9d65"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-f7334c2a94621a4c",
+        "family": "weighted_total",
+        "prompt_sha256": "230752a6f339cb013651929960eb51756a51890e4087ca3c03dd069e86e80154",
+        "source_facts_sha256": "2d5a7d5fcfddcde9e105ac18f44dc5aba10f3af93b1f2f6cf3cee7ab7caf80a2"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-176e012803e8e1de",
+        "family": "box_total",
+        "prompt_sha256": "63f8e2cd4a85c472931f5013a7828636a4f57842f133025eeb51003d6b648e65",
+        "source_facts_sha256": "314e39637d30df91da880297c25921b73ec8456b5f2780680134b5b1503872f3"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-d71932164717c3a6",
+        "family": "weighted_total",
+        "prompt_sha256": "c0a569aafd71076a80dd8b794f8a384008acea356321d9d9c39c2185b2ca08c6",
+        "source_facts_sha256": "c87602ac9cf2f811b9452cda33f773eb1c1d545fef5a30247fcdb4a285ec5086"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-3db333c79f9a28ff",
+        "family": "box_total",
+        "prompt_sha256": "d0b9603a2dd3e282a5ef139d18a395519b3590f3f9b7b2e14cc0ca7ad5f6d64f",
+        "source_facts_sha256": "bece3b26ec65985b9d151c0ef2a95378a55b780fdf93686c8952edf32d07d69a"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-1898fd9944957ad1",
+        "family": "remaining_stock",
+        "prompt_sha256": "637c6f5673fe8edbd17acdd3753d22877d489a00f4642d4ef5e1a6173fd11c9e",
+        "source_facts_sha256": "ebebab238306b1e08cf0d5be294e771ea5f310e9b59f629782859c4f8f1a68b8"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-788ae2b9b93c8474",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "25654af4c7b0692cb9d481f06c60dd5f1c3ecabe33f6d7b1fc3f03d33cc2cc59",
+        "source_facts_sha256": "9cc6b0c8be5acc86065e16cb2ffbbb61d95c580fcaee7994f4f227289ce44713"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-72ad8fdb6f6fb6e6",
+        "family": "paired_average",
+        "prompt_sha256": "952504a7db430650c2ec861d1c27ecf56b9c6455e130e7ff617e82ea9f8a4efd",
+        "source_facts_sha256": "14edded06effbb4b1fdebcdb02cbc3f079fc9db30530a27e1e145f0733d6d1f9"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-025a0efabfbbba58",
+        "family": "paired_average",
+        "prompt_sha256": "a7ab3d8ad5e22ee096e34389c4cbfcf015af2ebad4b1f1e577aa6190aa46a533",
+        "source_facts_sha256": "634d3f45b61046c531e4513c8b56f9b0de50dc85719f02010485e227cb23d39a"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-154f1b695038e030",
+        "family": "weighted_total",
+        "prompt_sha256": "493185b1a4045f9d3784744b7144a72fa3d5486d829dcb429984fcb88adc3a3f",
+        "source_facts_sha256": "95cc2396e79714a402146a038a278aad8a8e74417bbadca7247040142f77664c"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-bcb3bace62847dab",
+        "family": "paired_average",
+        "prompt_sha256": "383f11be256a7df8fe95f8583ba9835b1fa75d0a3de00459647d5db55e49b520",
+        "source_facts_sha256": "1a347483b6e3fb52250d91fa1bb3332e2ed77db2f4478467c67cd26fe00b3689"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-5958eae429c92914",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "22988379c403a48555052e4c2219ce35ac1dc78e5931b09588c2a455f364d25e",
+        "source_facts_sha256": "141e68886a3694d4036660908f0cd59e8ac1bd817364c6699491f8b1353f926b"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-7f78baa8e979ca4b",
+        "family": "time_conversion",
+        "prompt_sha256": "5659f39001804c5b4f34f43b558297c2fcd470ed7671202ecfda264651401212",
+        "source_facts_sha256": "f40bfba629b84c4c1f81673b4d322d0da9729e53aa44a2888e3d02ba62001d1c"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-508614d02b4294dc",
+        "family": "time_conversion",
+        "prompt_sha256": "10b3f025162286fb577e1f32e034dbb8d66e020d693d00ed6b8b936cd1a9fb89",
+        "source_facts_sha256": "7c50b1deab0aa9b9f47ddfcccc2cdfb83c410aa76ac09828b95f22a8699894a2"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-8d1849e03e867a11",
+        "family": "weighted_total",
+        "prompt_sha256": "af4dc23e493d48ef329750cf457787093a223c747203162bed889b2398fe21ba",
+        "source_facts_sha256": "a645ca3c79a9d3bbadad9bfb93a5227141b6ba163e5de2852e09504de6653ffb"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-dec3020ec4508f3a",
+        "family": "remaining_stock",
+        "prompt_sha256": "7705a699207564ab7ced2a4966d869fde0bf443041215b3ea9ff04a16f990b9a",
+        "source_facts_sha256": "cce38f782c260cea99acbef52cc73c702aeecb3d0cd775e35fd36ebfbe984b98"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-8aa46291348bbb3a",
+        "family": "paired_average",
+        "prompt_sha256": "b2576b1382c6648ffe85b3354d7ab501b2749261ab34743f9bb0b444c97d0066",
+        "source_facts_sha256": "56e08a1bc1627f99e12b47b7ef2594caf5ea0ec29e0f8003184a499e197f0295"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-c3fb23fa99443f05",
+        "family": "quotient_remainder",
+        "prompt_sha256": "5a92a045c8d5e6c75ef9b742e636f628dacb0d39972630f8d44b306e1f919ef8",
+        "source_facts_sha256": "a4103a735d6195a7e7086ff02f81ade0859f3bce4565bacbf2e756cb37efd85a"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-80341de394ae8102",
+        "family": "time_conversion",
+        "prompt_sha256": "b7be79fe0544ef1d636099ab94ae79288298b44b1d1925f3b5abdbb72ce740ee",
+        "source_facts_sha256": "89ccc546f1418ac38a55a9d1f98a23e82cc2826c54139d92440e50a74348194b"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-b889944cb120c089",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "abe7df7e1c4108244ef0649545b488a8640ba812060f373fca8f676e8e808873",
+        "source_facts_sha256": "1b8114f3998013e837a75e664f3da93b81388ffa358946f8a84603169b9030b7"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-742f2986196c4a56",
+        "family": "time_conversion",
+        "prompt_sha256": "19fc26a08c80bda49221a884eb455fe7b630de26d2d0038341f92eb8a4e0e511",
+        "source_facts_sha256": "0cba6f834e67ec7c942fe836c18a21836aa6c0efd26d28ff493756790f62f4a6"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-e0528cea607a10f0",
+        "family": "single_operation",
+        "prompt_sha256": "572bf7a3c89a436a2075e4b1d48064af90d1ac0e1d157b3651a2f2e7c1aaa750",
+        "source_facts_sha256": "1f61f1e79f7abfa3af8811a9046aea73684502f6927be346bf78c3c86274a008"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-5d19a62452e0b5ea",
+        "family": "remaining_stock",
+        "prompt_sha256": "019a79f7beea1dd04b569f3962cc87aa87da13a4487624469d4c741d5ea9faf6",
+        "source_facts_sha256": "658e765259d943e63928f3d94037fd44057fbb64c3d4faa26243ebc1d164b00b"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-3ec1478ce19131fe",
+        "family": "box_total",
+        "prompt_sha256": "4bb97e6a7304295addf84513933227589fe005680995bae2cfda01ac58773c17",
+        "source_facts_sha256": "27743b4d03d41c118ed8691c227f449ba5a4585d20eca24b59840291ffd88e15"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-b5d121101faacca2",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "1df5868c213d454fbd8ecf2288bcd70c1f5dc0e9251f67d2791b69b2382b9067",
+        "source_facts_sha256": "1e9b96f4ad14ce1ede969e8f01616bbc1fdd7946f026bcf251965b1e88793839"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-5fd33ece5ae3db81",
+        "family": "box_total",
+        "prompt_sha256": "4bbdcead3392c69ac6ae9ab82aabd25969640e814eaf157a3bf1dfd9bfb5b5ba",
+        "source_facts_sha256": "60362828a7ee2a582bea879c3bc9069667068ec9d96112d567375b285d0bb43c"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-3e7aa3662e22f767",
+        "family": "weighted_total",
+        "prompt_sha256": "ff0acec06ddadde8a556d9baea339ad091d51aba469cacd97193f67ffeec5386",
+        "source_facts_sha256": "757156c3e4ae415bea74ff405178e889f48807fc1ab6735d71477c9c58b1889c"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-dfae432cb73ba8db",
+        "family": "quotient_remainder",
+        "prompt_sha256": "942ff79487917ec2ef29c71efabdf8f4ce55ee7b464553f5b192689596f3c6b3",
+        "source_facts_sha256": "f9aecc5906de1c7cb582e621a71ce4235f279eca4fdc755f3545e6d70bc42b0f"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-5a760d19ff81165d",
+        "family": "box_total",
+        "prompt_sha256": "1785310af5ca1a0a65a0412c2089710c688df8b69bdca97d4792c4cffc21b0c1",
+        "source_facts_sha256": "a2a4b8f8ede8f9f27e7354aec09d1d6a8a03c8336e520ec1bfb4694ff4ee62ef"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-dcb149c0b94edb76",
+        "family": "time_conversion",
+        "prompt_sha256": "6a781706405d3904a037a95fffa8cd4a295dc694d3ecc022e7a12baf83a5a059",
+        "source_facts_sha256": "66f08e26a66b9ba3331a0906f7d431a39fcda2bb9cadf2151ea9f3a0b75f1580"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-fd2c7830b2db8bf0",
+        "family": "box_total",
+        "prompt_sha256": "9ade4ab545e4990c1d38a128cd904d91bd3cd764f00b670df3c3c59352dbbfc1",
+        "source_facts_sha256": "baa145dfab9bae6869c4d92cc79f0e893ec89a9be3dcee6c7e4624ba9f2e3f75"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-97f2db4b5e49c64f",
+        "family": "paired_average",
+        "prompt_sha256": "98c5861dd5b2270e557e091250846fe026eccdbb41da473c04de6861e722ba20",
+        "source_facts_sha256": "c41bd02debb7770430124ffd2ee6bacc75de6e0985eb1a9363ce6074fea0346a"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-a0af688c9478f9b5",
+        "family": "time_conversion",
+        "prompt_sha256": "6450606f6461e0bff8aa727d6344400a604cd4cdcd2ed77ab2b618ba4825c51c",
+        "source_facts_sha256": "bd87090cdf59de164bc08a19295041c48bf0675ea0aa637c1c479df1bce42bbc"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-6dd7617173747832",
+        "family": "box_total",
+        "prompt_sha256": "c7a596878b7fd85880de69dda29b3b31c7483feccbb89fc635f811da35998246",
+        "source_facts_sha256": "4789b6f4762adfc6cca180e50edc52e58d1a8730083ecdbbf4ac679b3150c3c0"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-9f688b297eade01f",
+        "family": "quotient_remainder",
+        "prompt_sha256": "1382df2aaf67ac68d9d217421714a0562350c94eb2410605e06f9002e7c9bc07",
+        "source_facts_sha256": "998294c31c5862e01a57806e4c708810b5eefd65e6724b9babcd4d55d2796dcf"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-48aa661788250ab3",
+        "family": "percentage_change",
+        "prompt_sha256": "ed44778285bdf90d39829983dc9201f3c07830b4617e182d4207837c73bfe3fb",
+        "source_facts_sha256": "c4f8d609c87774768376fb55d4e205d89f7092ca99f6b53bc65772387ce81771"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-3f07675058863dae",
+        "family": "box_total",
+        "prompt_sha256": "6bb92b9bc5f9268882b558fce15e18cb990e0f019bb4021c4cfdc8fd43d66181",
+        "source_facts_sha256": "64390ca0745caac1ff6fb028b8b009e56f3e03395bb1a23244523e36bf2c4094"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-f92e2b4a4942f121",
+        "family": "single_operation",
+        "prompt_sha256": "5443055f6986f4d58227616c6ca31622720ea434cc4f5aab8131ec6beb2af645",
+        "source_facts_sha256": "a576ff4f04fa9c1492f31f468d072cd82269f5b7b9d6ce2c16afb1181719067b"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-e251f4ca06b27774",
+        "family": "remaining_stock",
+        "prompt_sha256": "d95ceccb26507c6ebd95979903adfecadb291d28e93345db64fa9d9ed01d7294",
+        "source_facts_sha256": "ec491a8e42b3fdea48cabaeb8911fac79497eb818e5d92488375780a9e4f0bf8"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-62d4ba7310f1c507",
+        "family": "percentage_change",
+        "prompt_sha256": "3c8c522c0d68fb0faa26b71c7ad679979bd5a5dee54f1fa08ffbaea2ebd18363",
+        "source_facts_sha256": "3b5566cbdab77b0b9f678e69b98361b198346ffb140634c678072a2264ae2bb0"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-3d3ebe0f6675a21b",
+        "family": "remaining_stock",
+        "prompt_sha256": "0d7cc7153d465b6fcc5060550a727ff97fce4464541aa21543b550c52b62a21f",
+        "source_facts_sha256": "6f9c149f39979c5d6cb1155f5f8d3bf85c8cbb61cdd0e5c0fbe55107b3398b1a"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-31accfb766a96bbf",
+        "family": "time_conversion",
+        "prompt_sha256": "aeb77f2b003e7c010e2497977996ff231cd2b6fd058f2e863fc567ed33671b38",
+        "source_facts_sha256": "c74a57ea069bdb847fb9693b3b994224118cfb0dfd268bfe2fa3667c3e6ad64c"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-cadc74f7952a0989",
+        "family": "box_total",
+        "prompt_sha256": "e9546f2611e01d8af3def171081d5af2a16802329c10537dfb4cb84b2a412251",
+        "source_facts_sha256": "24249d29bcbbc189669ed7e2492d527fc22b20e0cf43ee9d1a6e919e628fbc86"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-166965400b190b74",
+        "family": "percentage_change",
+        "prompt_sha256": "8e527c05338b41da57226692530609f84764e7626e630c63caa12e63540450b4",
+        "source_facts_sha256": "44ff02619cb717612551565ed747259a48ed4de067e44f8b9f077962774fd6a2"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-a3df3549590c98a6",
+        "family": "weighted_total",
+        "prompt_sha256": "aac8dec034705a33e83f766b1b55c238c4691da27002b1eeedb7ef86e6a95498",
+        "source_facts_sha256": "a5941e03ad093bde3edb62fa61fb16069a7c7aee0046282ddb9247dd1999faf3"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-0ea367d5ee9ef009",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "09255fb0530a242950105cda3278fd6014577af374ce4e686fc9d141a44c73db",
+        "source_facts_sha256": "f976286decc742b6199fcd5e34c11edba7be021621864fb9d0947a418eb21f36"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-2f52014d424fe3c5",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "086711539772558abcd9fa37929834d414208ac8e29ae142613d6298edbd6165",
+        "source_facts_sha256": "d57fef3197161b0f4ff5c70206e90e4d5e492f5e7ebe9a10cc62f6010892116a"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-8682fe389cd0059c",
+        "family": "percentage_change",
+        "prompt_sha256": "f2840bc5484749c703dc34790f7131e46e82b594cf8e8fd546ac00c7c2b5c68d",
+        "source_facts_sha256": "f7de58eba978a1e0c66c334e3a9975337f612ad3a5358ca917d54f81f56fb5e7"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-ae6064b3c35eafe3",
+        "family": "remaining_stock",
+        "prompt_sha256": "12d4bd0ae7a7a88a1ce5d9c1e7dea815d9233b42173ea70473ba4f0633560b1c",
+        "source_facts_sha256": "c8a6e69467a830eb6a2ac17a0f9b6455aabcb501fae27770ee65b1b87931a0ea"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-408e9c682e3a44ee",
+        "family": "quotient_remainder",
+        "prompt_sha256": "f5929d68687d2c858429d39cea481682bcfa8d333570bdae60698acc7f480385",
+        "source_facts_sha256": "39f3951bc0c60076631c933f3359e37dfb347fbf6a8d45725b90287870f0b9c1"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-50f2e94cde6c7854",
+        "family": "box_total",
+        "prompt_sha256": "aab4a05cbb2ebaa17e4e2898a2b42098e14740e16d21d1663a84d336830c27ef",
+        "source_facts_sha256": "e3bb392d3163076f17f6ba5462aea5d9d4e7ae2461f25a7a068a87537852903c"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-c2c59cd473a20e73",
+        "family": "weighted_total",
+        "prompt_sha256": "56c72a704761b7036bc07026406167f874d5dcb8f2a6c1c82021c057ca2bf448",
+        "source_facts_sha256": "065ec4dc99499f4bc3e0d21dd4460de2a99d5896cf8ecb2acdfab8e46831dafe"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-bccb8c386c730da8",
+        "family": "remaining_stock",
+        "prompt_sha256": "441205f2a3c5db9d8fdb9dac422cfb74769139b8457e24b407816fb084e65d0d",
+        "source_facts_sha256": "fdf07ae6bdb7485c54ef1a1cf5f0204ba842f03cab99144e3f1a4a21fb4f80dd"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-301c395c9bcdc2cb",
+        "family": "box_total",
+        "prompt_sha256": "0760916503f940e76ea7577c9c8707e112402fe23cd23deb4ded2670f2f1f187",
+        "source_facts_sha256": "b73fce27f423fa7e990328f5ccc11f5e83cbd12b8e9adbbb25751ad036705110"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-e8e99e49ebfb4498",
+        "family": "remaining_stock",
+        "prompt_sha256": "5a0ee601890eb9ea41873a66b0a480e60eb22c5c82a05e6db84d1fe9888fa1a7",
+        "source_facts_sha256": "20113d91893e426121a30c51b53471223ac3d6d3118fe758c23cfd6d00f51252"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-4f0d7671edf0d4df",
+        "family": "percentage_change",
+        "prompt_sha256": "30e0cd0e78a22b399377a20dad7ce2fbfa97fddf6632b566de24ce00d02a9710",
+        "source_facts_sha256": "10716dde14d76651efad8310ff7ade3d332ba283acf0982f4b33383c2cdb0a4f"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-6216f2bf3f83b3aa",
+        "family": "quotient_remainder",
+        "prompt_sha256": "0877347e14e88c569f0aaadf91b7e10db4896240fd2225eba4b9fc0516e693ac",
+        "source_facts_sha256": "4db32f33e6a56f2acc00b047d1e037d0e75e5ade74c9f76bfde1400af490c794"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-6560e582348c6dda",
+        "family": "time_conversion",
+        "prompt_sha256": "c02f144628e10d46098a1289827d2a05dc2af1b1b17ab72b83dd3a4e78be05a8",
+        "source_facts_sha256": "de80dca001c81b14df523ae2f03ba01d8bcc1ae0092fa1798156d335bf2dd92a"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-19ed5d85eddaff77",
+        "family": "percentage_change",
+        "prompt_sha256": "34791f1915b9af3792f1b9810bfd9b8d76eb1bc45d45ed9f0a9405b94c3d91f0",
+        "source_facts_sha256": "44402ba0518b4876440b8c9d9ae4a4381e862b6e98221553b625c4d5dbcda437"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-86ed47d715cb3fca",
+        "family": "remaining_stock",
+        "prompt_sha256": "aca7327490350a53c36a63d40a5f0a998531cdb1f08f2730cec3e39aa91c19ed",
+        "source_facts_sha256": "282d4d1e7694e22aa738dbd2e5b5b8cf851e294a8493fa2f6eaf8ba31f54c880"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-9074579eff49d7b2",
+        "family": "paired_average",
+        "prompt_sha256": "128fa6d2abe924bedd3fe3b951f391e8f7d0d57a334303306fc521db793eac1a",
+        "source_facts_sha256": "2f8e4e7b460e4e6b5d9de15fccb7e65bc0b64a007be5ca6b37ccd14eb3c92f28"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-b204c76d2fad3e5a",
+        "family": "percentage_change",
+        "prompt_sha256": "996d81ba122b124b9dffb0ba6293424ac160326f5a8efb965a2b2cd496b40de3",
+        "source_facts_sha256": "e570fe9c9b194a1471588e63c4f0083003e3aa49a739f965275308aff30cd8eb"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-b4b87313448289cf",
+        "family": "single_operation",
+        "prompt_sha256": "554ea9a4f76f53641d95feccbc73671393ade3517828d5725f64a39ae6bd928c",
+        "source_facts_sha256": "7dfb6feb64613889127a7f57961bd9f80d736fea2b1005ca4a3b8e4d2844806c"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-1bca831b094a8956",
+        "family": "remaining_stock",
+        "prompt_sha256": "f6251129a94d0a863bbdce8ef3275ab8c0b788880ef5094bf316b68c5ac5c50f",
+        "source_facts_sha256": "d08f13990a53a014e0cbbdf35f85c662c381cb9d218438333cf389746e6658d2"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-5ef94cb59ed7963c",
+        "family": "time_conversion",
+        "prompt_sha256": "f80356bd3f18f155f812185b8fafb034e20d15f080ffdae62bca1154c463e81e",
+        "source_facts_sha256": "97b490c4aa3852d18f7b58f6fa7c45c1131b876bb19b1e8956f1766e6ebb1426"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-5378208e2a38553d",
+        "family": "single_operation",
+        "prompt_sha256": "ef064136bfb9f4e360c10e15741d6767e5ac1e2adf83342d72b33047c6d1094a",
+        "source_facts_sha256": "48a80336238295dcf0556ecbebaf826ee07be5e892df59a7eafc876c45f69960"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-a7623db4e97bd756",
+        "family": "single_operation",
+        "prompt_sha256": "c4881cdfb075281c2f8edc7a25c927546f0b281a7857cc88e416e94cac88aeb9",
+        "source_facts_sha256": "b5efb6e5abce3ff1989c330ec3c8147b0a019694fd67609a88cb661636399659"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-98063b5509a2b694",
+        "family": "quotient_remainder",
+        "prompt_sha256": "99c4a57f77e97f273ec7bf37b238725b784e551f63696af492aa555db57e8f56",
+        "source_facts_sha256": "2774a1ae97b34753bee67cb6dbb6911dc226fe179560e85475e02de4d0a5800d"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-ebdb07ebbb3a7917",
+        "family": "percentage_change",
+        "prompt_sha256": "9ad3feb53e45e454cf58062f3177cda339e28982623a3085265a6268533b0d35",
+        "source_facts_sha256": "51512aa0be107502da020aeb5455a6d62e73c6661012967d7dccae4c0ae57f74"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-c1f331cca1aa4de6",
+        "family": "paired_average",
+        "prompt_sha256": "a9031738bee07ed95182ebe7335514ae79777409ba3c6378408916ed14e4eab3",
+        "source_facts_sha256": "e625db2ca77c969037a9171fab41f4146979626355e320e4b3c99e7e7bafe5b6"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-7841367a4e65389a",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "e2a9e20e072d33488487e5b57ab5e40f1378dcd36b9d129d6eaff35e7c938786",
+        "source_facts_sha256": "200ae44fd6fa9a4a2f7add4560efa8a7af234d44e3c205d602f983670d46cda6"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-20147480e4ba3d39",
+        "family": "time_conversion",
+        "prompt_sha256": "200a45b576e2a10d542f99e5303ded595964b97bb661c4758ff5ba809cbced71",
+        "source_facts_sha256": "6750afabb524832faa3eae32ce2d4b5f7b7460903bd9976293f3cefa8f5c145d"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-d6c001c09b693395",
+        "family": "single_operation",
+        "prompt_sha256": "344bcd89de24a82876b20e1615b7fdaf67a568dd92ec356a13d3b3379f1b6a13",
+        "source_facts_sha256": "b6a65c18b8b9c2f7339d710859b79c61c488245021e8c0a6089cfdada48d2cb5"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-ba647a64170d7770",
+        "family": "weighted_total",
+        "prompt_sha256": "2150cecc51fcdfad0f53d4bef9b95a8dd186d4a746e70f7e3d4d872cea00b449",
+        "source_facts_sha256": "eaf8268d25183850ee9dee284ad45ced76634618e810cd95bb1af129fa8c5048"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-624baa71c9e35ca2",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ccc644ad87075deed5b84cbe6b1ccd1cd40430384e45c12a844e9a6f7d488f1f",
+        "source_facts_sha256": "e5c0b4108ad6944efe2b91ef76eef389ef322115f933e8f0dbad918c16527757"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-55424b4b4f236a57",
+        "family": "remaining_stock",
+        "prompt_sha256": "38c0218f549cf20f20f1d2cdd14edfb07fdcf5f26ed7e693e51e01e32019fa96",
+        "source_facts_sha256": "1d05f304de68e7965f7b5c2a71741b19a08a397584a6b4d3e6333c95ab9078f7"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-6302b8c5e6a5102c",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "c17aaeb134d8358f14baa8eeee517185b4efeeda22a718ee010ec1419f1941bb",
+        "source_facts_sha256": "42abd29c2b3711c3ecbd7e1ea1e97d0c3705da29e1fc6d58bf568b9570f77b04"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-1892a178b4c7bf32",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9ee04840f38985179f2970337097612f14ce38591b8d557c1ace031559dbb4ec",
+        "source_facts_sha256": "d03c0fab70366efc2f66c1ad99caecf857740123e2f7ec863821df8151e20d5e"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-05adef86309808e0",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "a2419fd68bc817b3e8e5d685ccaf5af5a094baca2b20db2752919210be4767e2",
+        "source_facts_sha256": "fe12078658de4b2ae2a402c44935e760f6b3a00fc5882bd707838d5b03149cc6"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-a3376288de0afb23",
+        "family": "percentage_change",
+        "prompt_sha256": "3520d9f27ad378b2eb677ce6ef41645f1db29cbd7cf17aad43cbad28a0b08b23",
+        "source_facts_sha256": "5e382df5ecbfd8da18e34e9b28c62538ac5fba623550430dfcb92d969d691c46"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-603759cb8e2a2b18",
+        "family": "remaining_stock",
+        "prompt_sha256": "bf1cffa1e72111f4ce98b1833069492e494df43e552e1e31521f6190cab31948",
+        "source_facts_sha256": "5910783178f9ff23b6841bd500f8d961ef8d3910d20f69abde5840ee6bf22ce0"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-7a7be35de22875da",
+        "family": "quotient_remainder",
+        "prompt_sha256": "d54df8fea7e66b3653714ba04dabd907ed782d1e443f5c2031142a31a2f9d58c",
+        "source_facts_sha256": "c338fd3b7f08ff3a381db023f15d407ce5c63cdd8e8e165b74c2e64ad90b0df6"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-c57e84d11dafeb2a",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "8d38529fe72e24ddd659501d9a9fca4e3c7bcf82ff5cd4443a0568be3fde5317",
+        "source_facts_sha256": "0b8e9720de621de94480480ab27395278c8d1b4deebbb908b61d1a3525fdbd24"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-c4de34ace4383618",
+        "family": "single_operation",
+        "prompt_sha256": "83d26d8d6d2e17ff50d4b6950f6d6083d1410539f6c4689c67047cbdf59865c2",
+        "source_facts_sha256": "83e13194d77e7a5f4febf30b7c8496632189dee496ec77ea368dc5e22432d406"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-7fd6391588a8963d",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "d0801fdd6856d12ef666276bd68090b58a436040ef5c52e1f2a80395b89abc8f",
+        "source_facts_sha256": "e4d615eead2ea52b5f1997371f3238fe273513f6a64cf77007c88075e152c88a"
+      },
+      {
+        "case_id": "router-skill-v5-implicit_scale_total-526b051575c5c75d",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "722c59ceea6761718d3f48a9a790bc11517624237ceacb1febb0308b01a64a3f",
+        "source_facts_sha256": "7d77477e069f888894f11a782e40776b6e61e84937227f61f6049022ce859261"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-7b7872f43af09752",
+        "family": "paired_average",
+        "prompt_sha256": "9636a10d84a6cb55a17f7dac194b53beb8feb9708fc17310ce8c0e6d87724b17",
+        "source_facts_sha256": "2d9f97ef6f2809f31627ec1636545e102b7ca95621eb4942015d091a1ab1113e"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-88037e9d55f7348f",
+        "family": "single_operation",
+        "prompt_sha256": "5cf8dd4df37eb143de075ffa4afe3d10ada427f87060b9b9d2d3ac0e3fdfba7e",
+        "source_facts_sha256": "060885d7451a30dd59c4aef99f8f832a9e788cef1a899271c735ec3f3f86ff37"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-128547ccb948066c",
+        "family": "quotient_remainder",
+        "prompt_sha256": "0c52b8d3388c99cac2954d43d3cac492deaced38dfc42bd44f78c9fe360e9236",
+        "source_facts_sha256": "ba90808cd19a60fc49fdca28808d24233b5cc6382517c44485483aeb917926d1"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-64a88a0b63263938",
+        "family": "time_conversion",
+        "prompt_sha256": "157f3f4914b3dda4bcdd1f15ba2ce06b5044a07ebe85668be958ae24d86078be",
+        "source_facts_sha256": "772004b37f6ee12a105b829be69470896a432334f540d1ea4f6e7cb6ea924203"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-a3c8c6614e66b411",
+        "family": "box_total",
+        "prompt_sha256": "8f36edf6e35477a260c40144948b29e824c3e8b971a8b8c9608f08ac8875e561",
+        "source_facts_sha256": "46d7b307f16cfaf02111d7ca27a46b392b69d6d4453ae3b23af7b60766afc684"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-8b65351d7559089b",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "dad2b960469598929d4698ca406b60291cda709ec17cd0aa628827fd853b97f5",
+        "source_facts_sha256": "5f25ab6df389c7ed0347d3d82f86daab62fb8f54aeceef895270a858052ff660"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-f60774359015d260",
+        "family": "remaining_stock",
+        "prompt_sha256": "e3eb3db53a8ecb70de00b5efd8795c2b5fd352d884de3e96f21dfed269ae8334",
+        "source_facts_sha256": "9c21088086030b603c4a3299d179d43c2fe51049353da072f6c731e0bcaa3e22"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-eb65d816a33aef70",
+        "family": "quotient_remainder",
+        "prompt_sha256": "a15f705a0bf0adbf0470a35dd7ef31ebc139faba1b7b1d1155cc557a742895d3",
+        "source_facts_sha256": "d1001c95119064d4740d2f62a46f39c94b057d92e54d6591688ede36662ecbda"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-50925e1954aafc55",
+        "family": "single_operation",
+        "prompt_sha256": "66a57a23a8c0133daebb9d092859b7f4ab63aa12195f3b11471cb95f2352e82d",
+        "source_facts_sha256": "f3365026ec4b615fa6a654640278af56f4714b32fa9632a12f04b614b5b4897b"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-2acba7ef9cdbe7d3",
+        "family": "weighted_total",
+        "prompt_sha256": "4b85936fc57c39d864246d8019902b3e04ffed100f1326da235c552b9f90794b",
+        "source_facts_sha256": "b3df5d271f77249b8c6352d60c35a33e7c8913b79d6562edcb3ce8a4d2fb4df1"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-751cfe6dd5d409c9",
+        "family": "box_total",
+        "prompt_sha256": "d53df5ea044716bf4f6502e27cb24030a026b299c0afc3e5234ede0a47a4e416",
+        "source_facts_sha256": "684fd6b544afc969d5279394757f1d1279113e47cb982e8647551e5cf14e0063"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-a764f310c6834fff",
+        "family": "percentage_change",
+        "prompt_sha256": "2b2a5012f3fc93b9912d09d882b8d85031effe04f68bc4810dc97696b6ec883e",
+        "source_facts_sha256": "dbb9c2b22db8d775769151d8fa714d108a1e99d4900d78c557758cfd0410df44"
+      },
+      {
+        "case_id": "router-skill-v5-remaining_stock-3a6d1954dff920f4",
+        "family": "remaining_stock",
+        "prompt_sha256": "7d5d38af03ae2b1f28aa63d3ea98b3116059389583ae5f38db70f9501004f399",
+        "source_facts_sha256": "c0f3da60771e1267333e1b804ea0233b886cac82e1f499007af679d37f74750d"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-d1bfcc47c16d340c",
+        "family": "paired_average",
+        "prompt_sha256": "e887a5a059bd819733dac4b96594dac39525aff682d84caa921889b2350287a1",
+        "source_facts_sha256": "b46a4f682861556b8a8def63769d1b6f891972b9c130476d188b2ab619b482cd"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-4fb745514e2a8b39",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "c30f4d5ccf2c4d216f7eac7ccf01f5d73831618ddae56257c396b18b2a31abe8",
+        "source_facts_sha256": "b11317de55f8813397e8c65f102d5196c0130a5b1b27cb34a02f4c8356c3cd4b"
+      },
+      {
+        "case_id": "router-skill-v5-quotient_remainder-385c6e4f9c57e30a",
+        "family": "quotient_remainder",
+        "prompt_sha256": "9e4c7c15c841832b267cd10d73eb3893b2b540ba049856f9a49ef77b4477f461",
+        "source_facts_sha256": "fc6ca5480af4bdfcdfd48c17a03ff59eb4b66960bf7dba8cbb0c4f1843568cd8"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-14b708df326c55e8",
+        "family": "percentage_change",
+        "prompt_sha256": "9fb8a49e9b63a5431f2af40dd517cce84f3ab58aee248765463afbbafebd7e9a",
+        "source_facts_sha256": "d66688d61f4dd94f7a760515f6b876c7288a40af30a215d9802777770d01f3fc"
+      },
+      {
+        "case_id": "router-skill-v5-first_strict_profit_period-49a3739a4e746564",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "b64be78564e3c319d1389adf02fc3f29616656f73125c785b1e5e4c741818830",
+        "source_facts_sha256": "621ba90e400779817417ced6e472ac7bbc0fbd0435c1b04828cbe0ec60c63b83"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-f5f330c108a5ad4c",
+        "family": "paired_average",
+        "prompt_sha256": "7f7ae5c97d259b4283bce4d7ca54d77b095b2d844912dca107485308969f97d6",
+        "source_facts_sha256": "26fbbe46684f88cb100b45038c8bff75d34c28c0fc4f6836754d70bccd3ede81"
+      },
+      {
+        "case_id": "router-skill-v5-paired_average-10cfd6ecfb7bee1e",
+        "family": "paired_average",
+        "prompt_sha256": "1d501546e6de5d74c7f3e11696cf0997f56b18186e915f0c45ab33e227921fcb",
+        "source_facts_sha256": "2023ee8151157bad69209022b0c9ac9add65caa75e85767c811f19866b7cb82c"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-8136fd2043023fd2",
+        "family": "single_operation",
+        "prompt_sha256": "7c8b33b9efa04ad7cd5ee31b33c4323221f0362149c91ef07e4f052f4cf71729",
+        "source_facts_sha256": "52d6e601572d8186bebf657fe211a4df1233ba1ffa0ac375fb8b94b94b3dc75e"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-79da5404dea7ab91",
+        "family": "box_total",
+        "prompt_sha256": "9a60eae4a5fdffe6422540edc401c94837235546cee58b69bba28e3d99c6b004",
+        "source_facts_sha256": "d735b3cef3cef471caae1b5f44d16a4d77dbdd92401c95782886c66b8c950077"
+      },
+      {
+        "case_id": "router-skill-v5-single_operation-da518839dabeefff",
+        "family": "single_operation",
+        "prompt_sha256": "a53c2dd30d261c8930d9570a0ec3b00fa49f8f571032099f2f7ad061d484fe5b",
+        "source_facts_sha256": "0a5c1ef1366bd63eec695f0b5a1a53200842c95fd977a2cff4398753667ec115"
+      },
+      {
+        "case_id": "router-skill-v5-percentage_change-6078586f7e2d5959",
+        "family": "percentage_change",
+        "prompt_sha256": "3c5a1ffa285e8d3e53cccf69b96c1a3d78280b9ae6cf220a50c7701332519008",
+        "source_facts_sha256": "e21d8422ed972514fb2563cf276a4654e663bd62aa2805d6d84a03c75f771ed9"
+      },
+      {
+        "case_id": "router-skill-v5-box_total-3e8fb1b7175c66b9",
+        "family": "box_total",
+        "prompt_sha256": "d9a6146ba91f3a2c2af3acc5cf41df02bc87ac73fe0084f285fbaab47865f7dc",
+        "source_facts_sha256": "7c7fae28e50a11e69988b0f938ce77530b8e64825d5240073a78eb0107fe2a45"
+      },
+      {
+        "case_id": "router-skill-v5-time_conversion-73d58d51c5d2c277",
+        "family": "time_conversion",
+        "prompt_sha256": "574635a9d25fd698c194e1a6d631b887e0b57de3d456bff626de55ab95fe747f",
+        "source_facts_sha256": "556584eea61fd42cbf7f0648a05b0e1141a124d9005bf63c6e2587d2ba37b77b"
+      },
+      {
+        "case_id": "router-skill-v5-weighted_total-f7e238c1af318972",
+        "family": "weighted_total",
+        "prompt_sha256": "ac6adcee40c718cfc42178e511630dd6325595035245de9cf0286a020e4f6a01",
+        "source_facts_sha256": "beb5c978efae4d4caeefcee23c458d0bce85e764689d9e62e618b5e9fd28c670"
+      }
+    ],
+    "schema_version": "nano_harness_verified_tool_contract_v1"
+  },
+  "claim_boundary": "This preregisters a target-blind applicability registry plus single-schema skill extraction on a fresh synthetic surface.",
+  "decision_policy": {
+    "failed": "Publish V5 negative evidence; do not rerun or tune V1-V5.",
+    "passed": "Publish V5 and preregister benchmark treatment."
+  },
+  "execution_boundary": {
+    "benchmark_accessed": false,
+    "canary_accessed": false,
+    "evaluation_started": false,
+    "holdout_accessed": false,
+    "model_generation_started": false,
+    "service_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false,
+    "v1_v2_v3_v4_rerun": false
+  },
+  "experiment_id": "qwen35-router-skill-registry-v5",
+  "freshness": {
+    "benchmark_outputs_loaded": false,
+    "benchmark_prompt_overlap": {
+      "gpqa_diamond": 0,
+      "gsm8k": 0,
+      "mmlu": 0
+    },
+    "benchmark_rows_hashed": {
+      "gpqa_diamond": 198,
+      "gsm8k": 1319,
+      "mmlu": 14042
+    },
+    "canary_or_holdout_loaded": false,
+    "case_seed": 20260830,
+    "prior_outputs_loaded": false,
+    "prior_surface_prompt_overlap": {
+      "choice_capability_matrix_v1": 0,
+      "choice_exact_replication_v3": 0,
+      "choice_verifier_matrix_v2": 0
+    },
+    "prompt_overlap": {
+      "integration_v1": 0,
+      "integration_v2": 0,
+      "integration_v3": 0,
+      "router_training": 0,
+      "skill_fallback_v4": 0
+    },
+    "training_prompts_hashed": 7680,
+    "value_offset": 16000000
+  },
+  "identity": {
+    "adapter_sha256": "cea357d281ed100437268e213564fc5a5c00e6024b0c7a4be207cc686453e3f9",
+    "case_contract_sha256": "24211fb1eb73f14a23d80ee365c496d6fab586fcc59f2ca2ddbccc92377371bb",
+    "code_revision": "5aa4d4831f35e91480aa18d27d747ec69efb675a",
+    "config_sha256": "f8544c6337948be87e8a34721bc10906fc724712d8b0ffed24381ef13a59ee91",
+    "router_training_data_sha256": "8c5975e3ceed494e20d0de54eb5654ab1af71163ed58489d42d98c8b54d0bad9",
+    "v4_report_sha256": "78b6c3456fcc4c3b2d11dd4d37722e3f537927c75e90768b8269ef46565a9d34"
+  },
+  "registry": {
+    "ab_false_matches": 0,
+    "c_unique_matches": 128,
+    "maximum_input_tokens": {
+      "box_total": 111,
+      "first_strict_profit_period": 146,
+      "implicit_scale_total": 119,
+      "paired_average": 83,
+      "percentage_change": 95,
+      "quotient_remainder": 81,
+      "remaining_stock": 117,
+      "single_operation": 97,
+      "time_conversion": 82,
+      "weighted_total": 106
+    },
+    "policy": "target_blind_applicability_then_single_schema_v1",
+    "skill_prompt_sha256": {
+      "box_total": "29fa9d685cc2ace0d48f8a4eac96280a4052fd4efeec7087189cf6183cb8e31a",
+      "paired_average": "ca0b143224eb1de0e3c5b20954462fd58065fa2ff3dc790448b9554482decf36",
+      "percentage_change": "50531578a07667b35c5dfc490f05ac58f167769db627e4a3119327862f64e3a1",
+      "quotient_remainder": "76629f73fe8dc7ed9aa1176e3e6401fc77396c9715212b7dafebb8e0bef7d5b6",
+      "remaining_stock": "bd2ee43f6ef91c25a86aaeae92f5263322c5bd32404a7e0804efe51ad5dc7332",
+      "single_operation": "604b7813c47c6377717da12a20e6b7a24eafa42e5cba263f17b23e1e6d110f7a",
+      "time_conversion": "5414338c92fa8d99e890ba7483eac69269b944f31e9369e33c53a2b55070e4ef",
+      "weighted_total": "19e44550329c19e6ad212c2b4f900e52f5967414d35a83742bd91afc6142f594"
+    },
+    "skill_regex": {
+      "box_total": "TOOL: box_total \\{\"boxes\":[0-9]+,\"items_per_box\":[0-9]+,\"loose_items\":[0-9]+\\}",
+      "paired_average": "TOOL: paired_average \\{\"first_total\":[0-9]+,\"second_total\":[0-9]+\\}",
+      "percentage_change": "TOOL: percentage_change \\{\"original\":[0-9]+,\"percent\":[0-9]+,\"direction\":\"(?:increase|decrease)\"\\}",
+      "quotient_remainder": "TOOL: quotient \\{\"dividend\":[0-9]+,\"divisor\":[0-9]+\\}",
+      "remaining_stock": "TOOL: remaining_stock \\{\"starting_units\":[0-9]+,\"batches_used\":[0-9]+,\"units_per_batch\":[0-9]+\\}",
+      "single_operation": "TOOL: single_operation \\{\"left\":[0-9]+,\"right\":[0-9]+,\"operation\":\"(?:sum|difference|product|quotient)\"\\}",
+      "time_conversion": "TOOL: time_to_minutes \\{\"days\":[0-9]+,\"hours\":[0-9]+,\"minutes\":[0-9]+\\}",
+      "weighted_total": "TOOL: weighted_total \\{\"first_count\":[0-9]+,\"first_weight\":[0-9]+,\"second_count\":[0-9]+,\"second_weight\":[0-9]+\\}"
+    },
+    "uses_case_correctness": false,
+    "uses_case_metadata": false,
+    "uses_expected_answer": false
+  },
+  "schema_version": "nano_harness_router_skill_registry_preregister_v5",
+  "surface": {
+    "cases": 160,
+    "family_counts": {
+      "box_total": 16,
+      "first_strict_profit_period": 16,
+      "implicit_scale_total": 16,
+      "paired_average": 16,
+      "percentage_change": 16,
+      "quotient_remainder": 16,
+      "remaining_stock": 16,
+      "single_operation": 16,
+      "time_conversion": 16,
+      "weighted_total": 16
+    },
+    "label_counts": {
+      "A": 16,
+      "B": 16,
+      "C": 128
+    }
+  }
+}
