@@ -31,6 +31,9 @@ from scripts.render_router_adapter_integration_v2_service import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/harness/qwen35_router_adapter_integration_v2.json"
+PUBLIC_RESULT = (
+    ROOT / "docs/results/qwen35_router_adapter_integration_v2.public.json"
+)
 
 
 class RouterAdapterIntegrationV2Tests(unittest.TestCase):
@@ -325,6 +328,125 @@ class RouterAdapterIntegrationV2Tests(unittest.TestCase):
         ):
             decision = admission_gates(raw, comparison, comparison)
         self.assertFalse(decision["negative_false_positive_routes_zero"])
+
+    def test_public_result_rejects_box_total_subtype_collapse(self):
+        report = json.loads(PUBLIC_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(
+            report["routing"],
+            {
+                "cases": 128,
+                "correct": 96,
+                "positive_cases": 64,
+                "positive_correct": 64,
+                "negative_cases": 64,
+                "negative_c_correct": 32,
+                "negative_false_positive_routes": 32,
+                "verified_executions": 64,
+                "fallbacks": 32,
+            },
+        )
+        self.assertEqual(
+            report["confusion"],
+            [
+                {
+                    "expected_label": "A",
+                    "selected_label": "A",
+                    "cases": 32,
+                },
+                {
+                    "expected_label": "B",
+                    "selected_label": "B",
+                    "cases": 32,
+                },
+                {
+                    "expected_label": "C",
+                    "selected_label": "A",
+                    "cases": 32,
+                },
+                {
+                    "expected_label": "C",
+                    "selected_label": "C",
+                    "cases": 32,
+                },
+            ],
+        )
+        self.assertEqual(
+            report["arms"]["four_b_router_adapter_v2"]["by_family"],
+            {
+                "implicit_scale_total": {
+                    "cases": 32,
+                    "correct": 32,
+                    "parseable": 32,
+                },
+                "first_strict_profit_period": {
+                    "cases": 32,
+                    "correct": 32,
+                    "parseable": 32,
+                },
+                "box_total": {
+                    "cases": 32,
+                    "correct": 0,
+                    "parseable": 32,
+                },
+                "remaining_stock": {
+                    "cases": 32,
+                    "correct": 0,
+                    "parseable": 32,
+                },
+            },
+        )
+        self.assertEqual(
+            report["routing_by_family"],
+            {
+                "implicit_scale_total": {
+                    "cases": 32,
+                    "route_correct": 32,
+                    "selected_labels": {"A": 32},
+                    "verified_executions": 32,
+                    "fallbacks": 0,
+                },
+                "first_strict_profit_period": {
+                    "cases": 32,
+                    "route_correct": 32,
+                    "selected_labels": {"B": 32},
+                    "verified_executions": 32,
+                    "fallbacks": 0,
+                },
+                "box_total": {
+                    "cases": 32,
+                    "route_correct": 0,
+                    "selected_labels": {"A": 32},
+                    "verified_executions": 0,
+                    "fallbacks": 32,
+                },
+                "remaining_stock": {
+                    "cases": 32,
+                    "route_correct": 32,
+                    "selected_labels": {"C": 32},
+                    "verified_executions": 0,
+                    "fallbacks": 0,
+                },
+            },
+        )
+        decision = report["decision"]
+        self.assertFalse(decision["adapter_integration_v2_admitted"])
+        self.assertFalse(
+            decision["question_only_scan_preregistration_allowed"]
+        )
+        self.assertFalse(decision["integration_v1_rerun_allowed"])
+        self.assertFalse(decision["integration_v2_rerun_allowed"])
+        self.assertFalse(decision["benchmark_generation_allowed"])
+        self.assertFalse(decision["training_or_rl_allowed"])
+        self.assertTrue(decision["gates"]["router_a_recall_32"])
+        self.assertTrue(decision["gates"]["router_b_recall_32"])
+        self.assertFalse(decision["gates"]["router_c_precision_64"])
+        self.assertFalse(
+            decision["gates"]["negative_false_positive_routes_zero"]
+        )
+        self.assertFalse(decision["gates"]["fallbacks_zero"])
+        self.assertFalse(
+            report["data"]["integration_v1_rows_or_outputs_loaded"]
+        )
 
 
 if __name__ == "__main__":

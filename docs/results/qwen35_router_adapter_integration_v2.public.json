@@ -1,0 +1,459 @@
+{
+  "arms": {
+    "four_b_direct": {
+      "accuracy": 0.0,
+      "by_family": {
+        "box_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "first_strict_profit_period": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "implicit_scale_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "remaining_stock": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        }
+      },
+      "cases": 128,
+      "correct": 0,
+      "parseable": 128
+    },
+    "four_b_router_adapter_v2": {
+      "accuracy": 0.5,
+      "by_family": {
+        "box_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "first_strict_profit_period": {
+          "cases": 32,
+          "correct": 32,
+          "parseable": 32
+        },
+        "implicit_scale_total": {
+          "cases": 32,
+          "correct": 32,
+          "parseable": 32
+        },
+        "remaining_stock": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        }
+      },
+      "cases": 128,
+      "correct": 64,
+      "parseable": 128
+    },
+    "nine_b_direct": {
+      "accuracy": 0.0,
+      "by_family": {
+        "box_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "first_strict_profit_period": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "implicit_scale_total": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        },
+        "remaining_stock": {
+          "cases": 32,
+          "correct": 0,
+          "parseable": 32
+        }
+      },
+      "cases": 128,
+      "correct": 0,
+      "parseable": 128
+    }
+  },
+  "claim_boundary": "This is fresh synthetic transfer evidence for the remapped adapter only. It is not benchmark, canary, holdout, training, RL, or final model-superiority evidence.",
+  "comparisons": {
+    "candidate_vs_four_b": {
+      "baseline_accuracy": 0.0,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-router-adapter-integration-v2:candidate-four",
+      "candidate_accuracy": 0.5,
+      "candidate_only_case_ids": [
+        "router-adapter-v2-first_strict_profit_period-00b4bf410e778768",
+        "router-adapter-v2-first_strict_profit_period-05ddf5d2300060f4",
+        "router-adapter-v2-first_strict_profit_period-0a8f3c54509905aa",
+        "router-adapter-v2-first_strict_profit_period-0ae27f4ab87f7a90",
+        "router-adapter-v2-first_strict_profit_period-0ae72f32ae14a675",
+        "router-adapter-v2-first_strict_profit_period-0eb00621514effd8",
+        "router-adapter-v2-first_strict_profit_period-262586dcad11be1b",
+        "router-adapter-v2-first_strict_profit_period-2c2ecc9712d34506",
+        "router-adapter-v2-first_strict_profit_period-49451b6556eeb087",
+        "router-adapter-v2-first_strict_profit_period-4c9df1f712077dda",
+        "router-adapter-v2-first_strict_profit_period-540c9050360a227b",
+        "router-adapter-v2-first_strict_profit_period-59149e3fffa1cd3e",
+        "router-adapter-v2-first_strict_profit_period-5fbcb8df034aae35",
+        "router-adapter-v2-first_strict_profit_period-60699768c5759fc4",
+        "router-adapter-v2-first_strict_profit_period-6d098710d0bb63c4",
+        "router-adapter-v2-first_strict_profit_period-766342e3f3251431",
+        "router-adapter-v2-first_strict_profit_period-98a202cc89bcb32b",
+        "router-adapter-v2-first_strict_profit_period-9d5b88a16c98f23b",
+        "router-adapter-v2-first_strict_profit_period-a00799fc5c4ec671",
+        "router-adapter-v2-first_strict_profit_period-b63b309c712c9343",
+        "router-adapter-v2-first_strict_profit_period-b95cb69bff276669",
+        "router-adapter-v2-first_strict_profit_period-bb816241094cb6a9",
+        "router-adapter-v2-first_strict_profit_period-bdcb21070fa8f96a",
+        "router-adapter-v2-first_strict_profit_period-c06135d3192cfa1e",
+        "router-adapter-v2-first_strict_profit_period-c23e781c556795fa",
+        "router-adapter-v2-first_strict_profit_period-caed48982fbefb8c",
+        "router-adapter-v2-first_strict_profit_period-d11c7968a8156239",
+        "router-adapter-v2-first_strict_profit_period-d672c75a3eff9beb",
+        "router-adapter-v2-first_strict_profit_period-e5368b979c280faf",
+        "router-adapter-v2-first_strict_profit_period-ef92dbe5e3a334b0",
+        "router-adapter-v2-first_strict_profit_period-f0035c92a5277923",
+        "router-adapter-v2-first_strict_profit_period-fe8870e2ca3b47ef",
+        "router-adapter-v2-implicit_scale_total-078a2d07c236b196",
+        "router-adapter-v2-implicit_scale_total-0e2db565f7cc6acb",
+        "router-adapter-v2-implicit_scale_total-1849cc190d8bb5d1",
+        "router-adapter-v2-implicit_scale_total-19e95b2ac26174f6",
+        "router-adapter-v2-implicit_scale_total-1aed9337860734f4",
+        "router-adapter-v2-implicit_scale_total-2fee87b42828bf30",
+        "router-adapter-v2-implicit_scale_total-30b6089523ad7a3a",
+        "router-adapter-v2-implicit_scale_total-31ebe8ef04c54481",
+        "router-adapter-v2-implicit_scale_total-3d2e9436714d1e33",
+        "router-adapter-v2-implicit_scale_total-48cbaa0a7fd09eed",
+        "router-adapter-v2-implicit_scale_total-499e06dde523b52e",
+        "router-adapter-v2-implicit_scale_total-4f2c1981be1c0f89",
+        "router-adapter-v2-implicit_scale_total-68bb9fbc89ac6cf9",
+        "router-adapter-v2-implicit_scale_total-6da4af54f0515acd",
+        "router-adapter-v2-implicit_scale_total-7ab8b656ba364161",
+        "router-adapter-v2-implicit_scale_total-81fc5626941474d9",
+        "router-adapter-v2-implicit_scale_total-83760637f40d24e1",
+        "router-adapter-v2-implicit_scale_total-9195072a52ca0a83",
+        "router-adapter-v2-implicit_scale_total-9aa465fb2306adf6",
+        "router-adapter-v2-implicit_scale_total-a181cd39fd54c141",
+        "router-adapter-v2-implicit_scale_total-a65faab48b890859",
+        "router-adapter-v2-implicit_scale_total-a869bae62e664cde",
+        "router-adapter-v2-implicit_scale_total-abec03e383cc8a38",
+        "router-adapter-v2-implicit_scale_total-af777ef8dd8e2fdf",
+        "router-adapter-v2-implicit_scale_total-be1e48d3fc729a09",
+        "router-adapter-v2-implicit_scale_total-c0b76e951f442dbb",
+        "router-adapter-v2-implicit_scale_total-ca0de9f5c081a799",
+        "router-adapter-v2-implicit_scale_total-cae2965857d40a23",
+        "router-adapter-v2-implicit_scale_total-cd2200c94ae9b4db",
+        "router-adapter-v2-implicit_scale_total-d7a3308afb8dab88",
+        "router-adapter-v2-implicit_scale_total-f633f6cd2f0aa377",
+        "router-adapter-v2-implicit_scale_total-fc8c69821a615efd"
+      ],
+      "cases": 128,
+      "delta": 0.5,
+      "mcnemar_exact_p": 1.0842021724855044e-19,
+      "paired_bootstrap_95_ci": [
+        0.4140625,
+        0.5859375
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 0,
+        "both_wrong": 64,
+        "candidate_only": 64
+      }
+    },
+    "candidate_vs_nine_b": {
+      "baseline_accuracy": 0.0,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-router-adapter-integration-v2:candidate-nine",
+      "candidate_accuracy": 0.5,
+      "candidate_only_case_ids": [
+        "router-adapter-v2-first_strict_profit_period-00b4bf410e778768",
+        "router-adapter-v2-first_strict_profit_period-05ddf5d2300060f4",
+        "router-adapter-v2-first_strict_profit_period-0a8f3c54509905aa",
+        "router-adapter-v2-first_strict_profit_period-0ae27f4ab87f7a90",
+        "router-adapter-v2-first_strict_profit_period-0ae72f32ae14a675",
+        "router-adapter-v2-first_strict_profit_period-0eb00621514effd8",
+        "router-adapter-v2-first_strict_profit_period-262586dcad11be1b",
+        "router-adapter-v2-first_strict_profit_period-2c2ecc9712d34506",
+        "router-adapter-v2-first_strict_profit_period-49451b6556eeb087",
+        "router-adapter-v2-first_strict_profit_period-4c9df1f712077dda",
+        "router-adapter-v2-first_strict_profit_period-540c9050360a227b",
+        "router-adapter-v2-first_strict_profit_period-59149e3fffa1cd3e",
+        "router-adapter-v2-first_strict_profit_period-5fbcb8df034aae35",
+        "router-adapter-v2-first_strict_profit_period-60699768c5759fc4",
+        "router-adapter-v2-first_strict_profit_period-6d098710d0bb63c4",
+        "router-adapter-v2-first_strict_profit_period-766342e3f3251431",
+        "router-adapter-v2-first_strict_profit_period-98a202cc89bcb32b",
+        "router-adapter-v2-first_strict_profit_period-9d5b88a16c98f23b",
+        "router-adapter-v2-first_strict_profit_period-a00799fc5c4ec671",
+        "router-adapter-v2-first_strict_profit_period-b63b309c712c9343",
+        "router-adapter-v2-first_strict_profit_period-b95cb69bff276669",
+        "router-adapter-v2-first_strict_profit_period-bb816241094cb6a9",
+        "router-adapter-v2-first_strict_profit_period-bdcb21070fa8f96a",
+        "router-adapter-v2-first_strict_profit_period-c06135d3192cfa1e",
+        "router-adapter-v2-first_strict_profit_period-c23e781c556795fa",
+        "router-adapter-v2-first_strict_profit_period-caed48982fbefb8c",
+        "router-adapter-v2-first_strict_profit_period-d11c7968a8156239",
+        "router-adapter-v2-first_strict_profit_period-d672c75a3eff9beb",
+        "router-adapter-v2-first_strict_profit_period-e5368b979c280faf",
+        "router-adapter-v2-first_strict_profit_period-ef92dbe5e3a334b0",
+        "router-adapter-v2-first_strict_profit_period-f0035c92a5277923",
+        "router-adapter-v2-first_strict_profit_period-fe8870e2ca3b47ef",
+        "router-adapter-v2-implicit_scale_total-078a2d07c236b196",
+        "router-adapter-v2-implicit_scale_total-0e2db565f7cc6acb",
+        "router-adapter-v2-implicit_scale_total-1849cc190d8bb5d1",
+        "router-adapter-v2-implicit_scale_total-19e95b2ac26174f6",
+        "router-adapter-v2-implicit_scale_total-1aed9337860734f4",
+        "router-adapter-v2-implicit_scale_total-2fee87b42828bf30",
+        "router-adapter-v2-implicit_scale_total-30b6089523ad7a3a",
+        "router-adapter-v2-implicit_scale_total-31ebe8ef04c54481",
+        "router-adapter-v2-implicit_scale_total-3d2e9436714d1e33",
+        "router-adapter-v2-implicit_scale_total-48cbaa0a7fd09eed",
+        "router-adapter-v2-implicit_scale_total-499e06dde523b52e",
+        "router-adapter-v2-implicit_scale_total-4f2c1981be1c0f89",
+        "router-adapter-v2-implicit_scale_total-68bb9fbc89ac6cf9",
+        "router-adapter-v2-implicit_scale_total-6da4af54f0515acd",
+        "router-adapter-v2-implicit_scale_total-7ab8b656ba364161",
+        "router-adapter-v2-implicit_scale_total-81fc5626941474d9",
+        "router-adapter-v2-implicit_scale_total-83760637f40d24e1",
+        "router-adapter-v2-implicit_scale_total-9195072a52ca0a83",
+        "router-adapter-v2-implicit_scale_total-9aa465fb2306adf6",
+        "router-adapter-v2-implicit_scale_total-a181cd39fd54c141",
+        "router-adapter-v2-implicit_scale_total-a65faab48b890859",
+        "router-adapter-v2-implicit_scale_total-a869bae62e664cde",
+        "router-adapter-v2-implicit_scale_total-abec03e383cc8a38",
+        "router-adapter-v2-implicit_scale_total-af777ef8dd8e2fdf",
+        "router-adapter-v2-implicit_scale_total-be1e48d3fc729a09",
+        "router-adapter-v2-implicit_scale_total-c0b76e951f442dbb",
+        "router-adapter-v2-implicit_scale_total-ca0de9f5c081a799",
+        "router-adapter-v2-implicit_scale_total-cae2965857d40a23",
+        "router-adapter-v2-implicit_scale_total-cd2200c94ae9b4db",
+        "router-adapter-v2-implicit_scale_total-d7a3308afb8dab88",
+        "router-adapter-v2-implicit_scale_total-f633f6cd2f0aa377",
+        "router-adapter-v2-implicit_scale_total-fc8c69821a615efd"
+      ],
+      "cases": 128,
+      "delta": 0.5,
+      "mcnemar_exact_p": 1.0842021724855044e-19,
+      "paired_bootstrap_95_ci": [
+        0.4140625,
+        0.5859375
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 0,
+        "both_wrong": 64,
+        "candidate_only": 64
+      }
+    },
+    "four_b_vs_nine_b": {
+      "baseline_accuracy": 0.0,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-router-adapter-integration-v2:four-nine",
+      "candidate_accuracy": 0.0,
+      "candidate_only_case_ids": [],
+      "cases": 128,
+      "delta": 0.0,
+      "mcnemar_exact_p": 1.0,
+      "paired_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 0,
+        "both_wrong": 128,
+        "candidate_only": 0
+      }
+    }
+  },
+  "confusion": [
+    {
+      "cases": 32,
+      "expected_label": "A",
+      "selected_label": "A"
+    },
+    {
+      "cases": 32,
+      "expected_label": "B",
+      "selected_label": "B"
+    },
+    {
+      "cases": 32,
+      "expected_label": "C",
+      "selected_label": "A"
+    },
+    {
+      "cases": 32,
+      "expected_label": "C",
+      "selected_label": "C"
+    }
+  ],
+  "data": {
+    "benchmark_canary_holdout_rows_or_outputs": 0,
+    "cases": 128,
+    "family_counts": {
+      "box_total": 32,
+      "first_strict_profit_period": 32,
+      "implicit_scale_total": 32,
+      "remaining_stock": 32
+    },
+    "freshness": {
+      "benchmark_outputs_loaded": false,
+      "benchmark_prompt_overlap": {
+        "gpqa_diamond": 0,
+        "gsm8k": 0,
+        "mmlu": 0
+      },
+      "benchmark_rows_hashed": {
+        "gpqa_diamond": 198,
+        "gsm8k": 1319,
+        "mmlu": 14042
+      },
+      "canary_rows_or_outputs_loaded": false,
+      "case_seed": 20260826,
+      "history_disjoint_prompt_overlap": {
+        "integration_v1_prompts": 0,
+        "prior_binary_prompts": 0,
+        "prior_multiclass_prompts": 0,
+        "router_training_prompts": 0
+      },
+      "holdout_rows_or_outputs_loaded": false,
+      "integration_v1_outputs_loaded": false,
+      "integration_v1_prompts_hashed": 128,
+      "prior_binary_prompts_hashed": 128,
+      "prior_multiclass_prompts_hashed": 256,
+      "prior_surface_prompt_overlap": {
+        "choice_capability_matrix_v1": 0,
+        "choice_exact_replication_v3": 0,
+        "choice_verifier_matrix_v2": 0
+      },
+      "training_prompts_hashed": 960,
+      "value_offset": 25000
+    },
+    "integration_v1_rows_or_outputs_loaded": false,
+    "negative_cases": 64,
+    "positive_cases": 64,
+    "training_eligible_cases": 0
+  },
+  "decision": {
+    "adapter_integration_v2_admitted": false,
+    "benchmark_generation_allowed": false,
+    "canary_allowed": false,
+    "further_tuning_allowed": false,
+    "gates": {
+      "all_three_arms_complete_and_parseable_128": true,
+      "candidate_vs_four_b_maximum_losses": true,
+      "candidate_vs_four_b_minimum_wins": true,
+      "candidate_vs_four_b_significant": true,
+      "candidate_vs_nine_b_maximum_losses": true,
+      "candidate_vs_nine_b_minimum_wins": true,
+      "candidate_vs_nine_b_significant": true,
+      "every_family_non_regression": true,
+      "fallbacks_zero": false,
+      "negative_candidate_exact_direct_parity": true,
+      "negative_false_positive_routes_zero": false,
+      "positive_feedback_result_matches_64": true,
+      "positive_verified_executions_64": true,
+      "router_a_recall_32": true,
+      "router_b_recall_32": true,
+      "router_c_precision_64": false,
+      "router_outputs_parseable_128": true
+    },
+    "holdout_allowed": false,
+    "integration_v1_rerun_allowed": false,
+    "integration_v2_rerun_allowed": false,
+    "next_action": "Reject the remapped router transfer. Do not rerun or tune V1 or V2.",
+    "question_only_scan_generation_allowed": false,
+    "question_only_scan_preregistration_allowed": false,
+    "training_or_rl_allowed": false
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "executor_uses_case_correctness": false,
+    "executor_uses_expected_answer": false,
+    "holdout_rows_loaded": false,
+    "integration_v1_rows_or_outputs_loaded": false,
+    "router_uses_case_correctness": false,
+    "router_uses_case_metadata": false,
+    "router_uses_expected_answer": false,
+    "training_eligible_cases": 0
+  },
+  "experiment_id": "qwen35-router-adapter-integration-v2",
+  "identity": {
+    "case_contract_sha256": "d1b03b8f5fae8e9a0a5e8d3a0b3d4f5d7f8fa78a53c767fb8ece3e404c8be486",
+    "config_sha256": "e9b4af568af1c54242b17442d361a0e0bc8548013cf54ddd716092ec6f6a8c35",
+    "integration_v1_report_sha256": "9b01a9b6d6011f657696b0cebf9de8853b16fd2406802b14ca203d3500288f70",
+    "parity_report_sha256": "539517c890e53f2a0e4034c724d1324df6cc828186d9621f77c106c08d4a1c01",
+    "preregister_sha256": "1a23a1bb391a3ebac7e70aecd5e2d855ef624e825c26e6bfe9ed942d07cc9e2e",
+    "raw_result_sha256": "2758925bc575dab994c70cf94f7e43a8d269d02d1759b10e05b20694cdac234a",
+    "remapped_adapter_sha256": "fbaa39dcb3fcf34e9aab280308cb5a5416094c1968e4ac3a69cd739a806ecc49",
+    "result_revision": "3b771b1bfdec409efd09928d013e271fea08b86a",
+    "service_receipt_sha256": "4bf5328d4256db8428d7fd8db96a6346a07abd6fc93c9920ff3e7bbb51c1e1fb"
+  },
+  "routing": {
+    "cases": 128,
+    "correct": 96,
+    "fallbacks": 32,
+    "negative_c_correct": 32,
+    "negative_cases": 64,
+    "negative_false_positive_routes": 32,
+    "positive_cases": 64,
+    "positive_correct": 64,
+    "verified_executions": 64
+  },
+  "routing_by_family": {
+    "box_total": {
+      "cases": 32,
+      "fallbacks": 32,
+      "route_correct": 0,
+      "selected_labels": {
+        "A": 32
+      },
+      "verified_executions": 0
+    },
+    "first_strict_profit_period": {
+      "cases": 32,
+      "fallbacks": 0,
+      "route_correct": 32,
+      "selected_labels": {
+        "B": 32
+      },
+      "verified_executions": 32
+    },
+    "implicit_scale_total": {
+      "cases": 32,
+      "fallbacks": 0,
+      "route_correct": 32,
+      "selected_labels": {
+        "A": 32
+      },
+      "verified_executions": 32
+    },
+    "remaining_stock": {
+      "cases": 32,
+      "fallbacks": 0,
+      "route_correct": 32,
+      "selected_labels": {
+        "C": 32
+      },
+      "verified_executions": 0
+    }
+  },
+  "schema_version": "nano_harness_router_adapter_integration_public_v2"
+}

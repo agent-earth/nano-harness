@@ -1,0 +1,44 @@
+{
+  "benchmark_accessed": false,
+  "canary_accessed": false,
+  "claim_boundary": "This receipt proves only readiness for the new V2 case contract. It does not rerun V1 or establish transfer quality.",
+  "config_sha256": "e9b4af568af1c54242b17442d361a0e0bc8548013cf54ddd716092ec6f6a8c35",
+  "experiment_id": "qwen35-router-adapter-integration-v2",
+  "health_sha256": "24d27322d2f47472664b887db02ed4206450f281d03e56b6d7c58fd167a80715",
+  "healthy": true,
+  "holdout_accessed": false,
+  "integration_v1_rerun": false,
+  "model_health": {
+    "qwen3.5-4b": {
+      "max_model_len": 4096,
+      "owned_by": "vllm",
+      "parent": null,
+      "root": "../../../models/Qwen3.5-4B"
+    },
+    "qwen3.5-router-original-v1": {
+      "max_model_len": null,
+      "owned_by": "vllm",
+      "parent": "qwen3.5-4b",
+      "root": "../nano-train-fullstack-traex-03/artifacts/qwen35-router-classification-sft-smoke-v1/adapter"
+    },
+    "qwen3.5-router-remapped-v1": {
+      "max_model_len": null,
+      "owned_by": "vllm",
+      "parent": "qwen3.5-4b",
+      "root": "results/serving/qwen35-router-v1-remapped"
+    }
+  },
+  "models": {
+    "base": "qwen3.5-4b",
+    "original_unused": "qwen3.5-router-original-v1",
+    "remapped_router": "qwen3.5-router-remapped-v1"
+  },
+  "parity_service_sha256": "1f741b74dfacc8e1845c18e1b08e609725f56a921ec8a913e16bd35436114d61",
+  "preregister_sha256": "1a23a1bb391a3ebac7e70aecd5e2d855ef624e825c26e6bfe9ed942d07cc9e2e",
+  "recorded_unix": 1787230795,
+  "remapped_adapter_sha256": "fbaa39dcb3fcf34e9aab280308cb5a5416094c1968e4ac3a69cd739a806ecc49",
+  "remapped_adapter_weights_sha256": "9475d69207fa1db9b0106e420637c6f764d907baa2048c4b73f19773d6e2042b",
+  "schema_version": "nano_harness_router_adapter_integration_v2_service",
+  "service_revision": "3b771b1bfdec409efd09928d013e271fea08b86a",
+  "v2_generation_started": false
+}

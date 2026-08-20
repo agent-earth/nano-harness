@@ -263,6 +263,39 @@ def build_report() -> dict:
         raw, candidate_vs_four, candidate_vs_nine
     )
     admitted = all(decision_gates.values())
+    routing_by_family = {
+        family: {
+            "cases": sum(case["family"] == family for case in cases),
+            "route_correct": sum(
+                case["family"] == family
+                and raw["receipts"][case["case_id"]]["router"]["correct"]
+                for case in cases
+            ),
+            "selected_labels": dict(
+                sorted(
+                    Counter(
+                        raw["receipts"][case["case_id"]]["router"]["label"]
+                        for case in cases
+                        if case["family"] == family
+                    ).items()
+                )
+            ),
+            "verified_executions": sum(
+                case["family"] == family
+                and bool(
+                    raw["receipts"][case["case_id"]]["receipt"]
+                    and raw["receipts"][case["case_id"]]["receipt"]["executed"]
+                )
+                for case in cases
+            ),
+            "fallbacks": sum(
+                case["family"] == family
+                and raw["receipts"][case["case_id"]]["fallback_used"]
+                for case in cases
+            ),
+        }
+        for family in ALL_FAMILIES
+    }
     return {
         "schema_version": (
             "nano_harness_router_adapter_integration_public_v2"
@@ -295,6 +328,7 @@ def build_report() -> dict:
         },
         "arms": raw["arms"],
         "routing": raw["routing"],
+        "routing_by_family": routing_by_family,
         "confusion": [
             {
                 "expected_label": expected,
@@ -367,6 +401,12 @@ Neither V1 rows nor V1 outputs were loaded or regenerated.
 
 ```json
 {json.dumps(report['routing'], indent=2, sort_keys=True)}
+```
+
+## Routing By Family
+
+```json
+{json.dumps(report['routing_by_family'], indent=2, sort_keys=True)}
 ```
 
 ## Paired Comparisons
