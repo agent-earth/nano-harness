@@ -1,0 +1,1690 @@
+{
+  "acceptance": {
+    "all_rows_complete_and_parseable": true,
+    "benchmark_allowed_after_pass": false,
+    "canary_allowed_after_pass": false,
+    "cases": 256,
+    "cases_per_family": 128,
+    "every_family_non_regression_vs_four_b_and_nine_b": true,
+    "executor_contract_failures_zero": true,
+    "feedback_result_matches_256": true,
+    "harness_vs_four_b_maximum_losses": 0,
+    "harness_vs_four_b_minimum_wins": 12,
+    "harness_vs_four_b_significant": true,
+    "harness_vs_nine_b_maximum_losses": 0,
+    "harness_vs_nine_b_minimum_wins": 12,
+    "harness_vs_nine_b_significant": true,
+    "next_fresh_local_replication_allowed_after_pass": true,
+    "prompt_routes_256": true,
+    "single_tool_exposures_256": true,
+    "verified_executions_256": true
+  },
+  "case_contract": {
+    "case_contract_sha256": "913c64a4bcfdce4d04299b9958a291937d3c7bfd6425ee956e835042e29651bf",
+    "case_count": 256,
+    "cases": [
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-476b76607e71ad6c",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "e26e2f370f736a6eacad4b2bdd3d978099413cca53cb43e5ab157fb648945406",
+        "source_facts_sha256": "94fa67b4125363717c8831683ae6a9ebdb0b073a7b8cac22170c8c95bea23369"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-28ac5960d4790456",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "213093bc2da2a18096f04f35188003108876c2ef1b8973ad473d1169bec0930c",
+        "source_facts_sha256": "fceaa4dcb15ce07968e4902fc767fa10c6e07676cc0484078325a518b3915825"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-3cedb201d2049a72",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "01892fae8a93a100b357bc9eeaa29ca038b4e9a0ca43427a79049b9481b6ed79",
+        "source_facts_sha256": "ce7fa59f1dcba62fa2c1f152b0473cf623ca4d450c72af337703e885f28a7d96"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e5dc5f50e4a744cd",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "f50ce7f9f527d9d78837628a50c5f78947e89cd3126c0afae76ffcd57e543bd4",
+        "source_facts_sha256": "cd084f356799429795e7917baf0a19760c61b820fee2870a9bbdf58c51a30f82"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-f08307865a61e156",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "9be2e7d5f0f7bd753f18b95edb27465eee227c2d6241fbde5db749fdbbedc181",
+        "source_facts_sha256": "97d4bfc6ea1018e2ae48bba7d7dc2d1a096cb181524379fa92e1a671aa2c2b67"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-445a8a522da9a863",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "64a3c2f571792c3a66698be051be4163aa4a9a4ebaba03724c9bfdd18c351b13",
+        "source_facts_sha256": "08f55629baa65c14b5fc1cd78f59375e35ef41577d0062ea986ce1dceb4990c0"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-14ebb9906073b293",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9a8ae32701289ce375b4337b4dd25e720675b3c4971d76cba50db884d89d4ec5",
+        "source_facts_sha256": "6f977f842e2ad3e77cf13836f6516aaaf037bc88372893e06045560107575fae"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-a357a28e2247be1f",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "60830d40cfcb86b8495190f9c85ea813d51565991e60d2acfba09ad3ad6ffadb",
+        "source_facts_sha256": "c0a8f5159700ea62ea054021b444480a9ff76833d83c51f7b966a28603470668"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c6e1af3344e18395",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "a6ee05a4bc98798cd04afe0ac96e768e0e6a6647f885024afb498d09de08fcfd",
+        "source_facts_sha256": "69ff9fb12d38bc54121b087112621badca55a44d103c0caead6e2352ab62484c"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-0cb3e46394ba77e6",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "d65591c236d55f494de3ff74c15e5b164d17abe5a10bbb1bf32bd8ab15312cff",
+        "source_facts_sha256": "2465a502efd1dc0b2a912c87c2f05ac1b34e637a97c4b3f588b6c720fe67b89d"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-d7e5063ee162a6ce",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "355a3544bb36676a670bbf6fbd3c70e0914a223e0ae4c59d84d3ba77f4e385b0",
+        "source_facts_sha256": "e7eb9e36d04f164a238e7815c068044f78ecacb679bbc792c6a7519bf895dff8"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-f280ac2d254dcb95",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "0dae0e9fb79d80f9947807ca0a5241ce1b4917946123ea5e447ad40c2c568a27",
+        "source_facts_sha256": "e9c8685325ba8fc536821372a4fa2ce5a78ed48b548ac82e031eb27d31863cdc"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-0e204e360c36d780",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "0884d2bbfb7fba449de989b341e99ae4dd31b9084ed196784ba4028958419a58",
+        "source_facts_sha256": "5594b84ff6bbdd68a3eb99590d62989844ffa9268c3ac4c7c3b16be82dd524e9"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-b4ccdbaca7aca3ea",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "c9d93741c7661911a994d779e0582c60a2f0844724f4e53679fa301de2185dbe",
+        "source_facts_sha256": "83d2ac46ac733053365cc72af4085a5f6039da8c53a92e66f01614d9dc5ef9ed"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-f2f8186221b6159d",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "4876ad0acee6b136039595b2bdbeacc019b6819402008bc43374ecb9309770e5",
+        "source_facts_sha256": "206d20c1edc9877b946ad2703ccc6473fc22e65b7176a60dc967b3a3c0e18494"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e5f21d372921e993",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "b2029aedcb512e53f9b5ccad6b8e19b86ca054812ecedea0e0b75d6e7316d95c",
+        "source_facts_sha256": "00e41b478bb0804b6cb1ff366154db915c86d6c9db11d9d71b8abb3441762a76"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-b94cec6db2aa96d3",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "617fff87c3107ced2ab3af69dea40439ed9b1127768de21ecd63c53bdca94e56",
+        "source_facts_sha256": "a9bcec8fca51c556a1ce5b5ea961bb678a41adc64465b23804116bcc90e74ce1"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-b3fc29609183289d",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "907128bc9fb03c87727eeb211d076850bd0853eadc05c345813da80542118615",
+        "source_facts_sha256": "a3c0ccf06f5aa2258c15bdf6ce83b7c065546f9bbb816c763896d15743a5f583"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c7e03bbf5526b85a",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "cfb7879aba0b8f5a6dfa69efc81716dc29b8674d4b2b08749f74d1b18426648c",
+        "source_facts_sha256": "3afa7cb8c2ee15c266dc60d80a254199e4bce17c3a150b0cbb9483b16b39590e"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-971273380395f936",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "b30c280ef1bd5755bdc202e597fccb9e0b75ed8a988bb224b3d64a909c7cd294",
+        "source_facts_sha256": "9d750122735145a715e855dc4108a048cc16ccc5616d8950474cfd9abab6f2f9"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-ce4aede32a6f5d40",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "4aba37eafad8455386f538e3a460adb743771ddbd136b5d82ed5b25a74e983f4",
+        "source_facts_sha256": "5be4e59b46d332bc84fad07f6457a7c20681401dafcbc78c9109babccb0b9eaa"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-034c3208c50da62b",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "29a5bd7cf9c0d413a53733eb50deaffdc015eb307316dedd7456ca6566fed7ee",
+        "source_facts_sha256": "49107a53b3b3b76cac6a1d82e4f8e857a1e38174c54fa3b59322cf314ab24963"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-3f76c93ac225247b",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ec3fb44cdf48ffa1619b6cf3059da4ee16df91334dc9098186d2ef4124306c87",
+        "source_facts_sha256": "a9718d716939bfe1f250dab55e22b66b21d2ba3a4ef8121d1b237e0082907f21"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-323604409e445c82",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "49626b84236039a6f91a7ea733d5557fe1964cac77412fc967ed91f1c19b619e",
+        "source_facts_sha256": "c80e0ab2a9649929aa10730a8d3ee22cb2047c6d05d4519c29feacf7308ca3f6"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-ae5fa50549076cb7",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "d58231b58b7d6c7d0dbc4bff40aee637e6c34bfa5594a191784e1f7cc1c3aed8",
+        "source_facts_sha256": "d615292d39863580fd1c1d33eaabd24612561ef04527f5c3dd131072b4218d07"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e8d38c6165500bb7",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "5194e2ce5a5a52963b1134b2bfbc3ca1477117368a9bf94d2c704c1823719f2f",
+        "source_facts_sha256": "63e7c72678d6b35bcecdba9e99d625a03d1194ae7223251f202454e53c661d30"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-4b08ef86f040c501",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "b4507e6defffaf6fe585a5a63c3c390cb02eb4b827301851170a1f149c1e9bfe",
+        "source_facts_sha256": "eb759586eac0271110c071cf756aec7d0f8577f01a8d89fbe34a97ed672e4b73"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-38ef3687c3cf1d6a",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "286866d3b4ddfdf8054853b595b0d2f5c6d7124f966eeefb59df46bf3b4025d1",
+        "source_facts_sha256": "058a919701618fda19f4ad6b1e11085184e5cb6e8e9d0ba5a176739a38989d43"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-0080fd0808d97461",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "815b6cc0219a26644d2e6e95677adf92b1024103bd505eff9b45c89c74a72e30",
+        "source_facts_sha256": "b2d2fe442e5cd061b3302fb386d4cf502ea7abdcfa08a222d8c94c540c370da6"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-6bdf56f23cf9a548",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "f809051a033dd30b3e421d45f6c5b2dd9004a4359d821aa9ebd075762fab3ea2",
+        "source_facts_sha256": "6f33a1c489dde0095982bd807b3d1cf9ea631574b8a599831c3cadad93133286"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c09eaf8b32c24822",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "74ba95e4c973c2c35e6e3d00d5686e112981aa8f2d206fdcbd1dae86ed9b176d",
+        "source_facts_sha256": "3040174088a7dee927d32a04cfa7be5aafb1251ee5a1070415423d1f4b3c07b0"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-e94cdc2386dd1ae4",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9f046e83c7923eb50cbb1040ef839360f92389319e512e784e9be8501972e521",
+        "source_facts_sha256": "f200b42a3faebcb35cd00001bd6d514bcde3542e69262473262574d8fb11cf63"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-a967b5a5bf8dcd63",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "01a1893ac272a771c184429cba0bd863781392198827fe8e81e4b7b9d06928c2",
+        "source_facts_sha256": "dd7239388f0569980c6e8ba4175ede6eb6255935451350bf6d9e282ede4e3567"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-b0a65222923dbf8e",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "02d57dfba4ea5e83008e47343c22c1d19faac2e53fb659c3d390b545ee46f82e",
+        "source_facts_sha256": "0c9090c6c96f3ae3ba13054d626f18441acbeb226a7232f5c7f96d69bfab24da"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-82a29d21e9a912e0",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "459b9e1e88a6e49970442f0cb6a1043f982ca48a366741158857bb26a4f74dde",
+        "source_facts_sha256": "f5195a729461bd5feedc8cc94efdf56f1dfb4b901f5b83564141da2813e0dad2"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-8656dd9159c39802",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "6f1286bc26ce6d1e3e0a20dd83ec23d8c0a1e09e7c9c22439af9c1ffb21e3385",
+        "source_facts_sha256": "6f57dc7ebbeac5859cc3b0674a7ce5b6b0df03226c486fea0e3e560f6cc07f56"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-ab593895eac750a0",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "6021e06a44d3651f2eaa5c555cb1ebc707b3558e59950c0eb27c63543c1d4894",
+        "source_facts_sha256": "8f073aa43d6b67d14919afe0f65222eef30588ed8a6d8edff09ca1b012a0c927"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-f3a4d7c7485af7c8",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "fde0fb3b6d2d61607d0b84d06f39e173609a66c3baa9a2e2f11784953c1b0ecc",
+        "source_facts_sha256": "6713a623fb89f5144c019fe2cb27baad86e9e42ce6f375dce7791db4c5b085dc"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e8fc51aba375e6a7",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "05c6febaeb46b152afaf116232104944ddf0fdf24724e4d2d19de1d53c2f2132",
+        "source_facts_sha256": "1843554c66ab4b8ed7b8f5fd6ffc9f0afdefee4683e3067cd62f16d93ea64d71"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-45fb2115dd5c684f",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "d07d132d6d4b05d56b04099add83be7f6e1b234842b9c1eb88b0561fef8291ce",
+        "source_facts_sha256": "d3366a353ac920f4d14d79068aff6425c86f69e2bea96427f3eb54c83c5bd346"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-3a7fd33c804a9539",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ffd50eb8d414b2c8b2ffa27e737ce989b0a4d3fc88d70eb199976bef5de54f91",
+        "source_facts_sha256": "3e3994f3ae0bbbf5f500723c00de0fa5b8a9d513da3d9f1d80c6baff9a9970de"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-90decc6016b1a12e",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "1d3194270ed13b61e7bb553485d00866c3ace047809bbc5c25f41eb35897fce1",
+        "source_facts_sha256": "31800a1d6a0d2226ebebc40022bf6445224df504eabd007c13a73a093ebdcbea"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-b89ac549628a99d4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "534f0edd6f726ca1ebc22a8ca593d73b0f79e00872087e1c5541753e87a3b4a5",
+        "source_facts_sha256": "8893f8dfaf114ca7d6e9519c68138e9d14ffe60f8853fe8d9c41fb57e4764183"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-f7cca5329904ad26",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "4a76fc0b6a1c3205c61e35c7e03500ed590ff6387e3bc6ae4bb7a11ce46afcb7",
+        "source_facts_sha256": "6d77eade3dca53eada4b722386e48a1b9923bb86c9f92f5e8cb38ad5a4a45b78"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-a6a54697cb56e3e4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "e9a6026ef927a28c7b8a6c041fc7d56087184ec30c896b188e20e75f8fdbccdd",
+        "source_facts_sha256": "02a1be8bf66474f8aa49faab916e8102d355a69239886ca2acf080eaa80667e4"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-b18b8605dc0500be",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "6acffe639d75bf47e285cb739b09fcb1fd77a290cbdb52ac284167fd612daacd",
+        "source_facts_sha256": "28b71b8965a22728b5f844d236c6c1d6ac9b9b5e84bf00fed01424de15629198"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-93abdb15b2ac4558",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "14356ed5b4076515a2c372d05ded861622b725e6b7ee4eb39c750c27bf865662",
+        "source_facts_sha256": "c8fb0a43b8f2977f0eb76196417c87f8e1db0750b86eb7b554f8a0ea07c1cad1"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-6213b4da8f4b62eb",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "5863be3ac8605b29a7d1bcf29b59aa49f0ed7ea27043ead8878ed7a43e9730e8",
+        "source_facts_sha256": "3d4c52323777f53cada6c4105f4c565e1c9f8f4f75322de960a7c336938241d1"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-57607478e1bbe339",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "98f15ed4c519ea5edf4fcc9e014c6c6e70873866c60bda3365cebfcd25e9e3da",
+        "source_facts_sha256": "b254ded09c41ba018a9235991c82e86a76110ddca9beea33dfc54e80dd855cac"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-924e5122106d0f8c",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "505ebd928c0c4720146e16531d7080232cecd5ab74ff0bd9acddec65d18444a1",
+        "source_facts_sha256": "9ecb951e56d53de9abeddcb69482988144a4e5fd0f2e3a49d2e4de45eb042e67"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-1695d49f4dae5858",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "b8cf34f89b58932ea3ba0400fd7300e13bdc98bb942db248475523eeef9e9e86",
+        "source_facts_sha256": "c38cf29fc0954a8fb6f166ac0ac030af23006ed153311b4c633724bada45c9ab"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c7eae0d9ffa42c43",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "25d665837a9862fdcc74085a407c8c73ee3722036fe8fcc2f35203f25c9b739d",
+        "source_facts_sha256": "27cdb6ef9937dbce6fec037a066643916950bc481c7e18399cf63531eafc4c1a"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-00291b6dcd2b501d",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "469754179337160f11e27bcf57c5c50a5d30c4f5c3b1acab6fde852fee52b69d",
+        "source_facts_sha256": "43da530c6b152d4c823938435072df917a8156180fb9b4c74ed45db24c282b89"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-bf29a5b8c61e4489",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "6bdac2e7432b1f24796bf5fa9cde7fb55b52e3389c7cc8cf2a9691ce16e59ec9",
+        "source_facts_sha256": "648e7936461fbaf4f81c9e71969b3a4f9be661c065ef8b599767293c4f7db660"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-25da026905fbae65",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ffc1da0e726cfdd92e04805cf4fb4d9f76d2cec89437ec83c94a2c5104609448",
+        "source_facts_sha256": "a3dc999b48d9ada983c7096e72de41584bb7c0afd688bf77c0a9c59cedfda2af"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-7de5635fd4a77a54",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "0478c1df02f14986d39b2aaee0e6bda470e1a964e46691a103c11421fd41a6d3",
+        "source_facts_sha256": "6ff613f79b20b45ac1c145addc0f15e06305df16129a3af99af16d46954ab544"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-f7f414228d741619",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "bde0da2404bf17af451405c5b017abc4db5c84929d59eb4b9592b5af78dd130e",
+        "source_facts_sha256": "cac8b65e8cf0b60527ef3fa851a963838856579ecec6410f2483c489bcbf7d53"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-aa556e275de8c147",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "560b2072c539c4075668f8d602b180e7bac874f68cdd28ad6a49335bd8231c4c",
+        "source_facts_sha256": "ee4f2d44cc403967788511291caea1fa7693e4ed024c29d6af5e7a0460c110e1"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-5e513a20b1ad9eb1",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "0bca8be258ab18079f099e571e74f40f10212a6de3c89805553962598cfadf61",
+        "source_facts_sha256": "d454abd241939e725d251a3b900789ad2c9a4895abe0a14374a8d3e6341f8521"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c3d6df425f6f426c",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "61fb1ea83015709210526205aa8dcfff1fbb445dc870d6360054f198117e9261",
+        "source_facts_sha256": "43a3524b8ce600e0ca4bcf349d87ab969164481d7de7bc2ef6473882a0f29e6e"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-3bc65b793b81b782",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "f07643d58ce9feb1674d5a03cf19f389b0031c00666e5decac9d23771c2f12ba",
+        "source_facts_sha256": "66de8b0443d71d9c73de4e78a7d32bdd899b165aea51e40ed3d2e567c499b246"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-d1a6ff24488f1fe7",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9f4434ba081c0bf1da3a2a0fd474b03991e10d1dc6a542019de9ec86f18581b8",
+        "source_facts_sha256": "f2197f981d0f7abe034fafd8ee3e8f9489f4c47e704060dfe5bc357608d89cb8"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-fe5f91c984b3ac49",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "97374d80d138152077c0028b161f825d9796ec31136b1e701c0bac397c34dd7a",
+        "source_facts_sha256": "0a0e408e84802b0bd4feee1dde10d1910db41f861023811953a5b3277743bf73"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-633fcd334acb8be3",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "60beb4d52997f95bac0d6d34e27409b2c027ff91a827e52436d282e718a0b7f0",
+        "source_facts_sha256": "74442778a394da7cad2ddc220f8f04a18c70da4141dc37dc6cfc6b255319fd1f"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-55e661970508a15c",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9f670b3506e6647dd4a82ce648456092e33ec939539af26f1b90dc7d69302edb",
+        "source_facts_sha256": "ec0d42cc38029692acb6a06affc357ce013fc9a99ca8ee7adb330c9ed0268352"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-a5b56cb69fd443d1",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "bdd0a49827b791163ae1f4bc217f83c62529aebacc29f458ac3a8ad74b202567",
+        "source_facts_sha256": "3f5a3acc898fd1d9dcf09397bf9ea8a1a0a97302e96614056687e26309825663"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-22a0e3c1a4d355ad",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "98d7843f42380feca5b69276c6bf007ec26af55743023d1e8e9d1950193ff20f",
+        "source_facts_sha256": "e5d5db4f49b88bb38630d54b3689c62c8b21050d6897cb52ea8e65ff0ad01900"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-1215b6958ce14fb7",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "33f3441ac175086ab645173146d02e286ffa1b209663d2cb58e154d4b2c34bd8",
+        "source_facts_sha256": "8428c4a6796ea808e19dde2665cabf894ceb57fe09729c3b856c28ef48e9b141"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-144b2eff8ef43e24",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "25d2d97155a51936be715386380514d6b2a67bee706e6b03aca235bac91477a9",
+        "source_facts_sha256": "e5f13a662c974bb29a8e6e268ac4bb0a8603261d8ba5470f3c2cf80050a18ce7"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-9d856e19428c956a",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "3ce9a7de6d63c82d2f1922482f7cfa1a39e7f046a801db905ea1435f48114e13",
+        "source_facts_sha256": "cdf0d34b6fae0e55cac3aa63c65bce77849204173f18c172fa946d144f8ea93b"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-bbdd0aa4a3a4db75",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "fbe357c50257b46a56ab183fd3c619b0f64011fafe59224b588aefdbba33361b",
+        "source_facts_sha256": "9c5417368ad9619ab0eeaa833c20254b0544ab72b153d552dcb6f6b578e46ee8"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-722f832fdbb6f6ea",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "14f74cc7f11318fee5492786e6975684c9115e4883eaad8515a40a368d1731a7",
+        "source_facts_sha256": "192b715c25c438bcbf68d974ac22bf06a69035209f67436e04a19808cc7aaad1"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-ac27939a43011d2d",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "4eb401c1a9c128be20db8de1ff5dec192b76ff7714ebf3074a8d2b5313f29fe2",
+        "source_facts_sha256": "5e6ab75ae3dcd82eea618aed3ad399bba23a8874e8423402dea603072f1379b4"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-1dd248ee52591587",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "949f8b702bc28fdcadfd7dd1fe655feae7f8a2f42a5ea5a4c79add900e87acae",
+        "source_facts_sha256": "7e4b9bdebeee0f958b51da8acee130971aa0cfa7949f56200daa1826a0811ce8"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-9d9e72153d3118cf",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "e75b3abf272c3e0a84e076e39329fb5a3f0e245047512da5f68a18d0cecc669f",
+        "source_facts_sha256": "5b765a4958ff24017a5093d5f822f552ee16455fc828640c606e9c68f2899862"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-3316d5db293e140e",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "63cd7293180a5d2e1256550fc683c3be7c02eb962cab05486e42149c51129c25",
+        "source_facts_sha256": "4814bfbcdd5950f7e6a816b1da1d344a14ddc319562e3ea4357ccc79b76c4181"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-e991d954934803b1",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "a702a10b112fea90b098f67264715fe7de839c90d1980f98b5a23d8485f67b73",
+        "source_facts_sha256": "0584be27cc593e9d1bf79a300327ed4fadbc57fec2bebf2ed297fbbbbc91969b"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-926f6ea2598f3ed7",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "2830c50b57a5613f3a38b7349e881f5a53d3d5344902532e5214f1f959e06436",
+        "source_facts_sha256": "287a7ee37f8ed9a9f140a85ed62b7159f686a0de382a1b19fc6dc78756abc4d2"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-ce3ebb891acb7ed2",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "40114250b1b585f30c2d34e6de10a829bb6c853afccd45c443dab382778ce8f5",
+        "source_facts_sha256": "d228c0bf1880ec31c9869274f035412ce2056e9588cc121357e09129e9495f85"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-a86a4042b9a1b19e",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ca906b6ff25e372b21c7eaac4c9aea0d155d9cab9768daa48468d2c1a2edf84d",
+        "source_facts_sha256": "2494fbd2605529fe2c550151916ff8652b33f270ddb813930d8494c1a802b35a"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-e4a9126c075b6f57",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "7f0a18f8a4e7988c657afb34afd1a06bc5f0a0b19381f18dda5a692ab0ea117a",
+        "source_facts_sha256": "272d668389059b9f5d0e3ecb464264778eae77f561345e1b4165916063d785ef"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c8a7d123df1e0f23",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "fabec98a565374cf3a3df4ac0527d2232df3436e0431a82918a1f25cf3191356",
+        "source_facts_sha256": "e6e04edb3a04dc1256cb1efbabbf926661f492a15f2914eae76e83c086d5cf61"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-daa09425d5b34437",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "1b943a98b1cfed2aa9cdceac6852e6cf07b754f79f35fcf5341ff7e0757c27a5",
+        "source_facts_sha256": "0f4ae7e6455642e1576bf5fe4f4ef6b68fa714a3776e71adfcb339ad09bccb86"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-1e730cbbfe3bb66d",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "3c33d13039a8c9e5e4b16169f45953fe4f5fbd3e1709cee1a8730995fb228725",
+        "source_facts_sha256": "7da1d3e415f088ef4d6d8602812d8b0a60ca3f3811dcb4cb019281fd6189b1e5"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-ea93a04b0510f252",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "0bb22638888d251e5ecb8a5071ed774c96dfbde57063521f5b994d3bc38651e9",
+        "source_facts_sha256": "94228f5a9f5bf5496aac2bd6f4953d94bbaa55e39d3ff14dd2bebc4ebf59bd84"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-f080de1745facd78",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "c8805280c8ebf809c5bab71fc5ae41c9b7528211109aae376f7b04c47851dd4b",
+        "source_facts_sha256": "5af06b1830b40b548da94569117d70c96a6e6238c04f0e5f5203cc9dd8f46c52"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-b59a3d284099c208",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "c5956572d83ed0cd2e1294838424760601eddd329b112c740fb681f138ef04fb",
+        "source_facts_sha256": "f41f3c0a053a21c67c70706dc3bc5002e89c8151b44908c0a262523707895915"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-36820b2a2c9aafb0",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "736792dfe9eb359b0525d69244b690a21e72368999ad2a395900f295720011c3",
+        "source_facts_sha256": "e2e01f8ad932cd2baa88684435b954d31516ece14fdcd719aa001b5d9061d583"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-28394d97c50c2ebd",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "2a2556050a91fce1a0a20452df956e01d557cd0644eab56de2d5e91b528ac15d",
+        "source_facts_sha256": "6486d0592832e77dae404d1e261f1869bd9972fc90bf2a2c4d92cb23d732c189"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-f38dfd437e83c02b",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "f05da91bb62550539da6ee19d78f4af3ae2e24bf2847e04b354d7afc4e45e8cf",
+        "source_facts_sha256": "1f0692c04e1d06e6d281b4651a4c9d2c76017e43c8212c2a3d46f2427e54d0b1"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-db3a7bbe98856af6",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "754b36ea7ff305a96f54c4e166871ff6c51d73e4542952b89523f52eaf25150e",
+        "source_facts_sha256": "50560c98fde17fd5fb06e6a4bc5afcde572c1ceb1f9e631181ae66fbcbdb2da6"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-b063026841be148b",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "26f1670ca35753b56084204740599ad932c928fc419d57efd5e00bb2c3b24b3e",
+        "source_facts_sha256": "3fae3f43b6c66d5685bf952cb9a0573031172e15e1506c28102333fadaeca2cf"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-333d3407e4339648",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "561fd62ec473079bb2f476397eaf32cbee6b7009b6e6cdecb1079d377e35aa3f",
+        "source_facts_sha256": "20cee5a2d7751e720422573a1954b4fd4a75cde6d05fa49e3a788f161a624a35"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-d28791b9f5da24fd",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "05b44c043a5e93aa2b3291154be70703ad944ccee8e9161c87f5222ecc2c8f5d",
+        "source_facts_sha256": "579fff0fdbf771a88639c55d7bb10c4491b62b720e69a8149f2c4944dfb8c64a"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-d537632ccfb5d0f3",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "ba4e30a3db0dce9a626a7d574232b60c66326083d428596772e805e82d4f1cac",
+        "source_facts_sha256": "80759519edef63bd695a0d8d0cca7b4a9bef519e35186db5e3d3f9b32b46e955"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-924bcb619e0ee207",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "c73141b67f8095e2a88173812cd36f1ef33e907e65ed5597caecf41239f8b753",
+        "source_facts_sha256": "255cc5d4202ca4932cfe35c0cdf908f3cac2da031528b89d92856ad903e2f678"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-0ed5d2646e97e199",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "861ca55595b73e1c391da6368466e54f153018fc51a4f06000b53e67abcc2d8d",
+        "source_facts_sha256": "00ef84ba821b17ea2fcfd3c808d2d5a31c55de0fc2fa25099cbad623ce885154"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e3d130290f0e8c7c",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "903128ea7e55142422472c958fd94e4bdcb162d8f5f405eb636aba0c6426f3bb",
+        "source_facts_sha256": "b4d1bda9bee5256b743af3c737d8c430b70a6e97a64f9e013ef84215163f8ee5"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-f22e1efec468f23f",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ef0be06c6c57ac20106c76793f15c3ee19e7e83c11ebb09872fcd56b665deb4c",
+        "source_facts_sha256": "6c29a35588a7aab0cb4b18a62e0f4a7876d6bb67e2195179e69b90020446e5c2"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-13211bb4ccdf13e5",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "3371c4aff7d5a4538d130b34657fb6ab47b8fc87c01e1332d9727e969ce4d654",
+        "source_facts_sha256": "06a07a4c4ce477a2306847ec889784f44cac03e811c8a253064517695e19ff0d"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-93bf3c81d64f1230",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "24b434123a732832a5ffe6b57c6c0b008f7ab4b8b964c9c712b85c3d490d688c",
+        "source_facts_sha256": "ecf9ee86c1445731b4a5d460d0f660f4b5f5eecf82475ecf58e09cb3353dba46"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-91d7f2637b2d9ac2",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "00a9966f11123b039e56f50464c6ced46c3fa9b6d72698a4218bf2658a0f14b3",
+        "source_facts_sha256": "35097fd5b0757b8059856a7010ff108ddc82ed67bc03386f6b7bd143d0a8e14a"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-ea1c0b351a775a5a",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "d53121f9c0d8a5093b9a1e6ec2f76c649a211b8e273a52800eddb7810d7f2d55",
+        "source_facts_sha256": "40f2570d396fbdeb9e546575189182b3b545ae3517f01efcaf4bc5dad133285b"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e50a6cba6236b589",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "3ac0c21b18531ee87b185868e34177e5a529f1597f0a31ef3333a34de8676e13",
+        "source_facts_sha256": "7c8f7d63a1c4b5ffb2bf473a4e26853fc0136d150fffdafdd05ec1b6c01b2e14"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-c08d457c17878e4a",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "1a0e9cdf87b4de14970abc9d51bbac5f49cc5806e90b8582de0ea1c8a15846dd",
+        "source_facts_sha256": "a073c80fad73349ce5efb158e367a5afb32a88f8d2844f777b4953d50dc01bf2"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-ebbbe0170ada0f79",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "08de3aab131cc713b141c466dc8cd54428918a6bced20aa4c3b2df2d29771414",
+        "source_facts_sha256": "eaa8f87e645d043da8ceaab4bc029683f7016fb8ec5e42f37b2792dc05860c4d"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-18802973a4310c6f",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "0144a9ad9815413440680233805b3f9e7b76bbc6e59a0a7ec44b951f1bc503b3",
+        "source_facts_sha256": "529b4c1b9c879390515405a053daa8f89003b2110d2114f460ce86d56c532d51"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-0e37d1e6d02839f7",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "d2d7b207e64259e6a2f12494147c9486d763e071edc5b3f2dc121ff4ebc1bdff",
+        "source_facts_sha256": "6d61fd49dd5769e03f1193cc1341990564586e518aadfb8a6e654dc8ead5cfdc"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-e7fa646da790dde9",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "3b28bce023fd3e8e52573a92264eab16e9445ee82678b5d1fee56bf273ce1e9a",
+        "source_facts_sha256": "5ba4420c2b9939e7223bfcc939ea58eaf067006a05819925cb0a72fb7ed06826"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-0384e788dc451c1b",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "f632450dbbd1456c325f5887381d79a6473e63387d48f662a0a14271a4a87907",
+        "source_facts_sha256": "28c6a25e43121ef5792053a0536efe334b224b36afa061b81c7eb06ece3a9222"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-4bd91b0a7c160c44",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "5b53051b38b555d6dcfa792c5abf997eebbf7fbd5cca47ea51158c33bd00da63",
+        "source_facts_sha256": "3ec1a39129308407862e0424187114e1085d73111a2e0bf6a9b60ce949d3de62"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-25140aca0f5d16f9",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "1f14272c18f8cfe22ec4b5b1b7ddf126d919e5c50716e647103413b259eb983a",
+        "source_facts_sha256": "e4af47f47eca5c8d6426d1f24808f13ee75df3ed5bddd5983184d865866d9636"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-290a47e67e777473",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "3400c73686957f9ca0267b6f853641671a3b7ea633fe9f296c2c1777af5f7d72",
+        "source_facts_sha256": "2120a3de14af876702e84156bae40012e44b904cd4ca2d8235882c0f87486359"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-572adf8c1fa57f4c",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "0f295382becb12ab94161a99ed0053fd961a1a3b60aa0c9b7068fa97b302f530",
+        "source_facts_sha256": "0dac0a364f0bcb802f5559aba0dac9f04840da8f53fcc73cc9ceba1ea7838356"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-d2d1a5a8467dc3b0",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "32b9691664d5d41c8cd405eb2885a25340c69a3a1bfbe1884ed8bc297c1f3375",
+        "source_facts_sha256": "68a98e31e38de349f1495c7d914f33a581db9700b8458b9b833031f8025a0b87"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-f6f7ceedc322ea4d",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "be1e8f456422c26c1319dd078694934fa634764f402223da294dfd409abfd683",
+        "source_facts_sha256": "66c38b4441b85d115c4c74bff37b1b5ec5996b5370dcfc215e589ee2bfa43142"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-12abdf42b08d9db4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "f9a0e5a3048d057ef99b496d974bd8bc59458559cb895440274781870201c247",
+        "source_facts_sha256": "0bbc8cb9dda57e2bb17a80651a2265f3e09904968342040f4c7cdb98bacc7e7d"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-db4eedb3f54e22a2",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "cbc2d1547aae1c05d087d2d09b81fd3eba9513a3dfbc7b931ec96c20feb8defc",
+        "source_facts_sha256": "4bc13223b0b24f45f94494ac753bc92c02480530c51062137a1049a43ea5d9f5"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e683ce6f12431c0b",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "ca29950ff343c11a9ecd7de1e8af72d018807b37bd0cb17815cf69e2d09e68dc",
+        "source_facts_sha256": "510c26cd203a2750de62195d507efbe32bdd0d09f3e44b659c5e4e526159b930"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-cbcaff2cafd305f0",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "a287b856f9e292afa907f2f928ccfad845801fbc2d147b75081378e1ef298913",
+        "source_facts_sha256": "cf8938b39cc39447456534fad1dbf47de43d749f2f583ce54f382f9fee7d66e8"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-e902efa9f3893b9b",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "318dcdff84a7908c2d47b5b9cc0179c5bb42ec7831d4415867ffbdcbc4cadbf0",
+        "source_facts_sha256": "749caf72be34102c89e6863ba0d3c7a08cb62805fad0878f05555145e8720882"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-4655c6dd417ac2e2",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "7bf78ebf8ba7c103c6b5830834a2acef52c22f3b50daa9ec31bf18d5e7db44b1",
+        "source_facts_sha256": "b1e21bb191d3f7288797b65bfc5f7b577d74588e332e3b739732fb05b34a0d41"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-082004bcacfb4324",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "15f0316fb5ea63626f49d23b42a1df4a4154723f7f752e37b9de0c2b8366b0e1",
+        "source_facts_sha256": "f3580fb9f7e5a68423af910741966dd5bacf77314bda3bc580f49c6b89f76820"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-7ea6451701b4a82c",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "57e8fea91ba7cdcf2178929f171c07658d29e3c013ccb495f9ff762facd9f6cc",
+        "source_facts_sha256": "9274c006743c40d207ca9042703594770ca3eccec3aa7608a4f1ec90e4603ecc"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c77157fdd28f6e09",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "0bc9353bf3f77139cc310183325d434724ae06570d9bf833f4bb894f81cf1fa7",
+        "source_facts_sha256": "721dd0380801295f5790dab70dff983b2ea19ba29b52e17390a2a6c5117f3ec4"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-fd853f610c237016",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "8c485b0d577fdc0b691574ba6ac93671def16d9fffae15e6a885eac3a458ae16",
+        "source_facts_sha256": "2afebe6aa971ebde91bde8ee9ef44e5a22d175d40d685d36fa8c637a0c4e15bf"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-86d4a9bbfb18c34a",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "e3f11be76bc9b8caddce61494240f6f44fedb8f471cc2e5c58a01d1580c42fd9",
+        "source_facts_sha256": "a04706247cd34fe8148ab9552204c809f75b415c4f825b0697700e11db73598d"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-3c1920ea55d7b1bd",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "462ab92b5952547c54cea95a2287cfc6714910a057c8547473b29f958bca33c1",
+        "source_facts_sha256": "3706659d2b7fcfd340b6baa585d158d23a591baa6402d6c335f5a7ef501072a6"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-2931461ca33d0157",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "aac73836fa0951413bf7fba21a48c109ba5ef805fef9cfcbed1631d9a763fc88",
+        "source_facts_sha256": "55d3a57b8d2990f8d7f16c304b62e4c91863810cbd8842cf58eb6bacc2ed3abb"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-e47f5ebbc5e6ca13",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "688c56b2832fb97334655fd79835aeb3f3c3075526e845cdb3e1862c8311507f",
+        "source_facts_sha256": "7495040bee2901e2b4eb304e4171dea499852e4f528a26f3f8bf83ded542a8c8"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-1d0d47ba3ff4f45b",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "277405da630ce22741792333153fcf6c5423dccd97fdb1e2457e870abaab3757",
+        "source_facts_sha256": "aef26b4db7bc6bf807ce24e0440a6b53ed1110df0c16934c842d083632d0457f"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-35d5278248be1bb7",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "384fa9b5cc40c8682d75d26b502f2642354e06880b983687b3f220bf06ceaf3f",
+        "source_facts_sha256": "ff9faf85d20ac973d775b03ccdb7e10f23d6ad6fe15b62107a4b0053a1027447"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-a5c745887b0c3b4d",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "87fb8246f0350f239ea68f97bc9e2a17b03684dc2e8fb09290ce90eaeb5d142d",
+        "source_facts_sha256": "78c599fa73aaa0b9127ae5f6b63e23387d420125fc4b95d5e445a909e6f359b6"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-24b84bd7cf9e97f7",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9293f2c739bbfc17a6748478c35a139cd456092f643ce5f091312d094b45422b",
+        "source_facts_sha256": "204752371356ad5d65e627b93a4b11466355b36d09c2e9c7560abaf231fda028"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-925c6652b14e1748",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "0872bdc5aedede8c9ec71d4121bd11650f9c37367734a8e0990b0ccc663cb651",
+        "source_facts_sha256": "1707b7c5db0583db3dc949f4e80a9b2f57b14de02539f8b39b8471190b151f47"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-595a0c502ff0adde",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "51404593657c83a9814cb4faf1c1b33480aeb1b146294e2d8390e5d1a3d9046c",
+        "source_facts_sha256": "d98cd01bf729aaa4f51c17e437fa1d348ffe0d602d0598775132a06673eebe18"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-328ad025481f8b4f",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "c84c2ac1050e60200e4da0d916b2fd8a73ab7b2b69fad176c0950ee230f48ecd",
+        "source_facts_sha256": "1e66dc4e18f0a572a9c21d09403f94293abdb8aa56fb5d840be86c76e3b86f76"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-b14b27665670c7be",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "eadc637cd93178d0e27e9471a67153dbf5e6413939a5dac6be766dae81d29cd4",
+        "source_facts_sha256": "acec416e79af43a3ff1b34ad1029646d12d3db014913e6abd586aabe365fee17"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-adead777601072ab",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "28bf392248b2a1b48b805ce806b3894c6df18f20055fc2eccd1ed3a61b9226a7",
+        "source_facts_sha256": "5de61f2a1156098ec0f2b16640fee8c0dd4ac959f5bfad8f2641c05d55a0304c"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-17067496ffce56ee",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "d4498dc781879497431a5f8425aa3eca239c5258fdea3c4993eab5c0451d41be",
+        "source_facts_sha256": "a5c46bf42e3f558fa2fba6932db07d840698ddbfad8a3602a50337430007d47d"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-7602ff2ebfe87332",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "b9b6ede90e419700878f68725529805fffa0758fc952879297ceeb2a35c24d64",
+        "source_facts_sha256": "82bd9dad2a72d628a7d33dcc3131a9679bd63829669dc8f25e93c9b3b7ce1cb8"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-a36d456ce030cea0",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "aab8bea04ce0b5b35874337a8550c696a0dbf5040d4ad694c17ffff4afc45f0e",
+        "source_facts_sha256": "da9b018fb7554c5b30262c4b72de082ccb28acf9fa8da2d849a10f2f6f59f6c1"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-77925c73ca489693",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "4d42a66bc28bff8616b8c7bad0f059c5e2bfa8e37baf4c9c238bac002ca0632d",
+        "source_facts_sha256": "8d8790ae9fadf2dec05a94df5080e73f7e63ce6904ec56e58ca9aafab4a53d50"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-c57ea416cb99a6ab",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "2925a1af930df6324b1234e57d5f27d037534b119c603b61f18e415579b0fa1f",
+        "source_facts_sha256": "ff5cbb1ff0a0a0d7c12af402be4e7dbd0344a046d1b958083603a7bdae7e10d4"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-26da9e3e6cc6f0fb",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "1fdfa00ec89a9121cbd541a090a94e47751ef4b63575d74b4065305af5406feb",
+        "source_facts_sha256": "06fdd38ce46a120bd1ae7546cf75d18cf0cad1835cbb6deb82a65c5a6a1aeefb"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-56d283eea3bb3c25",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "02ee9d4ce72b3c575876e9910f2166d20f9f6c70dc485d2c6f37da2c1dccd8b0",
+        "source_facts_sha256": "3686c214f34745206f9af9ddecbea1741885512f82a53d26ec1863e5654278db"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-6b682dc7a6ea9765",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "5aa30b7e668748d446747bfc4b8c304891ecf5e18c9318757c66838aff36da3d",
+        "source_facts_sha256": "32da700ef9741aa294d747aaa0d5dea72bec976731a939562a9dc7b14e9ee343"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-00d886497914fed7",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "4f32eb4a12510c759892f4eed8f4e89105c26c3b5cd72194cb32aa8fd0f39f8c",
+        "source_facts_sha256": "fef31fcc6981e848cad9e7eed674382b8ca571dd72322c1e360eb231e257b964"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-9d961a814b9ceee7",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "051feedb48455c13ebbbd9c4298de6c4b7980aeee8b866d8c113653c877a3d1d",
+        "source_facts_sha256": "ee4c3e0c7ab168e47cca821452ac36bf184539e7d5452a14688b45b548ffee32"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-3b04ba8edfd110ea",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "0749187dace146f5453c778e638a1be0ae0bb01380effc8e7b84c8cfc006185c",
+        "source_facts_sha256": "e32aea7059e93e36210b9fa7f9a1846b5001877f1cf886cf267d933170384d94"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-50f6f3331363c587",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9a69060938b0cffc25592e0c990618d051b11ae25d53643625c0174b8894bb99",
+        "source_facts_sha256": "caefcadb641b38b10ee81d204a76e8cdf42325abea743e1f020addb44a22dd4f"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-e056aea79efaed9e",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "8ab63a1d21115326346f6f13fdf40c0fcb7d3db49105d24dad0097d2842447ad",
+        "source_facts_sha256": "119ef5f7b584af387777b6ab8a55e2284bf3a912286fe4729d4278d3b6b49eeb"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-73cf9c685c754a8d",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "5da856420924b621be284eb3d61d5792a9063dff85e504fa7e2cf7f184ce7f2d",
+        "source_facts_sha256": "c420a3a36fe0bddea1d773bf4457045b9a2490a8e9d4e3d367ba33f638b9364f"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-2df639e933e3c6b9",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "bec7f5a4cb01a87bfe02fdd26bafe1e33c3d8e70185d350b2c1da9ad7eaf4175",
+        "source_facts_sha256": "e06556ce347f43a5175d4a2509fe5901ef98270fa94e186aa03650cae9d5e096"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-7badc62247929b39",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "f956125427ad53788dbe831c6be9511e665b409b4111669408522d7196ef9f3d",
+        "source_facts_sha256": "3a993b805e7804b91a46d2ccdfb336c83ecb79c8de2bd6f5b767c434b8e057a9"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c8e411359efa5c25",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "e479096180326f4d4fa97d8a7626ccd9aa56b721ef5f1a15cb36420068f84f24",
+        "source_facts_sha256": "fcbc02b5362deabe116399f563fa116c076a6ac315861e807dacb6cd6380f54c"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-4f90432cbacc1076",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "b3fb839621a620955c3d2855de96ce9d191fdb14abd0c648fb470d01df4dc2d5",
+        "source_facts_sha256": "8b08bca1d873026c9c2c9be7a919b5744ea1d80cde4450f09f28cb16f1182405"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-d29666a43de5496b",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "46c1ef37b142f96ac81023c08f2119753115287d80f8702cb6d2d0cfe916d2bc",
+        "source_facts_sha256": "78e19678428ad267ea698488ab68e294237eaab72a0ae56aa162c4443be62ab9"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-2f36266a42a5b726",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "b87098ea223fe349aa381b1fc952d72212c3bdca5429afac353047c0fd5deb6e",
+        "source_facts_sha256": "74e7e12acd0ee81389b23ce65bc24ff85e9a2308e661783371acce3265b587be"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-d834a1c3d9a8ea0e",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "78abed18be235ea1a8a9ea05c1c4e0cf7f74be6f573c36bc5627cbb117446317",
+        "source_facts_sha256": "eed9404329e17b704babd957e07105875fd45b3ddab422f72295ef51d80b9817"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-bb4f5d86581d73bf",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "dd22ff5bc272e75b00c227487299a2e2b39b78f92fdd11c79236126dd27f4555",
+        "source_facts_sha256": "1a9e3c8efadcf00772008fbe089adcde1912f5462741ac84d2c220c2172790e8"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-6984f3d0db012094",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "dc5b3856016adc1619da979139141651b2fe078171788ba51ce6a2ec25679456",
+        "source_facts_sha256": "f902a7dbd96f9389dce819be036a4ffe5a353f79f7e1c54fdc7517f6740853a3"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e6d55299341631da",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "b2e2ee4d47167c18d59d940fddda8d3108b7e0580e35286b9637a633c76b3bc9",
+        "source_facts_sha256": "e43cc50c8804fd031e928a4772c9f2b847ea5dcaf890d56091edf8885c4a8a62"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-9353fe6fe2c65ae0",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "2ad92eb751eaad53a81e4a7048919441cc1eb999e5578eca4e4f8fece5e951f9",
+        "source_facts_sha256": "dd47b117f47eb5f02e3c90e30322380bc2ab401137c40134fb84061196ba7068"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-b1088d7e9a640b53",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "47f7b2d70b9696b46f9e59b10b6b9e766b11a793c30ddd3d0d8ccd75f1506a0e",
+        "source_facts_sha256": "33899bfe863eebefb19b651fad743062974c4c7819b1ba86041fd7ef325e303c"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-9d30a75f879d8426",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "3080904f09012def117fdb7cd8d38796f7faa3e0545d85e0ba533b18966d28c3",
+        "source_facts_sha256": "8c036d3bf77318dc0273e8a5c8ccf7e1143b49c4f7f6824c2a8f085744ec9d82"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-842f21526d388f6c",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "9eb9a9604317a77841fbe4d7a8bb4b93bd784e675ebc5def8b16a927f0e3f8d4",
+        "source_facts_sha256": "f0c28df6c483cd16be4cd1dd8cf0af157b74de8e08a961cb8b317e81424a1834"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-43caaeb76541bbae",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "031c2b6ba40b7157d7cfafd6600db294ba4193f3f486e7e6cee733e4f431b301",
+        "source_facts_sha256": "b0d8a82133eacdf5ff6e05b688180577626375e43da7b77ff2df7f0fc0c64da7"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-bb3cc5081bd0326f",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "39aa654d7a48c20a7415a3542a8fe5476fc7faceb29c862dc3e72e5b5974a162",
+        "source_facts_sha256": "57e7421be253a3722224030b2eac7ba9224a337dc5652665ca7aba095116b2a7"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-f8ade7a046831b41",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "48fa9cb36962c73f1e00d39cecd66cc868fabe54a1151524c4a86283a2d5d704",
+        "source_facts_sha256": "fad0d67c1d46cd9cb1653be416d77a5999553c34a9e5c36343eea0b62d5e3dc1"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c9527416d8154717",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "1d8afc9c4e52d34e73a0d2658e515947aef8783cd8eddca145b0a0e582e29a83",
+        "source_facts_sha256": "f31c75afade249a3b98c8e36a7cb5fb8452fbb52ef1b6155208c56a097d83878"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-631216850fd05ef4",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "4f105b21a00047d5f3a2f0d72c4efc379831556a791e3d07e273aba536fb2fb5",
+        "source_facts_sha256": "239e1066457f8da02a8438817892b881498fe35da052d92b26aa09f0abdc2411"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-379a7b14f3418dcb",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "077306550fcf5f5ff2ed19f6d1399a02003d6fb2fead8897f33712fc9370d42e",
+        "source_facts_sha256": "2ea5866b0e4d3c92644cd4f848d22611fe152c6deada3dc36f6997be60e784af"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-1dc481c18d2520ff",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "4296901568c34a49de6cf212d0029f2737a1100b9e3dc494aa70092d9f2c31a0",
+        "source_facts_sha256": "5f43a367c7c2415ecb89858d40954c861f3c26a0ec025839940f62cd46312f0a"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-a96e10774d4e861c",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "692f71e7c5bb6526fec8ea818f7c9a56cc5338ffd86f39a4df7e97dfcbfc9302",
+        "source_facts_sha256": "c8ec1e08d4a3a240f3a8f63f79b24d2d1a422b439e86a51c1675f0004c96b1fc"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-cb81260e10e74026",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "e76a58021aca373faabeb3cd542677a67f3dd414ae71a02e34071ffd51c03352",
+        "source_facts_sha256": "ad5a620a0ef8c105884609b812aabd2ccb573897246d67757d33ded243d91f38"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-2fce29f43b8361da",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "55511d8a7a42273090a69c28744684d21e660a0ac45bada20aa83f19ea696f09",
+        "source_facts_sha256": "f7219e9ed6205100b8244fd5da52f0a7c080a25fb8135ddda587865b317a78c8"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-50d27cddd63cdcdb",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "4362ad6cadecd0ae78c489faca87cd8fd3dffeab96d8a5f4adc336efc62178c6",
+        "source_facts_sha256": "8412699ecb901cb4b2219d86bb0880d2b66097d9beae4d3fd383bc74053d3656"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-14e788f7e2ce27cb",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "8811ff648e848bd20bd09eaf02efa0fb53a3f05a9231cd063ef2ec259e373d17",
+        "source_facts_sha256": "574d333e70002baae52be6b2b7dad39de7fa7579b3ebd9ce7e0a8cd3aea9d5f2"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-f6c884b583d13788",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "7dd42770f60f3f51d4b7ae9067292af743b76d6e202063c2162719fdd92dbd74",
+        "source_facts_sha256": "3d2a4b098afd16cb4e1585be30cd31368eef2fa6297249a14b7a8682a3185232"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-8ad4aa2a0d8c63d0",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "fe475d25abbb131e4d9d94606d206419c05b49675f48169683b874a08a34c259",
+        "source_facts_sha256": "4b81ad448fb0356d8de51378cc6da9133237f5631e2d6e321990847fd1a39188"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-c7acff0be94b87f1",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "36aff75381a6c10fa142257c85defe34d4d3e0c76ba617904defc087e28e6588",
+        "source_facts_sha256": "2d12997412e8581752eaa8c989d2fa254d582d50b725dd325eb40bc726aed6ba"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-35ca523f45c092be",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "eee038545c6cd9b04b035e07996f24a766497849f227b0688dabfff8d908bdcf",
+        "source_facts_sha256": "5d632e01b7b8a4aba89f2f9eabae9a8be06851cb5f00ef20dd441d906ec32a6d"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-9a0473a740393cb6",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "18a561608f2e845746d6f1959036dd3bc82e68d915417fff1a577cbd3dbc34fc",
+        "source_facts_sha256": "0aaf19d2d45a8210be325d572afe57d3311d8e1b5d373ea331c47cbeaf7ce37a"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-71cc4c03034782cf",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "222df5ab68b6c16b4f6299104b448c401c1b11a863dd42fa8fd42c1e5be3bc89",
+        "source_facts_sha256": "c4b514a42ef3e638172ffb5fb1e2ff5ce8af2dcf03ee7aeb7610e07f41b67fa7"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-d535a6555af98289",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "8764a1e76fb4c8bfc47aade5e130b012f3082172c00021286809d04353cd217c",
+        "source_facts_sha256": "7733b2c6969bfbf3469424fa11ff4cf65f89330493c490cbad93e0006c52cc54"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-e6fd1cb513514fd5",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "5cd29a59aec3d8f854e8603d990e77e7cb0d208eda5ff022a2f3a16722921f00",
+        "source_facts_sha256": "0336d7a0d4baecf5ce30c8a3eb1f2b93c0796be21f6e1e2d3162583f4e364e54"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-224074f4a5aae3e4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "47347d19535313b9a527b85e10c49ee626c7d23d07c35fe39ab5fd28e796f90c",
+        "source_facts_sha256": "8c9a80613c75832c73f95737bbde32b9c18c6fa7fb4e235056b19904e16a6eb0"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-248aaf3c10092f98",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "152a728dc46b539c4232809e9cf825d084b8de635eb8459061a6a3b67ef77395",
+        "source_facts_sha256": "4feb1dbc25252b216d195ccedee0711aa8732142c0963cf77a529f37d0fb9fce"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-11e00f3fa7365ca6",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "f268f2f0f5408857a8eafac31f4a07e6e40e941bc24cc93040ece4e59ca336da",
+        "source_facts_sha256": "fa87559eae587084eb8a6e4d4c519adb052ad140c78fbaef6278dd1d7d492cbc"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-bff36ec6cf7fc2e2",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "8b6172373260d5e18bf520e2b822113123ceb53dd426f81b9c89caa056ad9308",
+        "source_facts_sha256": "0b9fcb2651db82ffa3e8829c95a907d053fe9c19248ddc21cfcc9a61c2563fd2"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-90b493fc3cfc4450",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "d9bfd2ca280d5ad3270ae7d48903fd003108d5125c7d3478a63df48a904f992d",
+        "source_facts_sha256": "2d009ba001200d54c361f8d8cbf99c82ed03c9056f6b5da880cf7d2ccdf0a3b7"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-51e270a3fd1d833c",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "582229cae0a3c5c54e07a980908fe3b5a9fd2ca8c0e030aa67df0cea8fcfae5e",
+        "source_facts_sha256": "664b21e6a5eb50757297f8daf795576c0e8cf8db0a9cdcb163e7f546e3bd618b"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-7ddb04473fd123d4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "175761534dea6f6e274ea25d56db6093fed61171c9c49854ae368eebec80c06d",
+        "source_facts_sha256": "47ed5d4d0a893f8ffbcb00b228d980f0a2d0433ee2d7a445e9f72e111343f8f5"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-c7e7ddf456dafce3",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "b225308fee5ff1542223187f3cf1671c4f6b8c651f7b3215f48b6f5e75906ecf",
+        "source_facts_sha256": "134314070856a202c153c28ef1529a364683155f2be4ce90af7cb77a3d0c7cab"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-47416ff0337e88f9",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "8578320910b86dc478895f0dd74107b7860b45c6b0df32d7205698cd4b33d881",
+        "source_facts_sha256": "6c0784234f30b8ba1b21ace9217932d95c828188046862e9bee83e82f517b4cb"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-49fd01349568834f",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "092bc734caec183228bfc092fe046e6b8aa448a62229b655651e94e2854c70cc",
+        "source_facts_sha256": "8bb4b5ab21f34e70025d5a4d678162dc01bfbe3a963d1a408e6be680cfbd7abc"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-0e40a3e4bb9444d1",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ec6605d16c483ffedeeb007dd507f37655c1c5f1af8c61590bedd5df48bf5121",
+        "source_facts_sha256": "4a335734a1829af722c8baf662478c8ced6324fd4ab4100f7ff0ee46c187402d"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-6af8bb0c4656eeb2",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "14882ef8843cf4295702626154213d41166af47bc79daedfc68048d66e357847",
+        "source_facts_sha256": "4d833cd389e032c78a5196ee62aa0671f622b8ef0d377d92795b6f5740db3923"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-3621eef29906c5f6",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "b4bc7d5b064d9a82728a1c7b201876600a022ece60042a75ed37de061a26c42c",
+        "source_facts_sha256": "8a970e952c6c2a03067413270e52271adcd1e3933f4bf7ad2a4e072845ff0938"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-1b351692d2b0fd6e",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "99542c35702b2271ef2cc09ffc4ee2ad52527f082156a839f32d0fed937d241e",
+        "source_facts_sha256": "d00e08c1ac05d55dc266f081d5d57e473a4490680110e3e8bac2f90387956a23"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-fdd1497d4885e2b9",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "ef01154daf727f6303e60c16a2eedb2e6bc4b3b9ee5bb44b9ba48098d0466930",
+        "source_facts_sha256": "8a5f7aaca4b037275adb4fabbbf6cfb99172403598670a8a96454db5879330cb"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-4e76c6bf08174ecd",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "23a2105436d51d4829d710cbbc17c88e49f61f810c519460aedccce253de8ed8",
+        "source_facts_sha256": "fad729d16b6d690aa5a949f3583c2f9c4f8a2b0d356ae6bc14899d5e3cb4afb0"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-f2db4053fbfb36b5",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "0937b579d767c61a2cc18548286fd0cb382bf1401ec3a91af987a43e2d78305a",
+        "source_facts_sha256": "fb4928360eecfea518cd5feffc633c26c4fcaefd85d07c18dc14db199e88db31"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-d2b15f8bd891bf0a",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9602719f07524a526f997078393363cf97ac3817b9924d90aad890393a5235a4",
+        "source_facts_sha256": "296db868cb9b8bf181dbc5e74dcc1a7d9ad75000e45aba54708077151fe8a87f"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-e20f78769772bcdc",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "b6727e3fd919cd2bd66978cf602b02a98094660ae7b5b5460841b8c9a1f55422",
+        "source_facts_sha256": "52e89b0ec018a609d4ac656b4013b0f3b6351748c397cbb0bdd8386f57967299"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-8236d392098a10e5",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "d5798c72807d996486716c00c7fa9c22bda528c436b654f739b7301534bcbcc4",
+        "source_facts_sha256": "e69a5f7b2b428ead6facbd73bdec7c08dd7ccf927fcbe85f0c6930443df4bd58"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-7089d371ad43ec88",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "e993f48d1ec6dc128aba0f3c8a591832aa023bf3c7c49acec54d6a7cc3899ac0",
+        "source_facts_sha256": "87ed261b72c0733665d1015e8cc056f32f16c6df10ca34bcfcf43512a39fba29"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-1c0a4d886ac8bd2b",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "3d8baf18cf973974162cbcb23ce405baec98831650e3adc6d838dd55b3c020ca",
+        "source_facts_sha256": "3441ff2a668dbec36c2a94a9f4b33f8039071c4f7e071b1aaf913745287ed5fe"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-a2822c32386a43c6",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "155e85a52fd32f2aa96fa8fbf8397d4092be7c017fdde9f9dcecc18f69597775",
+        "source_facts_sha256": "f23d31477c2d8f897a6f3585f8c2bb470147b951e0017930b97bfb18e223cd16"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-929470480870ae19",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "30c0d76e1e8a8adeb74c08a6f362ff3a7e1cadc97f606c44a52cac1d8f6e5aff",
+        "source_facts_sha256": "ac5cb41e78e88ebc67672dda124764bfa758e1f28ac0168e02e7a03895237b09"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-10c45e31f8d47360",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "dd66453148310ef1208e591d351e5783a88290eaec620645b8734a6e3a68d5fc",
+        "source_facts_sha256": "d1c5bd3554257f94c39f5d700499f5c8a3070dbc8bbdf651c191d995d65ffd74"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-d47e74102a36859c",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "1fd90db78059ff72917f5091fe4834478d2dbe6cad51febb13c3d9937373d485",
+        "source_facts_sha256": "3d33467c89c1710bf936e8050c85ea2b8ea6ab3fd4f4e9f7809eb65ca088507b"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-51054a14b4e69f0e",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "971e87c0c7eb9affad10de939ff09e8223641d50c3ee0653eeefc6d57d2b5052",
+        "source_facts_sha256": "bb0c66cd9b6c60f1f290bbd28c69ac0cb264b323d6fcf59df43c13e2e447fb95"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-fe95489ef9ef89ba",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "ce5276feb8ea45e30794367a2c9c42d57875edc038a6e974b452b74374e236a1",
+        "source_facts_sha256": "c2ca229b701af28c1a1da1dada40a16fc7f704010f7a0b914f6da640d243c9ae"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-df703abb3243691a",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "e5c39230f18aa3faa637c087fe03b3757bdda024e410af2b7838e15eda93c1ab",
+        "source_facts_sha256": "0dc4ee0bc5ba74082e2bc668fe7373baa6fb0f33a8c3efecce8485702e132fec"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-18c64f37bfa2cc85",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "a085b8d0bb5c97304dffc709cb06a811bf41f76085b0db9028c6fb243b8f2d37",
+        "source_facts_sha256": "a4c96dbc16aea38c646a39a9c0c135838ac39f7c0bf798457b7b3b3ee496fd5e"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-b57a4dcfd95d9b5d",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "90e69148c54e43ec807138fafdb40448895acb0bd357fb7cd470d586cc7cdfa0",
+        "source_facts_sha256": "07ffabc53882cf558399d303f9f65901bb899e55ad992f7f40e89ff96b9f7d6f"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-7ae9157662fe5968",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "7d0738f1615c5888099b0876f0571f0ab9650d0f87d0c80d8f117592789c34f7",
+        "source_facts_sha256": "e1c0a13e7ac99fa30999e610b19281adb0205af8c15a82f1cbcba93f7f55bcb8"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-61ab5dfc9a0d5688",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9a7d200dfd43fc757f368841d249bacc872086e5420e115fb040d9ece18c81e5",
+        "source_facts_sha256": "683d460deb150ef5356c5ebe0f267ff2b1268db084edb511658f223f294ba255"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-9796ea551f576900",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "cd268f2c8234a34e8f01c5a0f64e5a72ab4c39b94c6249af70f3c6ca48c0dd68",
+        "source_facts_sha256": "890bc3e1bc021d49f937751da76c136d4fac6e5be51b730b8db03fbce4fb0c71"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-87e42d285d7b7aed",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "21f70f3ee52345d5d0be337b675ac5242ffe22671106a8ec2eca6c5c06c90c1f",
+        "source_facts_sha256": "afd42fb8389fa6cc615b6b340c8720d31ed51c4b82296f51aab177867fbba61f"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-456864aee02916d4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "bd7d64e1dfc504b5ad35ab73df64498d856851f62727e1074c2503f1b462a016",
+        "source_facts_sha256": "e908631560f23c37ef2cc630c3064ec1975c4084a8f9913844a05eaffac4f160"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-ecf7b75e78b2b413",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "1b8f5ff52f9595bb762c0f3e8d71a66ef1bda733efcc89b6501fcf3d441e1b16",
+        "source_facts_sha256": "ad5a70ace65f001514e6ec6c072063614eaf5f42632309d4f7eac7051a69612f"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-1e0bc0dda3dab194",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "fb5ec5f649c6aedead92f06f3a4347ebd6fb901970f1c50949f80402040a87bf",
+        "source_facts_sha256": "342e39245d09da4784f6855477c1fb1d14f92cffccc987d66b67ff8b43f4430b"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e17febc0c0d7a8c3",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "85494c97f604c3a4c9dc0925bf641e5ad65495dd3cbc61f3d5e18a0394104b08",
+        "source_facts_sha256": "4b8408a7a9ee40f5eaf79af0275668e89543827be09f1471ac010ea285d0c9d1"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-8ba4969b5055b614",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "e78bc886c1b29519f948a9088aadb2eedb3fc8085c6b9b91803bc70d74093be8",
+        "source_facts_sha256": "e3cb2b5b439ae222027bcbffb38a0ab3c9a6621bd31a6a10c3d2a434be1e0e4f"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-eeb2fcd075d5fb1e",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "bac102337236d9a444b17a6db068875d703cb7d5fa3622be00da65e1717313d0",
+        "source_facts_sha256": "dcce3d9a81e54b05bb8146c8b60f0c7d577a5f382547590932a27fb898fbc528"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-50684e589bfedd36",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "b6ef37a835c4286f2526b6e13dd4c78db2671a024df1935ffc3dd86c1c6150f5",
+        "source_facts_sha256": "20b3f4b9c042cd257335e44c32f61a6fa988b63d8d0572ce31dc33cfc75567b3"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-3f23c0b7cd2dd37e",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "9e5249b2ea5ce63bc7e7b56f52fcbeb57d14b3badb574e96a6ae32ee5a6e2878",
+        "source_facts_sha256": "ae2ac82f84faf07286af39357dad378c8bf5a219f35fa2f2373f38c93253d677"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-9dbbd5eb255d6c3d",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "b112c99ab262eb2a33877da8e03df7a97c337a317484a28f153b36062c9b4aa5",
+        "source_facts_sha256": "54224eae5f4faedaea43a1c33c4e4a3f1e0709afa3ddb240dab1b4168daa2359"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-8de9d0054b9c852d",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "547051a4f294f67007f8eafa7242373686b6b5b90ccab75e1e9c35edf9a6efa0",
+        "source_facts_sha256": "1dc3a024c05992c74c67df65cc55473028536b45668754ab236b2773a10d9753"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-e1d1d1991b937fe7",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "e9e54b37628a719337d37ccc05216d3052fef21fd99f64277bf6ce4f0a37cf1b",
+        "source_facts_sha256": "3ecbc4fc250c8f8b782ce0b57f01dc19b0990061527100b663b0616ccc269eeb"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-efb6962126b01019",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "cee9da33b98974ae0500152335a2be6a3bcbc2bf71877ab52e2c58813c4b0f20",
+        "source_facts_sha256": "db76f8856eb5e1c7fb55f26264df0c8123ba3dbff5e9f8ad82ff314de9137c56"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-b3ff2d8b4a22255c",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "1ba4b59585bfa50e9df3145f7d96b424ad2d2b0aa8d5a49d8f735c31cb7f3227",
+        "source_facts_sha256": "587841459bda6af43e4dce6e9d427766c87d051d2c6b0c355190a39947055fec"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-6579e06831d8dc30",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "1173393d85a6f99575a8fc4863b945713c597b51b4322c87f45f054e030ce705",
+        "source_facts_sha256": "0f6c744b5c08412e6ca2614bcd2bb9069d477c1224152a09aa725c0e61d907f0"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-ea36bd104a4889f7",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "2b7a00b6cfece6363cfb081c0596f28fa681046c423518ef4a24ac31d90a5221",
+        "source_facts_sha256": "ba93d4d311299b33b899bd395dd5ee2a7cdeb4887608514919f001b8e38751dd"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-f1b05ca966d5ceca",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "2b785ba39ea88893ddeb835f29703baa7c93ed411569396828d8289faadec55e",
+        "source_facts_sha256": "2a07cd1cbcd8ad7bb5eb55b72d9f449eefa478843f8fd9c1b38bbb242e104d0b"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-996b78b6c1807a34",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "84bd4db2db26e919f56a791f6e35d5f166ebf1e10ba550bbb2c23ceef52ec097",
+        "source_facts_sha256": "8ab733b2b436e16ef6a11bbbc79d6550ee0cccd1d52d7c6ff24f03d550fbb48c"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-ea8630e2a4a337e5",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "b8f9ddecc4cc1c981cf36ce31948489a9b785b509602a6c9457c33d26648fd93",
+        "source_facts_sha256": "b87c197c2b98a74d7b22ce07bb201dcc91e246933f686cc94859be6470ac6f0c"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-dc8755148208a02d",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "1abcf63d9b82204365c94ff90d5c93e56e25efc8a9e8a3baf12d78d8f462ed24",
+        "source_facts_sha256": "167a4eeabba6a66ced030bb3c07dd4a38a64d62e206794a0685aa854a7d281c4"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-5e69924e520b08c2",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "49725328c62c34018aec890674d00c5d257b7ba821eb2e9d8eda9fb15aee6fb3",
+        "source_facts_sha256": "b3867b40d8f0c94be97e978249c54717c38a4656dfb9a76fdcaf6a0f97ce0f60"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-6e809cbdbc376abf",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "8d9c80c2e4b11a18f291fd45566b2686a83b02e6b6625b6d11f0d31c7c3ae9c5",
+        "source_facts_sha256": "f36399ca4c2f5a993362b66b3ebb7d9a7f399f5e90580b6efb06ecef6a68b982"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-41093034966adcc8",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "e2f11e11de976d46a796dd2e84d85721d4e82aaef2529dcc028e17cace6b38e7",
+        "source_facts_sha256": "5ab54684f0c8e47042b860c8b4f3f33dbdb4951f41c3f4bc37d6d95eeaf39601"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-7d1495e77baf0f3b",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "2f265536ba2739fbc0f2f2a59e1ea413bc705805d32639f01f9811ac99bf555f",
+        "source_facts_sha256": "3906c743d5c07032ca0c6addc125c86c0f5ea18df726100d17209b960c7270d7"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-1dff7780eb7dea06",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "5f6c829dfffd94e188669f0c8738a18ae907c8c0c8a0dd359ec8595a1ed8fec1",
+        "source_facts_sha256": "5b86235991d071a3c426d8bf4b21efcb78136e551730f560fff06dceaf320dda"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-872fc50f5f197be4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "be805531fb1a4a522709627e631599909b3a032c7b07a3f40e0d6e98f42be31f",
+        "source_facts_sha256": "975f4a334ce939a94c38472fca28d597edf36e37926acb7d29f34f116545a588"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-413b88627bcaf5c4",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "4b8b24096075ae554844966c3d6c7673942d438a956dabb0561ae9402f0f31bb",
+        "source_facts_sha256": "73446e08d0de2ac9a2a2d464b84145a6673f4c3c41422f17160da2a97b696f53"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-539924cf5f835067",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "03ad0d40dfaef8d821a5f82b458ad2a92a3d1f7f43512f6fdeff350be98cdbec",
+        "source_facts_sha256": "75c904b757eb7c6e657c336bf0576f14e32458467bf7e36e8fb6142c461f0483"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-0426a8b0908017a8",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "7b090b24c4678b8740e8d381530ec8a98ba940aa779c5fc0a54b63f047ac8e26",
+        "source_facts_sha256": "bec1895ebee0a02d2bc3beeb650cf574736d94f5171e441476e4c11fbfbdb3fd"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-a10e62efc469dfce",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "a90b31104ee2910085e4d96e6a91b7bb0f100090e7edd4b72f2920e0f4db418b",
+        "source_facts_sha256": "2ae3c62bc55254a393223fb600ebecda73e72bd4d0002193a744e625bb620552"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-83bfc3d56148953c",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "c4360caf870cbeabed47fc2f0c0a809b8b3326daf0404d207ae9612e39b235ea",
+        "source_facts_sha256": "a8e2454a8e70cca42b06fcb9d322e77db3baba7c49edf7cbe3e2304db5408dc2"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-cf182458232d4bc7",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "2932b12b33eb9537ab811dcc2e751624abc6f422e77e73ca8a5b89bbfdd39ea8",
+        "source_facts_sha256": "79e5e316f3542dd00998852e0f3b987c7bb55414741bab91f18e3b4784b3e8c4"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-d0a1ff7a823b0222",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "b4edd4888e66d2ab2018138980103bf2c3d9d5a329276d56c14073b6ec2f3237",
+        "source_facts_sha256": "9ff5578e46b6bb7645d2a5a91a8c93c4cf7b33a3bd0ae08bcc5b3f4313fe3010"
+      },
+      {
+        "case_id": "semantic-skill-first_strict_profit_period-6aaffe937e4bfc29",
+        "family": "first_strict_profit_period",
+        "prompt_sha256": "84fa318a0964b208975eaf4775a39d8d7155441f88147c3baeb7504c8a3e7de9",
+        "source_facts_sha256": "9e8e7c4ec386474d0acb7c4a582f34b75d04b90c458f2dcb48041afe1f779b9b"
+      },
+      {
+        "case_id": "semantic-skill-implicit_scale_total-8712811d97d2d6d3",
+        "family": "implicit_scale_total",
+        "prompt_sha256": "c4a15fc4f816b96ab1e614405e62a2e87a4c3663003d3a710cdbe7f4876eef7b",
+        "source_facts_sha256": "e2f02f2af3f1381acd1cfe8180a0baad64ed260c32187022463210bde4603050"
+      }
+    ],
+    "schema_version": "nano_harness_verified_tool_contract_v1"
+  },
+  "claim_boundary": "This pre-registers a fresh synthetic local mechanism test only. It generates no model output and does not reopen the observed canary, complete benchmark, independent holdout, or training.",
+  "decision_policy": {
+    "failed": "Publish negative evidence and change mechanism only on a new surface. Do not tune or rerun this surface.",
+    "forbidden_after_observation": [
+      "case_change",
+      "route_marker_change",
+      "skill_schema_change",
+      "semantic_executor_change",
+      "prompt_change",
+      "regex_change",
+      "retry_change",
+      "budget_change",
+      "temperature_change",
+      "model_or_service_change",
+      "fallback_change",
+      "gate_change",
+      "arm_rerun",
+      "canary_access",
+      "benchmark_access",
+      "holdout_access"
+    ],
+    "passed": "Publish local evidence and separately pre-register a fresh history-disjoint semantic-skill replication. Do not access the observed canary."
+  },
+  "execution_boundary": {
+    "benchmark_accessed": false,
+    "canary_accessed": false,
+    "evaluation_started": false,
+    "holdout_accessed": false,
+    "model_generation_started": false,
+    "service_reused": true,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-semantic-skill-execution-v1",
+  "freshness": {
+    "benchmark_outputs_loaded": false,
+    "benchmark_prompt_overlap": {
+      "gpqa_diamond": 0,
+      "gsm8k": 0,
+      "mmlu": 0
+    },
+    "benchmark_rows_hashed": {
+      "gpqa_diamond": 198,
+      "gsm8k": 1319,
+      "mmlu": 14042
+    },
+    "canary_rows_or_outputs_loaded": false,
+    "holdout_rows_loaded": false,
+    "prior_surface_prompt_overlap": {
+      "choice_capability_matrix_v1": 0,
+      "choice_exact_replication_v3": 0,
+      "choice_verifier_matrix_v2": 0
+    }
+  },
+  "identity": {
+    "canary_rejection_sha256": "6f0fcebabd0bfb8099ec34e6465362c1c884524605484aec47251068e9f5b056",
+    "case_contract_sha256": "913c64a4bcfdce4d04299b9958a291937d3c7bfd6425ee956e835042e29651bf",
+    "code_revision": "d3b67af19b1e70736ac630e87bc82290caa3c7ed",
+    "config_sha256": "4e5785b9b4fc9dd5b3a76a95b438c2f2c3d505a2fae6231b81cfbf53ebbd6ad9",
+    "parent_config_sha256": "538cbcde51ccb8ad43e4f91db4201a2ffd835c1493a5b2bd58177db7dcab3cd3",
+    "service_receipt_sha256": "895bd40d886d870f99230441baecdf1feb926e2992b6a151e54d8165145f1c0d",
+    "v2_report_sha256": "cd20bd3f6abccf3e8b70f8ec6504150dc30665fbe477364608ec8b34366ab0cc"
+  },
+  "inherited_contract": {
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": "qwen35-semantic-skill-execution-v1",
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "direct_max_tokens": 32,
+    "final_max_tokens": 32,
+    "four_b_model": "qwen3.5-4b",
+    "maximum_harness_losses": 0,
+    "minimum_harness_wins": 12,
+    "nine_b_model": "qwen3.5-9b",
+    "plan_max_tokens": 96,
+    "plan_retry_limit": 1,
+    "service_receipt_path": "docs/experiments/qwen35_verified_tool_execution_services_v1.public.json",
+    "significance_alpha": 0.05,
+    "temperature": 0.0
+  },
+  "mechanism": {
+    "changed": [
+      "fresh 120000-offset 256-case surface",
+      "prompt-marker routing without case metadata",
+      "typed implicit double/triple semantics",
+      "typed first strictly profitable whole-period semantics"
+    ],
+    "retained": [
+      "same Qwen3.5-4B and Qwen3.5-9B services",
+      "single applicable skill exposure",
+      "typed source-fact validation",
+      "one retry",
+      "verified-result feedback",
+      "direct fallback",
+      "temperature and token budgets",
+      "paired bootstrap and exact McNemar gates"
+    ],
+    "stopped": [
+      "literal-only arithmetic expression grounding",
+      "211-case canary access"
+    ]
+  },
+  "schema_version": "nano_harness_semantic_skill_execution_preregister_v1",
+  "skills": {
+    "first_strict_profit_period": {
+      "markers": [
+        "first whole period when cumulative profit is strictly positive"
+      ],
+      "maximum_feedback_input_tokens": 179,
+      "maximum_plan_input_tokens": 147,
+      "plan_regex": "TOOL: first_strict_profit_period \\{\"setup_cost\":[0-9]+,\"units_per_period\":[0-9]+,\"price_per_unit\":[0-9]+,\"recurring_cost\":[0-9]+\\}",
+      "system_prompt_sha256": "28d6b0ceab85fe762aad27185c1450d467061e50dd41c8b521f0b51af757b0b0"
+    },
+    "implicit_scale_total": {
+      "markers": [
+        "more than double the number of slots",
+        "more than triple the number of slots"
+      ],
+      "maximum_feedback_input_tokens": 151,
+      "maximum_plan_input_tokens": 121,
+      "plan_regex": "TOOL: implicit_scale_total \\{\"rows\":[0-9]+,\"columns\":[0-9]+,\"extra\":[0-9]+,\"scale_word\":\"(?:double|triple)\"\\}",
+      "system_prompt_sha256": "0cc473897177f02bf7696fa6742502e62a0e0db46246074e81e96094ae59858a"
+    }
+  }
+}

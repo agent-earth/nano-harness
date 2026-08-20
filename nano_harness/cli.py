@@ -67,6 +67,12 @@ from nano_harness.grounded_calculator_canary import (
 from nano_harness.grounded_calculator_canary import (
     run as run_grounded_calculator_canary,
 )
+from nano_harness.semantic_skill_execution import (
+    load_config as load_semantic_skill_execution_config,
+)
+from nano_harness.semantic_skill_execution import (
+    run as run_semantic_skill_execution,
+)
 
 
 def main() -> None:
@@ -157,6 +163,10 @@ def main() -> None:
         "grounded-calculator-canary"
     )
     grounded_calculator_canary_parser.add_argument("--config", required=True)
+    semantic_skill_execution_parser = subparsers.add_parser(
+        "semantic-skill-execution"
+    )
+    semantic_skill_execution_parser.add_argument("--config", required=True)
 
     args = parser.parse_args()
     if args.command == "run":
@@ -220,6 +230,12 @@ def main() -> None:
             os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
         summary = run_grounded_calculator_canary(
             load_grounded_calculator_canary_config(args.config)
+        )
+    elif args.command == "semantic-skill-execution":
+        if not os.getenv("NANO_HARNESS_API_KEY"):
+            os.environ["NANO_HARNESS_API_KEY"] = "local-vllm"
+        summary = run_semantic_skill_execution(
+            load_semantic_skill_execution_config(args.config)
         )
     elif args.command == "merge":
         summary = merge_paths(

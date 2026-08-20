@@ -1,0 +1,62 @@
+{
+  "bootstrap_samples": 10000,
+  "bootstrap_seed": "qwen35-semantic-skill-execution-v1",
+  "canary_rejection_path": "docs/results/qwen35_grounded_calculator_canary_v1.public.json",
+  "canary_rejection_sha256": "6f0fcebabd0bfb8099ec34e6465362c1c884524605484aec47251068e9f5b056",
+  "case_seed": 20260820,
+  "cases_per_family": 128,
+  "direct_max_tokens": 32,
+  "execution_boundary": {
+    "benchmark_accessed": false,
+    "canary_accessed": false,
+    "evaluation_started": false,
+    "holdout_accessed": false,
+    "model_generation_started": false,
+    "service_reused": true,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-semantic-skill-execution-v1",
+  "final_max_tokens": 32,
+  "maximum_harness_losses": 0,
+  "minimum_harness_wins": 12,
+  "output_path": "results/harness/qwen35-semantic-skill-execution-v1/result.json",
+  "parent_config_path": "configs/harness/qwen35_verified_tool_execution_v1.json",
+  "parent_config_sha256": "538cbcde51ccb8ad43e4f91db4201a2ffd835c1493a5b2bd58177db7dcab3cd3",
+  "plan_max_tokens": 96,
+  "plan_retry_limit": 1,
+  "plan_structured_output_regex_by_family": {
+    "first_strict_profit_period": "TOOL: first_strict_profit_period \\{\"setup_cost\":[0-9]+,\"units_per_period\":[0-9]+,\"price_per_unit\":[0-9]+,\"recurring_cost\":[0-9]+\\}",
+    "implicit_scale_total": "TOOL: implicit_scale_total \\{\"rows\":[0-9]+,\"columns\":[0-9]+,\"extra\":[0-9]+,\"scale_word\":\"(?:double|triple)\"\\}"
+  },
+  "policy": {
+    "contains_benchmark_outputs": false,
+    "contains_benchmark_rows": false,
+    "contains_canary_outputs": false,
+    "contains_canary_rows": false,
+    "contains_holdout_rows": false,
+    "evaluation_only": true,
+    "executor_uses_case_correctness": false,
+    "executor_uses_expected_answer": false,
+    "post_observation_prompt_parser_budget_search": false,
+    "router_uses_case_metadata": false,
+    "training_eligible": false,
+    "uses_observed_quality_outputs": false
+  },
+  "route_markers": {
+    "first_strict_profit_period": [
+      "first whole period when cumulative profit is strictly positive"
+    ],
+    "implicit_scale_total": [
+      "more than double the number of slots",
+      "more than triple the number of slots"
+    ]
+  },
+  "schema_version": "nano_harness_semantic_skill_execution_v1",
+  "service_receipt_sha256": "895bd40d886d870f99230441baecdf1feb926e2992b6a151e54d8165145f1c0d",
+  "significance_alpha": 0.05,
+  "skill_router": "prompt_marker_to_single_semantic_skill_v1",
+  "v2_report_path": "docs/results/qwen35_verified_tool_execution_v2.public.json",
+  "v2_report_sha256": "cd20bd3f6abccf3e8b70f8ec6504150dc30665fbe477364608ec8b34366ab0cc",
+  "value_offset": 120000
+}
