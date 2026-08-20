@@ -17,6 +17,9 @@ from nano_harness.v5_complete_treatment import (
     load_config,
 )
 from scripts.preregister_v5_complete_treatment import build_receipt
+from scripts.render_v5_complete_treatment import (
+    aggregate_treatment_diagnostics,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -216,6 +219,134 @@ class V5CompleteTreatmentTests(unittest.TestCase):
         self.assertEqual(candidate["output"], "FINAL: C")
         self.assertTrue(receipt["override"])
         self.assertEqual(receipt["confirmation"], "C")
+
+    def test_treatment_diagnostics_aggregate_without_case_content(self):
+        candidate_rows = [
+            {
+                "case_id": "gsm8k-a",
+                "benchmark": "gsm8k",
+                "prediction": 12,
+                "score": 1,
+            },
+            {
+                "case_id": "mmlu-a",
+                "benchmark": "mmlu",
+                "prediction": "B",
+                "score": 1,
+            },
+            {
+                "case_id": "gpqa_diamond-a",
+                "benchmark": "gpqa_diamond",
+                "prediction": "C",
+                "score": 1,
+            },
+        ]
+        direct_rows = [
+            {
+                "case_id": "gsm8k-a",
+                "benchmark": "gsm8k",
+                "prediction": 7,
+                "score": 0,
+            },
+            {
+                "case_id": "mmlu-a",
+                "benchmark": "mmlu",
+                "prediction": "B",
+                "score": 1,
+            },
+            {
+                "case_id": "gpqa_diamond-a",
+                "benchmark": "gpqa_diamond",
+                "prediction": "A",
+                "score": 0,
+            },
+        ]
+        receipt_rows = [
+            {
+                "case_id": "gsm8k-a",
+                "receipt": {
+                    "route": "gsm8k_grounded_expression_consensus",
+                    "override": True,
+                    "attempts": [
+                        {
+                            "executed": True,
+                            "reason": "verified_grounded_execution",
+                            "output_sha256": "output-a",
+                            "expression_sha256": "expression-a",
+                        },
+                        {
+                            "executed": True,
+                            "reason": "verified_grounded_execution",
+                            "output_sha256": "output-a",
+                            "expression_sha256": "expression-a",
+                        },
+                        {
+                            "executed": False,
+                            "reason": "ungrounded_literal",
+                            "output_sha256": "output-b",
+                            "expression_sha256": None,
+                        },
+                    ],
+                },
+            },
+            {
+                "case_id": "mmlu-a",
+                "receipt": {
+                    "route": "mmlu_direct_preserve",
+                    "override": False,
+                },
+            },
+            {
+                "case_id": "gpqa_diamond-a",
+                "receipt": {
+                    "route": "gpqa_conservative_choice_consensus",
+                    "override": True,
+                    "reviews": [
+                        {"prediction": "C"},
+                        {"prediction": "C"},
+                    ],
+                    "confirmation": "C",
+                    "model_calls": 3,
+                },
+            },
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            paths = {
+                name: root / f"{name}.jsonl"
+                for name in ("candidate", "direct", "receipts")
+            }
+            for path, rows in (
+                (paths["candidate"], candidate_rows),
+                (paths["direct"], direct_rows),
+                (paths["receipts"], receipt_rows),
+            ):
+                path.write_text(
+                    "".join(json.dumps(row) + "\n" for row in rows),
+                    encoding="utf-8",
+                )
+            diagnostics = aggregate_treatment_diagnostics(
+                paths["candidate"],
+                paths["receipts"],
+                paths["direct"],
+            )
+        self.assertEqual(
+            diagnostics["gsm8k"]["changed_case_outcomes"]["net_correct"],
+            1,
+        )
+        self.assertEqual(
+            diagnostics["gsm8k"]["calculator"][
+                "distinct_model_outputs_per_case"
+            ],
+            {"2": 1},
+        )
+        self.assertEqual(
+            diagnostics["gpqa_diamond"]["choice_consensus"][
+                "confirmation_requested_cases"
+            ],
+            1,
+        )
+        self.assertNotIn("case_ids", json.dumps(diagnostics))
 
 
 if __name__ == "__main__":
