@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import importlib.util
 import json
 import tempfile
 import unittest
@@ -25,6 +26,14 @@ from nano_harness.verified_tool_execution import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/harness/qwen35_verified_tool_execution_v1.json"
+RENDER_PATH = ROOT / "scripts/render_verified_tool_execution_v1.py"
+RENDER_SPEC = importlib.util.spec_from_file_location(
+    "render_verified_tool_execution_v1",
+    RENDER_PATH,
+)
+RENDER_MODULE = importlib.util.module_from_spec(RENDER_SPEC)
+assert RENDER_SPEC.loader is not None
+RENDER_SPEC.loader.exec_module(RENDER_MODULE)
 
 
 class VerifiedToolExecutionTests(unittest.TestCase):
@@ -260,6 +269,75 @@ class VerifiedToolExecutionTests(unittest.TestCase):
                     path.write_text(json.dumps(altered), encoding="utf-8")
                     with self.assertRaisesRegex(ValueError, error):
                         load_config(path)
+
+    def test_gate_rejects_executor_contract_failures_despite_quality_gain(self):
+        by_family = {
+            family: {"cases": 64, "correct": 0, "parseable": 64}
+            for family in FAMILIES
+        }
+        raw = {
+            "arms": {
+                "four_b_direct": {
+                    "cases": 256,
+                    "correct": 21,
+                    "accuracy": 21 / 256,
+                    "parseable": 256,
+                    "by_family": copy.deepcopy(by_family),
+                },
+                "nine_b_direct": {
+                    "cases": 256,
+                    "correct": 13,
+                    "accuracy": 13 / 256,
+                    "parseable": 256,
+                    "by_family": copy.deepcopy(by_family),
+                },
+                "four_b_verified_tool": {
+                    "cases": 256,
+                    "correct": 192,
+                    "accuracy": 192 / 256,
+                    "parseable": 256,
+                    "by_family": {
+                        family: {
+                            "cases": 64,
+                            "correct": 64 if family != "labor_total" else 0,
+                            "parseable": 64,
+                        }
+                        for family in FAMILIES
+                    },
+                },
+            },
+            "routing": {"verified_executions": 192},
+        }
+        raw["arms"]["four_b_direct"]["by_family"]["paired_average"][
+            "correct"
+        ] = 21
+        raw["arms"]["nine_b_direct"]["by_family"]["paired_average"][
+            "correct"
+        ] = 13
+        comparison = {
+            "candidate_accuracy": 0.75,
+            "baseline_accuracy": 0.08,
+            "paired_bootstrap_95_ci": [0.5, 0.8],
+            "mcnemar_exact_p": 1e-20,
+            "paired_counts": {
+                "candidate_only": 171,
+                "baseline_only": 0,
+            },
+        }
+        gates = RENDER_MODULE.admission_gates(
+            raw,
+            comparison,
+            comparison,
+            contract_failures=64,
+        )
+        self.assertTrue(
+            gates["harness_vs_four_b_bootstrap_ci_lower_gt_zero"]
+        )
+        self.assertTrue(
+            gates["harness_vs_nine_b_bootstrap_ci_lower_gt_zero"]
+        )
+        self.assertFalse(gates["executor_contract_failures_zero"])
+        self.assertFalse(all(gates.values()))
 
 
 if __name__ == "__main__":
