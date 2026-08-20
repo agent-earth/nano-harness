@@ -1,0 +1,98 @@
+{
+  "acceptance": {
+    "all_15559_rows_complete_and_parseable": true,
+    "api_errors_zero": true,
+    "candidate_only_gt_nine_b_only_each_benchmark": true,
+    "gpqa_superior_to_9b_ci_positive_mcnemar_lt_005": true,
+    "gsm8k_superior_to_9b_ci_positive_mcnemar_lt_005": true,
+    "minimum_complete_benchmarks_significantly_won": 3,
+    "mmlu_superior_to_9b_ci_positive_mcnemar_lt_005": true,
+    "per_benchmark_non_regression_vs_direct_4b": true
+  },
+  "claim_boundary": "This pre-registers one complete matched benchmark treatment. It validates identities and counts only, starts no generation, and does not use benchmark outputs for training or routing.",
+  "decision_policy": {
+    "failed": "Publish negative evidence. Do not rerun or tune this complete treatment.",
+    "forbidden_after_observation": [
+      "route_change",
+      "prompt_change",
+      "parser_or_scorer_change",
+      "budget_or_replica_change",
+      "consensus_or_override_rule_change",
+      "case_selection_change",
+      "model_or_adapter_change",
+      "rerun",
+      "training_on_benchmark_rows_or_outputs"
+    ],
+    "passed": "Publish complete treatment evidence and separately open 27B parity preregistration."
+  },
+  "execution_boundary": {
+    "benchmark_generation_started": false,
+    "benchmark_outputs_loaded_by_preregister": false,
+    "canary_rerun": false,
+    "holdout_accessed": false,
+    "rl_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-v5-complete-treatment-v1",
+  "identity": {
+    "baseline_report_sha256": "c9e622872d6ecd87350475011dcd19534c4f574a2999e69541d9b66ae0985152",
+    "case_ids_sha256": "d38ee8c3eabbefaf7381253f6a69ba87fa63d9ee25fa4b8aeaa5f2afd73b0c63",
+    "case_manifest_sha256": "858656f58decf8bbc23c70101dabcffc6ef12e049771e043575927743c6cfd10",
+    "code_revision": "0a048b73f96afb0672e010732f41a9e99e427540",
+    "config_sha256": "b083d320e7103cb0809b5c22e6f8ebbc9330a3eb96d3910fd17d34c8f9a52f10",
+    "four_b_raw_sha256": "b6e35d968dc3ff3311cf991b186e7a4f2a0ff8fe9989b7507f39b75b7aa6aa54",
+    "nine_b_raw_sha256": "a22cade1ea367e6cceddff4e25e88d34360adc005feeed316464b561c151b988",
+    "v5_report_sha256": "2b1e6be49e3e00de5168f377c8ce2ab097777e7d4a55976fdd423b4a5b74e48f"
+  },
+  "schema_version": "nano_harness_v5_complete_treatment_preregister_v1",
+  "statistics": {
+    "alpha": 0.05,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": "qwen35-v5-complete-treatment-v1",
+    "exact_mcnemar": true,
+    "minimum_complete_benchmarks_significantly_won": 3,
+    "per_benchmark_non_regression_vs_direct_4b": true,
+    "per_benchmark_superiority_vs_9b": true,
+    "require_candidate_only_gt_nine_b_only": true
+  },
+  "surface": {
+    "by_benchmark": {
+      "gpqa_diamond": 198,
+      "gsm8k": 1319,
+      "mmlu": 14042
+    },
+    "case_set_matches_both_direct_arms": true,
+    "cases": 15559,
+    "prompts_or_outputs_published": false
+  },
+  "treatment": {
+    "gpqa_fail_closed_to_direct": true,
+    "gsm8k_fail_closed_to_direct": true,
+    "mmlu_direct_preserved": true,
+    "routes": {
+      "gpqa_diamond": {
+        "choice_regex": "FINAL: [A-D]",
+        "confirmation_max_tokens": 64,
+        "option_review_max_tokens": 96,
+        "otherwise": "preserve_frozen_4b_direct",
+        "override_rule": "two_independent_reviews_and_confirmation_agree_on_same_non_direct_choice",
+        "strategy": "conservative_choice_consensus"
+      },
+      "gsm8k": {
+        "expression_regex": "CALC: [0-9+\\-*/(). ]+",
+        "maximum_absolute_value": 1000000000000000,
+        "maximum_ast_nodes": 64,
+        "maximum_expression_chars": 160,
+        "otherwise": "preserve_frozen_4b_direct",
+        "plan_max_tokens": 128,
+        "plan_replicas": 3,
+        "strategy": "grounded_expression_consensus",
+        "verified_result_rule": "at_least_two_executed_grounded_expressions_agree"
+      },
+      "mmlu": {
+        "strategy": "preserve_frozen_4b_direct"
+      }
+    }
+  }
+}

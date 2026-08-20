@@ -1,0 +1,77 @@
+{
+  "baseline": {
+    "case_manifest_path": "configs/generated/qwen35_complete_direct_v1_cases.public.json",
+    "case_manifest_sha256": "858656f58decf8bbc23c70101dabcffc6ef12e049771e043575927743c6cfd10",
+    "complete_preregister_path": "configs/campaign/qwen35_complete_direct_v1.preregister.json",
+    "complete_preregister_sha256": "957009bf75c7259dc3629037a9b14d4bf7ef48969080ad62749ef136f1e337b0",
+    "four_b_raw_path": "results/full/qwen35-complete-direct-v1/4b/cases.jsonl",
+    "four_b_raw_sha256": "b6e35d968dc3ff3311cf991b186e7a4f2a0ff8fe9989b7507f39b75b7aa6aa54",
+    "nine_b_raw_path": "results/full/qwen35-complete-direct-v1/9b/cases.jsonl",
+    "nine_b_raw_sha256": "a22cade1ea367e6cceddff4e25e88d34360adc005feeed316464b561c151b988",
+    "report_path": "docs/results/qwen35_complete_direct_v1.public.json",
+    "report_sha256": "c9e622872d6ecd87350475011dcd19534c4f574a2999e69541d9b66ae0985152",
+    "suite_manifest_path": "configs/baselines/qwen35_complete_direct_v1.yaml",
+    "suite_manifest_sha256": "6ec49d522892975e4532954d3bac7c7e5ed9b24e2c698700d5f8a61667753e90"
+  },
+  "execution_boundary": {
+    "benchmark_generation_started": false,
+    "benchmark_outputs_loaded_by_preregister": false,
+    "canary_rerun": false,
+    "holdout_accessed": false,
+    "rl_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false
+  },
+  "experiment_id": "qwen35-v5-complete-treatment-v1",
+  "output": {
+    "candidate_path": "results/full/qwen35-v5-complete-treatment-v1/candidate/cases.jsonl",
+    "result_path": "results/full/qwen35-v5-complete-treatment-v1/result.json"
+  },
+  "policy": {
+    "benchmark_rows_training_eligible": false,
+    "benchmark_outputs_may_enter_training_reward_or_verifier": false,
+    "case_id_allowlist_for_routing": false,
+    "expected_answer_used_by_routing_or_execution": false,
+    "post_observation_search": false,
+    "raw_outputs_committed": false
+  },
+  "routes": {
+    "gpqa_diamond": {
+      "choice_regex": "FINAL: [A-D]",
+      "confirmation_max_tokens": 64,
+      "option_review_max_tokens": 96,
+      "override_rule": "two_independent_reviews_and_confirmation_agree_on_same_non_direct_choice",
+      "otherwise": "preserve_frozen_4b_direct",
+      "strategy": "conservative_choice_consensus"
+    },
+    "gsm8k": {
+      "expression_regex": "CALC: [0-9+\\-*/(). ]+",
+      "maximum_absolute_value": 1000000000000000,
+      "maximum_ast_nodes": 64,
+      "maximum_expression_chars": 160,
+      "otherwise": "preserve_frozen_4b_direct",
+      "plan_max_tokens": 128,
+      "plan_replicas": 3,
+      "strategy": "grounded_expression_consensus",
+      "verified_result_rule": "at_least_two_executed_grounded_expressions_agree"
+    },
+    "mmlu": {
+      "strategy": "preserve_frozen_4b_direct"
+    }
+  },
+  "schema_version": "nano_harness_v5_complete_treatment_v1",
+  "statistics": {
+    "alpha": 0.05,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": "qwen35-v5-complete-treatment-v1",
+    "exact_mcnemar": true,
+    "minimum_complete_benchmarks_significantly_won": 3,
+    "per_benchmark_non_regression_vs_direct_4b": true,
+    "per_benchmark_superiority_vs_9b": true,
+    "require_candidate_only_gt_nine_b_only": true
+  },
+  "treatment": {
+    "v5_report_path": "docs/results/qwen35_router_skill_registry_v5.public.json",
+    "v5_report_sha256": "2b1e6be49e3e00de5168f377c8ce2ab097777e7d4a55976fdd423b4a5b74e48f"
+  }
+}
