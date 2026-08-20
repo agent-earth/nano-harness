@@ -30,6 +30,9 @@ from scripts.preregister_semantic_model_router_v1 import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/harness/qwen35_semantic_model_router_v1.json"
+PUBLIC_RESULT = (
+    ROOT / "docs/results/qwen35_semantic_model_router_v1.public.json"
+)
 
 
 class SemanticModelRouterTests(unittest.TestCase):
@@ -250,6 +253,62 @@ class SemanticModelRouterTests(unittest.TestCase):
         self.assertIn("128 unsupported", markdown)
         self.assertIn("false positive 0", markdown)
         self.assertIn("question-only real router scan", markdown)
+
+    def test_public_result_rejects_recall_failure(self):
+        report = json.loads(PUBLIC_RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(
+            report["routing"],
+            {
+                "cases": 256,
+                "router_correct": 192,
+                "positive_cases": 128,
+                "positive_route_correct": 64,
+                "negative_cases": 128,
+                "negative_none_correct": 128,
+                "negative_false_positive_routes": 0,
+                "verified_executions": 64,
+                "fallbacks": 0,
+            },
+        )
+        self.assertEqual(
+            report["confusion"],
+            [
+                {
+                    "expected_route": "NONE",
+                    "selected_route": "NONE",
+                    "cases": 128,
+                },
+                {
+                    "expected_route": "first_strict_profit_period",
+                    "selected_route": "first_strict_profit_period",
+                    "cases": 64,
+                },
+                {
+                    "expected_route": "implicit_scale_total",
+                    "selected_route": "NONE",
+                    "cases": 64,
+                },
+            ],
+        )
+        decision = report["decision"]
+        self.assertFalse(decision["router_admitted"])
+        self.assertTrue(decision["router_precision_direction_supported"])
+        self.assertFalse(decision["router_recall_supported"])
+        self.assertFalse(
+            decision["real_question_model_scan_preregistration_allowed"]
+        )
+        self.assertFalse(decision["benchmark_generation_allowed"])
+        self.assertFalse(decision["canary_rerun_allowed"])
+        self.assertFalse(decision["independent_holdout_allowed"])
+        self.assertFalse(decision["training_allowed"])
+        self.assertFalse(
+            decision["further_tuning_or_rerun_on_observed_cases_allowed"]
+        )
+        self.assertFalse(decision["gates"]["positive_route_recall_128"])
+        self.assertTrue(decision["gates"]["negative_none_correct_128"])
+        self.assertTrue(
+            decision["gates"]["negative_false_positive_routes_zero"]
+        )
 
 
 if __name__ == "__main__":

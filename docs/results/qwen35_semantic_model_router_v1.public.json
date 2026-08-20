@@ -1,0 +1,398 @@
+{
+  "arms": {
+    "four_b_direct": {
+      "accuracy": 0.0,
+      "by_family": {
+        "box_total": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        },
+        "first_strict_profit_period": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        },
+        "implicit_scale_total": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        },
+        "remaining_stock": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        }
+      },
+      "cases": 256,
+      "correct": 0,
+      "parseable": 256
+    },
+    "four_b_model_router": {
+      "accuracy": 0.25,
+      "by_family": {
+        "box_total": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        },
+        "first_strict_profit_period": {
+          "cases": 64,
+          "correct": 64,
+          "parseable": 64
+        },
+        "implicit_scale_total": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        },
+        "remaining_stock": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        }
+      },
+      "cases": 256,
+      "correct": 64,
+      "parseable": 256
+    },
+    "nine_b_direct": {
+      "accuracy": 0.0,
+      "by_family": {
+        "box_total": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        },
+        "first_strict_profit_period": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        },
+        "implicit_scale_total": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        },
+        "remaining_stock": {
+          "cases": 64,
+          "correct": 0,
+          "parseable": 64
+        }
+      },
+      "cases": 256,
+      "correct": 0,
+      "parseable": 256
+    }
+  },
+  "claim_boundary": "This is negative fresh-local router evidence. It establishes perfect unsupported-task precision for this surface but only 50% positive recall. It does not authorize a real question scan, benchmark generation, canary rerun, holdout, or training.",
+  "comparisons": {
+    "candidate_vs_four_b": {
+      "baseline_accuracy": 0.0,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-semantic-model-router-v1:candidate-four",
+      "candidate_accuracy": 0.25,
+      "candidate_only_case_ids": [
+        "semantic-router-first_strict_profit_period-013400812f1113a6",
+        "semantic-router-first_strict_profit_period-0e62edf33e8228a8",
+        "semantic-router-first_strict_profit_period-18a86aa9e4a5fbf0",
+        "semantic-router-first_strict_profit_period-1f7b4003ef665e60",
+        "semantic-router-first_strict_profit_period-21c2f7300346f0db",
+        "semantic-router-first_strict_profit_period-234435b18c9aa892",
+        "semantic-router-first_strict_profit_period-2c1e83fe3a061b68",
+        "semantic-router-first_strict_profit_period-2cb0bd35dd527e68",
+        "semantic-router-first_strict_profit_period-325cd3a80919d4bc",
+        "semantic-router-first_strict_profit_period-3a95e92cb9bc4dff",
+        "semantic-router-first_strict_profit_period-3c8b1d15a2993685",
+        "semantic-router-first_strict_profit_period-3d8ef1b5ea4785cc",
+        "semantic-router-first_strict_profit_period-3f73f0e11af6506a",
+        "semantic-router-first_strict_profit_period-44256a0367e689e0",
+        "semantic-router-first_strict_profit_period-45b759c71ae3b2e4",
+        "semantic-router-first_strict_profit_period-52acc6952fe23a8d",
+        "semantic-router-first_strict_profit_period-56321984fe1a13a2",
+        "semantic-router-first_strict_profit_period-5675dc9fafe864d8",
+        "semantic-router-first_strict_profit_period-61d1e0d32c65c874",
+        "semantic-router-first_strict_profit_period-633c965aaf070a0d",
+        "semantic-router-first_strict_profit_period-634cd042755079c2",
+        "semantic-router-first_strict_profit_period-671a5c093fe19786",
+        "semantic-router-first_strict_profit_period-6b7302519ea8cf57",
+        "semantic-router-first_strict_profit_period-6f31b107f36ee62c",
+        "semantic-router-first_strict_profit_period-724c355c5635a22a",
+        "semantic-router-first_strict_profit_period-7515e926418b8088",
+        "semantic-router-first_strict_profit_period-79dc6ea97bc46dd5",
+        "semantic-router-first_strict_profit_period-84690fe5ab1db90e",
+        "semantic-router-first_strict_profit_period-847375672a3c7008",
+        "semantic-router-first_strict_profit_period-851e87b3987d0a0f",
+        "semantic-router-first_strict_profit_period-894e521ea627db63",
+        "semantic-router-first_strict_profit_period-8e270b45f008139b",
+        "semantic-router-first_strict_profit_period-8e9b1534fce831ba",
+        "semantic-router-first_strict_profit_period-8ea3b1b9d6cbe50a",
+        "semantic-router-first_strict_profit_period-8f75b7ce5492cbab",
+        "semantic-router-first_strict_profit_period-90f9a552533ca40e",
+        "semantic-router-first_strict_profit_period-93f1eceded9286d7",
+        "semantic-router-first_strict_profit_period-9c07b9464cfdfbaa",
+        "semantic-router-first_strict_profit_period-9f029c9f9540f377",
+        "semantic-router-first_strict_profit_period-9f50d2fda9507778",
+        "semantic-router-first_strict_profit_period-a16c0683f11c3318",
+        "semantic-router-first_strict_profit_period-a262f8bfda1124b0",
+        "semantic-router-first_strict_profit_period-b00ca564e8990be6",
+        "semantic-router-first_strict_profit_period-b52a86f02246e9fa",
+        "semantic-router-first_strict_profit_period-bbd024d00b08c7c2",
+        "semantic-router-first_strict_profit_period-bca6de1063838a52",
+        "semantic-router-first_strict_profit_period-bd171bba256cec4e",
+        "semantic-router-first_strict_profit_period-c778d204d32c0954",
+        "semantic-router-first_strict_profit_period-d58dbebeeb0c8b17",
+        "semantic-router-first_strict_profit_period-d95eb86f175b7bda",
+        "semantic-router-first_strict_profit_period-de6334d332ce7700",
+        "semantic-router-first_strict_profit_period-df7c8876125df71c",
+        "semantic-router-first_strict_profit_period-e3af4518159432e7",
+        "semantic-router-first_strict_profit_period-e537728989f7aea2",
+        "semantic-router-first_strict_profit_period-e57946d80af436e0",
+        "semantic-router-first_strict_profit_period-eabb2928871ae992",
+        "semantic-router-first_strict_profit_period-ef21529ee9f884c1",
+        "semantic-router-first_strict_profit_period-f0eab17629af5bac",
+        "semantic-router-first_strict_profit_period-f33ad8dc8c4ceb88",
+        "semantic-router-first_strict_profit_period-f4103825aa998f5e",
+        "semantic-router-first_strict_profit_period-fcc1ada57c14dd2d",
+        "semantic-router-first_strict_profit_period-fcdd5bf42fe56425",
+        "semantic-router-first_strict_profit_period-fe08db6532b67958",
+        "semantic-router-first_strict_profit_period-ff24cb492f4d7562"
+      ],
+      "cases": 256,
+      "delta": 0.25,
+      "mcnemar_exact_p": 1.0842021724855044e-19,
+      "paired_bootstrap_95_ci": [
+        0.19921875,
+        0.3046875
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 0,
+        "both_wrong": 192,
+        "candidate_only": 64
+      }
+    },
+    "candidate_vs_nine_b": {
+      "baseline_accuracy": 0.0,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-semantic-model-router-v1:candidate-nine",
+      "candidate_accuracy": 0.25,
+      "candidate_only_case_ids": [
+        "semantic-router-first_strict_profit_period-013400812f1113a6",
+        "semantic-router-first_strict_profit_period-0e62edf33e8228a8",
+        "semantic-router-first_strict_profit_period-18a86aa9e4a5fbf0",
+        "semantic-router-first_strict_profit_period-1f7b4003ef665e60",
+        "semantic-router-first_strict_profit_period-21c2f7300346f0db",
+        "semantic-router-first_strict_profit_period-234435b18c9aa892",
+        "semantic-router-first_strict_profit_period-2c1e83fe3a061b68",
+        "semantic-router-first_strict_profit_period-2cb0bd35dd527e68",
+        "semantic-router-first_strict_profit_period-325cd3a80919d4bc",
+        "semantic-router-first_strict_profit_period-3a95e92cb9bc4dff",
+        "semantic-router-first_strict_profit_period-3c8b1d15a2993685",
+        "semantic-router-first_strict_profit_period-3d8ef1b5ea4785cc",
+        "semantic-router-first_strict_profit_period-3f73f0e11af6506a",
+        "semantic-router-first_strict_profit_period-44256a0367e689e0",
+        "semantic-router-first_strict_profit_period-45b759c71ae3b2e4",
+        "semantic-router-first_strict_profit_period-52acc6952fe23a8d",
+        "semantic-router-first_strict_profit_period-56321984fe1a13a2",
+        "semantic-router-first_strict_profit_period-5675dc9fafe864d8",
+        "semantic-router-first_strict_profit_period-61d1e0d32c65c874",
+        "semantic-router-first_strict_profit_period-633c965aaf070a0d",
+        "semantic-router-first_strict_profit_period-634cd042755079c2",
+        "semantic-router-first_strict_profit_period-671a5c093fe19786",
+        "semantic-router-first_strict_profit_period-6b7302519ea8cf57",
+        "semantic-router-first_strict_profit_period-6f31b107f36ee62c",
+        "semantic-router-first_strict_profit_period-724c355c5635a22a",
+        "semantic-router-first_strict_profit_period-7515e926418b8088",
+        "semantic-router-first_strict_profit_period-79dc6ea97bc46dd5",
+        "semantic-router-first_strict_profit_period-84690fe5ab1db90e",
+        "semantic-router-first_strict_profit_period-847375672a3c7008",
+        "semantic-router-first_strict_profit_period-851e87b3987d0a0f",
+        "semantic-router-first_strict_profit_period-894e521ea627db63",
+        "semantic-router-first_strict_profit_period-8e270b45f008139b",
+        "semantic-router-first_strict_profit_period-8e9b1534fce831ba",
+        "semantic-router-first_strict_profit_period-8ea3b1b9d6cbe50a",
+        "semantic-router-first_strict_profit_period-8f75b7ce5492cbab",
+        "semantic-router-first_strict_profit_period-90f9a552533ca40e",
+        "semantic-router-first_strict_profit_period-93f1eceded9286d7",
+        "semantic-router-first_strict_profit_period-9c07b9464cfdfbaa",
+        "semantic-router-first_strict_profit_period-9f029c9f9540f377",
+        "semantic-router-first_strict_profit_period-9f50d2fda9507778",
+        "semantic-router-first_strict_profit_period-a16c0683f11c3318",
+        "semantic-router-first_strict_profit_period-a262f8bfda1124b0",
+        "semantic-router-first_strict_profit_period-b00ca564e8990be6",
+        "semantic-router-first_strict_profit_period-b52a86f02246e9fa",
+        "semantic-router-first_strict_profit_period-bbd024d00b08c7c2",
+        "semantic-router-first_strict_profit_period-bca6de1063838a52",
+        "semantic-router-first_strict_profit_period-bd171bba256cec4e",
+        "semantic-router-first_strict_profit_period-c778d204d32c0954",
+        "semantic-router-first_strict_profit_period-d58dbebeeb0c8b17",
+        "semantic-router-first_strict_profit_period-d95eb86f175b7bda",
+        "semantic-router-first_strict_profit_period-de6334d332ce7700",
+        "semantic-router-first_strict_profit_period-df7c8876125df71c",
+        "semantic-router-first_strict_profit_period-e3af4518159432e7",
+        "semantic-router-first_strict_profit_period-e537728989f7aea2",
+        "semantic-router-first_strict_profit_period-e57946d80af436e0",
+        "semantic-router-first_strict_profit_period-eabb2928871ae992",
+        "semantic-router-first_strict_profit_period-ef21529ee9f884c1",
+        "semantic-router-first_strict_profit_period-f0eab17629af5bac",
+        "semantic-router-first_strict_profit_period-f33ad8dc8c4ceb88",
+        "semantic-router-first_strict_profit_period-f4103825aa998f5e",
+        "semantic-router-first_strict_profit_period-fcc1ada57c14dd2d",
+        "semantic-router-first_strict_profit_period-fcdd5bf42fe56425",
+        "semantic-router-first_strict_profit_period-fe08db6532b67958",
+        "semantic-router-first_strict_profit_period-ff24cb492f4d7562"
+      ],
+      "cases": 256,
+      "delta": 0.25,
+      "mcnemar_exact_p": 1.0842021724855044e-19,
+      "paired_bootstrap_95_ci": [
+        0.19921875,
+        0.3046875
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 0,
+        "both_wrong": 192,
+        "candidate_only": 64
+      }
+    },
+    "four_b_vs_nine_b": {
+      "baseline_accuracy": 0.0,
+      "baseline_only_case_ids": [],
+      "bootstrap_samples": 10000,
+      "bootstrap_seed": "qwen35-semantic-model-router-v1:four-nine",
+      "candidate_accuracy": 0.0,
+      "candidate_only_case_ids": [],
+      "cases": 256,
+      "delta": 0.0,
+      "mcnemar_exact_p": 1.0,
+      "paired_bootstrap_95_ci": [
+        0.0,
+        0.0
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 0,
+        "both_wrong": 256,
+        "candidate_only": 0
+      }
+    }
+  },
+  "confusion": [
+    {
+      "cases": 128,
+      "expected_route": "NONE",
+      "selected_route": "NONE"
+    },
+    {
+      "cases": 64,
+      "expected_route": "first_strict_profit_period",
+      "selected_route": "first_strict_profit_period"
+    },
+    {
+      "cases": 64,
+      "expected_route": "implicit_scale_total",
+      "selected_route": "NONE"
+    }
+  ],
+  "data": {
+    "benchmark_canary_holdout_rows_or_outputs": 0,
+    "cases": 256,
+    "family_counts": {
+      "box_total": 64,
+      "first_strict_profit_period": 64,
+      "implicit_scale_total": 64,
+      "remaining_stock": 64
+    },
+    "freshness": {
+      "benchmark_outputs_loaded": false,
+      "benchmark_prompt_overlap": {
+        "gpqa_diamond": 0,
+        "gsm8k": 0,
+        "mmlu": 0
+      },
+      "benchmark_rows_hashed": {
+        "gpqa_diamond": 198,
+        "gsm8k": 1319,
+        "mmlu": 14042
+      },
+      "canary_rows_or_outputs_loaded": false,
+      "exact_marker_occurrences": 0,
+      "holdout_rows_loaded": false,
+      "prior_surface_prompt_overlap": {
+        "choice_capability_matrix_v1": 0,
+        "choice_exact_replication_v3": 0,
+        "choice_verifier_matrix_v2": 0
+      }
+    },
+    "negative_cases": 128,
+    "positive_cases": 128,
+    "training_eligible_cases": 0
+  },
+  "decision": {
+    "benchmark_generation_allowed": false,
+    "canary_rerun_allowed": false,
+    "further_tuning_or_rerun_on_observed_cases_allowed": false,
+    "gates": {
+      "all_rows_complete_and_parseable": true,
+      "candidate_vs_four_b_maximum_losses": true,
+      "candidate_vs_four_b_minimum_wins": true,
+      "candidate_vs_four_b_significant": true,
+      "candidate_vs_nine_b_maximum_losses": true,
+      "candidate_vs_nine_b_minimum_wins": true,
+      "candidate_vs_nine_b_significant": true,
+      "every_family_non_regression": true,
+      "fallbacks_zero": true,
+      "negative_candidate_exact_direct_parity": true,
+      "negative_false_positive_routes_zero": true,
+      "negative_none_correct_128": true,
+      "positive_route_recall_128": false,
+      "positive_verified_executions_128": false,
+      "router_outputs_parseable_256": true
+    },
+    "independent_holdout_allowed": false,
+    "next_action": "Reject this router. Preserve zero-false-positive evidence, but do not tune prompt or rerun on these cases. On a fresh surface, test two independent binary skill detectors with a NONE-by-default composition and unchanged typed executors.",
+    "real_question_model_scan_preregistration_allowed": false,
+    "router_admitted": false,
+    "router_precision_direction_supported": true,
+    "router_recall_supported": false,
+    "training_allowed": false
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_loaded": false,
+    "canary_rows_loaded": false,
+    "executor_uses_case_correctness": false,
+    "executor_uses_expected_answer": false,
+    "holdout_rows_loaded": false,
+    "router_uses_case_correctness": false,
+    "router_uses_case_metadata": false,
+    "router_uses_expected_answer": false,
+    "training_eligible_cases": 0
+  },
+  "experiment_id": "qwen35-semantic-model-router-v1",
+  "identity": {
+    "applicability_report_sha256": "26d99e46d9b0523598ca863c9440d1519119d3ef3a1a928e881a35f3f9806d0c",
+    "case_contract_sha256": "6bb1f7ff3079fa1e3c75d033e26d3c6f6109b0abdf96c8949edebea2761c31ca",
+    "config_sha256": "8c6f0215cb2a0f805e04fe6c00a28fc3b5847d0c2a14575a90b3ed2a6586ebce",
+    "mechanism_config_sha256": "4e5785b9b4fc9dd5b3a76a95b438c2f2c3d505a2fae6231b81cfbf53ebbd6ad9",
+    "preregister_revision": "6a30f64e32cb01957dcd03292180aece4e7a0cfb",
+    "preregister_sha256": "963c93ca46493b91b6bf59a3933b0d40fbaf5eaabf8f8a3748bad4c74d1abf14",
+    "raw_result_sha256": "8d3842984e6643a8c86aa29038bfb1280fa12a56deb3010f1151f03ed54a33a3",
+    "result_revision": "6a30f64e32cb01957dcd03292180aece4e7a0cfb"
+  },
+  "routing": {
+    "cases": 256,
+    "fallbacks": 0,
+    "negative_cases": 128,
+    "negative_false_positive_routes": 0,
+    "negative_none_correct": 128,
+    "positive_cases": 128,
+    "positive_route_correct": 64,
+    "router_correct": 192,
+    "verified_executions": 64
+  },
+  "schema_version": "nano_harness_semantic_model_router_public_v1"
+}
