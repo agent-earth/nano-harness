@@ -21,52 +21,92 @@ from nano_harness.v5_complete_treatment import jsonl_ids, jsonl_rows
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXECUTION = (
+EXECUTION_V1 = (
     ROOT
     / "configs/campaign/"
     "qwen35_complete_conditional_majority_v1.execution.json"
 )
-EXECUTION_SHA256 = (
-    "35d737f3a82e584a48d1c53087338e065f95a1c4bd7c21c4130f974e30f74fa9"
+EXECUTION_V2 = (
+    ROOT
+    / "configs/campaign/"
+    "qwen35_complete_conditional_majority_v1.execution_v2.json"
 )
+EXECUTION = EXECUTION_V2
+EXECUTION_SHA256 = {
+    EXECUTION_V1.name: (
+        "35d737f3a82e584a48d1c53087338e065f95a1c4bd7c21c4130f974e30f74fa9"
+    ),
+    EXECUTION_V2.name: (
+        "e7d705c36f8f975bfcdc8ba44143315156d38be3eae37484f18b395b05d14ff6"
+    ),
+}
 
 
 def load_execution(path: str | Path = EXECUTION) -> dict:
     execution_path = Path(path)
     execution = json.loads(execution_path.read_text(encoding="utf-8"))
-    if sha256_file(execution_path) != EXECUTION_SHA256:
+    if sha256_file(execution_path) != EXECUTION_SHA256.get(execution_path.name):
         raise ValueError("complete conditional majority execution SHA differs")
+    schema = execution.get("schema_version")
     if (
-        execution.get("schema_version")
-        != "nano_harness_complete_conditional_majority_execution_v1"
-        or execution.get("sharding")
-        != {
-            "num_shards": 2,
-            "assignment": "global_sorted_case_index_mod_num_shards",
-            "preserve_global_case_index_for_seed": True,
-            "preserve_completed_prefix": True,
-            "merge_requires_exact_1319_case_set": True,
+        schema
+        not in {
+            "nano_harness_complete_conditional_majority_execution_v1",
+            "nano_harness_complete_conditional_majority_execution_v2",
         }
-        or execution.get("invariance")
-        != {
-            "case_set_changed": False,
-            "prompt_changed": False,
-            "parser_changed": False,
-            "sampling_changed": False,
-            "seed_changed": False,
-            "vote_threshold_changed": False,
-            "model_weights_changed": False,
-            "scorer_changed": False,
-            "only_execution_partition_changed": True,
-        }
-        or execution.get("observation_boundary")
-        != {
-            "prefix_rows_generated_before_addendum": 89,
-            "prefix_progress_and_limited_diagnostics_observed": True,
-            "policy_tuned_from_prefix": False,
-            "prefix_regenerated": False,
-            "post_addendum_policy_change_allowed": False,
-        }
+        or execution.get("sharding", {}).get("assignment")
+        != "global_sorted_case_index_mod_num_shards"
+        or execution.get("sharding", {}).get(
+            "preserve_global_case_index_for_seed"
+        )
+        is not True
+        or execution.get("sharding", {}).get("preserve_completed_prefix")
+        is not True
+        or execution.get("sharding", {}).get(
+            "merge_requires_exact_1319_case_set"
+        )
+        is not True
+        or execution.get("observation_boundary", {}).get(
+            "policy_tuned_from_prefix"
+        )
+        is not False
+        or execution.get("observation_boundary", {}).get(
+            "prefix_regenerated"
+        )
+        is not False
+        or execution.get("observation_boundary", {}).get(
+            "post_addendum_policy_change_allowed"
+        )
+        is not False
+    ):
+        raise ValueError("complete conditional majority execution differs")
+    invariant = execution.get("invariance", {})
+    required_false = {
+        "case_set_changed",
+        "prompt_changed",
+        "parser_changed",
+        "sampling_changed",
+        "seed_changed",
+        "vote_threshold_changed",
+        "model_weights_changed",
+        "scorer_changed",
+    }
+    if any(invariant.get(key) is not False for key in required_false):
+        raise ValueError("complete conditional majority execution differs")
+    if schema.endswith("_v1"):
+        if (
+            execution["sharding"]["num_shards"] != 2
+            or invariant.get("only_execution_partition_changed") is not True
+            or execution["completed_prefix"]["rows"] != 89
+        ):
+            raise ValueError("complete conditional majority execution differs")
+    elif (
+        execution["sharding"]["num_shards"] != 8
+        or invariant.get(
+            "only_execution_partition_and_batch_capacity_changed"
+        )
+        is not True
+        or execution["completed_prefix"]["rows"] != 156
     ):
         raise ValueError("complete conditional majority execution differs")
     return execution
@@ -79,7 +119,7 @@ def select_shard(
     num_shards: int,
     shard_id: int,
 ) -> list[tuple[int, object]]:
-    if num_shards != 2 or shard_id not in range(num_shards):
+    if num_shards <= 0 or shard_id not in range(num_shards):
         raise ValueError("complete conditional majority shard differs")
     return [
         (index, case)
@@ -88,8 +128,11 @@ def select_shard(
     ]
 
 
-def run_shard(shard_id: int) -> dict:
-    execution = load_execution()
+def run_shard(
+    shard_id: int,
+    execution_path: str | Path = EXECUTION,
+) -> dict:
+    execution = load_execution(execution_path)
     config_path = ROOT / execution["parent_config_path"]
     preregister_path = ROOT / execution["parent_preregister_path"]
     if (
@@ -100,7 +143,12 @@ def run_shard(shard_id: int) -> dict:
         raise ValueError("complete conditional majority parent differs")
     config = load_config(config_path)
     service = next(
-        row for row in execution["services"] if row["shard_id"] == shard_id
+        row
+        for row in execution["services"]
+        if (
+            row.get("shard_id") == shard_id
+            or shard_id in row.get("shard_ids", [])
+        )
     )
     service_config = {
         **config,
@@ -211,8 +259,15 @@ def run_shard(shard_id: int) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--shard-id", type=int, required=True)
+    parser.add_argument("--execution", default=str(EXECUTION))
     args = parser.parse_args()
-    print(json.dumps(run_shard(args.shard_id), indent=2, sort_keys=True))
+    print(
+        json.dumps(
+            run_shard(args.shard_id, args.execution),
+            indent=2,
+            sort_keys=True,
+        )
+    )
 
 
 if __name__ == "__main__":

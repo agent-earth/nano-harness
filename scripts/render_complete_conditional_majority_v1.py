@@ -19,6 +19,7 @@ from scripts.render_orca_self_consistency_replication_v2 import (
     four_b_preservation_gates,
 )
 from scripts.render_orca_self_consistency_v1 import paired_metrics
+from scripts.run_complete_conditional_majority_shard_v1 import EXECUTION
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -228,6 +229,8 @@ def build_report() -> dict[str, Any]:
         != "nano_harness_complete_conditional_majority_raw_v1"
         or raw.get("identity", {}).get("config_sha256")
         != sha256_file(CONFIG)
+        or raw.get("identity", {}).get("execution_sha256")
+        != sha256_file(EXECUTION)
         or raw.get("identity", {}).get("gsm8k_candidate_sha256")
         != sha256_file(gsm8k_path)
         or raw.get("identity", {}).get("gsm8k_receipts_sha256")
@@ -382,6 +385,7 @@ def build_report() -> dict[str, Any]:
         "identity": {
             "result_revision": git_revision(),
             "config_sha256": sha256_file(CONFIG),
+            "execution_sha256": sha256_file(EXECUTION),
             "preregister_sha256": sha256_file(PREREGISTER),
             "raw_result_sha256": sha256_file(RAW_RESULT),
             "gsm8k_candidate_sha256": sha256_file(gsm8k_path),

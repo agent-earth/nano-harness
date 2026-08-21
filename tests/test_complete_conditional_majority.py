@@ -21,6 +21,8 @@ from scripts.render_complete_conditional_majority_v1 import (
     holm_bonferroni,
 )
 from scripts.run_complete_conditional_majority_shard_v1 import (
+    EXECUTION_V1,
+    EXECUTION_V2,
     load_execution,
     select_shard,
 )
@@ -209,7 +211,6 @@ class CompleteConditionalMajorityTests(unittest.TestCase):
         self.assertFalse(rejected["all_rejected"])
 
     def test_execution_shards_preserve_global_indices_and_are_disjoint(self):
-        execution = load_execution()
         cases = [
             self.make_case().__class__(
                 **{
@@ -220,6 +221,7 @@ class CompleteConditionalMajorityTests(unittest.TestCase):
             for index in range(8)
         ]
         prefix_ids = {"gsm8k-000", "gsm8k-001"}
+        execution = load_execution(EXECUTION_V1)
         even = select_shard(
             cases,
             prefix_ids=prefix_ids,
@@ -244,6 +246,21 @@ class CompleteConditionalMajorityTests(unittest.TestCase):
             {case.case_id for _, case in even}
             & {case.case_id for _, case in odd}
         )
+        accelerated = load_execution(EXECUTION_V2)
+        shards = [
+            select_shard(
+                cases,
+                prefix_ids=prefix_ids,
+                num_shards=accelerated["sharding"]["num_shards"],
+                shard_id=shard_id,
+            )
+            for shard_id in range(8)
+        ]
+        assigned = [
+            case.case_id for shard in shards for _, case in shard
+        ]
+        self.assertEqual(set(assigned), {f"gsm8k-{i:03d}" for i in range(2, 8)})
+        self.assertEqual(len(assigned), len(set(assigned)))
 
 
 if __name__ == "__main__":
