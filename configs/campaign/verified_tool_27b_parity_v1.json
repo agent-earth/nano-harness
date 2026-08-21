@@ -1,0 +1,71 @@
+{
+  "schema_version": "nano_harness_verified_tool_27b_parity_v1",
+  "experiment_id": "verified-tool-27b-parity-v1",
+  "source": {
+    "config_path": "configs/harness/qwen35_verified_tool_execution_v2.json",
+    "config_sha256": "ae6740e37da66b393f0732e7d86b785148e9d6fc663cbbdea0c8554d68f5ae0f",
+    "raw_path": "results/harness/qwen35-verified-tool-execution-v2/result.json",
+    "raw_sha256": "3d4c987f8f949289e50d97bdb7f00dd08036eec511a8d77261cc0b24ddbb8047",
+    "report_path": "docs/results/qwen35_verified_tool_execution_v2.public.json",
+    "report_sha256": "cd20bd3f6abccf3e8b70f8ec6504150dc30665fbe477364608ec8b34366ab0cc",
+    "case_contract_sha256": "cd5037a2574254ad87ff13abc3d8af51670d9b565d4433b041df4968c5eb2d71",
+    "harness_rows_sha256": "cb4ccd69549057e8c7325f8ea72eafcde19e83e378c3c981019028e3835a7c66",
+    "harness_correct": 256,
+    "cases": 256
+  },
+  "twenty_seven_b": {
+    "base_url": "http://127.0.0.1:8002/v1",
+    "model": "qwen3.5-27b",
+    "path": "/tmp/ultimate-distill-models/Qwen3.5-27B",
+    "model_config_sha256": "f8d190c5b89c1521220f935d2567a587d6e291ed69066a45a106560b05a2174c",
+    "model_index_sha256": "b3737e9d00bda0e37f0b873629d98bf9b407bef35735b9193c23d9844bcc96a6",
+    "serving_report_path": "docs/results/qwen35_27b_bf16_tp2_4096_v2.public.json",
+    "serving_report_sha256": "75ff3896bf939b28d4a861e0b8ec61debe688d5578fe49cd1c72fc2d7a24efb4",
+    "vllm_version": "0.19.1",
+    "dtype": "float16",
+    "max_model_len": 4096,
+    "tensor_parallel_size": 2
+  },
+  "direct": {
+    "system": "Solve the arithmetic task exactly. Return only one line in the form FINAL: <integer>.",
+    "temperature": 0.0,
+    "max_tokens": 32,
+    "seed_base": 2026084000,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "structured_output_regex": "FINAL: -?[0-9]+",
+    "parser_regex": "^FINAL: (-?[0-9]+)$"
+  },
+  "statistics": {
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": "verified-tool-27b-parity-v1",
+    "noninferiority_margin": 0.02,
+    "require_overall_and_every_family": true
+  },
+  "execution": {
+    "num_shards": 2,
+    "assignment": "sorted_case_index_mod_num_shards",
+    "merge_requires_exact_case_set": true
+  },
+  "output_dir": "results/harness/verified-tool-27b-parity-v1",
+  "execution_boundary": {
+    "parity_generation_started": false,
+    "four_b_harness_reused": true,
+    "four_b_generation_repeated": false,
+    "nine_b_generation_repeated": false,
+    "suite_changed": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false,
+    "rl_or_opd_started": false
+  },
+  "policy": {
+    "synthetic_evaluation_only": true,
+    "training_eligible": false,
+    "uses_benchmark_rows_or_outputs": false,
+    "expected_answer_used_during_generation": false,
+    "case_correctness_used_during_generation": false,
+    "raw_outputs_committed": false,
+    "post_observation_tuning_or_rerun": false
+  }
+}
