@@ -66,6 +66,24 @@ class VerifiedToolTwentySevenBParityTests(unittest.TestCase):
         if not path.exists():
             self.skipTest("verified-tool 27B parity result not generated yet")
         report = build_report()
+        self.assertTrue(
+            report["decision"]["complete_verified_tool_parity_with_27b"]
+        )
+        self.assertTrue(report["decision"]["four_b_harness_exceeds_27b"])
+        self.assertEqual(
+            (
+                report["comparison"]["overall"]["candidate_accuracy"],
+                report["comparison"]["overall"]["baseline_accuracy"],
+            ),
+            (1.0, 0.24609375),
+        )
+        self.assertTrue(all(report["noninferiority"]["gates"].values()))
+        self.assertTrue(
+            all(
+                row["paired_bootstrap_95_ci"][0] >= -0.02
+                for row in report["comparison"]["by_family"].values()
+            )
+        )
         serialized = json.dumps(report).lower()
         self.assertNotIn('"output"', serialized)
         self.assertFalse(report["decision"]["rerun_or_tuning_allowed"])
