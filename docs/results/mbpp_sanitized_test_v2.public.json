@@ -1,0 +1,101 @@
+{
+  "boundary": {
+    "claim_scope": "complete MBPP sanitized-test score",
+    "complete_benchmark": true,
+    "full_train_replication_rerun": false,
+    "full_validation_confirmation_rerun": false,
+    "reference_solution_used_for_evaluation": false,
+    "sanitized_train_v2_rerun": false,
+    "split": "sanitized_test"
+  },
+  "comparisons": {
+    "versus_four_b": {
+      "baseline_accuracy": 0.7354085603112841,
+      "baseline_correct": 189,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.8521400778210116,
+      "candidate_correct": 219,
+      "candidate_parse_failures": 0,
+      "cases": 257,
+      "delta": 0.11673151750972763,
+      "mcnemar_exact_p": 1.862645149230957e-09,
+      "paired_bootstrap_95_ci": [
+        0.07782101167315175,
+        0.1556420233463035
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 189,
+        "both_wrong": 38,
+        "candidate_only": 30
+      }
+    },
+    "versus_nine_b": {
+      "baseline_accuracy": 0.7704280155642024,
+      "baseline_correct": 198,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.8521400778210116,
+      "candidate_correct": 219,
+      "candidate_parse_failures": 0,
+      "cases": 257,
+      "delta": 0.08171206225680934,
+      "mcnemar_exact_p": 0.0005082604475319386,
+      "paired_bootstrap_95_ci": [
+        0.038910505836575876,
+        0.12840466926070038
+      ],
+      "paired_counts": {
+        "baseline_only": 7,
+        "both_correct": 191,
+        "both_wrong": 31,
+        "candidate_only": 28
+      }
+    }
+  },
+  "decision": {
+    "complete_benchmark_superiority": true,
+    "four_b_preservation_gates": {
+      "bootstrap_ci_lower_nonnegative": true,
+      "every_stratum_non_regression": true,
+      "no_significant_regression": true,
+      "point_delta_nonnegative": true
+    },
+    "next_action": "Freeze MBPP as one complete benchmark win and run the preregistered 27B parity comparison.",
+    "nine_b_superiority_gates": {
+      "bootstrap_ci_lower_positive": true,
+      "candidate_only_exceeds_baseline_only": true,
+      "mcnemar_p_below_alpha": true,
+      "minimum_candidate_only_wins": true,
+      "point_delta_positive": true
+    },
+    "rerun_or_tuning_allowed": false
+  },
+  "diagnostics": {
+    "candidate_full_pass": 219,
+    "four_b_direct_full_pass": 189,
+    "nine_b_direct_full_pass": 198,
+    "overrides": 38,
+    "repair_rounds_generated": 116,
+    "replicas_generated": 340,
+    "selected_source_counts": {
+      "four_b_direct": 219,
+      "repair_0": 3,
+      "repair_1": 1,
+      "replica_0": 4,
+      "replica_1": 5,
+      "replica_2": 10,
+      "replica_3": 6,
+      "replica_4": 9
+    }
+  },
+  "experiment_id": "mbpp-sanitized-test-v2",
+  "identity": {
+    "config_sha256": "f37ab18661ce84a8a7adec664ae8a6114ca745266108099a77916b37528bdc5b",
+    "preregister_sha256": "63d18085193969ff7615dacb058f68a07700a9f0b1e96685783531a9c9be5881",
+    "raw_cases_sha256": "86c72abd02adb88cc2ae02bf74893068c0c4842c1dc214dbcc85a6306108d944",
+    "raw_result_sha256": "4f1154665035ab4c0d0677df1cd3de1a6fae9bf9ebc3305cabbc3b67ff342c0e",
+    "result_revision": "44a34fba7bdb3a84f6e408a31f59de997e4fbcd9",
+    "test_case_ids_sha256": "4b7e1f74447041a3f9ad4c02a27c157fd1ef98beb2c770796f4bfd8e630863d8"
+  },
+  "schema_version": "nano_harness_mbpp_sanitized_test_public_v2"
+}

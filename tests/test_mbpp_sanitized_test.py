@@ -55,6 +55,28 @@ class MbppSanitizedTestTests(unittest.TestCase):
         if not path.exists():
             self.skipTest("sanitized-test result not generated yet")
         report = build_test_report()
+        self.assertTrue(
+            report["decision"]["complete_benchmark_superiority"]
+        )
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_four_b"]["candidate_correct"],
+                report["comparisons"]["versus_four_b"]["baseline_correct"],
+            ),
+            (219, 189),
+        )
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_nine_b"]["candidate_correct"],
+                report["comparisons"]["versus_nine_b"]["baseline_correct"],
+            ),
+            (219, 198),
+        )
+        self.assertTrue(
+            all(
+                report["decision"]["nine_b_superiority_gates"].values()
+            )
+        )
         serialized = json.dumps(report).lower()
         self.assertNotIn('"output"', serialized)
         self.assertNotIn('"code"', serialized)
