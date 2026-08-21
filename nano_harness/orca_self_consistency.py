@@ -370,22 +370,58 @@ def run_selection(
         json.dumps(receipts, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
+    return build_raw_result(config, selection)
+
+
+def build_raw_result(
+    config: Config,
+    selection: dict[str, Any],
+) -> dict[str, Any]:
+    raw = config.raw
+    output_root = config.resolve(raw["output_dir"])
+    arm_paths = {
+        name: output_root / f"{name}.jsonl"
+        for name in ("four_direct", "candidate", "nine_direct")
+    }
+    receipts_path = output_root / "receipts.json"
+    if not all(path.is_file() for path in arm_paths.values()):
+        raise ValueError("self-consistency raw arms are incomplete")
+    if not receipts_path.is_file():
+        raise ValueError("self-consistency receipts are missing")
+    expected_ids = set(selection["case_ids"])
+    for name, path in arm_paths.items():
+        rows = _read_jsonl(path)
+        case_ids = [str(row["case_id"]) for row in rows]
+        if len(rows) != len(expected_ids) or set(case_ids) != expected_ids:
+            raise ValueError(
+                f"self-consistency {name} raw case identities differ"
+            )
+    receipts = json.loads(receipts_path.read_text(encoding="utf-8"))
+    receipt_ids = [str(row["case_id"]) for row in receipts]
+    if len(receipts) != len(expected_ids) or set(receipt_ids) != expected_ids:
+        raise ValueError("self-consistency receipt case identities differ")
+    excluded_ids_sha256 = selection.get(
+        "prior_ids_sha256",
+        selection.get("excluded_source_ids_sha256"),
+    )
+    if not excluded_ids_sha256:
+        raise ValueError("self-consistency exclusion identity is missing")
     return {
         "schema_version": "nano_harness_orca_self_consistency_raw_v1",
         "experiment_id": raw["experiment_id"],
         "selection": {
             "case_ids_sha256": selection["case_ids_sha256"],
-            "prior_ids_sha256": selection["prior_ids_sha256"],
+            "excluded_ids_sha256": excluded_ids_sha256,
             "cases": len(selection["cases"]),
         },
         "raw": {
             name: {
-                "path": str(output_root / f"{name}.jsonl"),
-                "sha256": sha256_file(output_root / f"{name}.jsonl"),
+                "path": str(path),
+                "sha256": sha256_file(path),
             }
-            for name in arms
+            for name, path in arm_paths.items()
         },
-        "receipts_sha256": sha256_file(output_root / "receipts.json"),
+        "receipts_sha256": sha256_file(receipts_path),
         "generation_boundary": {
             "expected_used_during_generation": False,
             "scoring_after_generation": True,

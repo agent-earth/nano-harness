@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from nano_harness.orca_self_consistency import (
+    build_raw_result,
     consensus_prediction,
     load_config,
     score_prediction,
@@ -58,6 +60,38 @@ class OrcaSelfConsistencyTests(unittest.TestCase):
         )
         self.assertTrue(
             first["execution_boundary"]["this_commit_only_preregisters"]
+        )
+
+    def test_raw_result_accepts_generic_exclusion_identity(self):
+        selection = {
+            "cases": [{"sample_id": "a"}],
+            "case_ids": ["a"],
+            "case_ids_sha256": "case-hash",
+            "excluded_source_ids_sha256": "excluded-hash",
+        }
+        rows = {
+            "four_direct.jsonl": '{"case_id":"a"}\n',
+            "candidate.jsonl": '{"case_id":"a"}\n',
+            "nine_direct.jsonl": '{"case_id":"a"}\n',
+            "receipts.json": '[{"case_id":"a"}]\n',
+        }
+        with self.subTest("alternate exclusion identity"):
+            from tempfile import TemporaryDirectory
+
+            with TemporaryDirectory() as directory:
+                output = Path(directory)
+                for name, value in rows.items():
+                    (output / name).write_text(value, encoding="utf-8")
+                config = mock.Mock()
+                config.raw = {
+                    "experiment_id": "test",
+                    "output_dir": "ignored",
+                }
+                config.resolve.return_value = output
+                result = build_raw_result(config, selection)
+        self.assertEqual(
+            result["selection"]["excluded_ids_sha256"],
+            "excluded-hash",
         )
 
 
