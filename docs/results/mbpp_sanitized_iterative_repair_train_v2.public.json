@@ -1,0 +1,103 @@
+{
+  "boundary": {
+    "claim_scope": "method development only, not benchmark score",
+    "reference_solution_used_for_evaluation": false,
+    "split": "train",
+    "test_generation_started": false,
+    "validation_rows_loaded_by_v2": false,
+    "validation_v1_rerun": false
+  },
+  "comparisons": {
+    "versus_four_b": {
+      "baseline_accuracy": 0.7916666666666666,
+      "baseline_correct": 95,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.9,
+      "candidate_correct": 108,
+      "candidate_parse_failures": 0,
+      "cases": 120,
+      "delta": 0.10833333333333334,
+      "mcnemar_exact_p": 0.000244140625,
+      "paired_bootstrap_95_ci": [
+        0.058333333333333334,
+        0.16666666666666666
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 95,
+        "both_wrong": 12,
+        "candidate_only": 13
+      }
+    },
+    "versus_nine_b": {
+      "baseline_accuracy": 0.8083333333333333,
+      "baseline_correct": 97,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.9,
+      "candidate_correct": 108,
+      "candidate_parse_failures": 0,
+      "cases": 120,
+      "delta": 0.09166666666666666,
+      "mcnemar_exact_p": 0.0009765625,
+      "paired_bootstrap_95_ci": [
+        0.041666666666666664,
+        0.15
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 97,
+        "both_wrong": 12,
+        "candidate_only": 11
+      }
+    }
+  },
+  "decision": {
+    "four_b_preservation_gates": {
+      "bootstrap_ci_lower_nonnegative": true,
+      "every_stratum_non_regression": true,
+      "no_significant_regression": true,
+      "point_delta_nonnegative": true
+    },
+    "fresh_validation_preregistration_allowed": true,
+    "method_supported": true,
+    "next_action": "Pre-register one frozen run on the 47 full-validation rows not present in sanitized validation.",
+    "nine_b_directional_gates": {
+      "bootstrap_ci_lower_positive": true,
+      "candidate_only_exceeds_baseline_only": true,
+      "mcnemar_p_below_alpha": true,
+      "minimum_candidate_only_wins": true,
+      "point_delta_positive": true
+    },
+    "rerun_or_tuning_allowed": false,
+    "test_generation_allowed": false,
+    "validation_v1_rerun_allowed": false
+  },
+  "diagnostics": {
+    "candidate_full_pass": 108,
+    "four_b_direct_full_pass": 95,
+    "nine_b_direct_full_pass": 97,
+    "overrides": 18,
+    "repair_rounds_generated": 38,
+    "replicas_generated": 125,
+    "selected_source_counts": {
+      "four_b_direct": 102,
+      "repair_0": 3,
+      "repair_1": 1,
+      "replica_0": 5,
+      "replica_1": 1,
+      "replica_2": 3,
+      "replica_3": 3,
+      "replica_4": 2
+    }
+  },
+  "experiment_id": "mbpp-sanitized-iterative-repair-train-v2",
+  "identity": {
+    "config_sha256": "21be8ace1aa02b98f1daf7160ce5a14cc1c45138b357fd5df0ec35e51070b0df",
+    "preregister_sha256": "ce86bbb7498938df8c2a758d212d4401175251a87bb8422a53e9635845a9dee5",
+    "raw_cases_sha256": "9ce08e6fc27e5bf66a10c77eb3822e2bb7770ac38dd7d28f7d95275d1961a308",
+    "raw_result_sha256": "86dbc96f32d59dd2f6648e6892787f4ea9f17c664e3042dbb6473f99e0078116",
+    "result_revision": "901a7de8e09d383a281e6f9443d734b15d7c506f",
+    "train_case_ids_sha256": "cbfb6f66d4c41ce3ffa242b39b5f37312bdfa93959583a5ae914849d67218514"
+  },
+  "schema_version": "nano_harness_mbpp_iterative_repair_public_v2"
+}

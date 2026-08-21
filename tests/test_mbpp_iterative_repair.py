@@ -15,6 +15,9 @@ from nano_harness.mbpp_iterative_repair import (
 )
 from nano_harness.mbpp_verified_selection import MbppCase
 from scripts.preregister_mbpp_iterative_repair_train_v2 import build_receipt
+from scripts.render_mbpp_iterative_repair_train_v2 import (
+    build_report as build_v2_report,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -133,6 +136,32 @@ class MbppIterativeRepairTests(unittest.TestCase):
         self.assertFalse(first["surface"]["validation_rows_loaded_by_v2"])
         self.assertFalse(first["surface"]["test_generation_started"])
         self.assertFalse(first["decision_rule"]["rerun_or_tuning_allowed"])
+
+    def test_public_result_supports_fresh_validation_preregistration(self):
+        report = build_v2_report()
+        self.assertTrue(report["decision"]["method_supported"])
+        self.assertTrue(
+            report["decision"]["fresh_validation_preregistration_allowed"]
+        )
+        self.assertFalse(report["decision"]["test_generation_allowed"])
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_four_b"]["candidate_correct"],
+                report["comparisons"]["versus_four_b"]["baseline_correct"],
+            ),
+            (108, 95),
+        )
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_nine_b"]["candidate_correct"],
+                report["comparisons"]["versus_nine_b"]["baseline_correct"],
+            ),
+            (108, 97),
+        )
+        serialized = json.dumps(report).lower()
+        self.assertNotIn('"output"', serialized)
+        self.assertNotIn('"code"', serialized)
+        self.assertNotIn('"test_list"', serialized)
 
 
 if __name__ == "__main__":
