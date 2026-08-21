@@ -18,6 +18,7 @@ from scripts.preregister_complete_conditional_majority_v1 import (
 )
 from scripts.render_complete_conditional_majority_v1 import (
     _correct_rows,
+    build_report as build_complete_report,
     holm_bonferroni,
 )
 from scripts.run_complete_conditional_majority_shard_v1 import (
@@ -209,6 +210,31 @@ class CompleteConditionalMajorityTests(unittest.TestCase):
             alpha=0.05,
         )
         self.assertFalse(rejected["all_rejected"])
+
+    def test_complete_report_rejects_gsm8k_regression(self):
+        report = build_complete_report()
+        self.assertFalse(report["decision"]["complete_candidate_admitted"])
+        self.assertTrue(
+            report["decision"]["all_benchmarks_non_regressing_vs_four_b"]
+        )
+        self.assertEqual(
+            report["decision"]["complete_benchmarks_significantly_won"],
+            2,
+        )
+        gsm8k = report["comparisons"]["versus_nine_b"]["gsm8k"]
+        self.assertEqual(
+            (gsm8k["candidate_correct"], gsm8k["baseline_correct"]),
+            (1220, 1243),
+        )
+        self.assertLess(gsm8k["paired_bootstrap_95_ci"][1], 0)
+        holm = {
+            row["benchmark"]: row for row in report["holm_bonferroni"][
+                "ordered_tests"
+            ]
+        }
+        self.assertTrue(holm["gsm8k"]["rejected"])
+        self.assertFalse(holm["gsm8k"]["positive_direction"])
+        self.assertFalse(holm["gsm8k"]["superiority"])
 
     def test_execution_shards_preserve_global_indices_and_are_disjoint(self):
         cases = [

@@ -1,0 +1,255 @@
+{
+  "claim_boundary": "This is a sequential complete GSM8K/MMLU/GPQA result. MMLU and GPQA reuse previously frozen endpoints; GSM8K is the only new generation. It is not independent three-benchmark replication or 27B parity.",
+  "comparisons": {
+    "versus_four_b": {
+      "gpqa_diamond": {
+        "baseline_accuracy": 0.3838383838383838,
+        "baseline_correct": 76,
+        "baseline_parse_failures": 0,
+        "candidate_accuracy": 0.4292929292929293,
+        "candidate_correct": 85,
+        "candidate_parse_failures": 0,
+        "cases": 198,
+        "delta": 0.045454545454545456,
+        "mcnemar_exact_p": 0.0931396484375,
+        "paired_bootstrap_95_ci": [
+          0.0,
+          0.09090909090909091
+        ],
+        "paired_counts": {
+          "baseline_only": 7,
+          "both_correct": 69,
+          "both_wrong": 106,
+          "candidate_only": 16
+        }
+      },
+      "gsm8k": {
+        "baseline_accuracy": 0.9128127369219106,
+        "baseline_correct": 1204,
+        "baseline_parse_failures": 0,
+        "candidate_accuracy": 0.9249431387414708,
+        "candidate_correct": 1220,
+        "candidate_parse_failures": 0,
+        "cases": 1319,
+        "delta": 0.012130401819560273,
+        "mcnemar_exact_p": 3.0517578125e-05,
+        "paired_bootstrap_95_ci": [
+          0.006823351023502654,
+          0.01819560272934041
+        ],
+        "paired_counts": {
+          "baseline_only": 0,
+          "both_correct": 1204,
+          "both_wrong": 99,
+          "candidate_only": 16
+        }
+      },
+      "mmlu": {
+        "baseline_accuracy": 0.7315909414613303,
+        "baseline_correct": 10273,
+        "baseline_parse_failures": 0,
+        "candidate_accuracy": 0.7315909414613303,
+        "candidate_correct": 10273,
+        "candidate_parse_failures": 0,
+        "cases": 14042,
+        "delta": 0.0,
+        "mcnemar_exact_p": 1.0,
+        "paired_bootstrap_95_ci": [
+          0.0,
+          0.0
+        ],
+        "paired_counts": {
+          "baseline_only": 0,
+          "both_correct": 10273,
+          "both_wrong": 3769,
+          "candidate_only": 0
+        }
+      }
+    },
+    "versus_nine_b": {
+      "gpqa_diamond": {
+        "baseline_accuracy": 0.3484848484848485,
+        "baseline_correct": 69,
+        "baseline_parse_failures": 38,
+        "candidate_accuracy": 0.4292929292929293,
+        "candidate_correct": 85,
+        "candidate_parse_failures": 0,
+        "cases": 198,
+        "delta": 0.08080808080808081,
+        "mcnemar_exact_p": 0.04794032407166697,
+        "paired_bootstrap_95_ci": [
+          0.005050505050505051,
+          0.15656565656565657
+        ],
+        "paired_counts": {
+          "baseline_only": 21,
+          "both_correct": 48,
+          "both_wrong": 92,
+          "candidate_only": 37
+        }
+      },
+      "gsm8k": {
+        "baseline_accuracy": 0.9423805913570887,
+        "baseline_correct": 1243,
+        "baseline_parse_failures": 0,
+        "candidate_accuracy": 0.9249431387414708,
+        "candidate_correct": 1220,
+        "candidate_parse_failures": 0,
+        "cases": 1319,
+        "delta": -0.017437452615617893,
+        "mcnemar_exact_p": 0.005152397042092063,
+        "paired_bootstrap_95_ci": [
+          -0.02880970432145565,
+          -0.006065200909780136
+        ],
+        "paired_counts": {
+          "baseline_only": 43,
+          "both_correct": 1200,
+          "both_wrong": 56,
+          "candidate_only": 20
+        }
+      },
+      "mmlu": {
+        "baseline_accuracy": 0.6456345249964393,
+        "baseline_correct": 9066,
+        "baseline_parse_failures": 3322,
+        "candidate_accuracy": 0.7315909414613303,
+        "candidate_correct": 10273,
+        "candidate_parse_failures": 0,
+        "cases": 14042,
+        "delta": 0.08595641646489104,
+        "mcnemar_exact_p": 1.2417186326741172e-112,
+        "paired_bootstrap_95_ci": [
+          0.07855006409343399,
+          0.0936476285429426
+        ],
+        "paired_counts": {
+          "baseline_only": 869,
+          "both_correct": 8197,
+          "both_wrong": 2900,
+          "candidate_only": 2076
+        }
+      }
+    }
+  },
+  "decision": {
+    "all_benchmarks_non_regressing_vs_four_b": true,
+    "complete_benchmarks_significantly_won": 2,
+    "complete_candidate_admitted": false,
+    "next_action": "Publish negative evidence. Do not rerun or tune this complete candidate.",
+    "rerun_or_tuning_allowed": false,
+    "twenty_seven_b_parity_preregistration_allowed": false
+  },
+  "diagnostics": {
+    "gsm8k": {
+      "cases": 1319,
+      "consensus_vote_counts": {
+        "1": 22,
+        "2": 63,
+        "3": 73,
+        "4": 108,
+        "5": 1053
+      },
+      "direct_strict_parse_failure": 32,
+      "direct_strict_parseable": 1287,
+      "fallbacks": 256,
+      "minimum_vote_route_counts": {
+        "3": 32,
+        "5": 1287
+      },
+      "overrides": 21
+    },
+    "new_model_requests": {
+      "gpqa_diamond": 0,
+      "gsm8k": 6595,
+      "mmlu": 0
+    }
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_training_eligible": false,
+    "case_correctness_used_during_generation": false,
+    "expected_answer_used_during_generation": false,
+    "raw_outputs_committed": false,
+    "scoring_applied_after_generation": true
+  },
+  "experiment_id": "qwen35-complete-conditional-majority-v1",
+  "gsm8k_gate": {
+    "admitted": false,
+    "four_b_preservation": {
+      "bootstrap_ci_lower_nonnegative": true,
+      "every_stratum_non_regression": true,
+      "no_significant_regression": true,
+      "point_delta_nonnegative": true
+    },
+    "nine_b_superiority": {
+      "bootstrap_ci_lower_positive": false,
+      "candidate_only_exceeds_baseline_only": false,
+      "mcnemar_p_below_bonferroni_alpha": true,
+      "minimum_candidate_only_wins": true,
+      "point_delta_positive": false
+    },
+    "route_metrics": {
+      "strict_parse_failure": {
+        "candidate_correct": 10,
+        "cases": 32,
+        "delta_correct": 8,
+        "four_b_correct": 2
+      },
+      "strict_parseable": {
+        "candidate_correct": 1210,
+        "cases": 1287,
+        "delta_correct": 8,
+        "four_b_correct": 1202
+      }
+    }
+  },
+  "holm_bonferroni": {
+    "all_rejected": true,
+    "all_superior": false,
+    "family_size": 3,
+    "familywise_alpha": 0.05,
+    "ordered_tests": [
+      {
+        "benchmark": "mmlu",
+        "p_value": 1.2417186326741172e-112,
+        "positive_direction": true,
+        "rank": 1,
+        "rejected": true,
+        "superiority": true,
+        "threshold": 0.016666666666666666
+      },
+      {
+        "benchmark": "gsm8k",
+        "p_value": 0.005152397042092063,
+        "positive_direction": false,
+        "rank": 2,
+        "rejected": true,
+        "superiority": false,
+        "threshold": 0.025
+      },
+      {
+        "benchmark": "gpqa_diamond",
+        "p_value": 0.04794032407166697,
+        "positive_direction": true,
+        "rank": 3,
+        "rejected": true,
+        "superiority": true,
+        "threshold": 0.05
+      }
+    ]
+  },
+  "identity": {
+    "complete_candidate_sha256": "0ce986924bb4231788f58ab8a7583b68c0069d91e653480d14876312fdf50893",
+    "config_sha256": "4f8c138166ada6c03edddfd3205d2cf7b3bc8baf86bdab879fe067f38a2e5013",
+    "execution_sha256": "e7d705c36f8f975bfcdc8ba44143315156d38be3eae37484f18b395b05d14ff6",
+    "four_b_raw_sha256": "b6e35d968dc3ff3311cf991b186e7a4f2a0ff8fe9989b7507f39b75b7aa6aa54",
+    "gsm8k_candidate_sha256": "429a6aad8c1f737f1077713ef36dd8d65a1ca6b3da54e08dd9896505a214a851",
+    "gsm8k_receipts_sha256": "708a9f3f0d333d4daf9037b47821aeecad3b4c1f74e9a47180732713b8a3e558",
+    "nine_b_raw_sha256": "a22cade1ea367e6cceddff4e25e88d34360adc005feeed316464b561c151b988",
+    "preregister_sha256": "e2e1b42719ea7b229a16d2e4b387e8718b1121a8685ed96d2796d18e915644d8",
+    "prior_complete_candidate_sha256": "28fa621a857938c9e8a88f94bd31fabcbd638702a40fa9dfae2621e43f39ca14",
+    "raw_result_sha256": "b3ae8ef454c97cb3699eab8d642eca67ebbdfc38934d257398199049bd5a7714",
+    "result_revision": "747db2d010c28068c034d0c28b4e536396582d96"
+  },
+  "schema_version": "nano_harness_complete_conditional_majority_public_v1"
+}

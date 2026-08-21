@@ -141,7 +141,7 @@ def merge() -> dict:
             "generated_cases": len(by_id),
             "mmlu_model_requests": 0,
             "gpqa_diamond_model_requests": 0,
-            "execution_shards": 2,
+            "execution_shards": execution["sharding"]["num_shards"],
         },
         "evaluation_boundary": {
             "benchmark_rows_training_eligible": False,

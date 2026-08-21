@@ -329,13 +329,24 @@ def build_report() -> dict[str, Any]:
         p_values,
         alpha=stats["final_three_benchmark_family"]["familywise_alpha"],
     )
+    for row in holm["ordered_tests"]:
+        delta = comparisons["versus_nine_b"][row["benchmark"]]["delta"]
+        row["positive_direction"] = delta > 0
+        row["superiority"] = row["rejected"] and row["positive_direction"]
+    holm["all_superior"] = all(
+        row["superiority"] for row in holm["ordered_tests"]
+    )
     other_non_regression = all(
         comparisons["versus_four_b"][benchmark]["delta"] >= 0
         for benchmark in ("mmlu", "gpqa_diamond")
     )
-    admitted = gsm8k["admitted"] and other_non_regression and holm[
-        "all_rejected"
-    ]
+    admitted = (
+        gsm8k["admitted"] and other_non_regression and holm["all_superior"]
+    )
+    all_non_regressing = (
+        all(gsm8k["four_b_preservation"].values())
+        and other_non_regression
+    )
     receipt_values = [row["receipt"] for row in receipts]
     diagnostics = {
         "gsm8k": {
@@ -404,11 +415,9 @@ def build_report() -> dict[str, Any]:
         "decision": {
             "complete_candidate_admitted": admitted,
             "complete_benchmarks_significantly_won": sum(
-                row["rejected"] for row in holm["ordered_tests"]
+                row["superiority"] for row in holm["ordered_tests"]
             ),
-            "all_benchmarks_non_regressing_vs_four_b": (
-                gsm8k["admitted"] and other_non_regression
-            ),
+            "all_benchmarks_non_regressing_vs_four_b": all_non_regressing,
             "twenty_seven_b_parity_preregistration_allowed": admitted,
             "rerun_or_tuning_allowed": False,
             "next_action": (
