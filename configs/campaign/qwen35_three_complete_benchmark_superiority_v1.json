@@ -1,0 +1,68 @@
+{
+  "schema_version": "nano_harness_three_complete_benchmark_superiority_v1",
+  "experiment_id": "qwen35-three-complete-benchmark-superiority-v1",
+  "candidate": {
+    "model": "Qwen3.5-4B",
+    "type": "benchmark_routed_frozen_harness",
+    "routes": {
+      "mmlu": "frozen_four_b_direct",
+      "gpqa_diamond": "frozen_v5_conservative_choice_consensus",
+      "gsm8k": "frozen_conditional_majority_v1",
+      "mbpp": "frozen_iterative_repair_v2"
+    }
+  },
+  "sources": {
+    "choice_suite": {
+      "path": "docs/results/qwen35_complete_conditional_majority_v1.public.json",
+      "sha256": "e0e86e1bb62aa45e822cb4abd372544ae4763954caf3e2c76e834062473f3f3b",
+      "benchmarks": ["mmlu", "gpqa_diamond"],
+      "complete": true
+    },
+    "mbpp": {
+      "path": "docs/results/mbpp_sanitized_test_v2.public.json",
+      "sha256": "1290827fe25704f86a15676aa78d6f7b519929b312e06383d4afc69e1a0a3d13",
+      "benchmarks": ["mbpp"],
+      "complete": true
+    },
+    "failed_gsm8k": {
+      "path": "docs/results/qwen35_complete_conditional_majority_v1.public.json",
+      "sha256": "e0e86e1bb62aa45e822cb4abd372544ae4763954caf3e2c76e834062473f3f3b",
+      "benchmarks": ["gsm8k"],
+      "complete": true
+    },
+    "mbpp_27b": {
+      "path": "docs/results/mbpp_27b_parity_v1.public.json",
+      "sha256": "1ae47518b33518fb29c8269bb5d62aa1f0eaf8f67fc306214f1209eea8e19d7b",
+      "complete": true
+    },
+    "verified_tool_27b": {
+      "path": "docs/results/verified_tool_27b_parity_v1.public.json",
+      "sha256": "34f56147c47e793024a8f2e7cad9ddcb9bfbcb54ebbbffd82796f2ca3c026d18",
+      "complete": true,
+      "synthetic": true
+    }
+  },
+  "statistics": {
+    "familywise_alpha": 0.05,
+    "procedure": "holm_bonferroni",
+    "family": ["mmlu", "gpqa_diamond", "gsm8k", "mbpp"],
+    "required_wins": 3,
+    "per_benchmark_requirements": {
+      "candidate_accuracy_gt_nine_b": true,
+      "paired_bootstrap_ci_lower_gt_zero": true,
+      "candidate_only_gt_nine_b_only": true,
+      "holm_rejected": true
+    }
+  },
+  "claim_boundary": {
+    "three_complete_public_benchmarks": true,
+    "four_complete_public_benchmarks_evaluated": true,
+    "single_base_model": "Qwen3.5-4B",
+    "benchmark_specific_frozen_routes": true,
+    "single_checkpoint_claim": false,
+    "gsm8k_counted_as_win": false,
+    "verified_tool_counted_as_public_benchmark": false,
+    "mbpp_27b_parity_counted": false,
+    "verified_tool_27b_parity_counted_as_capability_evidence": true
+  }
+}
