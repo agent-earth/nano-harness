@@ -108,7 +108,7 @@ def build_report() -> dict[str, Any]:
     gates = {
         "all_cases_complete": len(rows) == config["dataset"]["test_rows"],
         "twenty_seven_b_parse_failures_zero": (
-            comparison["baseline_parse_failures"] == 0
+            raw["diagnostics"]["twenty_seven_b_parse_failures"] == 0
         ),
         "paired_bootstrap_ci_lower_gte_negative_margin": (
             comparison["paired_bootstrap_95_ci"][0] >= -margin

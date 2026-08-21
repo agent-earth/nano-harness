@@ -65,6 +65,23 @@ class MbppTwentySevenBParityTests(unittest.TestCase):
         if not path.exists():
             self.skipTest("MBPP 27B parity result not generated yet")
         report = build_report()
+        self.assertFalse(report["decision"]["mbpp_complete_parity_with_27b"])
+        self.assertEqual(
+            (
+                report["comparison"]["candidate_correct"],
+                report["comparison"]["baseline_correct"],
+            ),
+            (219, 226),
+        )
+        self.assertLess(
+            report["comparison"]["paired_bootstrap_95_ci"][0],
+            -report["noninferiority"]["margin"],
+        )
+        self.assertFalse(
+            report["noninferiority"]["gates"][
+                "twenty_seven_b_parse_failures_zero"
+            ]
+        )
         serialized = json.dumps(report).lower()
         self.assertNotIn('"output"', serialized)
         self.assertNotIn('"code"', serialized)

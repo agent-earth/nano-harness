@@ -1,0 +1,63 @@
+{
+  "boundary": {
+    "benchmark": "mbpp",
+    "claim_scope": "complete MBPP parity against Qwen3.5-27B",
+    "complete_benchmark": true,
+    "four_b_candidate_reused": true,
+    "four_b_generation_repeated": false,
+    "nine_b_generation_repeated": false,
+    "reference_solution_used_for_generation": false,
+    "split": "sanitized_test"
+  },
+  "comparison": {
+    "baseline_accuracy": 0.8793774319066148,
+    "baseline_correct": 226,
+    "baseline_parse_failures": 0,
+    "candidate_accuracy": 0.8521400778210116,
+    "candidate_correct": 219,
+    "candidate_parse_failures": 0,
+    "cases": 257,
+    "delta": -0.027237354085603113,
+    "mcnemar_exact_p": 0.26493089646101,
+    "paired_bootstrap_95_ci": [
+      -0.07003891050583658,
+      0.01556420233463035
+    ],
+    "paired_counts": {
+      "baseline_only": 18,
+      "both_correct": 208,
+      "both_wrong": 20,
+      "candidate_only": 11
+    }
+  },
+  "decision": {
+    "mbpp_complete_parity_with_27b": false,
+    "next_action": "Freeze MBPP 27B parity as negative evidence and continue on a separately preregistered benchmark.",
+    "rerun_or_tuning_allowed": false
+  },
+  "diagnostics": {
+    "candidate_correct": 219,
+    "twenty_seven_b_correct": 226,
+    "twenty_seven_b_parse_failures": 1
+  },
+  "experiment_id": "mbpp-27b-parity-v1",
+  "identity": {
+    "candidate_raw_sha256": "86c72abd02adb88cc2ae02bf74893068c0c4842c1dc214dbcc85a6306108d944",
+    "config_sha256": "dbeccb9afc6acc4100c853a4e8bc52385e9fbc38d52204486e15296c286549e1",
+    "preregister_sha256": "374e6178de0c8075ebb02b7fb17b5d9ec64c023ab903622188a6c87adef4d115",
+    "raw_cases_sha256": "dc4b5e5f66effe08503bfd64921eea1bfb2f704d906d04847b0c29747f6f1fc4",
+    "raw_result_sha256": "4f4861d00205f34f0cf131acfc19b79d665adb221d01246bf3308362f03ee03f",
+    "result_revision": "43cecccca3c2b521d62ad4d6f2a41f563e4f3d7c",
+    "serving_report_sha256": "75ff3896bf939b28d4a861e0b8ec61debe688d5578fe49cd1c72fc2d7a24efb4"
+  },
+  "noninferiority": {
+    "gates": {
+      "all_cases_complete": true,
+      "paired_bootstrap_ci_lower_gte_negative_margin": false,
+      "twenty_seven_b_parse_failures_zero": false
+    },
+    "margin": 0.02,
+    "parity_admitted": false
+  },
+  "schema_version": "nano_harness_mbpp_27b_parity_public_v1"
+}
