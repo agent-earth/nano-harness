@@ -1,0 +1,98 @@
+{
+  "boundary": {
+    "claim_scope": "fresh confirmation only, not benchmark test score",
+    "reference_solution_used_for_evaluation": false,
+    "sanitized_validation_v1_rerun": false,
+    "split": "full_validation_minus_sanitized_validation",
+    "test_generation_started": false,
+    "train_v2_rerun": false
+  },
+  "comparisons": {
+    "versus_four_b": {
+      "baseline_accuracy": 0.574468085106383,
+      "baseline_correct": 27,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.7659574468085106,
+      "candidate_correct": 36,
+      "candidate_parse_failures": 0,
+      "cases": 47,
+      "delta": 0.19148936170212766,
+      "mcnemar_exact_p": 0.00390625,
+      "paired_bootstrap_95_ci": [
+        0.0851063829787234,
+        0.3191489361702128
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 27,
+        "both_wrong": 11,
+        "candidate_only": 9
+      }
+    },
+    "versus_nine_b": {
+      "baseline_accuracy": 0.6595744680851063,
+      "baseline_correct": 31,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.7659574468085106,
+      "candidate_correct": 36,
+      "candidate_parse_failures": 0,
+      "cases": 47,
+      "delta": 0.10638297872340426,
+      "mcnemar_exact_p": 0.1796875,
+      "paired_bootstrap_95_ci": [
+        -0.02127659574468085,
+        0.23404255319148937
+      ],
+      "paired_counts": {
+        "baseline_only": 2,
+        "both_correct": 29,
+        "both_wrong": 9,
+        "candidate_only": 7
+      }
+    }
+  },
+  "decision": {
+    "complete_test_preregistration_allowed": false,
+    "confirmation_admitted": false,
+    "four_b_preservation_gates": {
+      "bootstrap_ci_lower_nonnegative": true,
+      "every_stratum_non_regression": true,
+      "no_significant_regression": true,
+      "point_delta_nonnegative": true
+    },
+    "next_action": "Publish negative evidence. Do not tune or rerun this confirmation surface.",
+    "nine_b_superiority_gates": {
+      "bootstrap_ci_lower_positive": false,
+      "candidate_only_exceeds_baseline_only": true,
+      "mcnemar_p_below_alpha": false,
+      "minimum_candidate_only_wins": true,
+      "point_delta_positive": true
+    },
+    "rerun_or_tuning_allowed": false
+  },
+  "diagnostics": {
+    "candidate_full_pass": 36,
+    "four_b_direct_full_pass": 27,
+    "nine_b_direct_full_pass": 31,
+    "overrides": 9,
+    "repair_rounds_generated": 34,
+    "replicas_generated": 100,
+    "selected_source_counts": {
+      "four_b_direct": 38,
+      "repair_0": 1,
+      "replica_0": 2,
+      "replica_1": 4,
+      "replica_3": 2
+    }
+  },
+  "experiment_id": "mbpp-full-validation-confirmation-v2",
+  "identity": {
+    "config_sha256": "43675163a1d4fb576404f70a13f62e74e90b7dea275f56f06fe5dc6c118db19b",
+    "confirmation_case_ids_sha256": "30687b63345feacface8f94424e19bf7af2f355212432c5f355b86d5c4e803e9",
+    "preregister_sha256": "5155ea5f84321fb997e4545755668d00cbfe8d8cee6cc080af5486df01b9eeb2",
+    "raw_cases_sha256": "dbcc108a322d70dcd880c1437863b3529deb71e8255d4db9d23e9dbe3b6ede68",
+    "raw_result_sha256": "100aaa18a03eee0133c76b2308446b65a44df7f4a907601bbcf306a4c86a207e",
+    "result_revision": "58887a10565a0e6b11da4501a2cff0b6478eb7fe"
+  },
+  "schema_version": "nano_harness_mbpp_confirmation_public_v2"
+}

@@ -17,6 +17,9 @@ from nano_harness.mbpp_verified_selection import (
 from scripts.preregister_mbpp_full_validation_confirmation_v2 import (
     build_receipt,
 )
+from scripts.render_mbpp_full_validation_confirmation_v2 import (
+    build_report as build_confirmation_report,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -86,7 +89,27 @@ class MbppConfirmationTests(unittest.TestCase):
         path = ROOT / "docs/results/mbpp_full_validation_confirmation_v2.public.json"
         if not path.exists():
             self.skipTest("confirmation result not generated yet")
-        report = json.loads(path.read_text(encoding="utf-8"))
+        report = build_confirmation_report()
+        self.assertFalse(report["decision"]["confirmation_admitted"])
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_four_b"]["candidate_correct"],
+                report["comparisons"]["versus_four_b"]["baseline_correct"],
+            ),
+            (36, 27),
+        )
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_nine_b"]["candidate_correct"],
+                report["comparisons"]["versus_nine_b"]["baseline_correct"],
+            ),
+            (36, 31),
+        )
+        self.assertFalse(
+            report["decision"]["nine_b_superiority_gates"][
+                "bootstrap_ci_lower_positive"
+            ]
+        )
         serialized = json.dumps(report).lower()
         self.assertNotIn('"output"', serialized)
         self.assertNotIn('"code"', serialized)
