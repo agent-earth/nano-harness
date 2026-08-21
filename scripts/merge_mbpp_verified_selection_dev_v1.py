@@ -31,7 +31,6 @@ def merge() -> dict:
     output_root = ROOT / config["output_dir"]
     rows = []
     shards = []
-    service_sha = None
     for shard_id in range(config["execution"]["num_shards"]):
         path = output_root / f"shard-{shard_id}.jsonl"
         result_path = output_root / f"shard-{shard_id}.result.json"
@@ -57,16 +56,15 @@ def merge() -> dict:
             != config["execution"]["num_shards"]
         ):
             raise ValueError("MBPP shard case set differs")
-        if service_sha is None:
-            service_sha = shard_result["identity"]["service_sha256"]
-        elif service_sha != shard_result["identity"]["service_sha256"]:
-            raise ValueError("MBPP shard service identities differ")
         rows.extend(shard_rows)
         shards.append(
             {
                 "shard_id": shard_id,
                 "rows": len(shard_rows),
                 "sha256": sha256_file(path),
+                "service_sha256": shard_result["identity"][
+                    "service_sha256"
+                ],
             }
         )
     expected_ids = {case.case_id for case in cases}
@@ -89,7 +87,6 @@ def merge() -> dict:
             "config_sha256": sha256_file(CONFIG),
             "raw_sha256": sha256_file(merged),
             "shards": shards,
-            "service_sha256": service_sha or {},
         },
         "surface": {
             "split": config["dataset"]["split"],

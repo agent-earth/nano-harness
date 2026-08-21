@@ -1,0 +1,100 @@
+{
+  "claim_boundary": "This is the complete MBPP sanitized validation result. It is not the 257-case sanitized test score.",
+  "comparisons": {
+    "versus_four_b": {
+      "baseline_accuracy": 0.7441860465116279,
+      "baseline_correct": 32,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.8372093023255814,
+      "candidate_correct": 36,
+      "candidate_parse_failures": 0,
+      "cases": 43,
+      "delta": 0.09302325581395349,
+      "mcnemar_exact_p": 0.125,
+      "paired_bootstrap_95_ci": [
+        0.023255813953488372,
+        0.18604651162790697
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 32,
+        "both_wrong": 7,
+        "candidate_only": 4
+      }
+    },
+    "versus_nine_b": {
+      "baseline_accuracy": 0.813953488372093,
+      "baseline_correct": 35,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.8372093023255814,
+      "candidate_correct": 36,
+      "candidate_parse_failures": 0,
+      "cases": 43,
+      "delta": 0.023255813953488372,
+      "mcnemar_exact_p": 1.0,
+      "paired_bootstrap_95_ci": [
+        0.0,
+        0.06976744186046512
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 35,
+        "both_wrong": 7,
+        "candidate_only": 1
+      }
+    }
+  },
+  "decision": {
+    "complete_test_preregistration_allowed": false,
+    "four_b_preservation_gates": {
+      "bootstrap_ci_lower_nonnegative": true,
+      "every_stratum_non_regression": true,
+      "no_significant_regression": true,
+      "point_delta_nonnegative": true
+    },
+    "next_action": "Publish negative evidence. Do not tune or rerun this validation surface.",
+    "nine_b_directional_gates": {
+      "candidate_only_exceeds_baseline_only": true,
+      "minimum_candidate_only_wins": false,
+      "point_delta_positive": true
+    },
+    "rerun_or_tuning_allowed": false,
+    "validation_admitted": false
+  },
+  "diagnostics": {
+    "candidate_failure_classes": {
+      "assertion_failure": 14,
+      "runtime_error": 2
+    },
+    "candidate_full_pass": 36,
+    "candidate_overrides": 5,
+    "cases": 43,
+    "direct_failures_entering_selection": 11,
+    "four_b_direct_full_pass": 32,
+    "nine_b_direct_full_pass": 35,
+    "repairs_generated": 7,
+    "replicas_generated": 33,
+    "selected_source_counts": {
+      "four_b_direct": 38,
+      "replica_0": 3,
+      "replica_1": 2
+    }
+  },
+  "evaluation_boundary": {
+    "benchmark_rows_training_eligible": false,
+    "public_tests_visible_to_model": true,
+    "raw_outputs_committed": false,
+    "reference_solution_used": false,
+    "test_outcome_used_by_verifier": true
+  },
+  "experiment_id": "mbpp-sanitized-verified-selection-dev-v1",
+  "identity": {
+    "config_sha256": "8e02b0adc5ca78a4a197ec6622bcc65a0b30de3b6f9cdb64aa6446ce453775c2",
+    "preregister_sha256": "540662d70c048d0e663db5c1c3812257a880dff8e4da388fa093f18b2051ce9f",
+    "raw_cases_sha256": "83bdefac50faf5d474750478568ed9f688eeb4e0626b3a8af8deb92469625dcf",
+    "raw_result_sha256": "ae1cafbd53089958a13e66b87eca5567423c112984f6a70ffa92ae418f52f844",
+    "result_revision": "cfdc6d4454cf06f2be7241d697ece83c4fe8c7fb",
+    "validation_case_ids_sha256": "f73a3315369d6de7bff3596e234f56a1cc2c3d8b82cc6c495eedf8fc4b828ebe"
+  },
+  "schema_version": "nano_harness_mbpp_verified_selection_public_v1"
+}

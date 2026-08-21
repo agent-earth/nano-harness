@@ -62,7 +62,7 @@ def arm_rows(
         {
             "case_id": row["case_id"],
             "prediction": (
-                "pass" if row[arm]["test_result"]["full_pass"] else None
+                "pass" if row[arm]["test_result"]["full_pass"] else "fail"
             ),
             "correct": bool(row[arm]["test_result"]["full_pass"]),
         }

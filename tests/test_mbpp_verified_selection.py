@@ -19,6 +19,9 @@ from nano_harness.mbpp_verified_selection import (
     validate_code,
 )
 from scripts.preregister_mbpp_verified_selection_dev_v1 import build_receipt
+from scripts.render_mbpp_verified_selection_dev_v1 import (
+    build_report as build_mbpp_report,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -201,6 +204,42 @@ class MbppVerifiedSelectionTests(unittest.TestCase):
         )
         self.assertFalse(first["surface"]["test_generation_allowed"])
         self.assertTrue(all(first["sandbox"]["probe"].values()))
+
+    def test_public_report_rejects_one_case_directional_lead(self):
+        report = build_mbpp_report()
+        self.assertFalse(report["decision"]["validation_admitted"])
+        self.assertFalse(
+            report["decision"]["complete_test_preregistration_allowed"]
+        )
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_four_b"]["candidate_correct"],
+                report["comparisons"]["versus_four_b"]["baseline_correct"],
+            ),
+            (36, 32),
+        )
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_nine_b"]["candidate_correct"],
+                report["comparisons"]["versus_nine_b"]["baseline_correct"],
+            ),
+            (36, 35),
+        )
+        self.assertFalse(
+            report["decision"]["nine_b_directional_gates"][
+                "minimum_candidate_only_wins"
+            ]
+        )
+        self.assertEqual(
+            report["comparisons"]["versus_four_b"][
+                "candidate_parse_failures"
+            ],
+            0,
+        )
+        serialized = json.dumps(report).lower()
+        self.assertNotIn('"output"', serialized)
+        self.assertNotIn('"code"', serialized)
+        self.assertNotIn('"test_list"', serialized)
 
 
 if __name__ == "__main__":
