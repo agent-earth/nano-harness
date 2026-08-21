@@ -1,0 +1,149 @@
+{
+  "schema_version": "nano_harness_mbpp_sanitized_test_v2",
+  "experiment_id": "mbpp-sanitized-test-v2",
+  "dataset": {
+    "test_path": "../../../datasets/mbpp/mbpp/sanitized/test-00000-of-00001.parquet",
+    "test_sha256": "e9e9efa2c0d59ef5e55537a9d126b8f875d5ac010a8d75628d76824884e15850",
+    "test_rows": 257,
+    "prompt_path": "../../../datasets/mbpp/mbpp/sanitized/prompt-00000-of-00001.parquet",
+    "prompt_sha256": "73c623309b7b5d65fd5661204b35f779f8e66301aa9832d1ad4b8fc3b21151fd",
+    "few_shot_task_ids": [2, 3, 4],
+    "sanitized_train_path": "../../../datasets/mbpp/mbpp/sanitized/train-00000-of-00001.parquet",
+    "sanitized_train_sha256": "d95f8ad6d2fff08fe4826122d6e3e31f75716825d0c5c340d297aca5e9e0de0e",
+    "sanitized_validation_path": "../../../datasets/mbpp/mbpp/sanitized/validation-00000-of-00001.parquet",
+    "sanitized_validation_sha256": "27e065fcab3c863959933328a7fdbf404e1bcb5464b1be6fe0dcd9530e420204"
+  },
+  "predecessor": {
+    "v2_config_path": "configs/campaign/mbpp_sanitized_iterative_repair_train_v2.json",
+    "v2_config_sha256": "21be8ace1aa02b98f1daf7160ce5a14cc1c45138b357fd5df0ec35e51070b0df",
+    "replication_result_path": "docs/results/mbpp_full_train_replication_v2.public.json",
+    "replication_result_sha256": "2eb8e4a3ddc06e6194667004597a8e7964484e841784c2b7201dd12595a41aa5",
+    "replication_admitted": true
+  },
+  "models": {
+    "four_b": {
+      "base_url": "http://127.0.0.1:8000/v1",
+      "model": "qwen3.5-4b",
+      "model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+      "max_model_len": 4096
+    },
+    "nine_b": {
+      "base_url": "http://127.0.0.1:8001/v1",
+      "model": "qwen3.5-9b",
+      "model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+      "max_model_len": 4096
+    }
+  },
+  "prompt": {
+    "system": "You are an expert Python programmer. Write a correct Python solution for the requested function that passes the provided tests. Return exactly one Python code block and no explanation. Do not access files, the network, processes, environment variables, or external services.",
+    "format": "official_three_shot_then_task_prompt_then_public_test_list",
+    "public_tests_visible_to_model": true,
+    "evaluation_reference_solution_visible_to_model": false,
+    "few_shot_reference_examples_visible_to_model": true
+  },
+  "parser": {
+    "first_python_fence_anywhere": true,
+    "begin_done_fallback": true,
+    "plain_python_fallback": true,
+    "target_blind": true
+  },
+  "direct": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_tokens": 768,
+    "seed_base": 2026083000
+  },
+  "candidate": {
+    "preserve_passing_direct": true,
+    "replicas_after_direct_failure": 5,
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_tokens": 768,
+    "seed_base": 2026083100,
+    "selection": "highest_public_test_pass_count_then_shortest_code_then_replica_index",
+    "repair_rounds_after_no_full_pass": 3,
+    "repair_source": "current_best_candidate",
+    "repair_feedback": "failed_public_test_indices_plus_failure_classes",
+    "repair_temperature": 0.0,
+    "repair_top_p": 1.0,
+    "repair_max_tokens": 768,
+    "repair_seed_base": 2026083200,
+    "fallback": "frozen_four_b_direct"
+  },
+  "sandbox": {
+    "backend": "bubblewrap",
+    "network": false,
+    "root_filesystem": "read_only",
+    "temporary_home": true,
+    "temporary_workdir": true,
+    "python_isolated_mode": true,
+    "timeout_seconds_per_test": 5,
+    "cpu_seconds_per_test": 3,
+    "address_space_bytes": 1073741824,
+    "file_size_bytes": 1048576,
+    "open_files": 64,
+    "allowed_imports": [
+      "array",
+      "bisect",
+      "cmath",
+      "collections",
+      "copy",
+      "decimal",
+      "fractions",
+      "functools",
+      "heapq",
+      "itertools",
+      "math",
+      "operator",
+      "re",
+      "statistics",
+      "string",
+      "sys",
+      "typing"
+    ]
+  },
+  "statistics": {
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": "mbpp-sanitized-test-v2",
+    "alpha": 0.05,
+    "minimum_candidate_only_wins": 6,
+    "four_b_preservation": {
+      "candidate_only_greater_or_equal_baseline_only": true,
+      "bootstrap_ci_lower_nonnegative": true
+    },
+    "nine_b_superiority": {
+      "point_delta_positive": true,
+      "bootstrap_ci_lower_positive": true,
+      "mcnemar_p_below_alpha": true,
+      "candidate_only_exceeds_baseline_only": true,
+      "minimum_candidate_only_wins": true
+    }
+  },
+  "execution": {
+    "num_shards": 8,
+    "assignment": "sorted_case_index_mod_num_shards",
+    "merge_requires_exact_case_set": true
+  },
+  "output_dir": "results/harness/mbpp-sanitized-test-v2",
+  "execution_boundary": {
+    "test_generation_started": false,
+    "sanitized_train_v2_rerun": false,
+    "sanitized_validation_v1_rerun": false,
+    "full_validation_confirmation_rerun": false,
+    "full_train_replication_rerun": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false,
+    "rl_or_opd_started": false
+  },
+  "policy": {
+    "reference_solution_used": false,
+    "public_test_source_visible_to_model": true,
+    "test_outcome_used_by_verifier": true,
+    "train_rows_training_eligible": false,
+    "validation_rows_training_eligible": false,
+    "test_rows_training_eligible": false,
+    "outputs_may_enter_training_reward_or_verifier": false,
+    "raw_outputs_committed": false,
+    "post_observation_tuning": false
+  }
+}
