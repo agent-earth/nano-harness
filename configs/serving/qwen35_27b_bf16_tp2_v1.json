@@ -1,0 +1,84 @@
+{
+  "schema_version": "nano_harness_qwen35_27b_serving_v1",
+  "experiment_id": "qwen35-27b-bf16-tp2-v1",
+  "download": {
+    "tool": "oniond",
+    "bucket": "ai-infra",
+    "model": "Qwen3.5-27B",
+    "directory": "/tmp/ultimate-distill-models",
+    "turbo": true
+  },
+  "model": {
+    "path": "/tmp/ultimate-distill-models/Qwen3.5-27B",
+    "config_sha256": "f8d190c5b89c1521220f935d2567a587d6e291ed69066a45a106560b05a2174c",
+    "index_sha256": "b3737e9d00bda0e37f0b873629d98bf9b407bef35735b9193c23d9844bcc96a6",
+    "weight_shards": 11,
+    "quantization": null
+  },
+  "service": {
+    "base_url": "http://127.0.0.1:8002/v1",
+    "health_url": "http://127.0.0.1:8002/health",
+    "served_model_name": "qwen3.5-27b",
+    "vllm_version": "0.19.1",
+    "dtype": "float16",
+    "max_model_len": 1024,
+    "tensor_parallel_size": 2,
+    "distributed_executor_backend": "mp",
+    "disable_custom_all_reduce": true,
+    "gpu_memory_utilization": 0.95,
+    "kv_cache_memory_bytes": 402653184,
+    "enforce_eager": true,
+    "language_model_only": true,
+    "mm_processor_cache_gb": 0,
+    "skip_mm_profiling": true,
+    "max_num_batched_tokens": 1024,
+    "max_num_seqs": 1,
+    "generation_config": "vllm",
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "nccl_ib_disable": true
+  },
+  "smoke": {
+    "system": "Answer exactly one line in the format FINAL: <answer>.",
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 32,
+    "seed_base": 20260822,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "probes": [
+      {
+        "id": "arithmetic",
+        "prompt": "What is 7 * 6?",
+        "expected": "FINAL: 42"
+      },
+      {
+        "id": "knowledge",
+        "prompt": "What is the capital of France?",
+        "expected": "FINAL: Paris"
+      },
+      {
+        "id": "code",
+        "prompt": "What Python built-in returns the length of a list?",
+        "expected": "FINAL: len"
+      }
+    ]
+  },
+  "rejected_gptq": {
+    "model": "Qwen3.5-27B-GPTQ-Int4",
+    "config_sha256": "3d8342d9eaa840fcfcb754184ba10ed9f48de47799f683d2ed424b93c20884ae",
+    "failure": "vllm_4bit_gptq_gemm_numerical_corruption_on_v100",
+    "observed_outputs": [
+      "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+      "!!!!!!!!!!!!!!!!"
+    ],
+    "marlin_compatible_on_compute_capability_70": false,
+    "parity_eligible": false
+  },
+  "policy": {
+    "benchmark_generation_started": false,
+    "serving_smoke_only": true,
+    "gptq_outputs_scoreable": false,
+    "raw_server_logs_committed": false
+  }
+}
