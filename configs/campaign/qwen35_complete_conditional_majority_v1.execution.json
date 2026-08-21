@@ -1,0 +1,58 @@
+{
+  "schema_version": "nano_harness_complete_conditional_majority_execution_v1",
+  "experiment_id": "qwen35-complete-conditional-majority-v1",
+  "parent_config_path": "configs/campaign/qwen35_complete_conditional_majority_v1.json",
+  "parent_config_sha256": "4f8c138166ada6c03edddfd3205d2cf7b3bc8baf86bdab879fe067f38a2e5013",
+  "parent_preregister_path": "docs/experiments/qwen35_complete_conditional_majority_v1.preregister.json",
+  "parent_preregister_sha256": "e2e1b42719ea7b229a16d2e4b387e8718b1121a8685ed96d2796d18e915644d8",
+  "completed_prefix": {
+    "path": "results/full/qwen35-complete-conditional-majority-v1/candidate/gsm8k.jsonl",
+    "rows": 89,
+    "sha256": "2d92949a70908446e70499b9a87d01d0ea108b6f801aad64a47ca9e2ae09a0ab"
+  },
+  "sharding": {
+    "num_shards": 2,
+    "assignment": "global_sorted_case_index_mod_num_shards",
+    "preserve_global_case_index_for_seed": true,
+    "preserve_completed_prefix": true,
+    "merge_requires_exact_1319_case_set": true
+  },
+  "services": [
+    {
+      "shard_id": 0,
+      "base_url": "http://127.0.0.1:8000/v1",
+      "model": "qwen3.5-4b",
+      "model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+      "max_model_len": 2048
+    },
+    {
+      "shard_id": 1,
+      "base_url": "http://127.0.0.1:8002/v1",
+      "model": "qwen3.5-4b",
+      "model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+      "max_model_len": 2048
+    }
+  ],
+  "output": {
+    "shard_pattern": "results/full/qwen35-complete-conditional-majority-v1/candidate/execution-shard-<shard_id>.jsonl",
+    "merged_gsm8k_path": "results/full/qwen35-complete-conditional-majority-v1/candidate/gsm8k.jsonl"
+  },
+  "invariance": {
+    "case_set_changed": false,
+    "prompt_changed": false,
+    "parser_changed": false,
+    "sampling_changed": false,
+    "seed_changed": false,
+    "vote_threshold_changed": false,
+    "model_weights_changed": false,
+    "scorer_changed": false,
+    "only_execution_partition_changed": true
+  },
+  "observation_boundary": {
+    "prefix_rows_generated_before_addendum": 89,
+    "prefix_progress_and_limited_diagnostics_observed": true,
+    "policy_tuned_from_prefix": false,
+    "prefix_regenerated": false,
+    "post_addendum_policy_change_allowed": false
+  }
+}

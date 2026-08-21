@@ -20,6 +20,10 @@ from scripts.render_complete_conditional_majority_v1 import (
     _correct_rows,
     holm_bonferroni,
 )
+from scripts.run_complete_conditional_majority_shard_v1 import (
+    load_execution,
+    select_shard,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -203,6 +207,43 @@ class CompleteConditionalMajorityTests(unittest.TestCase):
             alpha=0.05,
         )
         self.assertFalse(rejected["all_rejected"])
+
+    def test_execution_shards_preserve_global_indices_and_are_disjoint(self):
+        execution = load_execution()
+        cases = [
+            self.make_case().__class__(
+                **{
+                    **self.make_case().__dict__,
+                    "case_id": f"gsm8k-{index:03d}",
+                }
+            )
+            for index in range(8)
+        ]
+        prefix_ids = {"gsm8k-000", "gsm8k-001"}
+        even = select_shard(
+            cases,
+            prefix_ids=prefix_ids,
+            num_shards=execution["sharding"]["num_shards"],
+            shard_id=0,
+        )
+        odd = select_shard(
+            cases,
+            prefix_ids=prefix_ids,
+            num_shards=execution["sharding"]["num_shards"],
+            shard_id=1,
+        )
+        self.assertEqual(
+            [(index, case.case_id) for index, case in even],
+            [(2, "gsm8k-002"), (4, "gsm8k-004"), (6, "gsm8k-006")],
+        )
+        self.assertEqual(
+            [(index, case.case_id) for index, case in odd],
+            [(3, "gsm8k-003"), (5, "gsm8k-005"), (7, "gsm8k-007")],
+        )
+        self.assertFalse(
+            {case.case_id for _, case in even}
+            & {case.case_id for _, case in odd}
+        )
 
 
 if __name__ == "__main__":
