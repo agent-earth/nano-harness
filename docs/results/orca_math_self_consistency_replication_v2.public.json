@@ -1,0 +1,414 @@
+{
+  "boundary": {
+    "benchmark_rows_used": false,
+    "expected_used_during_generation": false,
+    "pooled_result_overrides_replication_gate": false,
+    "training_allowed": false
+  },
+  "comparisons": {
+    "versus_four_b": {
+      "baseline_accuracy": 0.45625,
+      "baseline_correct": 73,
+      "baseline_parse_failures": 70,
+      "by_stratum": {
+        "long": {
+          "baseline_accuracy": 0.125,
+          "baseline_correct": 5,
+          "baseline_parse_failures": 30,
+          "candidate_accuracy": 0.15,
+          "candidate_correct": 6,
+          "candidate_parse_failures": 29,
+          "cases": 40,
+          "delta": 0.025,
+          "mcnemar_exact_p": 1.0,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.075
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 5,
+            "both_wrong": 34,
+            "candidate_only": 1
+          }
+        },
+        "medium": {
+          "baseline_accuracy": 0.4625,
+          "baseline_correct": 37,
+          "baseline_parse_failures": 33,
+          "candidate_accuracy": 0.4875,
+          "candidate_correct": 39,
+          "candidate_parse_failures": 30,
+          "cases": 80,
+          "delta": 0.025,
+          "mcnemar_exact_p": 0.5,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.0625
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 37,
+            "both_wrong": 41,
+            "candidate_only": 2
+          }
+        },
+        "short": {
+          "baseline_accuracy": 0.775,
+          "baseline_correct": 31,
+          "baseline_parse_failures": 7,
+          "candidate_accuracy": 0.775,
+          "candidate_correct": 31,
+          "candidate_parse_failures": 7,
+          "cases": 40,
+          "delta": 0.0,
+          "mcnemar_exact_p": 1.0,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.0
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 31,
+            "both_wrong": 9,
+            "candidate_only": 0
+          }
+        }
+      },
+      "candidate_accuracy": 0.475,
+      "candidate_correct": 76,
+      "candidate_parse_failures": 66,
+      "cases": 160,
+      "delta": 0.01875,
+      "mcnemar_exact_p": 0.25,
+      "paired_bootstrap_95_ci": [
+        0.0,
+        0.04375
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 73,
+        "both_wrong": 84,
+        "candidate_only": 3
+      }
+    },
+    "versus_nine_b": {
+      "baseline_accuracy": 0.40625,
+      "baseline_correct": 65,
+      "baseline_parse_failures": 87,
+      "by_stratum": {
+        "long": {
+          "baseline_accuracy": 0.2,
+          "baseline_correct": 8,
+          "baseline_parse_failures": 32,
+          "candidate_accuracy": 0.15,
+          "candidate_correct": 6,
+          "candidate_parse_failures": 29,
+          "cases": 40,
+          "delta": -0.05,
+          "mcnemar_exact_p": 0.625,
+          "paired_bootstrap_95_ci": [
+            -0.15,
+            0.05
+          ],
+          "paired_counts": {
+            "baseline_only": 3,
+            "both_correct": 5,
+            "both_wrong": 31,
+            "candidate_only": 1
+          }
+        },
+        "medium": {
+          "baseline_accuracy": 0.3625,
+          "baseline_correct": 29,
+          "baseline_parse_failures": 45,
+          "candidate_accuracy": 0.4875,
+          "candidate_correct": 39,
+          "candidate_parse_failures": 30,
+          "cases": 80,
+          "delta": 0.125,
+          "mcnemar_exact_p": 0.021270751953125,
+          "paired_bootstrap_95_ci": [
+            0.0375,
+            0.225
+          ],
+          "paired_counts": {
+            "baseline_only": 3,
+            "both_correct": 26,
+            "both_wrong": 38,
+            "candidate_only": 13
+          }
+        },
+        "short": {
+          "baseline_accuracy": 0.7,
+          "baseline_correct": 28,
+          "baseline_parse_failures": 10,
+          "candidate_accuracy": 0.775,
+          "candidate_correct": 31,
+          "candidate_parse_failures": 7,
+          "cases": 40,
+          "delta": 0.075,
+          "mcnemar_exact_p": 0.25,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.175
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 28,
+            "both_wrong": 9,
+            "candidate_only": 3
+          }
+        }
+      },
+      "candidate_accuracy": 0.475,
+      "candidate_correct": 76,
+      "candidate_parse_failures": 66,
+      "cases": 160,
+      "delta": 0.06875,
+      "mcnemar_exact_p": 0.03468966484069824,
+      "paired_bootstrap_95_ci": [
+        0.0125,
+        0.125
+      ],
+      "paired_counts": {
+        "baseline_only": 6,
+        "both_correct": 59,
+        "both_wrong": 78,
+        "candidate_only": 17
+      }
+    }
+  },
+  "decision": {
+    "complete_benchmark_allowed": false,
+    "four_b_preservation_gates": {
+      "bootstrap_ci_lower_nonnegative": true,
+      "every_stratum_non_regression": true,
+      "no_significant_regression": true,
+      "point_delta_nonnegative": true
+    },
+    "next_action": "Publish the failed long-stratum gate; freeze this exact policy and test a new harness only on fresh data.",
+    "nine_b_superiority_gates": {
+      "bootstrap_ci_lower_positive": true,
+      "candidate_only_exceeds_baseline_only": true,
+      "every_stratum_non_regression": false,
+      "mcnemar_below_alpha": true,
+      "minimum_candidate_only_wins": true,
+      "point_delta_positive": true
+    },
+    "replication_admitted": false,
+    "rerun_or_tuning_allowed": false
+  },
+  "diagnostics": {
+    "cases": 160,
+    "consensus_vote_counts": {
+      "0": 49,
+      "1": 13,
+      "2": 9,
+      "3": 16,
+      "4": 13,
+      "5": 60
+    },
+    "fallbacks": 87,
+    "overrides": 4,
+    "parseable_replica_counts": {
+      "0": 49,
+      "1": 12,
+      "2": 9,
+      "3": 11,
+      "4": 18,
+      "5": 61
+    }
+  },
+  "experiment_id": "orca-math-self-consistency-replication-v2",
+  "identity": {
+    "case_ids_sha256": "3516027e2c59ca561aa4f03aee2389a21b0f8f8ed5eb69b481882c9dee983d63",
+    "config_sha256": "9807517f63d7da7937f5dc641f92f907c038716fd1a398e0fcb89cc53d08541b",
+    "preregister_sha256": "cbce1f1784f29880adeb9018f32a7ecf6bcbb462ffb11164f520fa05e86d96fb",
+    "prior_public_sha256": "c9deaac935b4b312faf19865bd2b3c6ea6615a54231a475233df76b93cb23a87",
+    "raw_sha256": {
+      "candidate": "d232e49d595546552bf2d6705778d85a97e56eb7196a491bc9ba9f3957b9a7d2",
+      "four_direct": "5494905c5fdcaf47cd032a1b06ba58cb7bdc9d88c398249d4a24b0bbc011adb9",
+      "nine_direct": "2b6551f8e18d20e331c23328e7ff1848917f86f90ecb28123c149ac4c760fdb7"
+    },
+    "receipts_sha256": "6da2219d16e15f2d9fa25256151e1e4fbfbd6528f537b1678723b34632f22a97",
+    "result_revision": "e5de3e1cff5836a8104a2c68e392cd5c6b8a5b81"
+  },
+  "pooled_descriptive_only": {
+    "cases": 256,
+    "not_a_preregistered_gate": true,
+    "versus_four_b": {
+      "baseline_accuracy": 0.46875,
+      "baseline_correct": 120,
+      "baseline_parse_failures": 107,
+      "by_stratum": {
+        "long": {
+          "baseline_accuracy": 0.1875,
+          "baseline_correct": 12,
+          "baseline_parse_failures": 43,
+          "candidate_accuracy": 0.21875,
+          "candidate_correct": 14,
+          "candidate_parse_failures": 42,
+          "cases": 64,
+          "delta": 0.03125,
+          "mcnemar_exact_p": 0.5,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.078125
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 12,
+            "both_wrong": 50,
+            "candidate_only": 2
+          }
+        },
+        "medium": {
+          "baseline_accuracy": 0.4609375,
+          "baseline_correct": 59,
+          "baseline_parse_failures": 54,
+          "candidate_accuracy": 0.4765625,
+          "candidate_correct": 61,
+          "candidate_parse_failures": 50,
+          "cases": 128,
+          "delta": 0.015625,
+          "mcnemar_exact_p": 0.5,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.0390625
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 59,
+            "both_wrong": 67,
+            "candidate_only": 2
+          }
+        },
+        "short": {
+          "baseline_accuracy": 0.765625,
+          "baseline_correct": 49,
+          "baseline_parse_failures": 10,
+          "candidate_accuracy": 0.765625,
+          "candidate_correct": 49,
+          "candidate_parse_failures": 10,
+          "cases": 64,
+          "delta": 0.0,
+          "mcnemar_exact_p": 1.0,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.0
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 49,
+            "both_wrong": 15,
+            "candidate_only": 0
+          }
+        }
+      },
+      "candidate_accuracy": 0.484375,
+      "candidate_correct": 124,
+      "candidate_parse_failures": 102,
+      "cases": 256,
+      "delta": 0.015625,
+      "mcnemar_exact_p": 0.125,
+      "paired_bootstrap_95_ci": [
+        0.00390625,
+        0.03125
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 120,
+        "both_wrong": 132,
+        "candidate_only": 4
+      }
+    },
+    "versus_nine_b": {
+      "baseline_accuracy": 0.39453125,
+      "baseline_correct": 101,
+      "baseline_parse_failures": 142,
+      "by_stratum": {
+        "long": {
+          "baseline_accuracy": 0.171875,
+          "baseline_correct": 11,
+          "baseline_parse_failures": 53,
+          "candidate_accuracy": 0.21875,
+          "candidate_correct": 14,
+          "candidate_parse_failures": 42,
+          "cases": 64,
+          "delta": 0.046875,
+          "mcnemar_exact_p": 0.548828125,
+          "paired_bootstrap_95_ci": [
+            -0.046875,
+            0.15625
+          ],
+          "paired_counts": {
+            "baseline_only": 4,
+            "both_correct": 7,
+            "both_wrong": 46,
+            "candidate_only": 7
+          }
+        },
+        "medium": {
+          "baseline_accuracy": 0.359375,
+          "baseline_correct": 46,
+          "baseline_parse_failures": 72,
+          "candidate_accuracy": 0.4765625,
+          "candidate_correct": 61,
+          "candidate_parse_failures": 50,
+          "cases": 128,
+          "delta": 0.1171875,
+          "mcnemar_exact_p": 0.004077315330505371,
+          "paired_bootstrap_95_ci": [
+            0.046875,
+            0.1953125
+          ],
+          "paired_counts": {
+            "baseline_only": 5,
+            "both_correct": 41,
+            "both_wrong": 62,
+            "candidate_only": 20
+          }
+        },
+        "short": {
+          "baseline_accuracy": 0.6875,
+          "baseline_correct": 44,
+          "baseline_parse_failures": 17,
+          "candidate_accuracy": 0.765625,
+          "candidate_correct": 49,
+          "candidate_parse_failures": 10,
+          "cases": 64,
+          "delta": 0.078125,
+          "mcnemar_exact_p": 0.0625,
+          "paired_bootstrap_95_ci": [
+            0.015625,
+            0.140625
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 44,
+            "both_wrong": 15,
+            "candidate_only": 5
+          }
+        }
+      },
+      "candidate_accuracy": 0.484375,
+      "candidate_correct": 124,
+      "candidate_parse_failures": 102,
+      "cases": 256,
+      "delta": 0.08984375,
+      "mcnemar_exact_p": 0.000430857042374555,
+      "paired_bootstrap_95_ci": [
+        0.04296875,
+        0.13671875
+      ],
+      "paired_counts": {
+        "baseline_only": 9,
+        "both_correct": 92,
+        "both_wrong": 123,
+        "candidate_only": 32
+      }
+    }
+  },
+  "schema_version": "nano_harness_orca_self_consistency_replication_public_v2"
+}
