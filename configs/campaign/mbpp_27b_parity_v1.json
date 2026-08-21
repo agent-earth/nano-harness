@@ -1,0 +1,77 @@
+{
+  "schema_version": "nano_harness_mbpp_27b_parity_v1",
+  "experiment_id": "mbpp-27b-parity-v1",
+  "dataset": {
+    "test_path": "../../../datasets/mbpp/mbpp/sanitized/test-00000-of-00001.parquet",
+    "test_sha256": "e9e9efa2c0d59ef5e55537a9d126b8f875d5ac010a8d75628d76824884e15850",
+    "test_rows": 257,
+    "prompt_path": "../../../datasets/mbpp/mbpp/sanitized/prompt-00000-of-00001.parquet",
+    "prompt_sha256": "73c623309b7b5d65fd5661204b35f779f8e66301aa9832d1ad4b8fc3b21151fd",
+    "few_shot_task_ids": [2, 3, 4]
+  },
+  "candidate": {
+    "raw_path": "results/harness/mbpp-sanitized-test-v2/cases.jsonl",
+    "raw_sha256": "86c72abd02adb88cc2ae02bf74893068c0c4842c1dc214dbcc85a6306108d944",
+    "report_path": "docs/results/mbpp_sanitized_test_v2.public.json",
+    "report_sha256": "1290827fe25704f86a15676aa78d6f7b519929b312e06383d4afc69e1a0a3d13",
+    "complete_benchmark_superiority": true,
+    "model": "qwen3.5-4b-mbpp-iterative-repair-v2"
+  },
+  "policy_source": {
+    "config_path": "configs/campaign/mbpp_sanitized_test_v2.json",
+    "config_sha256": "f37ab18661ce84a8a7adec664ae8a6114ca745266108099a77916b37528bdc5b"
+  },
+  "twenty_seven_b": {
+    "base_url": "http://127.0.0.1:8002/v1",
+    "model": "qwen3.5-27b",
+    "path": "/tmp/ultimate-distill-models/Qwen3.5-27B",
+    "model_config_sha256": "f8d190c5b89c1521220f935d2567a587d6e291ed69066a45a106560b05a2174c",
+    "model_index_sha256": "b3737e9d00bda0e37f0b873629d98bf9b407bef35735b9193c23d9844bcc96a6",
+    "serving_report_path": "docs/results/qwen35_27b_bf16_tp2_4096_v2.public.json",
+    "serving_report_sha256": "75ff3896bf939b28d4a861e0b8ec61debe688d5578fe49cd1c72fc2d7a24efb4",
+    "vllm_version": "0.19.1",
+    "dtype": "float16",
+    "max_model_len": 4096,
+    "tensor_parallel_size": 2,
+    "kv_cache_memory_bytes": 1073741824,
+    "max_num_batched_tokens": 4096,
+    "max_num_seqs": 2
+  },
+  "direct": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_tokens": 768,
+    "seed_base": 2026083000
+  },
+  "statistics": {
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": "mbpp-27b-parity-v1",
+    "noninferiority_margin": 0.02,
+    "alpha": 0.05
+  },
+  "execution": {
+    "num_shards": 2,
+    "assignment": "sorted_case_index_mod_num_shards",
+    "merge_requires_exact_case_set": true
+  },
+  "output_dir": "results/harness/mbpp-27b-parity-v1",
+  "execution_boundary": {
+    "parity_generation_started": false,
+    "four_b_candidate_reused": true,
+    "four_b_generation_repeated": false,
+    "nine_b_generation_repeated": false,
+    "test_policy_changed": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false,
+    "rl_or_opd_started": false
+  },
+  "policy": {
+    "reference_solution_used": false,
+    "public_test_source_visible_to_model": true,
+    "test_outcome_used_only_for_final_scoring": true,
+    "benchmark_rows_training_eligible": false,
+    "benchmark_outputs_may_enter_training_reward_or_verifier": false,
+    "raw_outputs_committed": false,
+    "post_observation_tuning_or_rerun": false
+  }
+}
