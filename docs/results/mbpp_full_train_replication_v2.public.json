@@ -1,0 +1,100 @@
+{
+  "boundary": {
+    "claim_scope": "fresh replication only, not benchmark test score",
+    "full_validation_confirmation_rerun": false,
+    "reference_solution_used_for_evaluation": false,
+    "sanitized_test_generation_started": false,
+    "sanitized_train_v2_rerun": false,
+    "split": "full_train_minus_sanitized_train"
+  },
+  "comparisons": {
+    "versus_four_b": {
+      "baseline_accuracy": 0.7086614173228346,
+      "baseline_correct": 180,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.8307086614173228,
+      "candidate_correct": 211,
+      "candidate_parse_failures": 0,
+      "cases": 254,
+      "delta": 0.1220472440944882,
+      "mcnemar_exact_p": 9.313225746154785e-10,
+      "paired_bootstrap_95_ci": [
+        0.08267716535433071,
+        0.16535433070866143
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 180,
+        "both_wrong": 43,
+        "candidate_only": 31
+      }
+    },
+    "versus_nine_b": {
+      "baseline_accuracy": 0.7362204724409449,
+      "baseline_correct": 187,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.8307086614173228,
+      "candidate_correct": 211,
+      "candidate_parse_failures": 0,
+      "cases": 254,
+      "delta": 0.09448818897637795,
+      "mcnemar_exact_p": 8.430331945419312e-06,
+      "paired_bootstrap_95_ci": [
+        0.05511811023622047,
+        0.1377952755905512
+      ],
+      "paired_counts": {
+        "baseline_only": 3,
+        "both_correct": 184,
+        "both_wrong": 40,
+        "candidate_only": 27
+      }
+    }
+  },
+  "decision": {
+    "four_b_preservation_gates": {
+      "bootstrap_ci_lower_nonnegative": true,
+      "every_stratum_non_regression": true,
+      "no_significant_regression": true,
+      "point_delta_nonnegative": true
+    },
+    "next_action": "Pre-register the unchanged v2 policy on all 257 sanitized test cases.",
+    "nine_b_superiority_gates": {
+      "bootstrap_ci_lower_positive": true,
+      "candidate_only_exceeds_baseline_only": true,
+      "mcnemar_p_below_alpha": true,
+      "minimum_candidate_only_wins": true,
+      "point_delta_positive": true
+    },
+    "replication_admitted": true,
+    "rerun_or_tuning_allowed": false,
+    "sanitized_test_preregistration_allowed": true
+  },
+  "diagnostics": {
+    "candidate_full_pass": 211,
+    "four_b_direct_full_pass": 180,
+    "nine_b_direct_full_pass": 187,
+    "overrides": 42,
+    "repair_rounds_generated": 131,
+    "replicas_generated": 370,
+    "selected_source_counts": {
+      "four_b_direct": 212,
+      "repair_0": 4,
+      "replica_0": 10,
+      "replica_1": 9,
+      "replica_2": 7,
+      "replica_3": 5,
+      "replica_4": 7
+    }
+  },
+  "experiment_id": "mbpp-full-train-replication-v2",
+  "identity": {
+    "config_sha256": "5bfd75fb03250cd2385090103e41902f1ab26aeda631eadb903463f2ed961139",
+    "preregister_sha256": "2950cce50f0ac7b006c80af439f0f762304f682ba6ca6821053045c3d9cded3b",
+    "raw_cases_sha256": "3485df943e9fe37e5a7aaf82f2f939578be4b43b1dbec69b7b135a080c750115",
+    "raw_result_sha256": "21ee3c5c2453fa7129f05a6445c7fd33a803f0f7d811c3526b9b4a26b009f155",
+    "replication_case_ids_sha256": "f3ad3ba8bfd7fd47e08e5db94c8a2de7e1ba5299e8d0396bb526725a79fae93a",
+    "result_revision": "f7df6787165b4390660adce88cce0a963d1e68b7"
+  },
+  "schema_version": "nano_harness_mbpp_full_train_public_v2"
+}

@@ -69,6 +69,26 @@ class MbppFullTrainReplicationTests(unittest.TestCase):
         if not path.exists():
             self.skipTest("full-train replication result not generated yet")
         report = build_replication_report()
+        self.assertTrue(report["decision"]["replication_admitted"])
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_four_b"]["candidate_correct"],
+                report["comparisons"]["versus_four_b"]["baseline_correct"],
+            ),
+            (211, 180),
+        )
+        self.assertEqual(
+            (
+                report["comparisons"]["versus_nine_b"]["candidate_correct"],
+                report["comparisons"]["versus_nine_b"]["baseline_correct"],
+            ),
+            (211, 187),
+        )
+        self.assertTrue(
+            all(
+                report["decision"]["nine_b_superiority_gates"].values()
+            )
+        )
         serialized = json.dumps(report).lower()
         self.assertNotIn('"output"', serialized)
         self.assertNotIn('"code"', serialized)
