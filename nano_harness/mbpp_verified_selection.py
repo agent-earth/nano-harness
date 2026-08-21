@@ -33,8 +33,24 @@ DANGEROUS_NAMES = {
     "compile",
     "eval",
     "exec",
+    "getattr",
+    "globals",
     "input",
+    "locals",
     "open",
+    "setattr",
+    "vars",
+}
+DANGEROUS_ATTRIBUTES = {
+    "argv",
+    "executable",
+    "modules",
+    "path",
+    "setprofile",
+    "settrace",
+    "stderr",
+    "stdin",
+    "stdout",
 }
 
 
@@ -203,6 +219,10 @@ def validate_code(code: str, allowed_imports: set[str]) -> str | None:
                 return "forbidden_import"
         elif isinstance(node, ast.Name) and node.id in DANGEROUS_NAMES:
             return "forbidden_builtin"
+        elif isinstance(node, ast.Attribute) and (
+            node.attr.startswith("__") or node.attr in DANGEROUS_ATTRIBUTES
+        ):
+            return "forbidden_attribute"
     return None
 
 
@@ -216,6 +236,7 @@ def run_public_tests(
             "passed": 0,
             "total": len(case.test_list),
             "failure_classes": {"format_error": len(case.test_list)},
+            "failed_test_indices": list(range(len(case.test_list))),
             "full_pass": False,
         }
     static_failure = validate_code(code, set(sandbox["allowed_imports"]))
@@ -224,11 +245,13 @@ def run_public_tests(
             "passed": 0,
             "total": len(case.test_list),
             "failure_classes": {static_failure: len(case.test_list)},
+            "failed_test_indices": list(range(len(case.test_list))),
             "full_pass": False,
         }
     passed = 0
     failures: Counter[str] = Counter()
-    for test in case.test_list:
+    failed_test_indices = []
+    for test_index, test in enumerate(case.test_list):
         source = "\n".join((*case.test_imports, code, test)) + "\n"
         with tempfile.TemporaryDirectory() as directory:
             program = Path(directory) / "program.py"
@@ -283,21 +306,27 @@ def run_public_tests(
                 )
             except subprocess.TimeoutExpired:
                 failures["timeout"] += 1
+                failed_test_indices.append(test_index)
                 continue
         if process.returncode == 0:
             passed += 1
         elif "AssertionError" in process.stderr:
             failures["assertion_failure"] += 1
+            failed_test_indices.append(test_index)
         elif "SyntaxError" in process.stderr:
             failures["syntax_error"] += 1
+            failed_test_indices.append(test_index)
         elif "MemoryError" in process.stderr:
             failures["memory_limit"] += 1
+            failed_test_indices.append(test_index)
         else:
             failures["runtime_error"] += 1
+            failed_test_indices.append(test_index)
     return {
         "passed": passed,
         "total": len(case.test_list),
         "failure_classes": dict(sorted(failures.items())),
+        "failed_test_indices": failed_test_indices,
         "full_pass": passed == len(case.test_list),
     }
 
