@@ -1,0 +1,110 @@
+{
+  "arms": {
+    "four_b_direct": {
+      "max_tokens": 768,
+      "seed_base": 2026082700,
+      "temperature": 0.0,
+      "top_p": 1.0
+    },
+    "four_b_verified_selection": {
+      "fallback": "frozen_four_b_direct",
+      "max_tokens": 768,
+      "preserve_passing_direct": true,
+      "repair_after_no_full_pass": true,
+      "repair_feedback": "aggregate_pass_count_and_failure_classes_only",
+      "repair_max_tokens": 768,
+      "repair_seed_base": 2026082900,
+      "repair_source": "best_candidate",
+      "repair_temperature": 0.0,
+      "repair_top_p": 1.0,
+      "replicas_after_direct_failure": 3,
+      "seed_base": 2026082800,
+      "selection": "highest_public_test_pass_count_then_shortest_code_then_replica_index",
+      "temperature": 0.7,
+      "top_p": 0.9
+    },
+    "nine_b_direct": {
+      "max_tokens": 768,
+      "seed_base": 2026082700,
+      "temperature": 0.0,
+      "top_p": 1.0
+    }
+  },
+  "claim_boundary": "This pre-registers the complete 43-case sanitized validation split. One test row was previously inspected only for local schema feasibility and did not determine this policy. It starts no model generation, and establishes no MBPP score.",
+  "decision_rule": {
+    "complete_test_preregistration_allowed": "validation_admitted",
+    "rerun_or_tuning_allowed": false,
+    "validation_admitted": "all four_b_preservation and nine_b_directional gates pass"
+  },
+  "execution": {
+    "assignment": "sorted_case_index_mod_num_shards",
+    "merge_requires_exact_case_set": true,
+    "num_shards": 4
+  },
+  "execution_boundary": {
+    "rl_or_opd_started": false,
+    "test_content_used_for_policy_design": false,
+    "test_feasibility_probe_rows": 1,
+    "test_generation_started": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false,
+    "validation_generation_started": false
+  },
+  "experiment_id": "mbpp-sanitized-verified-selection-dev-v1",
+  "identity": {
+    "code_revision": "6865472e9e31854f4b6af4d38aca9de90f84610d",
+    "config_sha256": "8e02b0adc5ca78a4a197ec6622bcc65a0b30de3b6f9cdb64aa6446ce453775c2",
+    "four_b_model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "nine_b_model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+    "test_sha256": "e9e9efa2c0d59ef5e55537a9d126b8f875d5ac010a8d75628d76824884e15850",
+    "validation_case_ids_sha256": "f73a3315369d6de7bff3596e234f56a1cc2c3d8b82cc6c495eedf8fc4b828ebe",
+    "validation_sha256": "27e065fcab3c863959933328a7fdbf404e1bcb5464b1be6fe0dcd9530e420204"
+  },
+  "sandbox": {
+    "address_space_bytes": 1073741824,
+    "allowed_imports": [
+      "array",
+      "bisect",
+      "cmath",
+      "collections",
+      "copy",
+      "decimal",
+      "fractions",
+      "functools",
+      "heapq",
+      "itertools",
+      "math",
+      "operator",
+      "re",
+      "statistics",
+      "string",
+      "sys",
+      "typing"
+    ],
+    "backend": "bubblewrap",
+    "cpu_seconds_per_test": 3,
+    "file_size_bytes": 1048576,
+    "network": false,
+    "only_aggregate_failure_feedback_visible_to_repair": true,
+    "open_files": 64,
+    "probe": {
+      "network_blocked": true,
+      "root_filesystem_read_only": true,
+      "temporary_workdir_writable": true
+    },
+    "public_test_source_visible_to_model": true,
+    "python_isolated_mode": true,
+    "root_filesystem": "read_only",
+    "temporary_home": true,
+    "temporary_workdir": true,
+    "timeout_seconds_per_test": 5
+  },
+  "schema_version": "nano_harness_mbpp_verified_selection_preregister_v1",
+  "surface": {
+    "cases": 43,
+    "split": "validation",
+    "test_content_used_for_policy_design": false,
+    "test_feasibility_probe_rows": 1,
+    "test_generation_allowed": false
+  }
+}
