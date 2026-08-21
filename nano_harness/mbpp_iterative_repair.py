@@ -24,7 +24,7 @@ from nano_harness.orca_self_consistency import _request
 
 
 CONFIG_SHA256 = (
-    "4b7173012a9ffe07a3e5964d609ada9019a7d3c7099242045109c943244b67d8"
+    "21be8ace1aa02b98f1daf7160ce5a14cc1c45138b357fd5df0ec35e51070b0df"
 )
 FENCED_CODE = re.compile(
     r"```(?:python)?\s*\n(.*?)```",

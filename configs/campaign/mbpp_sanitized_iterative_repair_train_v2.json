@@ -24,13 +24,13 @@
       "base_url": "http://127.0.0.1:8000/v1",
       "model": "qwen3.5-4b",
       "model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
-      "max_model_len": 2048
+      "max_model_len": 4096
     },
     "nine_b": {
       "base_url": "http://127.0.0.1:8001/v1",
       "model": "qwen3.5-9b",
       "model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
-      "max_model_len": 2048
+      "max_model_len": 4096
     }
   },
   "prompt": {

@@ -20,7 +20,7 @@ in the same no-network, read-only-root bubblewrap sandbox.
 
 ## Identity
 
-- config SHA: `4b7173012a9ffe07a3e5964d609ada9019a7d3c7099242045109c943244b67d8`;
+- config SHA: `21be8ace1aa02b98f1daf7160ce5a14cc1c45138b357fd5df0ec35e51070b0df`;
 - train SHA: `d95f8ad6d2fff08fe4826122d6e3e31f75716825d0c5c340d297aca5e9e0de0e`;
 - train case IDs SHA: `cbfb6f66d4c41ce3ffa242b39b5f37312bdfa93959583a5ae914849d67218514`;
 - frozen v1 report SHA: `498775115585bd5f7f8edbd43ef842b9d86a9e5b91d9acb5c4380e7f35fd65a5`.
