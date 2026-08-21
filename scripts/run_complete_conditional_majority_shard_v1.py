@@ -177,7 +177,8 @@ def run_shard(
         if case.benchmark == "gsm8k"
     ]
     ordered = sorted(cases, key=lambda row: row.case_id)
-    if prefix_ids != {case.case_id for case in ordered[:89]}:
+    prefix_rows = execution["completed_prefix"]["rows"]
+    if prefix_ids != {case.case_id for case in ordered[:prefix_rows]}:
         raise ValueError("complete conditional majority prefix order differs")
     selected = select_shard(
         cases,
