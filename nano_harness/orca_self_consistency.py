@@ -241,8 +241,10 @@ def _request(
     }
 
 
-def run(config: Config) -> dict[str, Any]:
-    selection = select_cases(config)
+def run_selection(
+    config: Config,
+    selection: dict[str, Any],
+) -> dict[str, Any]:
     raw = config.raw
     output_root = config.resolve(raw["output_dir"])
     output_root.mkdir(parents=True, exist_ok=True)
@@ -377,3 +379,7 @@ def run(config: Config) -> dict[str, Any]:
             "scoring_after_generation": True,
         },
     }
+
+
+def run(config: Config) -> dict[str, Any]:
+    return run_selection(config, select_cases(config))
