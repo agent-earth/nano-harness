@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from openai import OpenAI
 
@@ -212,6 +212,7 @@ def _request(
     top_p: float,
     max_tokens: int,
     seed: int | None,
+    parser: Callable[[str], str | None] = parse_final,
 ) -> dict[str, Any]:
     kwargs: dict[str, Any] = {
         "model": model,
@@ -230,7 +231,7 @@ def _request(
     output = response.choices[0].message.content or ""
     return {
         "output": output,
-        "prediction": parse_final(output),
+        "prediction": parser(output),
         "finish_reason": response.choices[0].finish_reason,
         "usage": (
             response.usage.model_dump(exclude_none=True)
@@ -244,6 +245,14 @@ def _request(
 def run_selection(
     config: Config,
     selection: dict[str, Any],
+    *,
+    messages_for_row: Callable[
+        [dict[str, Any]], list[dict[str, str]]
+    ] = _messages,
+    expected_for_row: Callable[[dict[str, Any]], str] = (
+        lambda row: str(row["expected"])
+    ),
+    parser: Callable[[str], str | None] = parse_final,
 ) -> dict[str, Any]:
     raw = config.raw
     output_root = config.resolve(raw["output_dir"])
@@ -265,12 +274,13 @@ def run_selection(
     arms = {"four_direct": [], "candidate": [], "nine_direct": []}
     receipts = []
     for case_index, row in enumerate(selection["cases"]):
-        messages = _messages(row)
+        messages = messages_for_row(row)
         four_direct = _request(
             clients["four"],
             model=raw["four_b"]["model"],
             messages=messages,
             seed=raw["candidate"]["seed_base"] + case_index * 10,
+            parser=parser,
             **raw["direct"],
         )
         nine_direct = _request(
@@ -278,6 +288,7 @@ def run_selection(
             model=raw["nine_b"]["model"],
             messages=messages,
             seed=raw["candidate"]["seed_base"] + case_index * 10 + 9,
+            parser=parser,
             **raw["direct"],
         )
         replicas = [
@@ -289,6 +300,7 @@ def run_selection(
                 top_p=raw["candidate"]["top_p"],
                 max_tokens=raw["candidate"]["max_tokens"],
                 seed=raw["candidate"]["seed_base"] + case_index * 10 + replica,
+                parser=parser,
             )
             for replica in range(raw["candidate"]["replicas"])
         ]
@@ -297,7 +309,7 @@ def run_selection(
             four_direct["prediction"],
             minimum_agreement=raw["candidate"]["minimum_agreement"],
         )
-        expected = str(row["expected"])
+        expected = expected_for_row(row)
         base = {
             "case_id": row["sample_id"],
             "stratum": row["stratum"],
