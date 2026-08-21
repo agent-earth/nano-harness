@@ -1,0 +1,263 @@
+{
+  "boundary": {
+    "benchmark_rows_used": false,
+    "claim_scope": "fresh non-benchmark local development admission only",
+    "complete_benchmark_score_claimed": false,
+    "expected_used_during_generation": false,
+    "training_allowed": false
+  },
+  "comparisons": {
+    "versus_four_b": {
+      "baseline_accuracy": 0.5625,
+      "baseline_correct": 54,
+      "baseline_parse_failures": 0,
+      "by_stratum": {
+        "long": {
+          "baseline_accuracy": 0.125,
+          "baseline_correct": 3,
+          "baseline_parse_failures": 0,
+          "candidate_accuracy": 0.16666666666666666,
+          "candidate_correct": 4,
+          "candidate_parse_failures": 0,
+          "cases": 24,
+          "delta": 0.041666666666666664,
+          "mcnemar_exact_p": 1.0,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.125
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 3,
+            "both_wrong": 20,
+            "candidate_only": 1
+          }
+        },
+        "medium": {
+          "baseline_accuracy": 0.6875,
+          "baseline_correct": 33,
+          "baseline_parse_failures": 0,
+          "candidate_accuracy": 0.7291666666666666,
+          "candidate_correct": 35,
+          "candidate_parse_failures": 0,
+          "cases": 48,
+          "delta": 0.041666666666666664,
+          "mcnemar_exact_p": 0.5,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.10416666666666667
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 33,
+            "both_wrong": 13,
+            "candidate_only": 2
+          }
+        },
+        "short": {
+          "baseline_accuracy": 0.75,
+          "baseline_correct": 18,
+          "baseline_parse_failures": 0,
+          "candidate_accuracy": 0.7916666666666666,
+          "candidate_correct": 19,
+          "candidate_parse_failures": 0,
+          "cases": 24,
+          "delta": 0.041666666666666664,
+          "mcnemar_exact_p": 1.0,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.125
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 18,
+            "both_wrong": 5,
+            "candidate_only": 1
+          }
+        }
+      },
+      "candidate_accuracy": 0.6041666666666666,
+      "candidate_correct": 58,
+      "candidate_parse_failures": 0,
+      "cases": 96,
+      "delta": 0.041666666666666664,
+      "mcnemar_exact_p": 0.125,
+      "paired_bootstrap_95_ci": [
+        0.010416666666666666,
+        0.08333333333333333
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 54,
+        "both_wrong": 38,
+        "candidate_only": 4
+      }
+    },
+    "versus_nine_b": {
+      "baseline_accuracy": 0.4791666666666667,
+      "baseline_correct": 46,
+      "baseline_parse_failures": 0,
+      "by_stratum": {
+        "long": {
+          "baseline_accuracy": 0.08333333333333333,
+          "baseline_correct": 2,
+          "baseline_parse_failures": 0,
+          "candidate_accuracy": 0.16666666666666666,
+          "candidate_correct": 4,
+          "candidate_parse_failures": 0,
+          "cases": 24,
+          "delta": 0.08333333333333333,
+          "mcnemar_exact_p": 0.625,
+          "paired_bootstrap_95_ci": [
+            -0.08333333333333333,
+            0.25
+          ],
+          "paired_counts": {
+            "baseline_only": 1,
+            "both_correct": 1,
+            "both_wrong": 19,
+            "candidate_only": 3
+          }
+        },
+        "medium": {
+          "baseline_accuracy": 0.5208333333333334,
+          "baseline_correct": 25,
+          "baseline_parse_failures": 0,
+          "candidate_accuracy": 0.7291666666666666,
+          "candidate_correct": 35,
+          "candidate_parse_failures": 0,
+          "cases": 48,
+          "delta": 0.20833333333333334,
+          "mcnemar_exact_p": 0.001953125,
+          "paired_bootstrap_95_ci": [
+            0.10416666666666667,
+            0.3333333333333333
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 25,
+            "both_wrong": 13,
+            "candidate_only": 10
+          }
+        },
+        "short": {
+          "baseline_accuracy": 0.7916666666666666,
+          "baseline_correct": 19,
+          "baseline_parse_failures": 0,
+          "candidate_accuracy": 0.7916666666666666,
+          "candidate_correct": 19,
+          "candidate_parse_failures": 0,
+          "cases": 24,
+          "delta": 0.0,
+          "mcnemar_exact_p": 1.0,
+          "paired_bootstrap_95_ci": [
+            -0.125,
+            0.125
+          ],
+          "paired_counts": {
+            "baseline_only": 1,
+            "both_correct": 18,
+            "both_wrong": 4,
+            "candidate_only": 1
+          }
+        }
+      },
+      "candidate_accuracy": 0.6041666666666666,
+      "candidate_correct": 58,
+      "candidate_parse_failures": 0,
+      "cases": 96,
+      "delta": 0.125,
+      "mcnemar_exact_p": 0.004180908203125,
+      "paired_bootstrap_95_ci": [
+        0.052083333333333336,
+        0.20833333333333334
+      ],
+      "paired_counts": {
+        "baseline_only": 2,
+        "both_correct": 44,
+        "both_wrong": 36,
+        "candidate_only": 14
+      }
+    }
+  },
+  "decision": {
+    "candidate_admitted": true,
+    "complete_benchmark_allowed": true,
+    "four_b_preservation_gates": {
+      "bootstrap_ci_lower_nonnegative": true,
+      "every_stratum_non_regression": true,
+      "no_significant_regression": true,
+      "point_delta_nonnegative": true
+    },
+    "next_action": "Pre-register one matched complete benchmark treatment using the frozen parser and conditional-majority policy.",
+    "nine_b_superiority_gates": {
+      "bootstrap_ci_lower_positive": true,
+      "candidate_only_exceeds_baseline_only": true,
+      "every_stratum_non_regression": true,
+      "mcnemar_below_alpha": true,
+      "minimum_candidate_only_wins": true,
+      "point_delta_positive": true
+    },
+    "rerun_or_tuning_allowed": false
+  },
+  "diagnostics": {
+    "cases": 96,
+    "consensus_vote_counts": {
+      "1": 17,
+      "2": 12,
+      "3": 7,
+      "4": 15,
+      "5": 45
+    },
+    "direct_strict_parse_failure": 41,
+    "direct_strict_parseable": 55,
+    "fallbacks": 42,
+    "minimum_vote_route_counts": {
+      "3": 41,
+      "5": 55
+    },
+    "model_requests_rerun_for_render": false,
+    "override_outcomes": {
+      "both_correct": 0,
+      "both_wrong": 2,
+      "candidate_only": 4,
+      "four_b_only": 0
+    },
+    "overrides": 6,
+    "parseable_replica_counts": {
+      "5": 96
+    },
+    "receipt_cases_match_raw": true,
+    "route_outcomes": {
+      "strict_parse_failure": {
+        "candidate_correct": 10,
+        "candidate_only": 4,
+        "cases": 41,
+        "four_b_correct": 6,
+        "four_b_only": 0
+      },
+      "strict_parseable": {
+        "candidate_correct": 48,
+        "candidate_only": 0,
+        "cases": 55,
+        "four_b_correct": 48,
+        "four_b_only": 0
+      }
+    }
+  },
+  "experiment_id": "orca-math-conditional-majority-v4",
+  "identity": {
+    "case_ids_sha256": "4f6b9a456544c3fcf8ec2dc70ef2c696d5474111f7aaf5869ef716be9adafd1f",
+    "config_sha256": "8d37f051ac556506574e7a6abb491dbdd84af82f526999a33dc67031f52a7ac3",
+    "generation_revision": "dba8f569c380ca70fc4a507b64ef34407ca18da5",
+    "preregister_sha256": "ba8fe481241f32294f0140c46473ad527266358e8b32ebe667329b0b3de3ff40",
+    "raw_sha256": {
+      "candidate": "fd307866197fffc70c01dfcf0f1975784431de913404d6ae66dc6cdf4243e2c9",
+      "four_direct": "f735ea590ee1cfb9a351c33c5756b08d35140375887fd7df0746d2314be23074",
+      "nine_direct": "982bb8a68fcc2b9454fc4de6c5b584a14c2652eec2d637d64185cbca9a21dbf1"
+    },
+    "receipts_sha256": "ef8568d3e2674f7716431137a883d2b2fd5591ee80257b8a79123e6396ab4d38",
+    "run_receipt_sha256": "93b5aeaa2fd282a17b3954bcc29fe4ff0c38d6d75018177d1eee1591f358e433"
+  },
+  "schema_version": "nano_harness_orca_conditional_majority_public_v4"
+}
