@@ -1,0 +1,112 @@
+{
+  "schema_version": "nano_harness_complete_conditional_majority_v1",
+  "experiment_id": "qwen35-complete-conditional-majority-v1",
+  "baseline": {
+    "suite_manifest_path": "configs/baselines/qwen35_complete_direct_v1.yaml",
+    "suite_manifest_sha256": "6ec49d522892975e4532954d3bac7c7e5ed9b24e2c698700d5f8a61667753e90",
+    "case_manifest_path": "configs/generated/qwen35_complete_direct_v1_cases.public.json",
+    "case_manifest_sha256": "858656f58decf8bbc23c70101dabcffc6ef12e049771e043575927743c6cfd10",
+    "four_b_raw_path": "results/full/qwen35-complete-direct-v1/4b/cases.jsonl",
+    "four_b_raw_sha256": "b6e35d968dc3ff3311cf991b186e7a4f2a0ff8fe9989b7507f39b75b7aa6aa54",
+    "nine_b_raw_path": "results/full/qwen35-complete-direct-v1/9b/cases.jsonl",
+    "nine_b_raw_sha256": "a22cade1ea367e6cceddff4e25e88d34360adc005feeed316464b561c151b988",
+    "report_path": "docs/results/qwen35_complete_direct_v1.public.json",
+    "report_sha256": "c9e622872d6ecd87350475011dcd19534c4f574a2999e69541d9b66ae0985152"
+  },
+  "predecessors": {
+    "local_v4_report_path": "docs/results/orca_math_conditional_majority_v4.public.json",
+    "local_v4_report_sha256": "8d8c48ee51c8565805095057bf676e848b5133d7dd7fdc5450454f8ef127e4c7",
+    "prior_complete_report_path": "docs/results/qwen35_v5_complete_treatment_v1.public.json",
+    "prior_complete_report_sha256": "eb5de49353f5aeca923b058d8df0bd92228969f2126e9ea3046f9aa4555d60aa",
+    "prior_complete_candidate_path": "results/full/qwen35-v5-complete-treatment-v1/candidate/cases.jsonl",
+    "prior_complete_candidate_sha256": "28fa621a857938c9e8a88f94bd31fabcbd638702a40fa9dfae2621e43f39ca14"
+  },
+  "four_b": {
+    "base_url": "http://127.0.0.1:8000/v1",
+    "model": "qwen3.5-4b",
+    "path": "../../../models/Qwen3.5-4B",
+    "model_config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "max_model_len": 2048,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "routes": {
+    "gsm8k": {
+      "strategy": "conditional_majority_v4",
+      "parser": {
+        "strict_final_first": true,
+        "fallback": "last_numeric_token_in_last_1500_chars",
+        "target_blind": true
+      },
+      "replicas": 5,
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "max_tokens": 384,
+      "seed_base": 2026082600,
+      "direct_strict_parse_failure_minimum_votes": 3,
+      "direct_strict_parseable_minimum_votes": 5,
+      "fallback": "frozen_four_b_recovered_direct"
+    },
+    "mmlu": {
+      "strategy": "preserve_frozen_four_b_direct"
+    },
+    "gpqa_diamond": {
+      "strategy": "reuse_frozen_v5_conservative_choice_consensus"
+    }
+  },
+  "statistics": {
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": "qwen35-complete-conditional-majority-v1",
+    "exact_mcnemar": true,
+    "nominal_alpha": 0.05,
+    "complete_gsm8k_attempt_family_size": 2,
+    "bonferroni_alpha": 0.025,
+    "final_three_benchmark_family": {
+      "procedure": "holm_bonferroni",
+      "family_size": 3,
+      "familywise_alpha": 0.05
+    },
+    "minimum_candidate_only_wins": 6,
+    "four_b_preservation": {
+      "point_delta_nonnegative": true,
+      "bootstrap_ci_lower_nonnegative": true,
+      "no_significant_regression": true,
+      "strict_parseable_route_non_regression": true,
+      "strict_parse_failure_route_non_regression": true
+    },
+    "nine_b_superiority": {
+      "point_delta_positive": true,
+      "bootstrap_ci_lower_positive": true,
+      "mcnemar_p_below_bonferroni_alpha": true,
+      "minimum_candidate_only_wins": true,
+      "candidate_only_exceeds_baseline_only": true
+    }
+  },
+  "output": {
+    "gsm8k_candidate_path": "results/full/qwen35-complete-conditional-majority-v1/candidate/gsm8k.jsonl",
+    "gsm8k_receipts_path": "results/full/qwen35-complete-conditional-majority-v1/candidate/gsm8k.receipts.jsonl",
+    "complete_candidate_path": "results/full/qwen35-complete-conditional-majority-v1/candidate/cases.jsonl",
+    "result_path": "results/full/qwen35-complete-conditional-majority-v1/result.json"
+  },
+  "policy": {
+    "benchmark_rows_training_eligible": false,
+    "benchmark_outputs_may_enter_training_reward_or_verifier": false,
+    "expected_answer_used_during_generation": false,
+    "case_correctness_used_during_generation": false,
+    "case_id_allowlist_for_routing": false,
+    "post_observation_search": false,
+    "raw_outputs_committed": false,
+    "prior_v5_gsm8k_outputs_reused": false,
+    "mmlu_and_gpqa_model_requests_repeated": false
+  },
+  "execution_boundary": {
+    "benchmark_generation_started": false,
+    "benchmark_output_content_loaded_by_preregister": false,
+    "full_candidate_composed": false,
+    "this_commit_only_preregisters": true,
+    "training_started": false,
+    "rl_or_opd_started": false,
+    "twenty_seven_b_accessed": false
+  }
+}
