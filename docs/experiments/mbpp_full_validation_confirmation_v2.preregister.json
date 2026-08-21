@@ -1,0 +1,131 @@
+{
+  "candidate": {
+    "fallback": "frozen_four_b_direct",
+    "max_tokens": 768,
+    "preserve_passing_direct": true,
+    "repair_feedback": "failed_public_test_indices_plus_failure_classes",
+    "repair_max_tokens": 768,
+    "repair_rounds_after_no_full_pass": 3,
+    "repair_seed_base": 2026083200,
+    "repair_source": "current_best_candidate",
+    "repair_temperature": 0.0,
+    "repair_top_p": 1.0,
+    "replicas_after_direct_failure": 5,
+    "seed_base": 2026083100,
+    "selection": "highest_public_test_pass_count_then_shortest_code_then_replica_index",
+    "temperature": 0.8,
+    "top_p": 0.95
+  },
+  "claim_boundary": "This pre-registers one fresh 47-case confirmation. It starts no generation, does not rerun prior train or validation rows, and establishes no MBPP test score.",
+  "decision_rule": {
+    "complete_test_preregistration_allowed": "confirmation_admitted",
+    "confirmation_admitted": "all four_b_preservation and nine_b_superiority gates pass",
+    "rerun_or_tuning_allowed": false
+  },
+  "execution": {
+    "assignment": "sorted_case_index_mod_num_shards",
+    "merge_requires_exact_case_set": true,
+    "num_shards": 4
+  },
+  "execution_boundary": {
+    "confirmation_generation_started": false,
+    "rl_or_opd_started": false,
+    "sanitized_validation_v1_rerun": false,
+    "test_generation_started": false,
+    "this_commit_only_preregisters": true,
+    "train_v2_rerun": false,
+    "training_started": false
+  },
+  "experiment_id": "mbpp-full-validation-confirmation-v2",
+  "identity": {
+    "code_revision": "1e4693d47d58860deb2ab876e8371185d5b932b3",
+    "config_sha256": "43675163a1d4fb576404f70a13f62e74e90b7dea275f56f06fe5dc6c118db19b",
+    "confirmation_case_ids_sha256": "30687b63345feacface8f94424e19bf7af2f355212432c5f355b86d5c4e803e9",
+    "excluded_sanitized_validation_sha256": "27e065fcab3c863959933328a7fdbf404e1bcb5464b1be6fe0dcd9530e420204",
+    "few_shot_task_ids": [
+      2,
+      3,
+      4
+    ],
+    "full_validation_sha256": "3f0ec060987432d99fe8fb409d31e6c67445b208a01741c5583517c80a10fe80",
+    "test_sha256": "e9e9efa2c0d59ef5e55537a9d126b8f875d5ac010a8d75628d76824884e15850",
+    "v2_result_sha256": "899c7c69949fa5ffd0433f2319f5b9f32cd9e77f91f83598f210b7e315acbdd0"
+  },
+  "parser": {
+    "begin_done_fallback": true,
+    "first_python_fence_anywhere": true,
+    "plain_python_fallback": true,
+    "target_blind": true
+  },
+  "prompt": {
+    "evaluation_reference_solution_visible_to_model": false,
+    "few_shot_reference_examples_visible_to_model": true,
+    "format": "official_three_shot_then_task_prompt_then_public_test_list",
+    "public_tests_visible_to_model": true,
+    "system": "You are an expert Python programmer. Write a correct Python solution for the requested function that passes the provided tests. Return exactly one Python code block and no explanation. Do not access files, the network, processes, environment variables, or external services."
+  },
+  "sandbox": {
+    "address_space_bytes": 1073741824,
+    "allowed_imports": [
+      "array",
+      "bisect",
+      "cmath",
+      "collections",
+      "copy",
+      "decimal",
+      "fractions",
+      "functools",
+      "heapq",
+      "itertools",
+      "math",
+      "operator",
+      "re",
+      "statistics",
+      "string",
+      "sys",
+      "typing"
+    ],
+    "backend": "bubblewrap",
+    "cpu_seconds_per_test": 3,
+    "file_size_bytes": 1048576,
+    "network": false,
+    "open_files": 64,
+    "python_isolated_mode": true,
+    "root_filesystem": "read_only",
+    "temporary_home": true,
+    "temporary_workdir": true,
+    "timeout_seconds_per_test": 5
+  },
+  "schema_version": "nano_harness_mbpp_confirmation_preregister_v2",
+  "statistics": {
+    "alpha": 0.05,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": "mbpp-full-validation-confirmation-v2",
+    "four_b_preservation": {
+      "bootstrap_ci_lower_nonnegative": true,
+      "candidate_only_greater_or_equal_baseline_only": true
+    },
+    "minimum_candidate_only_wins": 6,
+    "nine_b_superiority": {
+      "bootstrap_ci_lower_positive": true,
+      "candidate_only_exceeds_baseline_only": true,
+      "mcnemar_p_below_alpha": true,
+      "minimum_candidate_only_wins": true,
+      "point_delta_positive": true
+    }
+  },
+  "surface": {
+    "cases": 47,
+    "overlap_with_sanitized_train": 0,
+    "overlap_with_sanitized_validation": 0,
+    "shard_counts": [
+      12,
+      12,
+      12,
+      11
+    ],
+    "task_id_max": 575,
+    "task_id_min": 511,
+    "test_generation_started": false
+  }
+}
