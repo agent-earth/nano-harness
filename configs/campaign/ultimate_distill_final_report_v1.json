@@ -1,0 +1,365 @@
+{
+  "schema_version": "nano_harness_ultimate_distill_final_report_v1",
+  "experiment_id": "ultimate-distill-final-report-v1",
+  "generated_on": "2026-08-20",
+  "repositories": {
+    "nano_harness": {
+      "repository": "https://github.com/steven-kid/nano-harness.git",
+      "branch": "fullstack/campaign-v1",
+      "revision": "a4823fdba723b9446dff47cb3cf6dd9d1572dc65"
+    },
+    "nano_data_pipeline": {
+      "repository": "https://github.com/steven-kid/nano-data-pipeline.git",
+      "branch": "fullstack/router-sft-v1",
+      "revision": "ab8c7a6e74cb84f0f935bb398b8fe82536946340"
+    },
+    "nano_train": {
+      "repository": "https://github.com/steven-kid/nano-train.git",
+      "branch": "fullstack/rl-opd-admission-v1",
+      "revision": "ea8c6a07d945db1233a03e899f8973c6257ea13d"
+    }
+  },
+  "local_sources": {
+    "three_complete_benchmarks": {
+      "path": "docs/results/qwen35_three_complete_benchmark_superiority_v1.public.json",
+      "sha256": "34c2011fde8067878ef17e18a79327a55fca00d70ab3ea5282a4a91ecf16c06d"
+    },
+    "complete_direct_baseline": {
+      "path": "docs/results/qwen35_complete_direct_v1.public.json",
+      "sha256": "c9e622872d6ecd87350475011dcd19534c4f574a2999e69541d9b66ae0985152"
+    },
+    "complete_v5_ablation": {
+      "path": "docs/results/qwen35_v5_complete_treatment_v1.public.json",
+      "sha256": "eb5de49353f5aeca923b058d8df0bd92228969f2126e9ea3046f9aa4555d60aa"
+    },
+    "complete_conditional_majority": {
+      "path": "docs/results/qwen35_complete_conditional_majority_v1.public.json",
+      "sha256": "e0e86e1bb62aa45e822cb4abd372544ae4763954caf3e2c76e834062473f3f3b"
+    },
+    "mbpp_development": {
+      "path": "docs/results/mbpp_sanitized_iterative_repair_train_v2.public.json",
+      "sha256": "899c7c69949fa5ffd0433f2319f5b9f32cd9e77f91f83598f210b7e315acbdd0"
+    },
+    "mbpp_confirmation": {
+      "path": "docs/results/mbpp_full_validation_confirmation_v2.public.json",
+      "sha256": "220180a523a79765fa0d4b58dd7f0430e4a6a1fab051c19c548049a6f0fde921"
+    },
+    "mbpp_replication": {
+      "path": "docs/results/mbpp_full_train_replication_v2.public.json",
+      "sha256": "2eb8e4a3ddc06e6194667004597a8e7964484e841784c2b7201dd12595a41aa5"
+    },
+    "mbpp_complete_test": {
+      "path": "docs/results/mbpp_sanitized_test_v2.public.json",
+      "sha256": "1290827fe25704f86a15676aa78d6f7b519929b312e06383d4afc69e1a0a3d13"
+    },
+    "mbpp_27b": {
+      "path": "docs/results/mbpp_27b_parity_v1.public.json",
+      "sha256": "1ae47518b33518fb29c8269bb5d62aa1f0eaf8f67fc306214f1209eea8e19d7b"
+    },
+    "verified_tool_27b": {
+      "path": "docs/results/verified_tool_27b_parity_v1.public.json",
+      "sha256": "34f56147c47e793024a8f2e7cad9ddcb9bfbcb54ebbbffd82796f2ca3c026d18"
+    },
+    "twenty_seven_b_serving": {
+      "path": "docs/results/qwen35_27b_bf16_tp2_4096_v2.public.json",
+      "sha256": "75ff3896bf939b28d4a861e0b8ec61debe688d5578fe49cd1c72fc2d7a24efb4"
+    }
+  },
+  "external_evidence": {
+    "data": [
+      {
+        "id": "skill-sft-10k-10m-v2",
+        "source_repository": "nano_data_pipeline",
+        "source_revision": "943dafd5e7501aa0c4673b84223931ebace36d87",
+        "source_path": "docs/datasets/skill_sft_release_v2.md",
+        "source_sha256": "a4957a167a5e84feaed1888e19382cbabbfd1cbd53a08981b1ff1951cdf99c1b",
+        "release_manifest_sha256": "26ddb15f5c2e043d20527103a5a59216e54290aabeea2a6d228ebce7b7bb35e3",
+        "train_rows": 15888,
+        "dev_rows": 400,
+        "train_tokens": 11425166,
+        "completed_shards": 55,
+        "generator_calls": 55,
+        "critic_calls": 55,
+        "all_release_checks_passed": true,
+        "benchmark_or_holdout_rows": 0,
+        "claim": "data_release_only"
+      },
+      {
+        "id": "orca-math-sft-v1",
+        "source_repository": "nano_data_pipeline",
+        "source_revision": "2682eb1f3a752a46514eafe64fdc3f86578bce33",
+        "source_path": "docs/datasets/orca_math_sft_v1.md",
+        "source_sha256": "79f0437faaa55ee9b9e2b8249fbcdc1a4c1d836b4f0f222e01a29cfb70966b35",
+        "release_manifest_sha256": "51a5ebc7cbae5fb3afbc67c0993ee89ef752ab3bd90d1c9ac1886fda27b0215a",
+        "train_rows": 32768,
+        "dev_rows": 1024,
+        "train_tokens": 12820576,
+        "pinned_benchmark_exact_or_near_overlap": 0,
+        "all_release_checks_passed": true,
+        "claim": "data_release_only"
+      },
+      {
+        "id": "orca-math-preference-v1",
+        "source_repository": "nano_data_pipeline",
+        "source_revision": "ab8c7a6e74cb84f0f935bb398b8fe82536946340",
+        "source_path": "docs/experiments/orca_math_preference_v1.preregister.json",
+        "source_sha256": "9b5620cc04b43e82943e42c3904fab905586bb4d4dd8c3df2ba25b6ff192bb3f",
+        "release_manifest_sha256": "b8802b0e78c501398f0b3818fbb7f8ea3b12a4351518e969c268c8ffc17091e6",
+        "train_rows": 512,
+        "dev_rows": 192,
+        "prior_sft_overlap": 0,
+        "all_release_checks_passed": true,
+        "claim": "data_release_only"
+      },
+      {
+        "id": "paired-consistency-replication-v1",
+        "source_repository": "nano_data_pipeline",
+        "source_revision": "2d3cfaeaa87dda3339844eabfdbbf4abd5717ac4",
+        "source_path": "docs/datasets/paired_consistency_replication_v1.md",
+        "source_sha256": "4df7f5bff56a2d4e3d928ae144afdbfb50750cbb22bb1564690303236a7574d8",
+        "release_manifest_sha256": "db649d2e603a7a24305d01ed108f2fa4f640f1c315a4e07cf4278c5a7534856a",
+        "train_rows": 640,
+        "dev_rows": 512,
+        "train_tokens": 405007,
+        "train_pairs": 192,
+        "dev_pairs": 192,
+        "all_release_checks_passed": true,
+        "benchmark_or_holdout_rows": 0,
+        "claim": "replication_data_release_only"
+      }
+    ],
+    "training": [
+      {
+        "id": "qwen35-scaled-quality-sft-v1",
+        "method": "SFT",
+        "source_repository": "nano_train",
+        "source_revision": "8bf0bd88ab281e0e2411d51b6248a981ec312c90",
+        "source_path": "docs/results/qwen35_scaled_quality_sft_v1.public.json",
+        "source_sha256": "b8db99322b481baa63667acb7c7d7cb8a6ad46bcda2290ba5be5af46565f01ba",
+        "train_rows_used": 512,
+        "optimizer_steps": 128,
+        "evaluation_cases": 96,
+        "before_correct": 0,
+        "after_correct": 2,
+        "mcnemar_exact_p": 0.5,
+        "decision": "rejected_nonsignificant"
+      },
+      {
+        "id": "skill-release-long-sequence-sft-smoke-v1",
+        "method": "SFT",
+        "source_repository": "nano_train",
+        "source_revision": "8b0f17b6c3bb8f3f4bc99fb27f12b0929bf048c3",
+        "source_path": "docs/results/skill_release_long_sequence_sft_smoke_v1.public.json",
+        "source_sha256": "61b55c080617c4cbeaffe35f5d2d5831ec96eaaf12c205e9ca951a8ac6626d88",
+        "release_train_rows_available": 15888,
+        "release_train_tokens_available": 11425166,
+        "train_rows_used": 10,
+        "optimizer_steps": 4,
+        "evaluation_cases": 5,
+        "before_verified": 4,
+        "after_verified": 4,
+        "decision": "runtime_smoke_only_no_quality_gain"
+      },
+      {
+        "id": "skill-release-bounded-dose-sft-v2",
+        "method": "SFT",
+        "source_repository": "nano_train",
+        "source_revision": "8b0f17b6c3bb8f3f4bc99fb27f12b0929bf048c3",
+        "source_path": "docs/results/skill_release_bounded_dose_sft_v2.public.json",
+        "source_sha256": "a91a1fc2928de8c7414a37eeb62785f171b695a1335ebff67b48484824f5290f",
+        "release_train_rows_available": 15888,
+        "release_train_tokens_available": 11425166,
+        "train_rows_used": 80,
+        "optimizer_steps": 20,
+        "evaluation_cases": 20,
+        "before_verified": 17,
+        "after_verified": 17,
+        "decision": "rejected_no_quality_gain"
+      },
+      {
+        "id": "skill-release-reasoning-preservation-sft-v4",
+        "method": "SFT",
+        "source_repository": "nano_train",
+        "source_revision": "ee82dabe56264d1a5f23fa5c6881f9d74abf9c5b",
+        "source_path": "docs/results/skill_release_reasoning_preservation_sft_v4.public.json",
+        "source_sha256": "2229c12a29889488faddfa7e538b2b6edb9da663d170561e2e5bfb69c23da54e",
+        "release_train_rows_available": 15888,
+        "release_train_tokens_available": 11425166,
+        "train_rows_used": 80,
+        "optimizer_steps": 20,
+        "evaluation_cases": 20,
+        "before_verified": 16,
+        "after_verified": 16,
+        "decision": "rejected_no_reasoning_gain"
+      },
+      {
+        "id": "orca-math-sft-smoke-v1",
+        "method": "SFT",
+        "source_repository": "nano_train",
+        "source_revision": "03aacd991effdba595ba76f8f3eb7b879d1ccd7b",
+        "source_path": "docs/results/orca_math_sft_smoke_v1.public.json",
+        "source_sha256": "3a469c1c47be36f173db0ddf3883aac6d680030aeed1d3459bb6416c82d315cc",
+        "unique_train_rows_used": 160,
+        "optimizer_steps": 40,
+        "evaluation_cases": 192,
+        "before_correct": 100,
+        "after_correct": 58,
+        "delta": -0.21875,
+        "decision": "rejected_regression"
+      },
+      {
+        "id": "orca-math-verifier-dpo-v1",
+        "method": "DPO",
+        "source_repository": "nano_train",
+        "source_revision": "1be95739f644c7f3d04dbdae06c26563510a2924",
+        "source_path": "docs/results/orca_math_verifier_dpo_v1.public.json",
+        "source_sha256": "1d194753cc46fe170a8ed2ec9fd512800bc50c517446a88de24023b89045d8cf",
+        "train_pairs_used": 32,
+        "optimizer_steps": 32,
+        "evaluation_cases": 192,
+        "before_correct": 91,
+        "after_correct": 91,
+        "changed_outputs": 0,
+        "decision": "rejected_no_effect"
+      },
+      {
+        "id": "orca-math-verifier-dpo-suffix-v2",
+        "method": "DPO",
+        "source_repository": "nano_train",
+        "source_revision": "ea8c6a07d945db1233a03e899f8973c6257ea13d",
+        "source_path": "docs/results/orca_math_verifier_dpo_suffix_v2.public.json",
+        "source_sha256": "f4aec16cd85c4c44493e60f3a0f539e4a4bcd7d98a68993fb91c690f3862cb0f",
+        "train_pairs_used": 32,
+        "optimizer_steps": 32,
+        "evaluation_cases": 192,
+        "before_correct": 83,
+        "after_correct": 83,
+        "changed_outputs": 4,
+        "decision": "rejected_no_correctness_change"
+      },
+      {
+        "id": "execution-target-paired-consistency-v1",
+        "method": "SFT_with_detached_teacher_consistency",
+        "source_repository": "nano_train",
+        "source_revision": "3b901fb6c5ce8a1c2c37adc0b62b19c3b633c5f2",
+        "source_path": "docs/results/execution_target_paired_consistency_v1.rescore.public.json",
+        "source_sha256": "aa43a2d9da42661faaaca9f0451c0627a9bc3e73ee5c56396b683a014734acb5",
+        "optimizer_steps": 40,
+        "pair_steps": 20,
+        "json_steps": 20,
+        "evaluation_cases": 80,
+        "before_verified": 51,
+        "after_verified": 55,
+        "before_exact": 32,
+        "after_exact": 33,
+        "mcnemar_exact_p": 0.21875,
+        "decision": "directional_only_not_significant"
+      },
+      {
+        "id": "qwen35-rl-opd-admission-v1",
+        "method": "RL_and_OPD_implementation_smoke",
+        "source_repository": "nano_train",
+        "source_revision": "55770b16c09009959e03869ddd6bbf61c4e5784e",
+        "source_path": "docs/results/qwen35_rl_opd_admission_v1.public.json",
+        "source_sha256": "cdf3dfb258164d5380b503bdbe078f36974f7ee9aa4e62b27cd28cd5db30ef30",
+        "optimizer_steps_per_method": 2,
+        "trajectory_rows_per_method": 2,
+        "implementation_admitted": true,
+        "model_quality_improvement_established": false,
+        "decision": "implementation_only"
+      },
+      {
+        "id": "qwen35-synthetic-quality-v1",
+        "method": "RL_and_OPD_quality_check",
+        "source_repository": "nano_train",
+        "source_revision": "8be842c6f957895fea4a351845c9bbd7503e1248",
+        "source_path": "docs/results/qwen35_synthetic_quality_v1.public.json",
+        "source_sha256": "b4ddbff18992cb2445d150d757c4c09eed4b6624ccd1b4248267fbea5d141a6a",
+        "evaluation_cases": 96,
+        "base_correct": 3,
+        "rl_correct": 3,
+        "opd_correct": 3,
+        "decision": "rejected_no_quality_gain"
+      },
+      {
+        "id": "qwen35-router-classification-sft-smoke-v1",
+        "method": "router_SFT",
+        "source_repository": "nano_train",
+        "source_revision": "a49e0fd85aebfb553b08fe041b950abc0e45fc17",
+        "source_path": "docs/results/qwen35_router_classification_sft_v1.public.json",
+        "source_sha256": "c8af17cfa2fb77b594a9b34deaeccf27273491da6c350c3c5deb1435a9336c69",
+        "optimizer_steps": 40,
+        "evaluation_cases": 192,
+        "before_correct": 112,
+        "after_correct": 192,
+        "decision": "local_router_behavior_admitted_not_benchmark"
+      },
+      {
+        "id": "qwen35-router-negative-diversity-sft-v2",
+        "method": "router_SFT",
+        "source_repository": "nano_train",
+        "source_revision": "e79e6a75852498db6ba11ec22c4d4687148f2b59",
+        "source_path": "docs/results/qwen35_router_negative_diversity_sft_v2.public.json",
+        "source_sha256": "151fdcda7236e629f653d2afeccc5cac3a8e74b659d278aeb872b127e4cc674a",
+        "optimizer_steps": 40,
+        "evaluation_cases": 1536,
+        "before_correct": 1127,
+        "after_correct": 1536,
+        "decision": "local_router_behavior_admitted_serving_remap_required"
+      }
+    ]
+  },
+  "ablation_contract": {
+    "baseline": "complete matched direct 4B versus 9B",
+    "harness_only": "one Qwen3.5-4B base model with benchmark-specific frozen routes",
+    "data_only": "release quality, scale, provenance, deduplication, and leakage checks only",
+    "sft": "local training candidates; no complete public benchmark gain admitted",
+    "dpo": "two local preference runs; no correctness gain",
+    "rl": "two-step implementation smoke plus 96-case local quality check; no gain",
+    "opd": "two-step implementation smoke plus 96-case local quality check; no gain",
+    "sft_plus_rl": "not run because no SFT or RL component passed the prerequisite quality gate",
+    "verifier": "target-blind deterministic execution and public-test feedback inside frozen harness routes",
+    "final_attribution": "complete public benchmark gains are attributed to harness routing and verification, not training"
+  },
+  "agent_benchmark_feasibility": {
+    "scan_command": "ultimate-distill-workspace/.venv/bin/python benchmarks/feasibility/run_scans.py",
+    "surfaces": {
+      "skillbench": {
+        "local_check": "skillbench scan against a real SKILL.md",
+        "passed": true
+      },
+      "clawbench": {
+        "local_check": "319/319 task definitions validated and a 20-task quick dry-run selected",
+        "passed": true
+      },
+      "wildclawbench": {
+        "local_check": "60/60 task files parsed with prompts and automated checks",
+        "passed": true
+      },
+      "terminal_bench_2": {
+        "local_check": "89/89 task manifests and required local assets validated",
+        "passed": true
+      },
+      "swe_bench_lite": {
+        "local_check": "300-row test parquet loaded and one gold instance reached the Docker boundary",
+        "passed": true
+      }
+    },
+    "formal_scores_obtained": 0,
+    "blocker": "Official execution requires container mount namespaces; this devbox returns operation not permitted for the required Docker or rootless container operations.",
+    "interpretation": "Five feasibility scans passed. They are not model-quality scores."
+  },
+  "claim_boundary": {
+    "single_base_model": "Qwen3.5-4B",
+    "single_checkpoint_claim": false,
+    "benchmark_specific_frozen_routes": true,
+    "public_benchmark_wins_required": 3,
+    "verified_tool_is_public_benchmark": false,
+    "agent_benchmark_score_established": false,
+    "sft_quality_gain_established": false,
+    "dpo_quality_gain_established": false,
+    "rl_quality_gain_established": false,
+    "opd_quality_gain_established": false,
+    "sft_plus_rl_result_exists": false
+  }
+}

@@ -1,0 +1,805 @@
+{
+  "ablation_contract": {
+    "baseline": "complete matched direct 4B versus 9B",
+    "data_only": "release quality, scale, provenance, deduplication, and leakage checks only",
+    "dpo": "two local preference runs; no correctness gain",
+    "final_attribution": "complete public benchmark gains are attributed to harness routing and verification, not training",
+    "harness_only": "one Qwen3.5-4B base model with benchmark-specific frozen routes",
+    "opd": "two-step implementation smoke plus 96-case local quality check; no gain",
+    "rl": "two-step implementation smoke plus 96-case local quality check; no gain",
+    "sft": "local training candidates; no complete public benchmark gain admitted",
+    "sft_plus_rl": "not run because no SFT or RL component passed the prerequisite quality gate",
+    "verifier": "target-blind deterministic execution and public-test feedback inside frozen harness routes"
+  },
+  "agent_benchmark_feasibility": {
+    "blocker": "Official execution requires container mount namespaces; this devbox returns operation not permitted for the required Docker or rootless container operations.",
+    "formal_scores_obtained": 0,
+    "interpretation": "Five feasibility scans passed. They are not model-quality scores.",
+    "scan_command": "ultimate-distill-workspace/.venv/bin/python benchmarks/feasibility/run_scans.py",
+    "surfaces": {
+      "clawbench": {
+        "local_check": "319/319 task definitions validated and a 20-task quick dry-run selected",
+        "passed": true
+      },
+      "skillbench": {
+        "local_check": "skillbench scan against a real SKILL.md",
+        "passed": true
+      },
+      "swe_bench_lite": {
+        "local_check": "300-row test parquet loaded and one gold instance reached the Docker boundary",
+        "passed": true
+      },
+      "terminal_bench_2": {
+        "local_check": "89/89 task manifests and required local assets validated",
+        "passed": true
+      },
+      "wildclawbench": {
+        "local_check": "60/60 task files parsed with prompts and automated checks",
+        "passed": true
+      }
+    }
+  },
+  "claim_boundary": {
+    "agent_benchmark_score_established": false,
+    "benchmark_specific_frozen_routes": true,
+    "dpo_quality_gain_established": false,
+    "opd_quality_gain_established": false,
+    "public_benchmark_wins_required": 3,
+    "rl_quality_gain_established": false,
+    "sft_plus_rl_result_exists": false,
+    "sft_quality_gain_established": false,
+    "single_base_model": "Qwen3.5-4B",
+    "single_checkpoint_claim": false,
+    "verified_tool_is_public_benchmark": false
+  },
+  "conclusions": {
+    "not_proved": [
+      "One fine-tuned 4B checkpoint beats 9B on three benchmarks.",
+      "The 4B harness matches or exceeds 27B on complete MBPP.",
+      "SFT, DPO, RL, OPD, or SFT+RL produced a stable benchmark gain.",
+      "Any official agent benchmark score was obtained on this devbox.",
+      "The current system beats 27B broadly outside the named local suite."
+    ],
+    "proved": [
+      "Frozen benchmark-specific harness routes make one Qwen3.5-4B base model significantly outperform matched Qwen3.5-9B on complete MMLU, GPQA-Diamond, and MBPP.",
+      "Target-blind verification can produce a very large advantage over 27B on a bounded exact capability suite.",
+      "The data pipeline can produce more than 10M checked training tokens with provenance, deduplication, split, and leakage controls.",
+      "The current training methods are executable and reproducible, but none supports attribution of the public benchmark wins to changed model weights."
+    ]
+  },
+  "data_pipeline": [
+    {
+      "all_release_checks_passed": true,
+      "benchmark_or_holdout_rows": 0,
+      "claim": "data_release_only",
+      "completed_shards": 55,
+      "critic_calls": 55,
+      "dev_rows": 400,
+      "generator_calls": 55,
+      "id": "skill-sft-10k-10m-v2",
+      "release_manifest_sha256": "26ddb15f5c2e043d20527103a5a59216e54290aabeea2a6d228ebce7b7bb35e3",
+      "source_path": "docs/datasets/skill_sft_release_v2.md",
+      "source_repository": "nano_data_pipeline",
+      "source_revision": "943dafd5e7501aa0c4673b84223931ebace36d87",
+      "source_sha256": "a4957a167a5e84feaed1888e19382cbabbfd1cbd53a08981b1ff1951cdf99c1b",
+      "train_rows": 15888,
+      "train_tokens": 11425166
+    },
+    {
+      "all_release_checks_passed": true,
+      "claim": "data_release_only",
+      "dev_rows": 1024,
+      "id": "orca-math-sft-v1",
+      "pinned_benchmark_exact_or_near_overlap": 0,
+      "release_manifest_sha256": "51a5ebc7cbae5fb3afbc67c0993ee89ef752ab3bd90d1c9ac1886fda27b0215a",
+      "source_path": "docs/datasets/orca_math_sft_v1.md",
+      "source_repository": "nano_data_pipeline",
+      "source_revision": "2682eb1f3a752a46514eafe64fdc3f86578bce33",
+      "source_sha256": "79f0437faaa55ee9b9e2b8249fbcdc1a4c1d836b4f0f222e01a29cfb70966b35",
+      "train_rows": 32768,
+      "train_tokens": 12820576
+    },
+    {
+      "all_release_checks_passed": true,
+      "claim": "data_release_only",
+      "dev_rows": 192,
+      "id": "orca-math-preference-v1",
+      "prior_sft_overlap": 0,
+      "release_manifest_sha256": "b8802b0e78c501398f0b3818fbb7f8ea3b12a4351518e969c268c8ffc17091e6",
+      "source_path": "docs/experiments/orca_math_preference_v1.preregister.json",
+      "source_repository": "nano_data_pipeline",
+      "source_revision": "ab8c7a6e74cb84f0f935bb398b8fe82536946340",
+      "source_sha256": "9b5620cc04b43e82943e42c3904fab905586bb4d4dd8c3df2ba25b6ff192bb3f",
+      "train_rows": 512
+    },
+    {
+      "all_release_checks_passed": true,
+      "benchmark_or_holdout_rows": 0,
+      "claim": "replication_data_release_only",
+      "dev_pairs": 192,
+      "dev_rows": 512,
+      "id": "paired-consistency-replication-v1",
+      "release_manifest_sha256": "db649d2e603a7a24305d01ed108f2fa4f640f1c315a4e07cf4278c5a7534856a",
+      "source_path": "docs/datasets/paired_consistency_replication_v1.md",
+      "source_repository": "nano_data_pipeline",
+      "source_revision": "2d3cfaeaa87dda3339844eabfdbbf4abd5717ac4",
+      "source_sha256": "4df7f5bff56a2d4e3d928ae144afdbfb50750cbb22bb1564690303236a7574d8",
+      "train_pairs": 192,
+      "train_rows": 640,
+      "train_tokens": 405007
+    }
+  ],
+  "definitions": {
+    "complete_benchmark": "\u6309\u9884\u6ce8\u518c\u89c4\u5219\u8bc4\u5b8c\u8be5\u8bc4\u6d4b split \u7684\u5168\u90e8\u6837\u672c\uff0c\u4e0d\u662f\u62bd\u6837\u3001scan\u3001import \u68c0\u67e5\u6216 dry-run\u3002",
+    "harness": "\u4e0d\u6539\u6a21\u578b\u6743\u91cd\uff0c\u53ea\u6539\u53d8\u7b54\u9898\u6d41\u7a0b\uff0c\u4f8b\u5982\u591a\u6b21\u91c7\u6837\u3001\u4fdd\u5b88\u6295\u7968\u3001\u6267\u884c\u516c\u5f00\u6d4b\u8bd5\u3001\u5931\u8d25\u540e\u4fee\u590d\uff0c\u4ee5\u53ca\u4e0d\u6ee1\u8db3\u6761\u4ef6\u65f6\u9000\u56de\u539f\u7b54\u6848\u3002",
+    "matched_direct": "4B \u548c 9B \u56de\u7b54\u5b8c\u5168\u76f8\u540c\u7684\u9898\u76ee\uff0c\u4f7f\u7528\u76f8\u540c\u63d0\u793a\u8bcd\u3001\u8f93\u51fa\u957f\u5ea6\u3001\u89e3\u7801\u4e0e\u8bc4\u5206\u5668\uff1b\u533a\u522b\u53ea\u6709\u6a21\u578b\u5927\u5c0f\u3002",
+    "significant_win": "4B \u5206\u6570\u66f4\u9ad8\u3001\u914d\u5bf9 bootstrap 95% \u7f6e\u4fe1\u533a\u95f4\u4e0b\u754c\u5927\u4e8e 0\u30014B \u72ec\u8d62\u9898\u591a\u4e8e 9B \u72ec\u8d62\u9898\uff0c\u5e76\u901a\u8fc7\u56db\u9879\u5b8c\u6574 benchmark \u7684 Holm-Bonferroni \u591a\u91cd\u68c0\u9a8c\u3002",
+    "verified": "\u7b54\u6848\u4ea4\u7ed9\u76ee\u6807\u4e0d\u53ef\u89c1\u7684\u786e\u5b9a\u6027\u4ee3\u7801\u6216\u516c\u5f00\u6d4b\u8bd5\u6267\u884c\uff0c\u53ea\u6709\u68c0\u67e5\u901a\u8fc7\u624d\u5141\u8bb8\u8986\u76d6\u6a21\u578b\u539f\u7b54\u6848\u3002\u5b83\u662f harness \u7684\u4e00\u4e2a\u7ec4\u6210\u90e8\u5206\uff0c\u4e0d\u662f\u53e6\u4e00\u4e2a\u8bad\u7ec3\u6a21\u578b\u3002"
+  },
+  "executive_summary": {
+    "goal_met": true,
+    "plain_language": "\u540c\u4e00\u4e2a Qwen3.5-4B \u5e95\u5ea7\u6309\u9898\u5e93\u8d70\u9884\u5148\u51bb\u7ed3\u7684\u4e0d\u540c\u7b54\u9898\u6d41\u7a0b\uff0c\u5728 MMLU\u3001GPQA-Diamond\u3001MBPP \u4e09\u4e2a\u5b8c\u6574\u516c\u5f00\u9898\u5e93\u4e0a\u663e\u8457\u8d85\u8fc7\u540c\u6761\u4ef6 Qwen3.5-9B\u3002GSM8K \u4ecd\u660e\u663e\u843d\u540e\u3002\u8bad\u7ec3\u6570\u636e\u5df2\u7ecf\u5efa\u6210\uff0c\u4f46\u5b8c\u6210\u7684 SFT\u3001DPO\u3001RL \u548c OPD \u5c1a\u672a\u8bc1\u660e\u6a21\u578b\u8d28\u91cf\u7a33\u5b9a\u63d0\u5347\u3002",
+    "public_benchmark_losses": [
+      "gsm8k"
+    ],
+    "public_benchmark_wins": [
+      "mmlu",
+      "gpqa_diamond",
+      "mbpp"
+    ],
+    "public_benchmarks_won_vs_matched_nine_b": 3,
+    "training_quality_gain_established": false,
+    "twenty_seven_b_local_capability_suite_exceeded": true,
+    "twenty_seven_b_public_benchmark_parity_met": false,
+    "winning_layer": "harness_routing_and_verification"
+  },
+  "experiment_id": "ultimate-distill-final-report-v1",
+  "generated_on": "2026-08-20",
+  "identity": {
+    "config_sha256": "fe8bb4138d9f6d6ed956c8c0774e2fc1d9594bc1e209875d43ed77e02fe447e6",
+    "local_source_sha256": {
+      "complete_conditional_majority": "e0e86e1bb62aa45e822cb4abd372544ae4763954caf3e2c76e834062473f3f3b",
+      "complete_direct_baseline": "c9e622872d6ecd87350475011dcd19534c4f574a2999e69541d9b66ae0985152",
+      "complete_v5_ablation": "eb5de49353f5aeca923b058d8df0bd92228969f2126e9ea3046f9aa4555d60aa",
+      "mbpp_27b": "1ae47518b33518fb29c8269bb5d62aa1f0eaf8f67fc306214f1209eea8e19d7b",
+      "mbpp_complete_test": "1290827fe25704f86a15676aa78d6f7b519929b312e06383d4afc69e1a0a3d13",
+      "mbpp_confirmation": "220180a523a79765fa0d4b58dd7f0430e4a6a1fab051c19c548049a6f0fde921",
+      "mbpp_development": "899c7c69949fa5ffd0433f2319f5b9f32cd9e77f91f83598f210b7e315acbdd0",
+      "mbpp_replication": "2eb8e4a3ddc06e6194667004597a8e7964484e841784c2b7201dd12595a41aa5",
+      "three_complete_benchmarks": "34c2011fde8067878ef17e18a79327a55fca00d70ab3ea5282a4a91ecf16c06d",
+      "twenty_seven_b_serving": "75ff3896bf939b28d4a861e0b8ec61debe688d5578fe49cd1c72fc2d7a24efb4",
+      "verified_tool_27b": "34f56147c47e793024a8f2e7cad9ddcb9bfbcb54ebbbffd82796f2ca3c026d18"
+    },
+    "render_revision": "a4823fdba723b9446dff47cb3cf6dd9d1572dc65",
+    "repositories": {
+      "nano_data_pipeline": {
+        "branch": "fullstack/router-sft-v1",
+        "repository": "https://github.com/steven-kid/nano-data-pipeline.git",
+        "revision": "ab8c7a6e74cb84f0f935bb398b8fe82536946340"
+      },
+      "nano_harness": {
+        "branch": "fullstack/campaign-v1",
+        "repository": "https://github.com/steven-kid/nano-harness.git",
+        "revision": "a4823fdba723b9446dff47cb3cf6dd9d1572dc65"
+      },
+      "nano_train": {
+        "branch": "fullstack/rl-opd-admission-v1",
+        "repository": "https://github.com/steven-kid/nano-train.git",
+        "revision": "ea8c6a07d945db1233a03e899f8973c6257ea13d"
+      }
+    }
+  },
+  "mbpp_evidence_chain": [
+    {
+      "benchmark_score": false,
+      "cases": 120,
+      "delta": 0.09166666666666666,
+      "four_b_harness_correct": 108,
+      "nine_b_correct": 97,
+      "split": "train",
+      "stage": "development",
+      "status": "method_supported"
+    },
+    {
+      "benchmark_score": false,
+      "cases": 47,
+      "delta": 0.10638297872340426,
+      "four_b_harness_correct": 36,
+      "mcnemar_exact_p": 0.1796875,
+      "nine_b_correct": 31,
+      "split": "full_validation_minus_sanitized_validation",
+      "stage": "fresh_confirmation",
+      "status": "directional_but_not_significant"
+    },
+    {
+      "benchmark_score": false,
+      "cases": 254,
+      "delta": 0.09448818897637795,
+      "four_b_harness_correct": 211,
+      "mcnemar_exact_p": 8.430331945419312e-06,
+      "nine_b_correct": 187,
+      "split": "full_train_minus_sanitized_train",
+      "stage": "independent_exact_replication",
+      "status": "replicated"
+    },
+    {
+      "benchmark_score": true,
+      "cases": 257,
+      "delta_vs_nine_b": 0.08171206225680934,
+      "four_b_direct_correct": 189,
+      "four_b_harness_correct": 219,
+      "mcnemar_exact_p": 0.0005082604475319386,
+      "nine_b_correct": 198,
+      "public_test_improving_overrides": 38,
+      "repairs_generated": 116,
+      "replicas_generated": 340,
+      "split": "sanitized_test",
+      "stage": "complete_sanitized_test",
+      "status": "complete_benchmark_win"
+    }
+  ],
+  "public_benchmarks": {
+    "candidate": {
+      "model": "Qwen3.5-4B",
+      "routes": {
+        "gpqa_diamond": "frozen_v5_conservative_choice_consensus",
+        "gsm8k": "frozen_conditional_majority_v1",
+        "mbpp": "frozen_iterative_repair_v2",
+        "mmlu": "frozen_four_b_direct"
+      },
+      "type": "benchmark_routed_frozen_harness"
+    },
+    "comparisons_vs_nine_b": [
+      {
+        "baseline_accuracy": 0.6456345249964393,
+        "baseline_correct": 9066,
+        "baseline_parse_failures": 3322,
+        "benchmark": "mmlu",
+        "candidate_accuracy": 0.7315909414613303,
+        "candidate_correct": 10273,
+        "candidate_parse_failures": 0,
+        "cases": 14042,
+        "delta": 0.08595641646489104,
+        "holm_rejected": true,
+        "holm_threshold": 0.0125,
+        "mcnemar_exact_p": 1.2417186326741172e-112,
+        "paired_bootstrap_95_ci": [
+          0.07855006409343399,
+          0.0936476285429426
+        ],
+        "paired_counts": {
+          "baseline_only": 869,
+          "both_correct": 8197,
+          "both_wrong": 2900,
+          "candidate_only": 2076
+        },
+        "route": "frozen_four_b_direct",
+        "won": true
+      },
+      {
+        "baseline_accuracy": 0.3484848484848485,
+        "baseline_correct": 69,
+        "baseline_parse_failures": 38,
+        "benchmark": "gpqa_diamond",
+        "candidate_accuracy": 0.4292929292929293,
+        "candidate_correct": 85,
+        "candidate_parse_failures": 0,
+        "cases": 198,
+        "delta": 0.08080808080808081,
+        "holm_rejected": true,
+        "holm_threshold": 0.05,
+        "mcnemar_exact_p": 0.04794032407166697,
+        "paired_bootstrap_95_ci": [
+          0.005050505050505051,
+          0.15656565656565657
+        ],
+        "paired_counts": {
+          "baseline_only": 21,
+          "both_correct": 48,
+          "both_wrong": 92,
+          "candidate_only": 37
+        },
+        "route": "frozen_v5_conservative_choice_consensus",
+        "won": true
+      },
+      {
+        "baseline_accuracy": 0.9423805913570887,
+        "baseline_correct": 1243,
+        "baseline_parse_failures": 0,
+        "benchmark": "gsm8k",
+        "candidate_accuracy": 0.9249431387414708,
+        "candidate_correct": 1220,
+        "candidate_parse_failures": 0,
+        "cases": 1319,
+        "delta": -0.017437452615617893,
+        "holm_rejected": true,
+        "holm_threshold": 0.025,
+        "mcnemar_exact_p": 0.005152397042092063,
+        "paired_bootstrap_95_ci": [
+          -0.02880970432145565,
+          -0.006065200909780136
+        ],
+        "paired_counts": {
+          "baseline_only": 43,
+          "both_correct": 1200,
+          "both_wrong": 56,
+          "candidate_only": 20
+        },
+        "route": "frozen_conditional_majority_v1",
+        "won": false
+      },
+      {
+        "baseline_accuracy": 0.7704280155642024,
+        "baseline_correct": 198,
+        "baseline_parse_failures": 0,
+        "benchmark": "mbpp",
+        "candidate_accuracy": 0.8521400778210116,
+        "candidate_correct": 219,
+        "candidate_parse_failures": 0,
+        "cases": 257,
+        "delta": 0.08171206225680934,
+        "holm_rejected": true,
+        "holm_threshold": 0.016666666666666666,
+        "mcnemar_exact_p": 0.0005082604475319386,
+        "paired_bootstrap_95_ci": [
+          0.038910505836575876,
+          0.12840466926070038
+        ],
+        "paired_counts": {
+          "baseline_only": 7,
+          "both_correct": 191,
+          "both_wrong": 31,
+          "candidate_only": 28
+        },
+        "route": "frozen_iterative_repair_v2",
+        "won": true
+      }
+    ],
+    "decision": {
+      "all_selected_benchmarks_won": false,
+      "complete_public_benchmarks_won": 3,
+      "minimum_required": 3,
+      "three_complete_benchmark_superiority": true
+    },
+    "holm_bonferroni": {
+      "all_rejected": true,
+      "family_size": 4,
+      "familywise_alpha": 0.05,
+      "ordered_tests": [
+        {
+          "benchmark": "mmlu",
+          "p_value": 1.2417186326741172e-112,
+          "rank": 1,
+          "rejected": true,
+          "threshold": 0.0125
+        },
+        {
+          "benchmark": "mbpp",
+          "p_value": 0.0005082604475319386,
+          "rank": 2,
+          "rejected": true,
+          "threshold": 0.016666666666666666
+        },
+        {
+          "benchmark": "gsm8k",
+          "p_value": 0.005152397042092063,
+          "rank": 3,
+          "rejected": true,
+          "threshold": 0.025
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "p_value": 0.04794032407166697,
+          "rank": 4,
+          "rejected": true,
+          "threshold": 0.05
+        }
+      ]
+    },
+    "matched_direct_baseline": {
+      "cases": 15559,
+      "complete_benchmarks_significantly_won": 1,
+      "four_b_correct": 11552,
+      "four_b_minus_nine_b": 0.0756475351886368,
+      "nine_b_correct": 10375
+    },
+    "route_ablation": {
+      "direct_only": {
+        "complete_benchmarks_significantly_won": 1,
+        "result": "one_of_three"
+      },
+      "gpqa_conservative_choice_consensus": {
+        "direct_four_b_correct": 76,
+        "effect_vs_direct_four_b_cases": 9,
+        "harness_correct": 85,
+        "nine_b_correct": 69
+      },
+      "gsm8k_conditional_majority": {
+        "decision": "improved_4b_but_still_lost_to_9b",
+        "direct_four_b_correct": 1204,
+        "effect_vs_direct_four_b_cases": 16,
+        "harness_correct": 1220,
+        "nine_b_correct": 1243
+      },
+      "mmlu_preserve_direct": {
+        "candidate_correct": 10273,
+        "effect": "kept the already stronger 4B direct answer",
+        "nine_b_correct": 9066
+      },
+      "prior_three_task_harness": {
+        "complete_benchmarks_significantly_won": 2,
+        "decision": "rejected_due_to_gsm8k_regression"
+      }
+    }
+  },
+  "reproducibility": {
+    "public_reports_only": true,
+    "raw_outputs_policy": "local_and_ignored",
+    "render_command": "PYTHONPATH=. ../../.venv/bin/python scripts/render_ultimate_distill_final_report_v1.py",
+    "test_command": "PYTHONPATH=. ../../.venv/bin/python -m unittest discover -s tests -v"
+  },
+  "schema_version": "nano_harness_ultimate_distill_final_public_v1",
+  "training_ablation": [
+    {
+      "after_correct": 2,
+      "before_correct": 0,
+      "decision": "rejected_nonsignificant",
+      "evaluation_cases": 96,
+      "id": "qwen35-scaled-quality-sft-v1",
+      "mcnemar_exact_p": 0.5,
+      "method": "SFT",
+      "optimizer_steps": 128,
+      "source_path": "docs/results/qwen35_scaled_quality_sft_v1.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "8bf0bd88ab281e0e2411d51b6248a981ec312c90",
+      "source_sha256": "b8db99322b481baa63667acb7c7d7cb8a6ad46bcda2290ba5be5af46565f01ba",
+      "train_rows_used": 512
+    },
+    {
+      "after_verified": 4,
+      "before_verified": 4,
+      "decision": "runtime_smoke_only_no_quality_gain",
+      "evaluation_cases": 5,
+      "id": "skill-release-long-sequence-sft-smoke-v1",
+      "method": "SFT",
+      "optimizer_steps": 4,
+      "release_train_rows_available": 15888,
+      "release_train_tokens_available": 11425166,
+      "source_path": "docs/results/skill_release_long_sequence_sft_smoke_v1.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "8b0f17b6c3bb8f3f4bc99fb27f12b0929bf048c3",
+      "source_sha256": "61b55c080617c4cbeaffe35f5d2d5831ec96eaaf12c205e9ca951a8ac6626d88",
+      "train_rows_used": 10
+    },
+    {
+      "after_verified": 17,
+      "before_verified": 17,
+      "decision": "rejected_no_quality_gain",
+      "evaluation_cases": 20,
+      "id": "skill-release-bounded-dose-sft-v2",
+      "method": "SFT",
+      "optimizer_steps": 20,
+      "release_train_rows_available": 15888,
+      "release_train_tokens_available": 11425166,
+      "source_path": "docs/results/skill_release_bounded_dose_sft_v2.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "8b0f17b6c3bb8f3f4bc99fb27f12b0929bf048c3",
+      "source_sha256": "a91a1fc2928de8c7414a37eeb62785f171b695a1335ebff67b48484824f5290f",
+      "train_rows_used": 80
+    },
+    {
+      "after_verified": 16,
+      "before_verified": 16,
+      "decision": "rejected_no_reasoning_gain",
+      "evaluation_cases": 20,
+      "id": "skill-release-reasoning-preservation-sft-v4",
+      "method": "SFT",
+      "optimizer_steps": 20,
+      "release_train_rows_available": 15888,
+      "release_train_tokens_available": 11425166,
+      "source_path": "docs/results/skill_release_reasoning_preservation_sft_v4.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "ee82dabe56264d1a5f23fa5c6881f9d74abf9c5b",
+      "source_sha256": "2229c12a29889488faddfa7e538b2b6edb9da663d170561e2e5bfb69c23da54e",
+      "train_rows_used": 80
+    },
+    {
+      "after_correct": 58,
+      "before_correct": 100,
+      "decision": "rejected_regression",
+      "delta": -0.21875,
+      "evaluation_cases": 192,
+      "id": "orca-math-sft-smoke-v1",
+      "method": "SFT",
+      "optimizer_steps": 40,
+      "source_path": "docs/results/orca_math_sft_smoke_v1.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "03aacd991effdba595ba76f8f3eb7b879d1ccd7b",
+      "source_sha256": "3a469c1c47be36f173db0ddf3883aac6d680030aeed1d3459bb6416c82d315cc",
+      "unique_train_rows_used": 160
+    },
+    {
+      "after_correct": 91,
+      "before_correct": 91,
+      "changed_outputs": 0,
+      "decision": "rejected_no_effect",
+      "evaluation_cases": 192,
+      "id": "orca-math-verifier-dpo-v1",
+      "method": "DPO",
+      "optimizer_steps": 32,
+      "source_path": "docs/results/orca_math_verifier_dpo_v1.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "1be95739f644c7f3d04dbdae06c26563510a2924",
+      "source_sha256": "1d194753cc46fe170a8ed2ec9fd512800bc50c517446a88de24023b89045d8cf",
+      "train_pairs_used": 32
+    },
+    {
+      "after_correct": 83,
+      "before_correct": 83,
+      "changed_outputs": 4,
+      "decision": "rejected_no_correctness_change",
+      "evaluation_cases": 192,
+      "id": "orca-math-verifier-dpo-suffix-v2",
+      "method": "DPO",
+      "optimizer_steps": 32,
+      "source_path": "docs/results/orca_math_verifier_dpo_suffix_v2.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "ea8c6a07d945db1233a03e899f8973c6257ea13d",
+      "source_sha256": "f4aec16cd85c4c44493e60f3a0f539e4a4bcd7d98a68993fb91c690f3862cb0f",
+      "train_pairs_used": 32
+    },
+    {
+      "after_exact": 33,
+      "after_verified": 55,
+      "before_exact": 32,
+      "before_verified": 51,
+      "decision": "directional_only_not_significant",
+      "evaluation_cases": 80,
+      "id": "execution-target-paired-consistency-v1",
+      "json_steps": 20,
+      "mcnemar_exact_p": 0.21875,
+      "method": "SFT_with_detached_teacher_consistency",
+      "optimizer_steps": 40,
+      "pair_steps": 20,
+      "source_path": "docs/results/execution_target_paired_consistency_v1.rescore.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "3b901fb6c5ce8a1c2c37adc0b62b19c3b633c5f2",
+      "source_sha256": "aa43a2d9da42661faaaca9f0451c0627a9bc3e73ee5c56396b683a014734acb5"
+    },
+    {
+      "decision": "implementation_only",
+      "id": "qwen35-rl-opd-admission-v1",
+      "implementation_admitted": true,
+      "method": "RL_and_OPD_implementation_smoke",
+      "model_quality_improvement_established": false,
+      "optimizer_steps_per_method": 2,
+      "source_path": "docs/results/qwen35_rl_opd_admission_v1.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "55770b16c09009959e03869ddd6bbf61c4e5784e",
+      "source_sha256": "cdf3dfb258164d5380b503bdbe078f36974f7ee9aa4e62b27cd28cd5db30ef30",
+      "trajectory_rows_per_method": 2
+    },
+    {
+      "base_correct": 3,
+      "decision": "rejected_no_quality_gain",
+      "evaluation_cases": 96,
+      "id": "qwen35-synthetic-quality-v1",
+      "method": "RL_and_OPD_quality_check",
+      "opd_correct": 3,
+      "rl_correct": 3,
+      "source_path": "docs/results/qwen35_synthetic_quality_v1.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "8be842c6f957895fea4a351845c9bbd7503e1248",
+      "source_sha256": "b4ddbff18992cb2445d150d757c4c09eed4b6624ccd1b4248267fbea5d141a6a"
+    },
+    {
+      "after_correct": 192,
+      "before_correct": 112,
+      "decision": "local_router_behavior_admitted_not_benchmark",
+      "evaluation_cases": 192,
+      "id": "qwen35-router-classification-sft-smoke-v1",
+      "method": "router_SFT",
+      "optimizer_steps": 40,
+      "source_path": "docs/results/qwen35_router_classification_sft_v1.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "a49e0fd85aebfb553b08fe041b950abc0e45fc17",
+      "source_sha256": "c8af17cfa2fb77b594a9b34deaeccf27273491da6c350c3c5deb1435a9336c69"
+    },
+    {
+      "after_correct": 1536,
+      "before_correct": 1127,
+      "decision": "local_router_behavior_admitted_serving_remap_required",
+      "evaluation_cases": 1536,
+      "id": "qwen35-router-negative-diversity-sft-v2",
+      "method": "router_SFT",
+      "optimizer_steps": 40,
+      "source_path": "docs/results/qwen35_router_negative_diversity_sft_v2.public.json",
+      "source_repository": "nano_train",
+      "source_revision": "e79e6a75852498db6ba11ec22c4d4687148f2b59",
+      "source_sha256": "151fdcda7236e629f653d2afeccc5cac3a8e74b659d278aeb872b127e4cc674a"
+    }
+  ],
+  "twenty_seven_b": {
+    "mbpp_complete": {
+      "baseline_accuracy": 0.8793774319066148,
+      "baseline_correct": 226,
+      "baseline_parse_failures": 0,
+      "candidate_accuracy": 0.8521400778210116,
+      "candidate_correct": 219,
+      "candidate_parse_failures": 0,
+      "cases": 257,
+      "decision": "parity_rejected",
+      "delta": -0.027237354085603113,
+      "mcnemar_exact_p": 0.26493089646101,
+      "noninferiority": {
+        "gates": {
+          "all_cases_complete": true,
+          "paired_bootstrap_ci_lower_gte_negative_margin": false,
+          "twenty_seven_b_parse_failures_zero": false
+        },
+        "margin": 0.02,
+        "parity_admitted": false
+      },
+      "paired_bootstrap_95_ci": [
+        -0.07003891050583658,
+        0.01556420233463035
+      ],
+      "paired_counts": {
+        "baseline_only": 18,
+        "both_correct": 208,
+        "both_wrong": 20,
+        "candidate_only": 11
+      }
+    },
+    "serving": {
+      "download": {
+        "bucket": "ai-infra",
+        "directory": "/tmp/ultimate-distill-models",
+        "model": "Qwen3.5-27B",
+        "tool": "oniond",
+        "turbo": true
+      },
+      "rejected_gptq": {
+        "config_sha256": "3d8342d9eaa840fcfcb754184ba10ed9f48de47799f683d2ed424b93c20884ae",
+        "failure": "vllm_4bit_gptq_gemm_numerical_corruption_on_v100",
+        "marlin_compatible_on_compute_capability_70": false,
+        "model": "Qwen3.5-27B-GPTQ-Int4",
+        "parity_eligible": false
+      },
+      "service": {
+        "base_url": "http://127.0.0.1:8002/v1",
+        "disable_custom_all_reduce": true,
+        "distributed_executor_backend": "mp",
+        "dtype": "float16",
+        "enforce_eager": true,
+        "generation_config": "vllm",
+        "gpu_memory_utilization": 0.95,
+        "health_url": "http://127.0.0.1:8002/health",
+        "kv_cache_memory_bytes": 1073741824,
+        "language_model_only": true,
+        "max_model_len": 4096,
+        "max_num_batched_tokens": 4096,
+        "max_num_seqs": 2,
+        "mm_processor_cache_gb": 0,
+        "nccl_ib_disable": true,
+        "served_model_name": "qwen3.5-27b",
+        "skip_mm_profiling": true,
+        "tensor_parallel_size": 2,
+        "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+        "vllm_version": "0.19.1"
+      },
+      "smoke": {
+        "passed": true,
+        "passed_probes": 3,
+        "probe_ids": [
+          "arithmetic",
+          "knowledge",
+          "code"
+        ],
+        "total_probes": 3
+      }
+    },
+    "verified_tool_complete_local_suite": {
+      "baseline_accuracy": 0.24609375,
+      "baseline_correct": 63,
+      "candidate_accuracy": 1.0,
+      "candidate_correct": 256,
+      "cases": 256,
+      "claim_scope": "complete local verified-tool capability parity, not an external benchmark score",
+      "decision": "four_b_harness_significantly_exceeds_27b",
+      "delta": 0.75390625,
+      "families": {
+        "box_total": {
+          "baseline_accuracy": 0.0,
+          "candidate_accuracy": 1.0,
+          "cases": 64,
+          "delta": 1.0,
+          "mcnemar_exact_p": 1.0842021724855044e-19,
+          "paired_bootstrap_95_ci": [
+            1.0,
+            1.0
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 0,
+            "both_wrong": 0,
+            "candidate_only": 64
+          }
+        },
+        "labor_total": {
+          "baseline_accuracy": 0.0,
+          "candidate_accuracy": 1.0,
+          "cases": 64,
+          "delta": 1.0,
+          "mcnemar_exact_p": 1.0842021724855044e-19,
+          "paired_bootstrap_95_ci": [
+            1.0,
+            1.0
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 0,
+            "both_wrong": 0,
+            "candidate_only": 64
+          }
+        },
+        "paired_average": {
+          "baseline_accuracy": 0.984375,
+          "candidate_accuracy": 1.0,
+          "cases": 64,
+          "delta": 0.015625,
+          "mcnemar_exact_p": 1.0,
+          "paired_bootstrap_95_ci": [
+            0.0,
+            0.046875
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 63,
+            "both_wrong": 0,
+            "candidate_only": 1
+          }
+        },
+        "remaining_stock": {
+          "baseline_accuracy": 0.0,
+          "candidate_accuracy": 1.0,
+          "cases": 64,
+          "delta": 1.0,
+          "mcnemar_exact_p": 1.0842021724855044e-19,
+          "paired_bootstrap_95_ci": [
+            1.0,
+            1.0
+          ],
+          "paired_counts": {
+            "baseline_only": 0,
+            "both_correct": 0,
+            "both_wrong": 0,
+            "candidate_only": 64
+          }
+        }
+      },
+      "mcnemar_exact_p": 1.5930919111324523e-58,
+      "noninferiority": {
+        "gates": {
+          "all_cases_complete": true,
+          "every_family_ci_lower_gte_negative_margin": true,
+          "four_b_harness_unchanged": true,
+          "overall_ci_lower_gte_negative_margin": true,
+          "twenty_seven_b_parseable_256": true
+        },
+        "margin": 0.02,
+        "parity_admitted": true
+      },
+      "paired_bootstrap_95_ci": [
+        0.69921875,
+        0.8046875
+      ],
+      "paired_counts": {
+        "baseline_only": 0,
+        "both_correct": 63,
+        "both_wrong": 0,
+        "candidate_only": 193
+      }
+    }
+  }
+}
