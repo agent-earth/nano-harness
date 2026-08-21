@@ -27,8 +27,8 @@ def git_revision() -> str:
     ).strip()
 
 
-def load_config() -> dict[str, Any]:
-    config = json.loads(CONFIG.read_text(encoding="utf-8"))
+def load_config(path: Path = CONFIG) -> dict[str, Any]:
+    config = json.loads(path.read_text(encoding="utf-8"))
     if (
         config.get("schema_version")
         != "nano_harness_qwen35_27b_serving_v1"
@@ -45,8 +45,13 @@ def load_config() -> dict[str, Any]:
     return config
 
 
-def validate() -> dict[str, Any]:
-    config = load_config()
+def validate(
+    config_path: Path = CONFIG,
+    raw_path: Path = RAW,
+    public_path: Path = PUBLIC,
+    markdown_path: Path = MARKDOWN,
+) -> dict[str, Any]:
+    config = load_config(config_path)
     model_root = Path(config["model"]["path"])
     if (
         sha256_file(model_root / "config.json")
@@ -117,7 +122,7 @@ def validate() -> dict[str, Any]:
         )
     if not all(row["exact"] for row in probes):
         raise ValueError("Qwen3.5-27B deterministic smoke failed")
-    RAW.parent.mkdir(parents=True, exist_ok=True)
+    raw_path.parent.mkdir(parents=True, exist_ok=True)
     raw = {
         "schema_version": "nano_harness_qwen35_27b_serving_raw_v1",
         "experiment_id": config["experiment_id"],
@@ -126,7 +131,7 @@ def validate() -> dict[str, Any]:
         ).hexdigest(),
         "probes": probes,
     }
-    RAW.write_text(
+    raw_path.write_text(
         json.dumps(raw, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
@@ -135,10 +140,10 @@ def validate() -> dict[str, Any]:
         "experiment_id": config["experiment_id"],
         "identity": {
             "result_revision": git_revision(),
-            "config_sha256": sha256_file(CONFIG),
+            "config_sha256": sha256_file(config_path),
             "model_config_sha256": config["model"]["config_sha256"],
             "model_index_sha256": config["model"]["index_sha256"],
-            "raw_result_sha256": sha256_file(RAW),
+            "raw_result_sha256": sha256_file(raw_path),
         },
         "service": config["service"],
         "download": config["download"],
@@ -156,15 +161,16 @@ def validate() -> dict[str, Any]:
             "benchmark_score_established": False,
         },
     }
-    PUBLIC.parent.mkdir(parents=True, exist_ok=True)
-    PUBLIC.write_text(
+    public_path.parent.mkdir(parents=True, exist_ok=True)
+    public_path.write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    MARKDOWN.write_text(
-        "# Qwen3.5-27B BF16 TP=2 Serving v1\n\n"
+    markdown_path.write_text(
+        f"# {config['experiment_id']}\n\n"
         "The two-GPU BF16 service passed 3/3 deterministic smoke probes at "
-        "1024 context. The GPTQ-Int4 service is rejected because vLLM 0.19.1 "
+        f"{config['service']['max_model_len']} context. The GPTQ-Int4 service "
+        "is rejected because vLLM 0.19.1 "
         "warns that its 4-bit GPTQ GEMM is buggy and the observed outputs "
         "degenerated to punctuation; Marlin has no supported quantization "
         "type on the V100 compute capability 7.0 GPUs.\n\n"

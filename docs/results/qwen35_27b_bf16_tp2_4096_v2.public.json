@@ -1,0 +1,106 @@
+{
+  "decision": {
+    "benchmark_score_established": false,
+    "bf16_tp2_service_ready": true,
+    "gptq_service_rejected": true,
+    "parity_preregistration_allowed": true
+  },
+  "download": {
+    "bucket": "ai-infra",
+    "directory": "/tmp/ultimate-distill-models",
+    "model": "Qwen3.5-27B",
+    "tool": "oniond",
+    "turbo": true
+  },
+  "experiment_id": "qwen35-27b-bf16-tp2-4096-v2",
+  "identity": {
+    "config_sha256": "3dbda508f7241aa2ccae1f36286cc7e2677845bddb315d2e68a7e838b8f8282a",
+    "model_config_sha256": "f8d190c5b89c1521220f935d2567a587d6e291ed69066a45a106560b05a2174c",
+    "model_index_sha256": "b3737e9d00bda0e37f0b873629d98bf9b407bef35735b9193c23d9844bcc96a6",
+    "raw_result_sha256": "ed1562bf8f5900453089f7f72f3618415a76c2ea6c22fe8a64f5064a5931ede0",
+    "result_revision": "d5ca7a9d88e56a6213d360597a333513802dc03c"
+  },
+  "rejected_gptq": {
+    "config_sha256": "3d8342d9eaa840fcfcb754184ba10ed9f48de47799f683d2ed424b93c20884ae",
+    "failure": "vllm_4bit_gptq_gemm_numerical_corruption_on_v100",
+    "marlin_compatible_on_compute_capability_70": false,
+    "model": "Qwen3.5-27B-GPTQ-Int4",
+    "observed_outputs": [
+      "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+      "!!!!!!!!!!!!!!!!"
+    ],
+    "parity_eligible": false
+  },
+  "schema_version": "nano_harness_qwen35_27b_serving_public_v1",
+  "service": {
+    "base_url": "http://127.0.0.1:8002/v1",
+    "disable_custom_all_reduce": true,
+    "distributed_executor_backend": "mp",
+    "dtype": "float16",
+    "enforce_eager": true,
+    "generation_config": "vllm",
+    "gpu_memory_utilization": 0.95,
+    "health_url": "http://127.0.0.1:8002/health",
+    "kv_cache_memory_bytes": 1073741824,
+    "language_model_only": true,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 4096,
+    "max_num_seqs": 2,
+    "mm_processor_cache_gb": 0,
+    "nccl_ib_disable": true,
+    "served_model_name": "qwen3.5-27b",
+    "skip_mm_profiling": true,
+    "tensor_parallel_size": 2,
+    "triton_libcuda_path": "/usr/lib/x86_64-linux-gnu",
+    "vllm_version": "0.19.1"
+  },
+  "smoke": {
+    "passed": true,
+    "passed_probes": 3,
+    "results": [
+      {
+        "exact": true,
+        "expected": "FINAL: 42",
+        "finish_reason": "stop",
+        "id": "arithmetic",
+        "output": "FINAL: 42",
+        "usage": {
+          "completion_tokens": 6,
+          "completion_tokens_details": null,
+          "prompt_tokens": 37,
+          "prompt_tokens_details": null,
+          "total_tokens": 43
+        }
+      },
+      {
+        "exact": true,
+        "expected": "FINAL: Paris",
+        "finish_reason": "stop",
+        "id": "knowledge",
+        "output": "FINAL: Paris",
+        "usage": {
+          "completion_tokens": 4,
+          "completion_tokens_details": null,
+          "prompt_tokens": 36,
+          "prompt_tokens_details": null,
+          "total_tokens": 40
+        }
+      },
+      {
+        "exact": true,
+        "expected": "FINAL: len",
+        "finish_reason": "stop",
+        "id": "code",
+        "output": "FINAL: len",
+        "usage": {
+          "completion_tokens": 4,
+          "completion_tokens_details": null,
+          "prompt_tokens": 40,
+          "prompt_tokens_details": null,
+          "total_tokens": 44
+        }
+      }
+    ],
+    "total_probes": 3
+  }
+}
